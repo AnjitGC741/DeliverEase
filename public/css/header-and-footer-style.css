@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 10px;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    line-height: 1;
+    font-weight: 400;
+    color: #04030f;
+}
+a{
+    text-decoration: none;
+    color: #04030f;
+}
+li
+{
+    list-style: none;
+}
+nav{
+    width: 100%;
+    height: 8rem;
+}
+.navbar-main-div{
+    height: 100%;
+    max-width: 140rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5rem;
+}
+.navbar-main-div h1{
+    font-size: 5.2rem;
+}
+.nav-links ul{
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+.nav-links ul li a{
+    font-size: 1.8rem;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+.nav-links ul a:hover{
+    color: #dd7230;
+    text-decoration: underline;
+}
+.cart-box{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.cart-box li a{
+    font-size: 1.8rem;
+    padding: 8px;
+    border-radius: 20px;
+}
+.sign-in-link{
+    border: 3px solid #555;
+}
+.log-in-link{
+    background-color: #dd7230;
+    color: #fff;
+    padding: 10px !important;
+}
+.cart{
+    font-size: 3rem;
+}
+/* hero section */
+.section-hero{
+    width: 100%;
+}
+.hero{
+    max-width: 140rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10rem;
+    align-items: center;
+    padding: 2.5rem 5rem;
+}
+.text-1{
+    font-size: 2rem;
+    border: 2px dashed #555;
+    padding: 5px 8px;
+    width: 90%;
+    margin-bottom: 2rem;
+}
+.text-2{
+    font-size: 5.2rem;
+    margin-bottom: 0.5rem;
+}
+.text-3{
+    font-size:12rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    color: #dd7230;
+}
+.text-4{
+    font-size: 2rem;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    margin-bottom: 4rem;
+}
+.order-now-link{
+    font-size: 1.8rem;
+    border: 1px solid #dd7230;
+    background-color: #dd7230;
+    color: white;
+    border-radius: 20px;
+    padding: 8px 16px;
+}
+.explore-menu-link{
+    font-size: 1.8rem;
+    border: 1px solid #dd7230;
+    background-color: #dd7230;
+    color: white;
+    border-radius: 20px;
+    padding: 8px 16px;
+    margin-left: 1rem;
+}
+.delivered-meals{
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    margin-top: 4rem;
+
+}
+.delivered-imgs{
+    display: flex;
+}
+.delivered-imgs img{
+    height: 4.8rem;
+    width: 4.8rem;
+    border-radius: 50%;
+    margin-right: -1.6rem;
+    border: 3px solid #fff;
+}
+.delivered-imgs img:last-child{
+    margin: 0;
+}
+.delivered-text{
+    font-size: 1.8rem;
+    font-weight: 400;
+}
+.delivered-text span{
+    color: #e67e22;
+    font-weight: 700;
+}
+.hero-img{
+    width: 100%;
+}
+/* footer style */
+.container{
+	max-width: 1170px;
+	margin:auto;
+}
+.footer-row{
+	display: flex;
+	flex-wrap: wrap;
+    line-height: 1.5;
+}
+ul{
+	list-style: none;
+}
+.footer{
+	background-color: #24262b;
+    padding: 70px 0;
+}
+.footer-col{
+   width: 25%;
+   padding: 0 15px;
+}
+.footer-col h4{
+	font-size: 18px;
+	color: #ffffff;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.footer-col ul{
+    padding-left: 0!important;
+}
+.footer-col h4::before{
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+	background-color: #e91e63;
+	height: 2px;
+	box-sizing: border-box;
+	width: 50px;
+}
+.footer-col ul li:not(:last-child){
+	margin-bottom: 10px;
+}
+.footer-col ul li a{
+	font-size: 16px;
+	text-transform: capitalize;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 300;
+	color: #bbbbbb;
+	display: block;
+	transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+	color: #ffffff;
+	padding-left: 8px;
+}
+.footer-col .social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+    font-size: 20px;
+	background-color: rgba(255,255,255,0.2);
+	margin:0 10px 10px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: #ffffff;
+	transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover{
+	color: #24262b;
+	background-color: #ffffff;
+}
+
+/*responsive*/
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+}
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+}
+}
