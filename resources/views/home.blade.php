@@ -1,31 +1,81 @@
 @extends('/frequently-used/header-and-footer')
 @section('title','Home')
 @section('other-content')
-<section class="section-hero">
-        <div class="hero">
-            <div class="hero-text-box">
-                <!-- <p class="text-1">It is good time for the great taste of Burgers</p> -->
-                <h3 class="text-2">Take a</h3>
-                <h1 class="text-3">Big Bite</h1>
-                <p class="text-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel nostrum, beatae facere tempora temporibus tempore, vero sapiente placeat cum ratione qui consequuntur distinctio commodi deleniti neque molestias ut quod ab?</p>
-                <a href="#" class="order-now-link">Order now</a>
-                <a href="#" class="explore-menu-link">Explore menu</a>
-                <div class="delivered-meals">
-                    <div class="delivered-imgs">
-                        <img src="/img/img-1.jpg" alt="">
-                        <img src="/img/img-2.jpg" alt="">
-                        <img src="/img/img-3.jpg" alt="">
-                        <img src="/img/img-4.jpg" alt="">
-                        <img src="/img/img-5.jpg" alt="">
-                        <img src="/img/img-6.jpg" alt="">
+<section class="hero-section">
+        <div class="img-section">
+            <img src="/img/img2.jpg" alt="" />
+          </div>
+          <div class="linear"></div>
+          <div class="main-box">
+            <div class="main-hero-section">
+              <h1 id="topic"></h1>
+              <h2>Your favorite restaurant,now available for delivery or pickup.</h2>
+              <h3>Enter your favourite resturant name to order food.</h3>
+                <form>
+                  <div class="input-btn">
+                    <div class="input-box">
+                      <input type="text" placeholder="Enter the name of resturant or cousine">
                     </div>
-                    <p class="delivered-text"><span>50,000+</span> meals delivered till now!</p>
-                </div>
-            </div>
-            <div class="hero-img-box">
-                <img src="/img/imgForProject.png" class="hero-img" alt="a burger image">
-            </div>
-        </div>
-     </section>
-     <!-- hello -->
+                    <div class="btn-box">
+                      <button>Search</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+          </div>
+    </section>
+    <section class="browse-by-cuisine">
+      <h2>Browse by cuisine</h2>
+      <div class="cuisine-links">
+        <a href="#">
+          <div class="cuisine-img-and-cuisine-name">
+              <div class="cuisine-img">
+                <img src="./img/newari-food.jpg" alt="">
+              </div>   
+              <p class="cuisine-name">Newari</p>
+          </div>
+        </a>
+        <a href="#">
+          <div class="cuisine-img-and-cuisine-name">
+              <div class="cuisine-img">
+                <img src="./img/nepali.jpg" alt="">
+              </div> 
+              <p class="cuisine-name">Nepali</p>  
+          </div>
+        </a>
+        <a href="#">
+          <div class="cuisine-img-and-cuisine-name">
+              <div class="cuisine-img">
+                <img src="./img/bakery.jpg" alt="">
+              </div>   
+              <p class="cuisine-name">Bakery</p>
+          </div>
+        </a>
+        <a href="#">
+          <div class="cuisine-img-and-cuisine-name">
+              <div class="cuisine-img">
+                <img src="./img/Korean.jpg" alt="">
+              </div>   
+              <p class="cuisine-name">Korean</p>
+          </div>
+        </a>
+        <a href="#">
+          <div class="cuisine-img-and-cuisine-name">
+              <div class="cuisine-img">
+                <img src="./img/momo.jfif" alt="">
+              </div>   
+              <p class="cuisine-name">MoMo</p>
+          </div>
+        </a>
+        <a href="#">
+          <div class="cuisine-img-and-cuisine-name">
+              <div class="cuisine-img">
+                <img src="./img/burger.jpg" alt="">
+              </div>   
+              <p class="cuisine-name">Burger</p>
+          </div>
+        </a>
+      </div>
+    </section>
+    <script src="./js/script.js"></script>
 @endsection

@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Session;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    session()->put(['loginCustomer']);
     return view('home');
 });
 Route::get('/dashboard', function () {
@@ -30,9 +31,10 @@ Route::get('/signup', function () {
 Route::get('/aboutus', function () {
     return view('aboutus');
 });
-Route::post('/login',[CustomerController::class,'loginUser'])->name('login-user');
-Route::post('/signup',[CustomerController::class,'registerUser'])->name('register-user');
 
+Route::post('/login',[CustomerController::class,'loginUser'])->name('login-user');
+Route::get('/logout',[CustomerController::class,'logout']);
+Route::post('/signup',[CustomerController::class,'registerUser'])->name('register-user');
 Route::get('auth/google',[CustomerController::class,'redirect'])->name('google-auth');
 Route::get('auth/google/call-back',[CustomerController::class,'callbackGoogle']);
 
