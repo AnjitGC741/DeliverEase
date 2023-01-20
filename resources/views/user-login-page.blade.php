@@ -28,9 +28,12 @@
             background-color: #fff;
             overflow: hidden;
         }
+        .imgBox{
+            padding-top: 9%;
+        }
         .imgBox img {
-            width: 90%;
-            height: 100%;
+            width: 100%;
+            height: 90%;
         }
         .btn1{
             height: 40px;
@@ -72,19 +75,26 @@
      <section>
         <div class="mainBox">
             <div class="imgBox">
-                <img src="/img/login-page.gif" alt="">
+                <img src="/img/imgForProject.png" alt="">
             </div>
             <div class="p-5">
+                @if(Session::has('fail'))
+                <div class="alert text-center alert-danger" role="alert">
+                {{Session::get('fail')}}
+                </div>
+                @endif
                 <h2 class="mb-4">Login To Logout Hunger</h1>
-                <form action="" method="POST">
+                <form action="{{route('login-user')}}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" value="{{old('customerName')}}">
+                        <span style="color: red;"> @error('email'){{$message}}@enderror</span>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
                         <input type="password" class="form-control"  name="password" id="myPassword">
+                        <span style="color: red;"> @error('password'){{$message}}@enderror</span>
                     </div>
                     <div>
                         <input type="checkbox" class="form-check-input" onclick="showPassword();"><span style="margin-left:5px;font-size:13px;">Show Password</span>
@@ -109,10 +119,11 @@
      </section>
      <script>
         const inputValue=document.getElementsByTagName("input");
-        for(var i=0;i<=1;i++)
+        console.log(inputValue);
+        for(var i=1;i<=2;i++)
         {
         inputValue[i].addEventListener('input',function()  {
-                if(inputValue[0].value.length > 0 && inputValue[1].value.length > 0)
+                if(inputValue[1].value.length > 0 && inputValue[2].value.length > 0)
                 {
                     document.getElementById("btn-login").style.backgroundColor="#D9A47A";
                 }

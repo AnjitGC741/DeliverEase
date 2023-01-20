@@ -22,15 +22,20 @@
             width: 60%;
             margin: 0 auto;
             min-height: 400px;
-            margin-top: 100px;
+            margin-top: 50px;
             border-radius: 10px;
             box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
             background-color: #fff;
             overflow: hidden;
         }
+        .imgBox{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         .imgBox img {
-            width: 90%;
-            height: 100%;
+            width: 80%;
+            height: 70%;
         }
         .btn1{
             height: 40px;
@@ -56,7 +61,7 @@
      <section>
         <div class="mainBox">
             <div class="imgBox">
-                <img src="/img/pizza.jpg" alt="">
+                <img src="/img/signup-img2.png" alt="">
             </div>
             <div class="p-5">
             @if(Session::has('fail'))
@@ -75,18 +80,23 @@
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">User name</label>
-                        <input type="text" class="form-control"  name="customerName">
+                        <input type="text" class="form-control"  name="customerName" value="{{old('customerName')}}">
                         <span style="color: red;"> @error('customerName'){{$message}}@enderror</span>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control"  aria-describedby="emailHelp" name="email">
+                        <input type="email" class="form-control"  aria-describedby="emailHelp" name="email" value="{{old('email')}}">
                         <span style="color: red;"> @error('email'){{$message}}@enderror</span>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control"  name="password">
+                        <input type="password" class="form-control" id="myPassword"  name="password">
                         <span style="color: red;"> @error('password'){{$message}}@enderror</span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Confirm password</label>
+                        <input type="password" class="form-control"  name="confirmPassword" id="confirmPassword">
+                        <span style="color: red;"> @error('confirmPassword'){{$message}}@enderror</span>
                     </div>
                     <div>
                         <input type="checkbox" class="form-check-input" onclick="showPassword();"><span style="margin-left:5px;font-size:13px;">Show Password</span>
@@ -105,7 +115,7 @@
         for(var i=1;i<=3;i++)
         {
         inputValue[i].addEventListener('input',function()  {
-                if((inputValue[1].value.length > 0) && (inputValue[2].value.length > 0) && (inputValue[3].value.length > 0))
+                if((inputValue[1].value.length > 0) && (inputValue[2].value.length > 0) && (inputValue[3].value.length > 0) && (inputValue[4].value.length > 0))
                 {
                     document.getElementById("btn-login").style.backgroundColor="#D9A47A";
                 }
@@ -117,10 +127,13 @@
         function showPassword()
         {
             var x = document.getElementById("myPassword");
-            if (x.type === "password") {
+            var y = document.getElementById("confirmPassword");
+            if (x.type === "password" || y.type === "password") {
                 x.type = "text";
+                y.type = "text";
             } else {
                 x.type = "password";
+                y.type = "password";
             }
         }
      </script>

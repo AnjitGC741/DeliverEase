@@ -15,38 +15,55 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- css link -->
     <link rel="stylesheet" href="/css/header-and-footer-style.css">
+    <link rel="stylesheet" href="/css/home-page.css">
     <title>@yield('title')</title>
     <link rel="shortcut icon" href="/favicon/favicon1.ico" type="image/x-icon">
 
 </head>
 
-<body>
-    <nav>
-        <div class="navbar-main-div">
-            <h1>B.</h1>
-            <div class="nav-links">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Menu</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div class="cart-box">
-                <li>
-                    <ion-icon name="cart" class="cart"></ion-icon>
-                </li>
-                <li><a href="{{url('/signup')}}" class="sign-in-link">
-                        <ion-icon name="person-outline"></ion-icon><span style="margin-left: 5px;">sign in</span>
-                    </a></li>
-                <li><a href="{{url('/login')}}" class="log-in-link">
-                        <ion-icon name="log-in-outline"></ion-icon><span style="margin-left: 5px;">login</span>
-                    </a></li>
-            </div>
-
+<body onload="topic();">
+<section class="navbar">
+    <div class="logo">
+      <h1>DeliverEase</h1>  
+    </div>
+    <div class="nav-links">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="resturantPage.html">Add Resturant</a></li>
+        <li><a href="#">Deliver Food</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    @if((session()->get('loginCustomer')) === null)
+    <div class="login-and-signup">
+      <a href="{{url('/signup')}}" class="signIn">Sign in</a>
+      <a href="{{url('/login')}}" class="logIn">Log in</a>
+    </div> 
+    @else
+    <div class="for-logined-user">
+      <a><ion-icon name="heart-outline" class="favorite"></ion-icon></a>
+      <a><ion-icon name="cart-outline" class="cart"></ion-icon></a>
+      <div>
+      <span style="display: none;"> {{$value=session()->get('loginCustomer')}}</span>
+        <button onclick="toggleMenu();" class="user-btn" style="color: #fff; font-size:20px; font-family:'Poppins', sans-serif; ">{{$value[0]}}</button>
+      </div>
+    </div>
+    <div class="sub-menu-wrap" id="subMenu">
+      <div class="sub-menu">
+        <div class="user-info">
+          <div class="user-btn2"><p style="font-size: 2rem;color: white;font-weight: 400;">{{$value[0]}}</p></div>
+          <p>{{session()->get('loginCustomer')}}</p>
         </div>
-    </nav>
-    @yield('other-content');
+        <hr>
+          <a href="#" class="sub-menu-link"><ion-icon name="person-outline"></ion-icon> <p>Profile</p></a>
+          <a href="#" class="sub-menu-link"><ion-icon name="heart-outline"></ion-icon><p>Favourite</p> </a>
+          <a href="{{url('/logout')}}" class="sub-menu-link"><ion-icon name="log-out-outline"></ion-icon><p>Log out</p> </a>
+      </div>
+    </div>
+    @endif
+  </section>
+    @yield('other-content')
     <footer class="footer">
         <div class="container">
             <div class="footer-row">
