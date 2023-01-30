@@ -71,17 +71,21 @@
                     <h4>Quick Link</h4>
                     <ul>
                         <li><a href="#">Home</a></li>
-                        <li><a href="#">Menu</a></li>
+                        <li><a href="#">Add resturant</a></li>
+                        <li><a href="#">Deliver food</a></li>
                         <li><a href="#">Our Story</a></li>
                         <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Login for resturant</a></li>
+                        <li><a href="#">Login for delivery</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Our menu</h4>
+                    <h4>Cities</h4>
                     <ul>
-                        <li><a href="#">Burger</a></li>
-                        <li><a href="#">Pizza</a></li>
-                        <li><a href="#">Drinks</a></li>
+                        <li><a href="#">Kathmandu</a></li>
+                        <li><a href="#">Bhaktapur</a></li>
+                        <li><a href="#">Lalitpur</a></li>
+                        <li><a href="#">Pokhara</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
