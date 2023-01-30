@@ -31,6 +31,17 @@ Route::get('/signup', function () {
 Route::get('/aboutus', function () {
     return view('aboutus');
 });
+Route::get('/restaurant-signup1', function () {
+    return view('restaurant-signup-page1');
+});
+
+Route::get('/restaurant-signup2', function () {
+    return view('restaurant-signup-page2');
+});
+Route::get('/restaurant-signup3', function () {
+    return view('restaurant-signup-page3');
+});
+
 
 Route::post('/login',[CustomerController::class,'loginUser'])->name('login-user');
 Route::get('/logout',[CustomerController::class,'logout']);

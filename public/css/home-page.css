@@ -83,7 +83,8 @@ a{
   color: #ffffff;
   font-size: 1.9rem;
   font-weight: 400;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+  letter-spacing: 1px;
 }
 .main-hero-section form{
     margin-top: 2rem;
@@ -177,5 +178,9 @@ a{
     text-align: center;
     margin-top: 10px;
     letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+  .cuisine-links a:hover .cuisine-name{
+    color: #FF7F00;
   }
   /* browse by cuisine section ends */
