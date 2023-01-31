@@ -41,6 +41,9 @@ Route::get('/restaurant-signup2', function () {
 Route::get('/restaurant-signup3', function () {
     return view('restaurant-signup-page3');
 });
+Route::get('/restaurant-page', function () {
+    return view('restaurant-page');
+});
 
 
 Route::post('/login',[CustomerController::class,'loginUser'])->name('login-user');

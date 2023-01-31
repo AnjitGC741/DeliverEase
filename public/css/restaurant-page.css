@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 10px;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    line-height: 1;
+}
+a{
+    text-decoration: none;
+}
+.resturant-section
+{
+  height: 60vh;
+  width: 100%;
+  position: relative;
+}
+.resturant-info{
+ position: absolute;
+ bottom: 15px;
+ left: 3rem;
+ min-width: 450px;
+ height:200px; 
+ display: flex;
+ gap: 20px;
+}
+.resturant-logo{
+  height: 100%;
+  width: 200px;
+}
+.resturant-logo img{
+  height: 100%;
+  width: 100%;
+}
+.resturant-details{
+  color: white;
+  /* background-color: #f6be87; */
+  padding-top: 40px;
+}
+.resturant-name{
+  font-size: 3.6rem;
+  font-weight: 300;
+  letter-spacing: 0.2rem;
+}
+.icon{
+  margin-right: 10px;
+}
+.icon1{
+  margin-right: 4px;
+}
+
+.resturant-location{
+  margin-top: 8px;
+  font-size: 1.8rem;
+  letter-spacing: 0.2rem;
+  font-weight: 300;
+}
+.resturant-type{
+  margin-top: 8px;
+  font-size: 1.8rem;
+  letter-spacing: 0.2rem;
+  font-weight: 300;
+}
+.minimum-order{
+  margin-top: 8px;
+  font-size: 1.8rem;
+  letter-spacing: 0.2rem;
+  font-weight: 300;
+}
+.service-type{
+  margin-top: 8px;
+  font-size: 1.8rem;
+  letter-spacing: 0.2rem;
+  font-weight: 300;
+}

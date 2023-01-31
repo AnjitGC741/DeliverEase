@@ -16,6 +16,7 @@
     <!-- css link -->
     <link rel="stylesheet" href="/css/header-and-footer-style.css">
     <link rel="stylesheet" href="/css/home-page.css">
+    <link rel="stylesheet" href="/css/restaurant-page.css">
     <title>@yield('title')</title>
     <link rel="shortcut icon" href="/favicon/favicon1.ico" type="image/x-icon">
 
@@ -28,8 +29,8 @@
     </div>
     <div class="nav-links">
       <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="resturantPage.html">Add Resturant</a></li>
+        <li><a href="{{url('/')}}">Home</a></li>
+        <li><a href="#">Add Resturant</a></li>
         <li><a href="#">Deliver Food</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Contact</a></li>
@@ -70,7 +71,7 @@
                 <div class="footer-col">
                     <h4>Quick Link</h4>
                     <ul>
-                        <li><a href="#">Home</a></li>
+                        <li><a href="{{url('/')}}">Home</a></li>
                         <li><a href="#">Add resturant</a></li>
                         <li><a href="#">Deliver food</a></li>
                         <li><a href="#">Our Story</a></li>
