@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\RestaurantController;
+use App\Models\Restaurant;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 /*
@@ -34,18 +36,19 @@ Route::get('/aboutus', function () {
 Route::get('/restaurant-signup1', function () {
     return view('restaurant-signup-page1');
 });
-
-Route::get('/restaurant-signup2', function () {
-    return view('restaurant-signup-page2');
-});
-Route::get('/restaurant-signup3', function () {
-    return view('restaurant-signup-page3');
-});
 Route::get('/restaurant-page', function () {
     return view('restaurant-page');
 });
-
-
+Route::get('/restaurant-admin-page', function () {
+    return view('admin-restaurant-page');
+});
+//for restaurant
+Route::get('/restaurant-signup2/{id}',[RestaurantController::class,'findRestaurantName']);
+Route::get('/restaurant-signup3/{id}',[RestaurantController::class,'findRestaurantName1']);
+Route::post('/restaurant-signup1',[RestaurantController::class,'registerRestaurantName'])->name('save-restaurant-name');
+Route::post('/restaurant-signup2',[RestaurantController::class,'saveRestaurantDetail'])->name('save-restaurant-detail');
+Route::post('/restaurant-signup3',[RestaurantController::class,'saveRestaurantLoginInfo'])->name('save-restaurant-loginInfo');
+// for Customer
 Route::post('/login',[CustomerController::class,'loginUser'])->name('login-user');
 Route::get('/logout',[CustomerController::class,'logout']);
 Route::post('/signup',[CustomerController::class,'registerUser'])->name('register-user');

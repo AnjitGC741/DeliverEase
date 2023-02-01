@@ -22,13 +22,14 @@
         <p class="text-1">STEP <b>3</b> OF <b>3</b></p>
         <h1 class="text-2">Almost there</h1>
         <p class="text-3">Enter your restaurant login info</p>
-        <form class="restaurant-register-form1">
+        <form action="{{route('save-restaurant-loginInfo')}}" method="post" class="restaurant-register-form1">
+         @csrf
             <label>Restaurant id</label>
-            <input type="text" class="form-control" placeholder="Enter your restaurant id">
+            <input type="text" class="form-control" name="id" placeholder="Enter your restaurant id" readonly value="{{$value->id}}">
             <label>password</label>
-            <input type="Password" class="form-control" placeholder="Enter the password" id="myPassword">
+            <input type="Password" class="form-control" placeholder="Enter the password" id="myPassword" name="password">
             <label>Confirm password</label>
-            <input type="password" class="form-control" placeholder="Confirm your password" id="confirmPassword">
+            <input type="password" class="form-control" placeholder="Confirm your password" id="confirmPassword" name="confirmPassword">
             <div class="forPassword-and-terms">
             <div style="display: flex; align-items:center">
                 <input style="height: 15px;" type="checkbox" class="form-check-input" onclick="showPassword();"><span style="margin-left:8px;margin-top:-15px;font-size:13px;">Show Password</span>
@@ -37,10 +38,23 @@
                 <input style="height: 15px;" type="checkbox" class="form-check-input"><span style="margin-left:8px;margin-top:-15px;font-size:13px;">Terms & Condition</span>
             </div>
             </div>
-            <button>Next</button>
+            <button type="submit">Next</button>
         </form>
     </section>
-    <script src="./js/forUserSignin.js"></script>
+    <script>
+        function showPassword()
+        {
+            var x = document.getElementById("myPassword");
+            var y = document.getElementById("confirmPassword");
+            if (x.type === "password" || y.type === "password") {
+                x.type = "text";
+                y.type = "text";
+            } else {
+                x.type = "password";
+                y.type = "password";
+            }
+        }
+    </script>
 </body>
 
 </html>

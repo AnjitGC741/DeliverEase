@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('restaurants', function (Blueprint $table) {
-            $table->id()->startAt(100);
+            $table->id();
             $table->string('restaurantName');
             $table->bigInteger('restaurantNumber')->nullable();
             $table->string('contactName')->nullable();
-            $table->bigInteger('contactEmail')->unique()->nullable();
+            $table->string('contactEmail')->unique()->nullable();
             $table->string('city')->nullable();
             $table->string('street')->nullable();
             $table->string('cuisine')->nullable();
