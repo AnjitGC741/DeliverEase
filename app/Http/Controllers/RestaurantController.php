@@ -44,5 +44,6 @@ class RestaurantController extends Controller
         $restaurantLoginInfo->password = $req->password;
         $restaurantLoginInfo->save();
         return view('admin-restaurant-page');
+        // hello
     }
 }
