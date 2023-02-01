@@ -30,7 +30,7 @@
     <div class="nav-links">
       <ul>
         <li><a href="{{url('/')}}">Home</a></li>
-        <li><a href="#">Add Resturant</a></li>
+        <li><a href="{{url('/restaurant-signup1')}}">Add Resturant</a></li>
         <li><a href="#">Deliver Food</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Contact</a></li>

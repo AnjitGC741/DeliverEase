@@ -18,33 +18,35 @@
 
 <body>
     <section class="main-box">
-        <h1 class="logo">DeliverEase</h1>
+        <h1 class="logo">{{$value->restaurantName}}</h1>
         <p class="text-1">STEP <b>2</b> OF <b>3</b></p>
         <!-- <h1 class="text-2">Excited! <br> Registering resturant is easy.</h1> -->
         <p class="text-3">Enter your restaurant detail information</p>
-        <form class="restaurant-register-form1">
+        <form action="{{route('save-restaurant-detail')}}" method="post" class="restaurant-register-form1">
+         @csrf
+            <input type="hidden" name="id" value="{{$value->id}}">
             <label>Restaurant number</label>
-            <input type="text" class="form-control" placeholder="Enter your restaurant name">
+            <input type="text" class="form-control" placeholder="Enter your restaurant number" name="restaurantNumber">
             <label>Contact name</label>
-            <input type="text" class="form-control" placeholder="Enter your restaurant name">
+            <input type="text" class="form-control" placeholder="Enter your contact name" name="contactName">
             <label>Contact email</label>
-            <input type="text" class="form-control" placeholder="Enter your restaurant name">
+            <input type="text" class="form-control" placeholder="Enter your contact email" name="contactEmail">
             <label>City</label>
-            <select class="form-select" aria-label="Default select example" style="font-size: 1.6rem;">
+            <select class="form-select" aria-label="Default select example" name="city" style="font-size: 1.6rem;">
                 <option value="kathmandu" style="font-size: 1.6rem;">kathmandu</option>
-                <option value="kathmandu" style="font-size: 1.6rem;">Pokhara</option>
+                <option value="Pokhara" style="font-size: 1.6rem;">Pokhara</option>
             </select>
             <label>street address</label>
-            <input type="text" class="form-control" placeholder="Enter your restaurant name">
+            <input type="text" class="form-control" placeholder="Enter your restaurant street" name="street">
             <label>Cuisine</label>
-            <input type="text" class="form-control" placeholder="Enter your restaurant name">
+            <input type="text" class="form-control" placeholder="Enter your restaurant city" name="cuisine">
             <label>Service</label>
-            <select class="form-select"  style="font-size: 1.6rem;">
-                <option value="kathmandu" style="font-size: 1.6rem;">Delivery & Pickup</option>
-                <option value="kathmandu" style="font-size: 1.6rem;">Delivery Only</option>
-                <option value="kathmandu" style="font-size: 1.6rem;">Pickup Only</option>
+            <select class="form-select"  style="font-size: 1.6rem;" name="service">
+                <option value="Delivery & Pickup" style="font-size: 1.6rem;">Delivery & Pickup</option>
+                <option value="Delivery Only" style="font-size: 1.6rem;">Delivery Only</option>
+                <option value="Pickup Only" style="font-size: 1.6rem;">Pickup Only</option>
             </select>
-            <button>Next</button>
+            <button type="submit">Next</button>
         </form>
     </section>
 </body>

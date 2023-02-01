@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="/css/restaurant-signup.css">
     <title>Resturant signup</title>
     <link rel="shortcut icon" href="/favicon/favicon1.ico" type="image/x-icon">
-    <!-- @vite(['resources/js/app.js']) -->
 </head>
 <body>
     <section class="main-box">
@@ -21,10 +20,11 @@
         <p class="text-1">STEP <b>1</b> OF <b>3</b></p>
         <h1 class="text-2">Excited! <br> Registering resturant is easy.</h1>
         <p class="text-3">Enter your restaurant name to get your first order</p>
-        <form class="restaurant-register-form1">
+        <form action="{{route('save-restaurant-name')}}" method="post" class="restaurant-register-form1">
+         @csrf
             <label>Restaurant name</label>
-            <input type="text" class="form-control" placeholder="Enter your restaurant name">
-            <button>Register</button>
+            <input type="text" class="form-control" placeholder="Enter your restaurant name" name="restaurantName">
+            <button type="submit">Register</button>
         </form>
     </section>
 </body>

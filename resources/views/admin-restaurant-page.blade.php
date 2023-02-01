@@ -15,6 +15,7 @@
     <!-- css link -->
     <link rel="stylesheet" href="/css/admin-restaurant-page.css">
     <title>My restaurant</title>
+    <link rel="shortcut icon" href="/favicon/favicon1.ico" type="image/x-icon">
 </head>
 <body>
 <section class="resturant-section">
