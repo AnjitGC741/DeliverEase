@@ -29,8 +29,13 @@
             <input type="Password" class="form-control" placeholder="Enter the password" id="myPassword">
             <label>Confirm password</label>
             <input type="password" class="form-control" placeholder="Confirm your password" id="confirmPassword">
+            <div class="forPassword-and-terms">
             <div style="display: flex; align-items:center">
                 <input style="height: 15px;" type="checkbox" class="form-check-input" onclick="showPassword();"><span style="margin-left:8px;margin-top:-15px;font-size:13px;">Show Password</span>
+            </div>
+            <div style="display: flex; align-items:center">
+                <input style="height: 15px;" type="checkbox" class="form-check-input"><span style="margin-left:8px;margin-top:-15px;font-size:13px;">Terms & Condition</span>
+            </div>
             </div>
             <button>Next</button>
         </form>
