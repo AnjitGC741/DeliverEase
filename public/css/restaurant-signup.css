@@ -70,3 +70,8 @@ a{
     letter-spacing: 1px;
 
 }
+.forPassword-and-terms{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
