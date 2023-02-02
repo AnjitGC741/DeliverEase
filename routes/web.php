@@ -42,6 +42,9 @@ Route::get('/restaurant-page', function () {
 Route::get('/restaurant-admin-page', function () {
     return view('admin-restaurant-page');
 });
+Route::get('/restaurant-list', function () {
+    return view('restaurant-list');
+});
 //for restaurant
 Route::get('/restaurant-signup2/{id}',[RestaurantController::class,'findRestaurantName']);
 Route::get('/restaurant-signup3/{id}',[RestaurantController::class,'findRestaurantName1']);
