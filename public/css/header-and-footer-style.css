@@ -26,7 +26,7 @@ a{
     justify-content: space-between;
     background-color: transparent; 
     position: absolute;
-    z-index: 1;
+    z-index: 99;
   }
   .logo h1{
     font-size: 2.4rem;
