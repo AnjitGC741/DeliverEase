@@ -19,6 +19,7 @@ a{
   height: 30vh;
   width: 100%;
   position: relative;
+  
 }
 .text-restaurant{
     position: absolute;
@@ -37,4 +38,133 @@ a{
 .restaurant-list{
     width: 100%;
     min-height: 500px;
+    margin-top: 30px;
 }
+.sort-filter-section {
+    height: 50px;
+    width: 130rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+  }
+  .totalRestaurant p {
+    font-size: 25px;
+    color:black;
+    margin-top:5px;
+  }
+  .totalRestaurant span {
+    font-size: 20px;
+    color: #696969;
+    margin-left:5px;
+  }
+  .controller {
+    display: flex;
+    gap: 80px;
+  }
+  
+  .filter {
+    width: 200px;
+    position: relative;
+  }
+  .sortBy {
+    width: 200px;
+    position: relative;
+  }
+  .filter-down-icon{
+    position: absolute;
+  }
+  .filter-up-icon{
+    position: absolute;
+     visibility: hidden;
+  }
+  
+  
+  .click {
+    font-size: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1;
+    transition: 0.3s;
+    padding: 12px;
+    line-height: 1;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #696969;
+    border-radius: 5px;
+    background-color: white;
+    width: 250px;
+    color: #696969;
+  }
+  
+  .click1 {
+    font-size: 1.6rem;
+    line-height: 1;
+    transition: 0.3s;
+    padding: 12px;
+    line-height: 1;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #696969;
+    border-radius: 5px;
+    background-color: white;
+    width: 250px;
+    color: #696969;
+  }
+  
+  .sortBy1 {
+    width: 200px;
+    position: relative;
+    height: 100px;
+  }
+  
+  .list {
+    width: 250px;
+    background-color: white;
+    position: absolute;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: 0.3s;
+    border: 1px solid #696969;
+    border-radius: 5px;
+    top: 50px;
+    padding: 10px 0;
+    z-index: 99;
+  }
+  .list1 {
+    width: 250px;
+    background-color: white;
+    position: absolute;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: 0.3s;
+    border: 1px solid #696969;
+    border-radius: 5px;
+    top: 50px;
+    padding: 10px 0;
+    z-index: 99;
+  }
+  
+  .links {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #696969;
+    width: 100%;
+    font-size: 1.6rem;
+    line-height: 1;
+    transition: 0.3s;
+    padding: 12px;
+    letter-spacing: 1px;
+  }
+  
+  .newlist {
+    transform: scaleY(1);
+  }
+  .newlist1 {
+    transform: scaleY(1);
+  }
+  .links:hover {
+    background-color: rgba(203, 203, 203, 0.5);
+  }
