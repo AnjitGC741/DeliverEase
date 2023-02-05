@@ -3,7 +3,7 @@
 @section('other-content')
 <section class="resturant-section1">
         <div class="img-section">
-            <img src="./img/rest2.jpg" alt="" />
+            <img src="./img/try6.jpg" alt="" />
           </div>
           <div class="linear"></div>
           <div class="text-restaurant">
@@ -63,6 +63,21 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="restaurant-directory">
+        <div class="restaurant-details">
+            <div class="restaurant-logo">
+                <img src="/img/restLogo1.png" alt="">
+            </div>
+            <div class="restaurant-info">
+                <h3>The Burger house</h3>
+                <p>Burger</p>
+                <p>Dillibazar,ktm</p>
+                <p>Pickup & delivery</p>
+                <p class="status close">Close</p>
+            </div>
+        </div>
+        
     </div>
 </section>
 <script src="./js/forRestaurantList.js"></script>

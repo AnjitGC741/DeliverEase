@@ -168,3 +168,59 @@ a{
   .links:hover {
     background-color: rgba(203, 203, 203, 0.5);
   }
+  /* restaurant directory */
+  .restaurant-directory{
+    max-width: 130rem;
+    height: 30vh;
+    margin: 0 auto;
+    margin-top: 40px;
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+  }
+  .restaurant-directory .restaurant-details:hover{
+    transform: scale(1.1);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+  
+  .restaurant-directory .restaurant-details{
+    width: 24rem;
+    border: 1px solid  rgb(214, 214, 214);
+    border-radius: 5px;
+    transition: all 0.3s;
+  }
+  .restaurant-directory .restaurant-details .restaurant-logo{
+    width: 24rem;
+    height: 24rem;
+  }
+  .restaurant-directory .restaurant-details .restaurant-logo img{
+    width: 100%;
+    height: 100%;
+  }
+  .restaurant-details .restaurant-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 15px 0;
+  }
+  .restaurant-details .restaurant-info h3{
+    font-size: 2rem;
+  }
+  .restaurant-details .restaurant-info p{
+    font-size: 1.3rem;
+    letter-spacing: 0.8px;
+  }
+  .status{
+    font-size: 1rem;
+    color: white;
+    padding: 6px 20px;
+    border-radius: 2px;
+  }
+  .open{
+    background-color: forestgreen;
+  }
+  .close{
+    background-color:red;
+  }

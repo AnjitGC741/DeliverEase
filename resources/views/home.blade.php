@@ -3,7 +3,7 @@
 @section('other-content')
 <section class="hero-section">
         <div class="img-section">
-            <img src="./img/rest2.jpg" alt="" />
+            <img src="./img/try1.jpg" alt="" />
           </div>
           <div class="linear"></div>
           <div class="main-box">
