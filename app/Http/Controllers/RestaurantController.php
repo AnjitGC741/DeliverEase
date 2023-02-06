@@ -72,4 +72,24 @@ class RestaurantController extends Controller
         $restaurantData->save();
         return  redirect('restaurant-admin-page/'.$req->id);
     }
+    public function changeRestaurantProfileImg(Request $req)
+    {
+        $restaurantData = Restaurant::find($req->id);
+        if($req->hasFile('restaurantLogo'))
+        {
+        $image = $req -> file('restaurantLogo');
+        $image->store('img','public');
+        $file_path=$image->store('img','public');
+        $restaurantData->restaurantLogo = $file_path;
+        $restaurantData->save();
+        }
+        return  redirect('restaurant-admin-page/'.$req->id);
+    }
+    public function deleteRestaurantProfileImg(Request $req)
+    {
+        $restaurantData = Restaurant::find($req->id);
+        $restaurantData->restaurantLogo = null;
+        $restaurantData->save();
+        return  redirect('restaurant-admin-page/'.$req->id);
+    }
 }
