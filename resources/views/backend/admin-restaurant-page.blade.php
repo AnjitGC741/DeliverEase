@@ -52,20 +52,30 @@
           </div>
           <div class="resturant-info">
             <div class="resturant-logo">
+              @if($value->restaurantLogo == "")
                 <img src="/img/restLogo1.png" alt="">
+              @else
+              <img src="{{ asset('/storage/'.$value->restaurantLogo) }}">
+              @endif
                 <button class="changeProfile" id="changeProfile" onclick="displayProfileImgOption();">
                   <ion-icon name="camera" style="font-size: 24px;"></ion-icon>
                 </button>
             </div>
             <div class="changeProfileImgOption" id="changeProfileImgOption">
-              <form action="#" method="POST">
-                <label for="file-input">
+               <form action="{{route('changeProfileImg')}}" method="POST" enctype="multipart/form-data" id="myForm2">
+                 @csrf
+                 <input type="text" value="{{$value->id}}" hidden name="id">
+                <label for="change2">
                   <div class="uploadImgBtn"><ion-icon name="cloud-upload-outline" style="font-size: 24px;"></ion-icon>Upload Image</div>
                  </label>
-                <input type="file" id="file-input" style="display:none;">
+                <input type="file" id="change2"  name="restaurantLogo" style="display:none;">
                 
                </form>
+               <form action="{{route('deleteProfileImg')}}" method="POST">
+                @csrf
+                <input type="text" value="{{$value->id}}" hidden name="id">
               <button class="deleteImgBtn"><ion-icon name="trash-outline" style="font-size: 24px;" ></ion-icon>Delete Image</button>
+               </form>
             </div>
             <div class="resturant-details">
                 <p class="resturant-name">{{$value->restaurantName}}</p>

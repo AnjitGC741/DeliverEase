@@ -21,7 +21,12 @@ function displayProfileImgOption()
  }
 }
 var fileInput=document.querySelector("#change");
+var fileInput2=document.querySelector("#change2");
 fileInput.addEventListener("change",function(){
     var form = document.querySelector("#myForm");
     form.submit();
+});
+fileInput2.addEventListener("change",function(){
+  var form2 = document.querySelector("#myForm2");
+  form2.submit();
 });
