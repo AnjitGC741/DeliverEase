@@ -23,10 +23,9 @@ return new class extends Migration
             $table->string('street')->nullable();
             $table->string('cuisine')->nullable();
             $table->string('service')->nullable();
+            $table->unsignedBigInteger('minimumOrder')->nullable();
             $table->string('status')->nullable()->default(1);
             $table->string('password')->nullable();
-            $table->bigInteger('rateNumber')->nullable();
-            $table->bigInteger('ratedUserNumber')->nullable();
             $table->string('restaurantLogo',255)->nullable();
             $table->string('restaurantCoverImg',255)->nullable();
             $table->rememberToken();

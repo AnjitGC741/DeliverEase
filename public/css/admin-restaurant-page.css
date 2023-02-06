@@ -59,6 +59,7 @@ a{
 .resturant-logo{
   height: 100%;
   width: 200px;
+  position: relative;
 }
 .resturant-logo img{
   height: 100%;
@@ -103,4 +104,75 @@ a{
   font-size: 1.8rem;
   letter-spacing: 0.2rem;
   font-weight: 300;
+}
+.changeProfile{
+  position: absolute;
+  bottom: 0;
+  right: 3rem;
+  padding: 7px 10px;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.changeBackgroundImgOption{
+  position: absolute;
+  bottom: 80px;
+  right: 3rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  visibility: hidden;
+}
+.changeProfileImgOption{
+  position: absolute;
+  bottom:5rem;
+  left:0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  visibility: hidden;
+}
+.uploadImgBtn{
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  gap: 40px;
+  border-style: none;
+  font-size: 1.4rem;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+}
+.deleteImgBtn{
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  gap: 40px;
+  border-style: none;
+  font-size: 1.4rem;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+}
+.uploadImgBtn:hover{
+  background-color: #d4d4d4;
+}
+.deleteImgBtn:hover{
+  background-color: #d4d4d4;
+}
+.changeBackground{
+  position: absolute;
+  bottom: 40px;
+  right: 3rem;
+  background-color:white;
+  display: flex;
+  padding: 2px 4px;
+  align-items: center;
+  gap: 4px;
+  border-radius: 3px;
+  cursor: pointer;
 }
