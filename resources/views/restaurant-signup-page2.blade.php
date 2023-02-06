@@ -40,6 +40,8 @@
             <input type="text" class="form-control" placeholder="Enter your restaurant street" name="street">
             <label>Cuisine</label>
             <input type="text" class="form-control" placeholder="Enter your restaurant city" name="cuisine">
+            <label>Minimum Order</label>
+            <input type="text" class="form-control" placeholder="Enter minimum order" name="minimumOrder">
             <label>Service</label>
             <select class="form-select"  style="font-size: 1.6rem;" name="service">
                 <option value="Delivery & Pickup" style="font-size: 1.6rem;">Delivery & Pickup</option>

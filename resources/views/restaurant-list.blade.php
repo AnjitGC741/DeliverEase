@@ -64,7 +64,9 @@
             </div>
         </div>
     </div>
-    <div class="restaurant-directory">
+  
+</section>
+<div class="restaurant-directory">
         <div class="restaurant-details">
             <div class="restaurant-logo">
                 <img src="/img/restLogo1.png" alt="">
@@ -79,6 +81,5 @@
         </div>
         
     </div>
-</section>
 <script src="./js/forRestaurantList.js"></script>
 @endsection
