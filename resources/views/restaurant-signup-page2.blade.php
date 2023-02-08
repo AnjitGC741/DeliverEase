@@ -19,6 +19,36 @@
 <body>
     <section class="main-box">
         <h1 class="logo">{{$value->restaurantName}}</h1>
+        @error('restaurantNumber')
+        <div class="alert text-center alert-danger" role="alert">
+            {{$message}}
+        </div>
+        @enderror
+
+        @error('contactName')
+        <div class="alert text-center alert-danger" role="alert">
+            {{$message}}
+        </div>
+        @enderror
+
+        @error('contactEmail')
+        <div class="alert text-center alert-danger" role="alert">
+            {{$message}}
+        </div>
+        @enderror
+
+        
+        @error('street')
+        <div class="alert text-center alert-danger" role="alert">
+            {{$message}}
+        </div>
+        @enderror
+
+        @error('cuisine')
+        <div class="alert text-center alert-danger" role="alert">
+            {{$message}}
+        </div>
+        @enderror
         <p class="text-1">STEP <b>2</b> OF <b>3</b></p>
         <!-- <h1 class="text-2">Excited! <br> Registering resturant is easy.</h1> -->
         <p class="text-3">Enter your restaurant detail information</p>
