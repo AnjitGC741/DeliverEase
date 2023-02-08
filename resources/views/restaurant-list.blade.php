@@ -67,19 +67,28 @@
   
 </section>
 <div class="restaurant-directory">
+@foreach ($restaurants as $restaurant)
         <div class="restaurant-details">
             <div class="restaurant-logo">
+            @if($restaurant->restaurantLogo == "")
                 <img src="/img/restLogo1.png" alt="">
+              @else
+              <img src="{{ asset('/storage/'.$value->restaurantLogo) }}">
+              @endif
             </div>
             <div class="restaurant-info">
-                <h3>The Burger house</h3>
-                <p>Burger</p>
-                <p>Dillibazar,ktm</p>
-                <p>Pickup & delivery</p>
+                <h3>{{ $restaurant->restaurantName }}</h3>
+                <p>{{ $restaurant->cuisine }}</p>
+                <p> {{$restaurant->street}},{{$restaurant->city}}</p>
+                <p>{{$restaurant->service}}</p>
+                @if($restaurant->status == 1)
+                <p class="status open">Open</p>
+                @else
                 <p class="status close">Close</p>
+                @endif
             </div>
         </div>
-        
+@endforeach      
     </div>
 <script src="./js/forRestaurantList.js"></script>
 @endsection

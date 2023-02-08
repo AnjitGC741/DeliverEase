@@ -11,13 +11,14 @@
               <h1 id="topic"></h1>
               <h2>Your favorite restaurant,now available for delivery or pickup.</h2>
               <h3>Enter your favourite resturant name to order food.</h3>
-                <form>
+                <form action="{{route('search-restaurant')}}" method="POST">
+                @csrf
                   <div class="input-btn">
                     <div class="input-box">
-                      <input type="text" placeholder="Enter the name of resturant or cousine">
+                      <input type="text" name="restaurantName" placeholder="Enter the name of resturant or cousine">
                     </div>
                     <div class="btn-box">
-                      <button>Search</button>
+                      <button type="submit">Search</button>
                     </div>
                   </div>
                 </form>

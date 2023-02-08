@@ -15,11 +15,22 @@ class RestaurantController extends Controller
         $list = Restaurant::query()->where('restaurantName','LIKE',"%{$req->restaurantName}%")->first('id');
         return  redirect('restaurant-signup2/'.$list->id);
     }
+    public function searchRestaurant(Request $req)
+    {
+        $query = $req->restaurantName;
+        $restaurants = Restaurant::where('restaurantName', 'like', '%'.$query.'%')
+            ->orWhere('cuisine', 'like', '%'.$query.'%')
+            ->get();
+    
+        return view('restaurant-list', compact('restaurants'));
+    }
+    
     public function findRestaurantName($id)
     {
         $data = Restaurant::find($id);
         return view('restaurant-signup-page2',['value'=>$data]);
     }
+
     public function saveRestaurantDetail(Request $req)
     {       
       $restaurantDetail = Restaurant::find($req->id);
