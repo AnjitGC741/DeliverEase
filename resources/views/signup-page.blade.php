@@ -63,6 +63,7 @@
             <div class="imgBox">
                 <img src="/img/signup-img2.png" alt="">
             </div>
+            <!-- For Displaying error message -->
             <div class="p-5">
             @if(Session::has('fail'))
             <div class="alert text-center alert-danger" role="alert">

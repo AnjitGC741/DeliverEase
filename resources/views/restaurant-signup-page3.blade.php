@@ -2,6 +2,14 @@
 <html lang="en">
 
 <head>
+
+        <style>
+            .input-error{
+                color: #ff5555;
+                margin-top: -300px;
+                margin-bottom: 80px;
+            }
+        </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +26,37 @@
 
 <body>
     <section class="main-box" style="margin-top: 90px;">
+    <div class="p-5">
+            @if(Session::has('fail'))
+            <div class="alert text-center alert-danger" role="alert">
+            {{Session::get('fail')}}
+            </div>
+            @endif
+            @if(Session::has('success'))
+            <div class="alert text-center alert-success" role="alert">
+            {{Session::get('success')}}
+            </div>
+            @endif
         <h1 class="logo">DeliverEase</h1>
+     @error('password')
+
+     <div class="alert text-center alert-danger" role="alert">
+        {{$message}}
+     </div>
+
+     @enderror
+       
+       @error('confirmPassword')
+
+       <div class="alert text-center alert-danger" role="alert">
+        {{$message}}
+       </div>
+
+       @enderror
+
+       @enderror
+       
+      
         <p class="text-1">STEP <b>3</b> OF <b>3</b></p>
         <h1 class="text-2">Almost there</h1>
         <p class="text-3">Enter your restaurant login info</p>
@@ -28,14 +66,16 @@
             <input type="text" class="form-control" name="id" placeholder="Enter your restaurant id" readonly value="{{$value->id}}">
             <label>password</label>
             <input type="Password" class="form-control" placeholder="Enter the password" id="myPassword" name="password">
+          
             <label>Confirm password</label>
             <input type="password" class="form-control" placeholder="Confirm your password" id="confirmPassword" name="confirmPassword">
+            
             <div class="forPassword-and-terms">
             <div style="display: flex; align-items:center">
                 <input style="height: 15px;" type="checkbox" class="form-check-input" onclick="showPassword();"><span style="margin-left:8px;margin-top:-15px;font-size:13px;">Show Password</span>
             </div>
             <div style="display: flex; align-items:center">
-                <input style="height: 15px;" type="checkbox" class="form-check-input"><span style="margin-left:8px;margin-top:-15px;font-size:13px;">Terms & Condition</span>
+                <input style="height: 15px;" type="checkbox"  class="form-check-input"><span style="margin-left:8px;margin-top:-15px;font-size:13px;">Terms & Condition</span>
             </div>
             </div>
             <button type="submit">Next</button>

@@ -17,6 +17,15 @@
 <body>
     <section class="main-box">
         <h1 class="logo">DeliverEase</h1>
+
+            @error('restaurantName')
+
+            <div class="alert text-center alert-danger" role="alert">
+            {{$message}}
+            </div>
+        
+            @enderror
+       
         <p class="text-1">STEP <b>1</b> OF <b>3</b></p>
         <h1 class="text-2">Excited! <br> Registering resturant is easy.</h1>
         <p class="text-3">Enter your restaurant name to get your first order</p>
