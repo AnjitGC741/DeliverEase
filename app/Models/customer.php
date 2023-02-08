@@ -9,4 +9,8 @@ class customer extends Model
 {
     use HasFactory;
     protected $fillable = ['customerName','email','password','img'];
+    public function ratings()
+    {
+    return $this->hasMany(Rating::class);
+    }
 }
