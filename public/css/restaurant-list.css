@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 10px;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    line-height: 1;
+}
+a{
+    text-decoration: none;
+}
+.resturant-section1
+{
+  height: 30vh;
+  width: 100%;
+  position: relative;
+  
+}
+.text-restaurant{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.text-restaurant h1{
+    font-size: 4.6rem;
+    color: white;
+    letter-spacing: 5px;
+}
+.restaurant-list{
+    width: 100%;
+    margin-top: 30px;
+}
+.sort-filter-section {
+  height: 50px;
+  width: 130rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 48px 0 40px;
+}
+.totalRestaurant p {
+  font-size: 25px;
+  color:black;
+  margin-top:5px;
+}
+.totalRestaurant span {
+  font-size: 20px;
+  color: #696969;
+  margin-left:5px;
+}
+.controller {
+  display: flex;
+  gap: 80px;
+}
+
+.filter {
+  width: 200px;
+  position: relative;
+}
+.filter-down-icon{
+  position: absolute;
+}
+.filter-up-icon{
+  position: absolute;
+   visibility: hidden;
+}
+
+
+.click {
+  font-size: 1.6rem;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1;
+  transition: 0.3s;
+  padding: 12px;
+  line-height: 1;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #696969;
+  border-radius: 5px;
+  background-color: white;
+  width: 250px;
+  color: #696969;
+}
+
+.click1 {
+  font-size: 1.6rem;
+  line-height: 1;
+  transition: 0.3s;
+  padding: 12px;
+  line-height: 1;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #696969;
+  border-radius: 5px;
+  background-color: white;
+  width: 250px;
+  color: #696969;
+}
+
+.sortBy1 {
+  width: 200px;
+  position: relative;
+  height: 100px;
+}
+
+.list {
+  width: 250px;
+  background-color: white;
+  position: absolute;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: 0.3s;
+  border: 1px solid #696969;
+  border-radius: 5px;
+  top: 50px;
+  padding: 10px 0;
+  z-index: 99;
+}
+.list1 {
+  width: 250px;
+  background-color: white;
+  position: absolute;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: 0.3s;
+  border: 1px solid #696969;
+  border-radius: 5px;
+  top: 50px;
+  padding: 10px 0;
+  z-index: 99;
+}
+
+.links {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #696969;
+  width: 100%;
+  font-size: 1.6rem;
+  line-height: 1;
+  transition: 0.3s;
+  padding: 12px;
+  letter-spacing: 1px;
+}
+
+.newlist {
+  transform: scaleY(1);
+}
+.newlist1 {
+  transform: scaleY(1);
+}
+.links:hover {
+  background-color: rgba(203, 203, 203, 0.5);
+}
+/* new */
+.restaurant-directory{
+  max-width: 130rem;
+  min-height: 60vh;
+  margin: 0 auto;
+  margin-top: 20px;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding: 0 40px 40px 40px;
+}
+.restaurant-directory .restaurant-details:hover{
+  transform: scale(1.1);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.restaurant-directory .restaurant-details{
+  width: 28rem;
+  border: 1px solid  rgb(214, 214, 214);
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+.restaurant-directory .restaurant-details .restaurant-logo{
+  width: 28rem;
+  height: 28rem;
+}
+.restaurant-directory .restaurant-details .restaurant-logo img{
+  width: 100%;
+  height: 100%;
+}
+.restaurant-details .restaurant-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+  gap: 1.2rem;
+  padding: 20px 25px;
+}
+.restaurant-details .restaurant-info h3{
+  font-size: 2.1rem;
+}
+.restaurant-details .restaurant-info p{
+  font-size: 1.4rem;
+  letter-spacing: 1.5px;
+}
+.status{
+  width: 80px;
+  font-size: 1rem;
+  color: white;
+  padding: 6px 20px;
+  border-radius: 2px;
+}
+.open{
+  background-color: forestgreen;
+}
+.close{
+  background-color:red;
+}

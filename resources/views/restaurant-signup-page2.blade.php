@@ -61,9 +61,12 @@
             <input type="text" class="form-control" placeholder="Enter your restaurant city" name="cuisine">
             <span style="color: red;">@error('cuisine'){{$message}}@enderror</span>
             </div>
-            
+             <div class="mb-3">
+              <label>Minimum Order</label>
+              <input type="text" class="form-control" placeholder="Enter minimum order" name="minimumOrder">
+             </div>
            <div class="mb-3">
-           <label>Service</label>
+            <label>Service</label>
             <select class="form-select"  style="font-size: 1.6rem;" name="service">
                 <option value="Delivery & Pickup" style="font-size: 1.6rem;">Delivery & Pickup</option>
                 <option value="Delivery Only" style="font-size: 1.6rem;">Delivery Only</option>

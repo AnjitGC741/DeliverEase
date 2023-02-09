@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('home');
 });
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('backend/dashboard');
 });
 Route::get('/login', function () {
     return view('user-login-page');
@@ -39,15 +39,24 @@ Route::get('/restaurant-signup1', function () {
 Route::get('/restaurant-page', function () {
     return view('restaurant-page');
 });
-Route::get('/restaurant-admin-page', function () {
-    return view('admin-restaurant-page');
+Route::get('/restaurant-list', function () {
+    return view('restaurant-list');
+});
+Route::get('/restaurant-login', function () {
+    return view('restaurant-login');
 });
 //for restaurant
+Route::get('/restaurant-admin-page/{id}',[RestaurantController::class,'adminRestaurantPage']);
 Route::get('/restaurant-signup2/{id}',[RestaurantController::class,'findRestaurantName']);
 Route::get('/restaurant-signup3/{id}',[RestaurantController::class,'findRestaurantName1']);
+Route::post('/restaurant-page',[RestaurantController::class,'searchRestaurant'])->name('search-restaurant');
 Route::post('/restaurant-signup1',[RestaurantController::class,'registerRestaurantName'])->name('save-restaurant-name');
 Route::post('/restaurant-signup2',[RestaurantController::class,'saveRestaurantDetail'])->name('save-restaurant-detail');
 Route::post('/restaurant-signup3',[RestaurantController::class,'saveRestaurantLoginInfo'])->name('save-restaurant-loginInfo');
+Route::post('/restaurant-admin-page/updateRestaurantCoverImg',[RestaurantController::class,'changeRestaurantCoverImg'])->name('changeBackgroundImg');
+Route::post('/restaurant-admin-page/deleteRestaurantCoverImg',[RestaurantController::class,'deleteRestaurantCoverImg'])->name('deleteBackgroundImg');
+Route::post('/restaurant-admin-page/updateRestaurantProfileImg',[RestaurantController::class,'changeRestaurantProfileImg'])->name('changeProfileImg');
+Route::post('/restaurant-admin-page/deleteRestaurantProfileImg',[RestaurantController::class,'deleteRestaurantProfileImg'])->name('deleteProfileImg');
 // for Customer
 Route::post('/login',[CustomerController::class,'loginUser'])->name('login-user');
 Route::get('/logout',[CustomerController::class,'logout']);

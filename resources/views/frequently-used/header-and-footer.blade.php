@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/css/header-and-footer-style.css">
     <link rel="stylesheet" href="/css/home-page.css">
     <link rel="stylesheet" href="/css/restaurant-page.css">
+    <link rel="stylesheet" href="/css/restaurant-list.css">
     <title>@yield('title')</title>
     <link rel="shortcut icon" href="/favicon/favicon1.ico" type="image/x-icon">
 
