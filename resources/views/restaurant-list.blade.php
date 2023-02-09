@@ -81,6 +81,11 @@
                 <p>{{ $restaurant->cuisine }}</p>
                 <p> {{$restaurant->street}},{{$restaurant->city}}</p>
                 <p>{{$restaurant->service}}</p>
+                @if($restaurant->ratings->avg('rating') != 0)
+                <p><ion-icon name="star" style="color:yellow; font-size:16px;"></ion-icon><span style="margin-left: 5px;">{{$restaurant->ratings->avg('rating')}}</span></p>
+                @else
+                <p><ion-icon name="star" style="color:yellow; font-size:16px;"></ion-icon><span style="margin-left: 5px;">No rating</span></p>
+                @endif
                 @if($restaurant->status == 1)
                 <p class="status open">Open</p>
                 @else
