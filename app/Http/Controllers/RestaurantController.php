@@ -39,13 +39,18 @@ class RestaurantController extends Controller
     public function saveRestaurantDetail(Request $req)
     {   
         $req -> validate([
-                'restaurantNumber'=> 'required',
+                'restaurantNumber'=> 'required|numeric',
                 'contactName' => 'required',
-                'contactEmail' => 'required',
+                'contactEmail' => 'required|email',
                 'city' => 'required',
                 'street' => 'required',
                 'cuisine' => 'required',
                 'service' => 'required' 
+        ],
+        [
+            'restaurantNumber.numeric' => 'The Number format is incorrect',
+            'contactEmail.email' => 'The Email format is incorrect',
+
         ]);
         
       $restaurantDetail = Restaurant::find($req->id);
@@ -69,8 +74,12 @@ class RestaurantController extends Controller
     {
         $req ->validate([
             'password' => 'required',
-            'confirmPassword' => 'required|same:password',
+            'confirmPassword' => 'required',
         ]);
+        if($req->password !== $req->confirmPassword)
+         {
+             return back()->with('fail','Password does not match');
+         }
        
 
 

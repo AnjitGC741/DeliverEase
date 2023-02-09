@@ -19,65 +19,61 @@
 <body>
     <section class="main-box">
         <h1 class="logo">{{$value->restaurantName}}</h1>
-        @error('restaurantNumber')
-        <div class="alert text-center alert-danger" role="alert">
-            {{$message}}
-        </div>
-        @enderror
-
-        @error('contactName')
-        <div class="alert text-center alert-danger" role="alert">
-            {{$message}}
-        </div>
-        @enderror
-
-        @error('contactEmail')
-        <div class="alert text-center alert-danger" role="alert">
-            {{$message}}
-        </div>
-        @enderror
-
-        
-        @error('street')
-        <div class="alert text-center alert-danger" role="alert">
-            {{$message}}
-        </div>
-        @enderror
-
-        @error('cuisine')
-        <div class="alert text-center alert-danger" role="alert">
-            {{$message}}
-        </div>
-        @enderror
         <p class="text-1">STEP <b>2</b> OF <b>3</b></p>
         <!-- <h1 class="text-2">Excited! <br> Registering resturant is easy.</h1> -->
         <p class="text-3">Enter your restaurant detail information</p>
         <form action="{{route('save-restaurant-detail')}}" method="post" class="restaurant-register-form1">
          @csrf
             <input type="hidden" name="id" value="{{$value->id}}">
+
+            <div class="mb-3">
             <label>Restaurant number</label>
             <input type="text" class="form-control" placeholder="Enter your restaurant number" name="restaurantNumber">
+            <span style="color: red;">@error('restaurantNumber'){{$message}}@enderror</span> 
+            </div>
+
+            <div class="mb-3">
             <label>Contact name</label>
             <input type="text" class="form-control" placeholder="Enter your contact name" name="contactName">
+            <span style="color: red;">@error('contactName'){{$message}}@enderror</span>
+            </div>
+           
+            <div class="mb-3">
             <label>Contact email</label>
             <input type="text" class="form-control" placeholder="Enter your contact email" name="contactEmail">
+            <span style="color: red;">@error('contactEmail'){{$message}}@enderror</span>
+            </div>
+
             <label>City</label>
             <select class="form-select" aria-label="Default select example" name="city" style="font-size: 1.6rem;">
                 <option value="kathmandu" style="font-size: 1.6rem;">kathmandu</option>
                 <option value="Pokhara" style="font-size: 1.6rem;">Pokhara</option>
             </select>
+
+            <div class="mb-3">
             <label>street address</label>
             <input type="text" class="form-control" placeholder="Enter your restaurant street" name="street">
+            <span style="color: red;">@error('street'){{$message}}@enderror</span>
+            </div>
+
+            <div class="mb-3">
             <label>Cuisine</label>
             <input type="text" class="form-control" placeholder="Enter your restaurant city" name="cuisine">
-            <label>Minimum Order</label>
-            <input type="text" class="form-control" placeholder="Enter minimum order" name="minimumOrder">
+            <span style="color: red;">@error('cuisine'){{$message}}@enderror</span>
+            </div>
+             <div class="mb-3">
+              <label>Minimum Order</label>
+              <input type="text" class="form-control" placeholder="Enter minimum order" name="minimumOrder">
+             </div>
+           <div class="mb-3">
             <label>Service</label>
             <select class="form-select"  style="font-size: 1.6rem;" name="service">
                 <option value="Delivery & Pickup" style="font-size: 1.6rem;">Delivery & Pickup</option>
                 <option value="Delivery Only" style="font-size: 1.6rem;">Delivery Only</option>
                 <option value="Pickup Only" style="font-size: 1.6rem;">Pickup Only</option>
             </select>
+           </div>
+           
             <button type="submit">Next</button>
         </form>
     </section>

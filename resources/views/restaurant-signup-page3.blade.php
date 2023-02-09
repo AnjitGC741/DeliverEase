@@ -26,36 +26,12 @@
 
 <body>
     <section class="main-box" style="margin-top: 90px;">
-    <div class="p-5">
-            @if(Session::has('fail'))
-            <div class="alert text-center alert-danger" role="alert">
-            {{Session::get('fail')}}
-            </div>
-            @endif
-            @if(Session::has('success'))
-            <div class="alert text-center alert-success" role="alert">
-            {{Session::get('success')}}
-            </div>
-            @endif
-        <h1 class="logo">DeliverEase</h1>
-     @error('password')
-
-     <div class="alert text-center alert-danger" role="alert">
-        {{$message}}
-     </div>
-
-     @enderror
        
-       @error('confirmPassword')
-
-       <div class="alert text-center alert-danger" role="alert">
-        {{$message}}
-       </div>
-
-       @enderror
-
-       @enderror
-       
+    @if(Session::has('fail'))
+    <div class="alert text-center alert-danger" role="alert">
+         {{Session::get('fail')}}
+        </div>
+        @endif
       
         <p class="text-1">STEP <b>3</b> OF <b>3</b></p>
         <h1 class="text-2">Almost there</h1>
@@ -64,11 +40,19 @@
          @csrf
             <label>Restaurant id</label>
             <input type="text" class="form-control" name="id" placeholder="Enter your restaurant id" readonly value="{{$value->id}}">
+
+            <div class="mb-3">
             <label>password</label>
             <input type="Password" class="form-control" placeholder="Enter the password" id="myPassword" name="password">
-          
+            <span style="color: red;">@error('password'){{$message}}@enderror</span>
+            </div>
+           
+            <div class="mb-3">
             <label>Confirm password</label>
             <input type="password" class="form-control" placeholder="Confirm your password" id="confirmPassword" name="confirmPassword">
+            <span style="color: red;">@error('confirmPassword'){{$message}}@enderror</span>
+            </div>
+          
             
             <div class="forPassword-and-terms">
             <div style="display: flex; align-items:center">
