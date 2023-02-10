@@ -14,7 +14,7 @@
 <section class="restaurant-list">
 <div class="sort-filter-section">
         <div class="totalRestaurant">
-            <p>6<span>restaurant</span></p>
+            <p>{{count($restaurants)}}<span>restaurant</span></p>
         </div>
         <div class="controller">
             <div class="filter">
@@ -52,14 +52,18 @@
                 </button>
 
                 <div class="list1">
-                    <input type="text" hidden value="" name="" />
+                    <form action="{{route('sort-restaurant-ascending')}}" method="POST">
+                    @csrf
                     <button type="submit" class="links">
                         A-Z
                     </button>
-                    <input type="text" hidden value="" name="" />
+                    </form>
+                    <form action="{{route('sort-restaurant-descending')}}" method="POST">
+                    @csrf
                     <button type="submit" class="links">
                         Z-A
                     </button>
+                    </form>
                 </div>
             </div>
         </div>

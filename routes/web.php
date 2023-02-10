@@ -46,6 +46,8 @@ Route::get('/restaurant-login', function () {
     return view('restaurant-login');
 });
 //for restaurant
+Route::post('/restaurants-sort-asc',[RestaurantController::class,'sortRestaurantAsc'])->name('sort-restaurant-ascending');
+Route::post('/restaurants-sort-desc',[RestaurantController::class,'sortRestaurantDesc'])->name('sort-restaurant-descending');
 Route::get('/restaurant-admin-page/{id}',[RestaurantController::class,'adminRestaurantPage']);
 Route::get('/restaurant-signup2/{id}',[RestaurantController::class,'findRestaurantName']);
 Route::get('/restaurant-signup3/{id}',[RestaurantController::class,'findRestaurantName1']);

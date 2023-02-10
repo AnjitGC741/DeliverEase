@@ -134,6 +134,17 @@ class RestaurantController extends Controller
         $restaurantData->save();
         return  redirect('restaurant-admin-page/'.$req->id);
     }
+    public function sortRestaurantAsc()
+    {
+        $restaurants = Restaurant::orderBy('restaurantName', 'asc')->get();
+        return view('restaurant-list', compact('restaurants'));
+
+    }
+    public function sortRestaurantDesc()
+    {
+        $restaurants = Restaurant::orderBy('restaurantName', 'desc')->get();
+        return view('restaurant-list', compact('restaurants'));
+    }
 
 
 }
