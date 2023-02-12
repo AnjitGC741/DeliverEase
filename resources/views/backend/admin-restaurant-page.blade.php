@@ -26,7 +26,6 @@
 </div>
 <div class="editProfileForm" id="editProfileForm">
     <h2>Edit restaurnant info</h2>
-    <hr class="mb-4">
     <form action="" >
         <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Resturant name</label>
@@ -59,6 +58,29 @@
        </div>
        <button style="width: 100%; height: 50px;" class=" fs-4 mt-3 btn btn-success">Update</button>
     </form>
+</div>
+<div class="editLoginInfo" id="editLoginInfo">
+<h2>Edit restaurnant Login Info</h2>
+<hr class="mb-4">
+  <form action="">
+        <div class="mb-3">
+        <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Resturant Id</label>
+        <input  style="letter-spacing: 0.8px;" type="text" readonly class="form-control fs-4" value="{{$value->id}}">
+        </div>
+        <div class="mb-3">
+        <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Old Password</label>
+        <input  style="letter-spacing: 0.8px;" type="password" class="form-control fs-4" value="">
+        </div>
+        <div class="mb-3">
+        <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">New Password</label>
+        <input style="letter-spacing: 0.8px;" type="password" class="form-control fs-4">
+        </div>
+        <div class="mb-3">
+        <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Confirm Password</label>
+        <input style="letter-spacing: 0.8px;" type="password" class="form-control fs-4">
+        </div>
+        <button style="width: 100%; height: 50px;" class=" fs-4 mt-3 btn btn-success">Update</button>
+  </form>
 </div>
 
 <section class="resturant-section">
@@ -132,7 +154,7 @@
             <div class="changeRestaurantData" id="changeRestaurantData">
               <button onclick="displayChangeRestaurantInfo();" class="changeRestaurantInfo"><ion-icon name="storefront-outline" style="font-size: 24px;"></ion-icon>Update restaurant Info</button>
               <hr>
-              <button class="changeRestaurantLoginInfo"><ion-icon name="log-in-outline" style="font-size: 24px;"></ion-icon>Update restaurant Login details</button>
+              <button onclick="displayChangeRestaurantLoginInfo();" class="changeRestaurantLoginInfo"><ion-icon name="log-in-outline" style="font-size: 24px;"></ion-icon>Update restaurant Login details</button>
             </div>
           </div>
 </section>
