@@ -20,6 +20,8 @@
 </style>
 </head>
 <body>
+<div class="blur-box" id="blurBox">
+</div>
 <section class="resturant-section">
         <div class="img-section">
           @if($value->restaurantCoverImg == "")
@@ -86,6 +88,17 @@
             </div>
           </div>
 </section>
+<section class="secondary-navbar">
+        <div>
+          <ul class="secondary-navbar-links">
+            <li class="secondary-navbar-link"><a href="#">Foods</a></li>
+            <li class="secondary-navbar-link"><a href="#">Unavailable Foods</a></li>
+            <li class="secondary-navbar-link"><a href="#" >Orders</a></li>
+            <li class="secondary-navbar-link"><a href="#" >Analysis</a></li>
+           </ul>
+        </div>
+</section>
+
 <script src="/js/forAdminRestaurantPage.js"></script>
 </body>
 </html>

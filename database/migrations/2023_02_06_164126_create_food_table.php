@@ -19,9 +19,10 @@ return new class extends Migration
             $table->string('category');
             $table->String('foodType');
             $table->integer('price');
+            $table->String('quantity');
             $table->string('foodImg',255);
-            $table->unsignedBigInteger('restaurantId');
-            $table->foreign('restaurantId')->references('id')->on('restaurants')->onDelete('cascade');
+            $table->unsignedBigInteger('restaurant_id');
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $table->timestamps();
         });
     }
