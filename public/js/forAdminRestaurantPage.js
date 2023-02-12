@@ -20,6 +20,28 @@ function displayProfileImgOption()
    editOption.style.visibility = "hidden";
  }
 }
+function displayChangeRestaurantData()
+{
+  let editOption = document.getElementById("changeRestaurantData");
+  if(editOption.style.visibility === "hidden")
+  {
+    editOption.style.visibility = "visible";
+  }
+  else{
+    editOption.style.visibility = "hidden";
+  }
+
+}
+function displayChangeRestaurantInfo()
+{
+  document.getElementById('blurBox').style.visibility="visible";
+  document.getElementById('editProfileForm').style.visibility="visible";
+}
+function hideAll()
+{
+  document.getElementById('blurBox').style.visibility="hidden";
+  document.getElementById('editProfileForm').style.visibility="hidden";
+}
 var fileInput=document.querySelector("#change");
 var fileInput2=document.querySelector("#change2");
 fileInput.addEventListener("change",function(){
