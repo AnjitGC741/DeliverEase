@@ -15,6 +15,15 @@ body{
 a{
     text-decoration: none;
 }
+.blur-box {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 300vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+  visibility: hidden;
+}
 .resturant-section
 {
   height: 60vh;
@@ -175,4 +184,34 @@ a{
   gap: 4px;
   border-radius: 3px;
   cursor: pointer;
+}
+/* secondary navbar */
+.secondary-navbar{
+  width: 100%;
+  margin-top: 10px;
+}
+.secondary-navbar div{
+  max-width: 130rem;
+  padding: 20px;
+  margin: 0 auto;
+  border-bottom: 1px solid gray;
+}
+.secondary-navbar-links{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+}
+.secondary-navbar-link{
+  list-style: none;
+}
+.secondary-navbar-link a{
+  text-decoration: none;
+  color: #181818;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+}
+.secondary-navbar-link a:hover{
+  color: #FF7F00;
 }

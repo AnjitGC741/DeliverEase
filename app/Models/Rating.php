@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Rating extends Model
 {
     use HasFactory;
-    protected $fillable = ['rating','restaurantId','customerId'];
+    protected $fillable = ['rating','restaurant_id','customer_id'];
     public function restaurants()
     {
         return $this->belongsTo(Restaurant::class);
