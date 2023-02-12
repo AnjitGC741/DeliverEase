@@ -37,10 +37,15 @@ function displayChangeRestaurantInfo()
   document.getElementById('blurBox').style.visibility="visible";
   document.getElementById('editProfileForm').style.visibility="visible";
 }
+function displayChangeRestaurantLoginInfo(){
+  document.getElementById('blurBox').style.visibility="visible";
+  document.getElementById('editLoginInfo').style.visibility="visible";
+}
 function hideAll()
 {
   document.getElementById('blurBox').style.visibility="hidden";
   document.getElementById('editProfileForm').style.visibility="hidden";
+  document.getElementById('editLoginInfo').style.visibility="hidden";
 }
 var fileInput=document.querySelector("#change");
 var fileInput2=document.querySelector("#change2");
