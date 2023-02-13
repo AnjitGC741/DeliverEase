@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\FoodController;
 use App\Models\Restaurant;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -65,4 +66,6 @@ Route::get('/logout',[CustomerController::class,'logout']);
 Route::post('/signup',[CustomerController::class,'registerUser'])->name('register-user');
 Route::get('auth/google',[CustomerController::class,'redirect'])->name('google-auth');
 Route::get('auth/google/call-back',[CustomerController::class,'callbackGoogle']);
+// for food
+Route::post('/restaurant-admin-page/saveFoodInfo',[FoodController::class,'saveFood'])->name('save-food-info');
 

@@ -62,38 +62,46 @@
 <div class="addFood" id="addFood">
   <h2>Add food to your restaurant</h2>
   <hr>
-  <form action="">
+  <form action="{{route('save-food-info')}}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="text" hidden name="restaurantId" value="{{$value->id}}">
     <div class="mb-3">
       <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food name</label>
-      <input  style="letter-spacing: 0.8px;" type="text" class="form-control fs-4">
+      <input  style="letter-spacing: 0.8px;" type="text" class="form-control fs-4" name="foodName">
+      <span style="color: red;"> @error('foodName'){{$message}}@enderror</span>
       </div>
       <div class="mb-3">
       <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Cuisine</label>
-      <input type="text" class="form-control fs-4">
+      <input type="text" style="letter-spacing: 0.8px;" class="form-control fs-4" name="category" >
+      <span style="color: red;"> @error('category'){{$message}}@enderror</span>
       </div>
       <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Type</label>
-        <input type="text" class="form-control fs-4">
+        <input type="text" style="letter-spacing: 0.8px;" class="form-control fs-4" name="foodType">
+        <span style="color: red;"> @error('foodType'){{$message}}@enderror</span>
       </div>
        <div class="mb-3 d-flex align-items-center gap-3">
         <div class="w-50">
           <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Price</label>
-          <input type="text" class="form-control fs-4">
+          <input type="text"style="letter-spacing: 0.8px;" class="form-control fs-4" name="price">
+          <span style="color: red;"> @error('price'){{$message}}@enderror</span>
         </div>
         <div class="w-50  mt-1">
         <label class="fs-4" style="letter-spacing: 0.8px;">Quantity</label>
-        <select class="form-select fs-4" aria-label="Default select example">
-          <option>Plate</option>
-          <option>Cup</option>
-          <option>Piece</option>
+        <select class="form-select fs-4" style="letter-spacing: 0.8px;" name="quantity" aria-label="Default select example">
+          <option value="plate">Plate</option>
+          <option value="cup">Cup</option>
+          <option value="piece">Piece</option>
         </select>
+        <span style="color: red;"> @error('quantity'){{$message}}@enderror</span>
         </div>
       </div>
       <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Image</label>
-        <input type="file" class="form-control fs-4">
+        <input type="file" style="letter-spacing: 0.8px;" name="foodImg" class="form-control fs-4">
+        <span style="color: red;"> @error('foodImg'){{$message}}@enderror</span>
       </div>
-      <button style="width: 100%; height: 50px;letter-spacing:1px;" class=" fs-2 mt-3 btn btn-success">Add</button>
+      <button type="submit" style="width: 100%; height: 50px;letter-spacing:1px;" class=" fs-2 mt-3 btn btn-success">Add</button>
   </form>
 </div>
 <div class="editLoginInfo" id="editLoginInfo">
@@ -206,11 +214,22 @@
         </div>
 </section>
 <section class="dynamic-div">
-  <button onclick="displayAddFood();" class="btn btn-success">Add Food</button>
-</section>
-<section class="multipage">
+    <div class="food-section">
+      <nav class="navbar">
+          <div class="container-fluid">
+          <button onclick="displayAddFood();" class="btn btn-success fs-4">Add Food</button>
+          <form class="d-flex" role="search">
+          <input class="form-control me-2 fs-4" type="search" placeholder="Search" aria-label="Search">
+         <button class="btn btn-outline-success fs-4" type="submit">Search</button>
+         </form>
+      </div>
+      </nav>
+      <div class="food-list">
 
+      </div>
+    </div>
 </section>
+
 
 <script src="/js/forAdminRestaurantPage.js"></script>
 </body>

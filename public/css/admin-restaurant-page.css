@@ -288,7 +288,7 @@ hr{
 /* secondary navbar */
 .secondary-navbar{
   width: 100%;
-  margin-top: 10px;
+  margin: 10px 0 10px 0 ;
 }
 .secondary-navbar div{
   max-width: 130rem;
@@ -312,4 +312,9 @@ hr{
 }
 .secondary-navbar-link a:hover{
   color: #FF7F00;
+}
+/* dynamic div  */
+.dynamic-div{
+  max-width: 130rem;
+  margin: 0 auto;
 }
