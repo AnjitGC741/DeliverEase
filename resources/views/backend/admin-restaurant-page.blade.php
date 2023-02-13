@@ -1,3 +1,6 @@
+@php
+  $sn=1;
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,44 +65,38 @@
 <div class="addFood" id="addFood">
   <h2>Add food to your restaurant</h2>
   <hr>
-  <form action="{{route('save-food-info')}}" method="POST" enctype="multipart/form-data">
+  <form action="{{route('save-food-info')}}" method="POST" enctype="multipart/form-data" id="saveFood">
     @csrf
     <input type="text" hidden name="restaurantId" value="{{$value->id}}">
     <div class="mb-3">
       <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food name</label>
-      <input  style="letter-spacing: 0.8px;" type="text" class="form-control fs-4" name="foodName">
-      <span style="color: red;"> @error('foodName'){{$message}}@enderror</span>
+      <input  style="letter-spacing: 0.8px;" type="text" class="form-control fs-4" name="foodName" id="foodName">
       </div>
       <div class="mb-3">
       <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Cuisine</label>
-      <input type="text" style="letter-spacing: 0.8px;" class="form-control fs-4" name="category" >
-      <span style="color: red;"> @error('category'){{$message}}@enderror</span>
+      <input type="text" style="letter-spacing: 0.8px;" class="form-control fs-4" name="category" id="category">
       </div>
       <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Type</label>
-        <input type="text" style="letter-spacing: 0.8px;" class="form-control fs-4" name="foodType">
-        <span style="color: red;"> @error('foodType'){{$message}}@enderror</span>
+        <input type="text" style="letter-spacing: 0.8px;" class="form-control fs-4" name="foodType" id="foodType">
       </div>
        <div class="mb-3 d-flex align-items-center gap-3">
         <div class="w-50">
           <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Price</label>
-          <input type="text"style="letter-spacing: 0.8px;" class="form-control fs-4" name="price">
-          <span style="color: red;"> @error('price'){{$message}}@enderror</span>
+          <input type="text"style="letter-spacing: 0.8px;" class="form-control fs-4" name="price" id="price">
         </div>
         <div class="w-50  mt-1">
         <label class="fs-4" style="letter-spacing: 0.8px;">Quantity</label>
-        <select class="form-select fs-4" style="letter-spacing: 0.8px;" name="quantity" aria-label="Default select example">
+        <select class="form-select fs-4" style="letter-spacing: 0.8px;" name="quantity" aria-label="Default select example" id="quantity">
           <option value="plate">Plate</option>
           <option value="cup">Cup</option>
           <option value="piece">Piece</option>
         </select>
-        <span style="color: red;"> @error('quantity'){{$message}}@enderror</span>
         </div>
       </div>
       <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Image</label>
-        <input type="file" style="letter-spacing: 0.8px;" name="foodImg" class="form-control fs-4">
-        <span style="color: red;"> @error('foodImg'){{$message}}@enderror</span>
+        <input type="file" style="letter-spacing: 0.8px;" name="foodImg" class="form-control fs-4" id="foodImg">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
       </div>
       <button type="submit" style="width: 100%; height: 50px;letter-spacing:1px;" class=" fs-2 mt-3 btn btn-success">Add</button>
   </form>
@@ -215,7 +212,7 @@
 </section>
 <section class="dynamic-div">
     <div class="food-section">
-      <nav class="navbar">
+      <nav class="navbar mb-4">
           <div class="container-fluid">
           <button onclick="displayAddFood();" class="btn btn-success fs-4">Add Food</button>
           <form class="d-flex" role="search">
@@ -225,7 +222,30 @@
       </div>
       </nav>
       <div class="food-list">
-
+      <table class="table table-striped table-hover">
+        <th>SN</th>
+        <th>Food Name</th>
+        <th>Image</th>
+        <th>category</th>
+        <th>Food Type</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th colspan="3">Action</th>
+        @foreach ($value->food as $food)
+        <tr>
+          <td>{{$sn++}}</td>
+          <td>{{$food->foodName}}</td>
+          <td> <img  width= 100 height=100 src="{{ asset('/storage/'.$food->foodImg) }}"></td>
+          <td>{{$food->category}}</td>
+          <td>{{$food->foodType}}</td>
+          <td>{{$food->price}}</td>
+          <td>{{$food->quantity}}</td>
+          <td><button class="btn btn-primary">Make Unavailable</button>
+          <button class="btn btn-warning">Edit</button></td>
+        
+        </tr>
+        @endforeach
+      </table>
       </div>
     </div>
 </section>
