@@ -59,6 +59,43 @@
        <button style="width: 100%; height: 50px;" class=" fs-4 mt-3 btn btn-success">Update</button>
     </form>
 </div>
+<div class="addFood" id="addFood">
+  <h2>Add food to your restaurant</h2>
+  <hr>
+  <form action="">
+    <div class="mb-3">
+      <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food name</label>
+      <input  style="letter-spacing: 0.8px;" type="text" class="form-control fs-4">
+      </div>
+      <div class="mb-3">
+      <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Cuisine</label>
+      <input type="text" class="form-control fs-4">
+      </div>
+      <div class="mb-3">
+        <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Type</label>
+        <input type="text" class="form-control fs-4">
+      </div>
+       <div class="mb-3 d-flex align-items-center gap-3">
+        <div class="w-50">
+          <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Price</label>
+          <input type="text" class="form-control fs-4">
+        </div>
+        <div class="w-50  mt-1">
+        <label class="fs-4" style="letter-spacing: 0.8px;">Quantity</label>
+        <select class="form-select fs-4" aria-label="Default select example">
+          <option>Plate</option>
+          <option>Cup</option>
+          <option>Piece</option>
+        </select>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Image</label>
+        <input type="file" class="form-control fs-4">
+      </div>
+      <button style="width: 100%; height: 50px;letter-spacing:1px;" class=" fs-2 mt-3 btn btn-success">Add</button>
+  </form>
+</div>
 <div class="editLoginInfo" id="editLoginInfo">
 <h2>Edit restaurnant Login Info</h2>
 <hr class="mb-4">
@@ -167,6 +204,9 @@
             <li class="secondary-navbar-link">Analysis</li>
            </ul>
         </div>
+</section>
+<section class="dynamic-div">
+  <button onclick="displayAddFood();" class="btn btn-success">Add Food</button>
 </section>
 <section class="multipage">
 
