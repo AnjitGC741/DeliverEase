@@ -2,14 +2,6 @@
 <html lang="en">
 
 <head>
-
-        <style>
-            .input-error{
-                color: #ff5555;
-                margin-top: -300px;
-                margin-bottom: 80px;
-            }
-        </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +14,13 @@
     <link rel="stylesheet" href="/css/restaurant-signup.css">
     <title>Resturant signup</title>
     <link rel="shortcut icon" href="/favicon/favicon1.ico" type="image/x-icon">
+    <style>
+            .input-error{
+                color: #ff5555;
+                margin-top: -300px;
+                margin-bottom: 80px;
+            }
+        </style>
 </head>
 
 <body>
