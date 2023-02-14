@@ -240,9 +240,35 @@
           <td>{{$food->foodType}}</td>
           <td>{{$food->price}}</td>
           <td>{{$food->quantity}}</td>
-          <td><button class="btn btn-primary">Make Unavailable</button>
+          <td>
+          <a href="{{url('make-food-unavailable/'.$food->id)}}"><button class="btn btn-primary">Make unavailable</button></a>
           <button class="btn btn-warning">Edit</button></td>
-        
+        </tr>
+        @endforeach
+      </table>
+      </div>
+      <div class="unavailable-food-list">
+      <table class="table table-striped table-hover">
+        <th>SN</th>
+        <th>Food Name</th>
+        <th>Image</th>
+        <th>category</th>
+        <th>Food Type</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th colspan="3">Action</th>
+        @foreach ($value->food()->onlyTrashed()->get() as $food)
+        <tr>
+          <td>{{$sn++}}</td>
+          <td>{{$food->foodName}}</td>
+          <td> <img  width= 100 height=100 src="{{ asset('/storage/'.$food->foodImg) }}"></td>
+          <td>{{$food->category}}</td>
+          <td>{{$food->foodType}}</td>
+          <td>{{$food->price}}</td>
+          <td>{{$food->quantity}}</td>
+          <td>
+          <a href="{{url('force-delete-food/'.$food->id)}}"><button class="btn btn-danger">Delete</button></a>
+          <a href="{{url('restore-food/'.$food->id)}}"><button class="btn btn-warning">Restore</button></a></td>
         </tr>
         @endforeach
       </table>
