@@ -43,6 +43,21 @@ hr{
   font-weight: 400;
   letter-spacing: 0.8px;
 }
+.editFood{
+min-width: 50rem;
+padding:30px;
+border:1px solid #939292;
+position: fixed;
+z-index: 2;
+margin:110px 500px;
+background-color: #ffffff;
+visibility: hidden;
+}
+.editFood h2{
+  margin-bottom: 10px;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+}
 .editLoginInfo{
   min-width: 50rem;
   padding:30px;
@@ -310,8 +325,17 @@ hr{
   letter-spacing: 1px;
   transition: all 0.3s;
 }
-.secondary-navbar-link a:hover{
+.secondary-navbar-link button{
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.secondary-navbar-link button:hover{
   color: #FF7F00;
+}
+/* table design */
+th{
+  font-size: 1.6rem;
 }
 /* dynamic div  */
 .dynamic-div{

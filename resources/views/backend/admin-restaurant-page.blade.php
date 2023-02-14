@@ -27,6 +27,44 @@
 <body>
 <div class="blur-box" id="blurBox" onclick="hideAll();">
 </div>
+@foreach ($value->food as $food)
+<div class="editFood" id="editFood_{{$food->id}}">
+    <h2>Edit food information</h2>
+    <form action="#" >
+    <div class="mb-3">
+      <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food name</label>
+      <input  style="letter-spacing: 0.8px;" type="text" class="form-control fs-4" name="foodName" id="foodName" value="{{$food->foodName}}">
+      </div>
+      <div class="mb-3">
+      <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Cuisine</label>
+      <input type="text" style="letter-spacing: 0.8px;" class="form-control fs-4" name="category" id="category" value="{{$food->category}}">
+      </div>
+      <div class="mb-3">
+        <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Type</label>
+        <input type="text" style="letter-spacing: 0.8px;" class="form-control fs-4" name="foodType" id="foodType" value="{{$food->foodType}}">
+      </div>
+       <div class="mb-3 d-flex align-items-center gap-3">
+        <div class="w-50">
+          <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Price</label>
+          <input type="text"style="letter-spacing: 0.8px;" class="form-control fs-4" name="price" id="price" value="{{$food->price}}">
+        </div>
+        <div class="w-50  mt-1">
+        <label class="fs-4" style="letter-spacing: 0.8px;">Quantity</label>
+        <select class="form-select fs-4" style="letter-spacing: 0.8px;" name="quantity" aria-label="Default select example" id="quantity">
+          <option value="plate">Plate</option>
+          <option value="cup">Cup</option>
+          <option value="piece">Piece</option>
+        </select>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Image</label>
+        <input type="file" style="letter-spacing: 0.8px;" name="foodImg" class="form-control fs-4" id="foodImg" value="{{ asset('/storage/'.$food->foodImg) }}">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+      </div>
+       <button style="width: 100%; height: 50px;" class=" fs-4 mt-3 btn btn-success">Update</button>
+    </form>
+</div>
+@endforeach
 <div class="editProfileForm" id="editProfileForm">
     <h2>Edit restaurnant info</h2>
     <form action="" >
@@ -203,10 +241,10 @@
 <section class="secondary-navbar">
         <div>
           <ul class="secondary-navbar-links">
-            <li class="secondary-navbar-link">Foods</li>
-            <li class="secondary-navbar-link">Unavailable Foods</li>
-            <li class="secondary-navbar-link">Orders</li>
-            <li class="secondary-navbar-link">Analysis</li>
+            <li class="secondary-navbar-link"><button>Foods</button></li>
+            <li class="secondary-navbar-link"><button>unavailable Foods</button></li>
+            <li class="secondary-navbar-link"><button>Orders</button></li>
+            <li class="secondary-navbar-link"><button>Analysis</button></li>
            </ul>
         </div>
 </section>
@@ -223,52 +261,65 @@
       </nav>
       <div class="food-list">
       <table class="table table-striped table-hover">
-        <th>SN</th>
-        <th>Food Name</th>
-        <th>Image</th>
-        <th>category</th>
-        <th>Food Type</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th colspan="3">Action</th>
+        <tr style="height:50px;">
+        <th style="padding-top:15px;">SN</th>
+        <th style="padding-top:15px;">Food Name</th>
+        <th style="padding-top:15px;padding-left:30px;">Image</th>
+        <th  style="padding-top:15px;">Category</th>
+        <th style="padding-top:15px;">Food Type</th>
+        <th style="padding-top:15px;">Price</th>
+        <th style="padding-top:15px;">Quantity</th>
+        <th  style="padding:15px 0 0 60px;" colspan="3">Action</th>
+        </tr>
         @foreach ($value->food as $food)
         <tr>
-          <td>{{$sn++}}</td>
-          <td>{{$food->foodName}}</td>
-          <td> <img  width= 100 height=100 src="{{ asset('/storage/'.$food->foodImg) }}"></td>
-          <td>{{$food->category}}</td>
-          <td>{{$food->foodType}}</td>
-          <td>{{$food->price}}</td>
-          <td>{{$food->quantity}}</td>
-          <td>
-          <a href="{{url('make-food-unavailable/'.$food->id)}}"><button class="btn btn-primary">Make unavailable</button></a>
-          <button class="btn btn-warning">Edit</button></td>
+          <td class="fs-3" style="padding-top:40px;">{{$sn++}}</td>
+          <td class="fs-3" style="padding-top:40px;">{{$food->foodName}}</td>
+          <td> <img  width= 100 height=100 src="{{ asset('/storage/'.$food->foodImg) }}" style="border-radius:50%"></td>
+          <td class="fs-3" style="padding-top:40px;">{{$food->category}}</td>
+          <td class="fs-3" style="padding-top:40px;">{{$food->foodType}}</td>
+          <td class="fs-3" style="padding-top:40px;">{{$food->price}}</td>
+          <td class="fs-3" style="padding-top:40px;">{{$food->quantity}}</td>
+          <td style="padding-top:40px;">
+          <a href="{{url('make-food-unavailable/'.$food->id)}}"><button class="btn btn-primary fs-4">Make unavailable</button></a>
+          <button id="{{$food->id}}" onclick="openFoodEditBox(this.id);" class="btn btn-warning fs-4" style="margin-left:10px">Edit</button></td>
         </tr>
         @endforeach
       </table>
       </div>
       <div class="unavailable-food-list">
+      <nav class="navbar mb-4 d-flex justify-content-end">
+          <div>
+          <form class="d-flex" role="search">
+          <input class="form-control me-2 fs-4" type="search" placeholder="Search" aria-label="Search">
+         <button class="btn btn-outline-success fs-4" type="submit">Search</button>
+         </form>
+         </div>
+      </nav>
       <table class="table table-striped table-hover">
-        <th>SN</th>
-        <th>Food Name</th>
-        <th>Image</th>
-        <th>category</th>
-        <th>Food Type</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th colspan="3">Action</th>
+      <tr style="height:50px;">
+        <th style="padding-top:15px;">SN</th>
+        <th style="padding-top:15px;">Food Name</th>
+        <th style="padding-top:15px;padding-left:30px;">Image</th>
+        <th  style="padding-top:15px;">Category</th>
+        <th style="padding-top:15px;">Food Type</th>
+        <th style="padding-top:15px;">Price</th>
+        <th style="padding-top:15px;">Quantity</th>
+        <th  style="padding:15px 0 0 60px;" colspan="3">Action</th>
+        </tr>
         @foreach ($value->food()->onlyTrashed()->get() as $food)
         <tr>
-          <td>{{$sn++}}</td>
-          <td>{{$food->foodName}}</td>
-          <td> <img  width= 100 height=100 src="{{ asset('/storage/'.$food->foodImg) }}"></td>
-          <td>{{$food->category}}</td>
-          <td>{{$food->foodType}}</td>
-          <td>{{$food->price}}</td>
-          <td>{{$food->quantity}}</td>
-          <td>
-          <a href="{{url('force-delete-food/'.$food->id)}}"><button class="btn btn-danger">Delete</button></a>
-          <a href="{{url('restore-food/'.$food->id)}}"><button class="btn btn-warning">Restore</button></a></td>
+          <td class="fs-3" style="padding-top:40px;">{{$sn++}}</td>
+          <td class="fs-3" style="padding-top:40px;">{{$food->foodName}}</td>
+          <td> <img  width= 100 height=100 src="{{ asset('/storage/'.$food->foodImg) }}" style="border-radius:50%"></td>
+          <td class="fs-3" style="padding-top:40px;">{{$food->category}}</td>
+          <td class="fs-3" style="padding-top:40px;">{{$food->foodType}}</td>
+          <td class="fs-3" style="padding-top:40px;">{{$food->price}}</td>
+          <td class="fs-3" style="padding-top:40px;">{{$food->quantity}}</td>
+          <td style="padding-top:40px;">
+          <a href="{{url('force-delete-food/'.$food->id)}}"><button class="btn btn-danger fs-4">Delete</button></a>
+          <a href="{{url('restore-food/'.$food->id)}}"><button class="btn btn-warning fs-4" style="margin-left:10px">Restore</button></a>
+          </td>
         </tr>
         @endforeach
       </table>
