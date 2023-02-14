@@ -1,3 +1,4 @@
+let idValue;
 function displayBackgroundImgOption()
 {
  let editOption = document.getElementById("changeBackgroundImgOption");
@@ -52,6 +53,13 @@ function hideAll()
   document.getElementById('editProfileForm').style.visibility="hidden";
   document.getElementById('editLoginInfo').style.visibility="hidden";
   document.getElementById('addFood').style.visibility="hidden";
+  document.getElementById("editFood_"+idValue).style.visibility = "hidden";
+}
+function openFoodEditBox(x)
+{
+    idValue=x; 
+    document.getElementById("editFood_"+x).style.visibility = "visible";
+    document.getElementById('blurBox').style.visibility="visible";
 }
 var fileInput=document.querySelector("#change");
 var fileInput2=document.querySelector("#change2");
