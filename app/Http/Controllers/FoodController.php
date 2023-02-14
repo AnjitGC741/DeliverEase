@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Restaurant;
 use App\Models\Food;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FoodController extends Controller
 {
@@ -36,5 +37,25 @@ class FoodController extends Controller
         else{
             return  redirect('restaurant-admin-page/'.$req->restaurantId);
         }
+    }
+    public function makeFoodUnavailable($id)
+    {
+        $makeFoodUnavailable = Food::find($id);
+        $makeFoodUnavailable->delete();
+        return back();
+    }
+    public function restoreFood($id)
+    {
+       $deleteFruit = Food::withTrashed()->find($id);
+       $deleteFruit->restore();
+       return back();
+
+    }
+    public function forceDeleteFood($id)
+    {
+       $deletefood = Food::withTrashed()->find($id);
+       $deletefood->forceDelete();
+       return back();
+
     }
 }

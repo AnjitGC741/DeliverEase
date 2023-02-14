@@ -68,4 +68,7 @@ Route::get('auth/google',[CustomerController::class,'redirect'])->name('google-a
 Route::get('auth/google/call-back',[CustomerController::class,'callbackGoogle']);
 // for food
 Route::post('/restaurant-admin-page/saveFoodInfo',[FoodController::class,'saveFood'])->name('save-food-info');
+Route::get('make-food-unavailable/{id}',[FoodController::class,'makeFoodUnavailable']);
+Route::get('restore-food/{id}',[FoodController::class,'restoreFood']);
+Route::get('force-delete-food/{id}',[FoodController::class,'forceDeleteFood']);
 
