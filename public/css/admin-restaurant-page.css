@@ -24,7 +24,7 @@ hr{
   width: 100%;
   height: 300vh;
   background: rgba(0, 0, 0, 0.7);
-  z-index: 1;
+  z-index: 98;
   visibility: hidden;
 }
 /* popup box design */
@@ -33,7 +33,7 @@ hr{
   padding:30px;
   border:1px solid #939292;
   position: fixed;
-  z-index: 2;
+  z-index: 99;
   margin:110px 500px;
   background-color: #ffffff;
   visibility: hidden;
@@ -48,7 +48,7 @@ min-width: 50rem;
 padding:30px;
 border:1px solid #939292;
 position: fixed;
-z-index: 2;
+z-index: 99;
 margin:110px 500px;
 background-color: #ffffff;
 visibility: hidden;
@@ -63,7 +63,7 @@ visibility: hidden;
   padding:30px;
   border:1px solid #939292;
   position: fixed;
-  z-index: 2;
+  z-index: 99;
   margin:130px 500px;
   background-color: #ffffff;
   visibility: hidden;
@@ -324,6 +324,7 @@ visibility: hidden;
   font-size: 1.8rem;
   letter-spacing: 1px;
   transition: all 0.3s;
+  
 }
 .secondary-navbar-link button{
   background: none;
@@ -341,4 +342,47 @@ th{
 .dynamic-div{
   max-width: 130rem;
   margin: 0 auto;
+  position: relative;
+}
+.food-section{
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+}
+.unavailable-food-list-section{
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  visibility: hidden;
+}
+.order-list-section{
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  visibility: hidden;
+}
+.analysis-section{
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  visibility: hidden;
+}
+.active{
+  color: #FF7F00;
+  text-decoration: underline;
+}
+/* nothing found div */
+.nothing-found-box{
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+}
+.nothing-found-box img{
+  width: 25rem;
+  height: 25rem;
+}
+.nothing-found-box p{
+  font-size: 2.4rem;
+  letter-spacing: 1px;
 }

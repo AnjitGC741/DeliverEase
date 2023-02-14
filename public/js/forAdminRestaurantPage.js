@@ -1,4 +1,14 @@
 let idValue;
+var fileInput=document.querySelector("#change");
+var fileInput2=document.querySelector("#change2");
+fileInput.addEventListener("change",function(){
+    var form = document.querySelector("#myForm");
+    form.submit();
+});
+fileInput2.addEventListener("change",function(){
+  var form2 = document.querySelector("#myForm2");
+  form2.submit();
+});
 function displayBackgroundImgOption()
 {
  let editOption = document.getElementById("changeBackgroundImgOption");
@@ -61,13 +71,31 @@ function openFoodEditBox(x)
     document.getElementById("editFood_"+x).style.visibility = "visible";
     document.getElementById('blurBox').style.visibility="visible";
 }
-var fileInput=document.querySelector("#change");
-var fileInput2=document.querySelector("#change2");
-fileInput.addEventListener("change",function(){
-    var form = document.querySelector("#myForm");
-    form.submit();
-});
-fileInput2.addEventListener("change",function(){
-  var form2 = document.querySelector("#myForm2");
-  form2.submit();
-});
+function displayFoodSection()
+{
+  document.getElementById("food-section").style.visibility = "visible";
+  document.getElementById("unavailable-food-section").style.visibility = "hidden";
+  document.getElementById("order-section").style.visibility = "hidden";
+  document.getElementById("analysis-section").style.visibility = "hidden";
+}
+function displayUnavailableFoodSection()
+{
+  document.getElementById("food-section").style.visibility = "hidden";
+  document.getElementById("unavailable-food-section").style.visibility = "visible";
+  document.getElementById("order-section").style.visibility = "hidden";
+  document.getElementById("analysis-section").style.visibility = "hidden";
+}
+function displayOrderSection()
+{
+  document.getElementById("food-section").style.visibility = "hidden";
+  document.getElementById("unavailable-food-section").style.visibility = "hidden";
+  document.getElementById("order-section").style.visibility = "visible";
+  document.getElementById("analysis-section").style.visibility = "hidden";
+}
+function displayAnalysisSection()
+{
+  document.getElementById("food-section").style.visibility = "hidden";
+  document.getElementById("unavailable-food-section").style.visibility = "hidden";
+  document.getElementById("order-section").style.visibility = "hidden";
+  document.getElementById("analysis-section").style.visibility = "visible";
+}

@@ -241,15 +241,15 @@
 <section class="secondary-navbar">
         <div>
           <ul class="secondary-navbar-links">
-            <li class="secondary-navbar-link"><button>Foods</button></li>
-            <li class="secondary-navbar-link"><button>unavailable Foods</button></li>
-            <li class="secondary-navbar-link"><button>Orders</button></li>
-            <li class="secondary-navbar-link"><button>Analysis</button></li>
+            <li class="secondary-navbar-link "><button  onclick="displayFoodSection();">Foods</button></li>
+            <li class="secondary-navbar-link"><button onclick="displayUnavailableFoodSection();">unavailable Foods</button></li>
+            <li class="secondary-navbar-link"><button  onclick="displayOrderSection();">Orders</button></li>
+            <li class="secondary-navbar-link"><button  onclick="displayAnalysisSection();">Analysis</button></li>
            </ul>
         </div>
 </section>
 <section class="dynamic-div">
-    <div class="food-section">
+    <div class="food-section" id="food-section">
       <nav class="navbar mb-4">
           <div class="container-fluid">
           <button onclick="displayAddFood();" class="btn btn-success fs-4">Add Food</button>
@@ -260,6 +260,7 @@
       </div>
       </nav>
       <div class="food-list">
+      @if($value->food() ->count() > 0)
       <table class="table table-striped table-hover">
         <tr style="height:50px;">
         <th style="padding-top:15px;">SN</th>
@@ -286,45 +287,66 @@
         </tr>
         @endforeach
       </table>
-      </div>
-      <div class="unavailable-food-list">
-      <nav class="navbar mb-4 d-flex justify-content-end">
-          <div>
-          <form class="d-flex" role="search">
-          <input class="form-control me-2 fs-4" type="search" placeholder="Search" aria-label="Search">
-         <button class="btn btn-outline-success fs-4" type="submit">Search</button>
-         </form>
-         </div>
-      </nav>
-      <table class="table table-striped table-hover">
-      <tr style="height:50px;">
-        <th style="padding-top:15px;">SN</th>
-        <th style="padding-top:15px;">Food Name</th>
-        <th style="padding-top:15px;padding-left:30px;">Image</th>
-        <th  style="padding-top:15px;">Category</th>
-        <th style="padding-top:15px;">Food Type</th>
-        <th style="padding-top:15px;">Price</th>
-        <th style="padding-top:15px;">Quantity</th>
-        <th  style="padding:15px 0 0 60px;" colspan="3">Action</th>
-        </tr>
-        @foreach ($value->food()->onlyTrashed()->get() as $food)
-        <tr>
-          <td class="fs-3" style="padding-top:40px;">{{$sn++}}</td>
-          <td class="fs-3" style="padding-top:40px;">{{$food->foodName}}</td>
-          <td> <img  width= 100 height=100 src="{{ asset('/storage/'.$food->foodImg) }}" style="border-radius:50%"></td>
-          <td class="fs-3" style="padding-top:40px;">{{$food->category}}</td>
-          <td class="fs-3" style="padding-top:40px;">{{$food->foodType}}</td>
-          <td class="fs-3" style="padding-top:40px;">{{$food->price}}</td>
-          <td class="fs-3" style="padding-top:40px;">{{$food->quantity}}</td>
-          <td style="padding-top:40px;">
-          <a href="{{url('force-delete-food/'.$food->id)}}"><button class="btn btn-danger fs-4">Delete</button></a>
-          <a href="{{url('restore-food/'.$food->id)}}"><button class="btn btn-warning fs-4" style="margin-left:10px">Restore</button></a>
-          </td>
-        </tr>
-        @endforeach
-      </table>
+      @else
+       <div class="nothing-found-box">
+       <img src="/img/nothing-found.jpg" alt="" />
+       <p>Nothing Found</p>
+       </div>
+      @endif
       </div>
     </div>
+      <div class="unavailable-food-list-section" id="unavailable-food-section">
+              <nav class="navbar mb-4 d-flex justify-content-end">
+                  <div>
+                  <form class="d-flex" role="search">
+                  <input class="form-control me-2 fs-4" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success fs-4" type="submit">Search</button>
+                </form>
+                </div>
+              </nav>
+              <div class="not-available-food-list">
+              @if($value->food()->onlyTrashed()->get() -> isNotEmpty())
+              <table class="table table-striped table-hover">
+              <tr style="height:50px;">
+                <th style="padding-top:15px;">SN</th>
+                <th style="padding-top:15px;">Food Name</th>
+                <th style="padding-top:15px;padding-left:30px;">Image</th>
+                <th  style="padding-top:15px;">Category</th>
+                <th style="padding-top:15px;">Food Type</th>
+                <th style="padding-top:15px;">Price</th>
+                <th style="padding-top:15px;">Quantity</th>
+                <th  style="padding:15px 0 0 60px;" colspan="3">Action</th>
+                </tr>
+                @foreach ($value->food()->onlyTrashed()->get() as $food)
+                <tr>
+                  <td class="fs-3" style="padding-top:40px;">{{$sn++}}</td>
+                  <td class="fs-3" style="padding-top:40px;">{{$food->foodName}}</td>
+                  <td> <img  width= 100 height=100 src="{{ asset('/storage/'.$food->foodImg) }}" style="border-radius:50%"></td>
+                  <td class="fs-3" style="padding-top:40px;">{{$food->category}}</td>
+                  <td class="fs-3" style="padding-top:40px;">{{$food->foodType}}</td>
+                  <td class="fs-3" style="padding-top:40px;">{{$food->price}}</td>
+                  <td class="fs-3" style="padding-top:40px;">{{$food->quantity}}</td>
+                  <td style="padding-top:40px;">
+                  <a href="{{url('force-delete-food/'.$food->id)}}"><button class="btn btn-danger fs-4">Delete</button></a>
+                  <a href="{{url('restore-food/'.$food->id)}}"><button class="btn btn-warning fs-4" style="margin-left:10px">Restore</button></a>
+                  </td>
+                </tr>
+                @endforeach
+              </table>
+              @else
+              <div class="nothing-found-box">
+              <img src="/img/nothing-found.jpg" alt="" />
+              <p>Nothing Found</p>
+              </div>
+              @endif
+              </div>
+      </div>
+      <div class="order-list-section" id="order-section">
+       <h1>Your Orders</h1> 
+      </div>
+      <div class="analysis-section" id="analysis-section">
+       <h1>Your restaurant Info</h1> 
+      </div>
 </section>
 
 
