@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Mail\ContactMail;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\FoodController;
 use App\Models\Restaurant;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,4 +74,7 @@ Route::post('/restaurant-admin-page/saveFoodInfo',[FoodController::class,'saveFo
 Route::get('make-food-unavailable/{id}',[FoodController::class,'makeFoodUnavailable']);
 Route::get('restore-food/{id}',[FoodController::class,'restoreFood']);
 Route::get('force-delete-food/{id}',[FoodController::class,'forceDeleteFood']);
+Route::get('/contact-us',[ContactController::class,'contact']);
+Route::get('/Login',[UserController::class,'login']);
+Route::post('/send-message',[ContactController::class,'sendEmail'])->name('contact.send');
 

@@ -36,7 +36,7 @@
             height: 90%;
         }
         .btn1{
-            height: 40px;
+            height: 41px;
             color: white;
             width: 100%;
             border-style: none;
