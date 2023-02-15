@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Mail;
-use App\Mail\TestMail;
-use Illuminati\Http\Request;
-use Illuminate\Support\Facades\Mail;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -11,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ContactMail extends Mailable
+class Testmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -33,9 +31,10 @@ class ContactMail extends Mailable
      */
     public function envelope()
     {
-        return $this->subject('Contact Message')->view('emails.ContactMail');
+        return $this->subject('Test Message')->view('emails.TestMail');
         
     }
+
 
     /**
      * Get the message content definition.
@@ -59,4 +58,3 @@ class ContactMail extends Mailable
         return [];
     }
 }
-
