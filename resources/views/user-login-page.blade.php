@@ -77,6 +77,7 @@
             <div class="imgBox">
                 <img src="/img/imgForProject.png" alt="">
             </div>
+            
             <div class="p-5">
                 @if(Session::has('fail'))
                 <div class="alert text-center alert-danger" role="alert">
