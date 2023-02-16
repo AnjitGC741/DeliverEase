@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/css/home-page.css">
     <link rel="stylesheet" href="/css/restaurant-page.css">
     <link rel="stylesheet" href="/css/restaurant-list.css">
+    <link rel="stylesheet" href="/css/about-us.css">
     <title>@yield('title')</title>
     <link rel="shortcut icon" href="/favicon/favicon1.ico" type="image/x-icon">
 
@@ -33,7 +34,7 @@
         <li><a href="{{url('/')}}">Home</a></li>
         <li><a href="{{url('/restaurant-signup1')}}">Add Resturant</a></li>
         <li><a href="#">Deliver Food</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="{{url('/aboutus')}}">About</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
     </div>

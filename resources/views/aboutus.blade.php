@@ -1,94 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="shortcut icon" href="/favicon/favicon1.ico" type="image/x-icon">
-    <title>AboutUS</title>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Baloo 2", cursive;
-        }
-       
-
-        .container{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 4rem 18rem;
-            padding: 40px 47px;
-            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-            border-radius: 20px;
-            width: 800px;
-            height: 600px;
-        }
-
-        .container img{
-            height: 100%;
-            width: auto;
-            border-radius: 20px;
-        }
-
-        .about_details{
-            margin: 0 45px;
-        }
-
-        .about_details span{
-            color: red;
-        }
-        .about_details h2{
-            font-family: Audiowide, fantasy;
-            font-weight: 300;
-            font-size: 26px;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-
-        }
-
-        .about_details p{
-            color: gray;
-            font-size: 15px;
-        }
-
-        .btn{
-            margin: 15px 0;
-            padding: 8px 20px;
-            background-color: transparent;
-            border: 1px solid red;
-            border-radius: 10px;
-            letter-spacing: 1px;
-            color: #373737;
-            cursor: pointer;
-            transition: 0.3s ease-in-out;
-        }
-        .btn:hover{
-            background-color: red;
-            color: white;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-    <img src="img/egg.jpg" alt="food">
-    <div class="about_details">
-        <span>About Our Restaurant</span>
-        <h2>We Provide Good Quality Food To Your Family</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla sed ullamofficiis
-         rem velit esse harum suscipit magna ducimus  ab pariatur ipsum.</p>
-
+@extends('/frequently-used/header-and-footer')
+@section('title','Restaurant')
+@section('other-content')
+<section class="About-Section-header">
+        <div class="img-section">
+            <img src="./img/try5.jpg" alt="" />
+          </div>
+          <div class="linear"></div>
+          <div class="text-about">
+              <h1>About Us</h1>
+          </div>
+</section>
+<section class="about-section">
+    <div class="aboutUs-img">
+    <img src="./img/aboutUs.png" alt="" />
+    </div>
+    <div class="aboutUs-description">
+        <p>
+        Welcome to our online food ordering and delivery platform!
         <br>
-
-        <p>Lorem ipsum dolor sit, amet consectetur ilique molestias facere id 
-            delectus odio, a labore perspiciatis quas .</p>
-
-      <button class="btn">Learn More</button>
+        <br>
+        At our website, we bring together a diverse selection of restaurants, each offering their unique culinary creations for you to order and enjoy from the comfort of your home. Whether you're in the mood for some delicious Newari food, mouth-watering Momos, or a juicy burger from your favorite local joint, our platform has got you covered.
+        <br>
+        <br>
+        Our mission is to make food ordering and delivery as simple and convenient as possible, connecting you with the best local restaurants and delivery drivers in your area. We're committed to ensuring that every meal you order from our platform is fresh, delicious, and delivered to your doorstep in a timely and efficient manner.
+        <br>
+        <br>
+        For restaurants, our platform offers a great opportunity to reach a wider audience and grow your business by tapping into the ever-growing market of online food ordering and delivery. We provide you with all the tools and resources you need to set up your menu, manage your orders, and track your sales and revenue.
+        <br>
+        <br>
+        For delivery drivers, our platform offers a flexible and reliable way to earn extra income by connecting you with customers who are in need of a timely and efficient delivery service. We provide you with all the information you need to complete your deliveries successfully, including detailed order information and real-time GPS tracking.
+        <br>
+        <br>
+        So whether you're a foodie looking for your next delicious meal, a restaurant owner looking to expand your business, or a delivery driver looking for extra income, our platform has something for everyone. Join us today and experience the convenience and deliciousness of online food ordering and delivery!
+        </p>
     </div>
-    </div>
-    
-</body>
-</html>
+</section>
+@endsection
