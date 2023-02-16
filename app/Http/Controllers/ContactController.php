@@ -35,19 +35,21 @@ class ContactController extends Controller
     ->subject($mail_data['subject']);
 });
 
+  
 return redirect()->back()->with('Success','Email sent!');
 
 }else{
     return redirect()->back()->withInput()->with('error','Check your Internet Connection');
 }
 
-    
-
 
     Mail::to('bjcrest123@gmail.com')->send(new ContactMail($details));
     return back()->with('message_sent','Your message has been sent succesfully!');
 }
 }
+
+
+
   //public function isOnline($site = "https://youtube.com/"){
     if(@fopen($site,"r")){
         return true;
@@ -55,6 +57,9 @@ return redirect()->back()->with('Success','Email sent!');
    return false;
   }
 //}
+    
+
+
 
 
 
