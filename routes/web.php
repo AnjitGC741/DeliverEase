@@ -79,5 +79,5 @@ Route::get('force-delete-food/{id}',[FoodController::class,'forceDeleteFood']);
 Route::get('/contact-us',[ContactController::class,'contact']);
 Route::get('/Login',[UserController::class,'login']);
 Route::post('/send-message',[ContactController::class,'sendEmail'])->name('contact.send');
-Route::get('/',[Website::class,'index']);
+Route::get('/','contact',[websitecontroller::class,'index']);
 

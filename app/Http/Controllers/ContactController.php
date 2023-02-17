@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use App\Mail\ContactMail;
 
 class ContactController extends Controller
 {
@@ -57,6 +58,10 @@ return redirect()->back()->with('Success','Email sent!');
    return false;
   }
 //}
+    
+
+
+
     
 
 
