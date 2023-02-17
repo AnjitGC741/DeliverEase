@@ -35,7 +35,7 @@
         <li><a href="{{url('/restaurant-signup1')}}">Add Resturant</a></li>
         <li><a href="#">Deliver Food</a></li>
         <li><a href="{{url('/aboutus')}}">About</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="{{route('contact')}}">Contact</a></li>
       </ul>
     </div>
     @if((session()->get('loginCustomer')) === null)
