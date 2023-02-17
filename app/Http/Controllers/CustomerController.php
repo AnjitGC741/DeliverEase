@@ -67,7 +67,7 @@ class CustomerController extends Controller
     }
     public function logout(){
         session::pull('loginCustomer');
-        return view('home');
+        return redirect('/');
     }
     public function redirect()
     {
@@ -84,12 +84,12 @@ class CustomerController extends Controller
                     'email' => $google_user->getEmail(),
                 ]);
                 session()->put('loginCustomer',$user->customerName);
-                return view('home');
+                return redirect('/');
             }
             else
             {
                 session()->put('loginCustomer',$user->customerName);
-                return view('home');
+                return redirect('/');
                 
             }
         }catch(\Throwable $th)

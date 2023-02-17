@@ -67,30 +67,32 @@
 @endforeach
 <div class="editProfileForm" id="editProfileForm">
     <h2>Edit restaurnant info</h2>
-    <form action="" >
+    <form action="{{route('update-restaurant-Info')}}" method="POST">
+      @csrf
+      <input type="text" hidden value="{{$value->id}}" name="id">
         <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Resturant name</label>
-        <input  style="letter-spacing: 0.8px;" type="text" class="form-control fs-4" value="{{$value->restaurantName}}">
+        <input  style="letter-spacing: 0.8px;" type="text" class="form-control fs-4" value="{{$value->restaurantName}}" name="restaurantName">
         </div>
         <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Cuisine</label>
-        <input  style="letter-spacing: 0.8px;" type="text" class="form-control fs-4" value="{{$value->cuisine}}">
+        <input  style="letter-spacing: 0.8px;" type="text" class="form-control fs-4" value="{{$value->cuisine}}" name="cuisine">
         </div>
         <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">City</label>
-        <input type="text" class="form-control fs-4" value="{{$value->city}}">
+        <input type="text" class="form-control fs-4" value="{{$value->city}}" name="city">
         </div>
         <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Street</label>
-        <input type="text" class="form-control fs-4" value="{{$value->street}}">
+        <input type="text" class="form-control fs-4" value="{{$value->street}}" name="street">
         </div>
         <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Minimum order</label>
-        <input type="text" class="form-control fs-4" value="{{$value->minimumOrder}}">
+        <input type="text" class="form-control fs-4" value="{{$value->minimumOrder}}" name="minimumOrder">
         </div>
         <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Service</label>
-        <select class="form-select fs-4" aria-label="Default select example">
+        <select class="form-select fs-4" aria-label="Default select example" name="service">
           <option selected>{{$value->service}}</option>
           <option selected>Delivery & pickup</option>
           <option>Delivery Only</option>
@@ -101,6 +103,11 @@
     </form>
 </div>
 <div class="addFood" id="addFood">
+@if(Session::has('fail'))
+                <div class="alert text-center alert-danger" role="alert">
+                {{Session::get('fail')}}
+                </div>
+                @endif
   <h2>Add food to your restaurant</h2>
   <hr>
   <form action="{{route('save-food-info')}}" method="POST" enctype="multipart/form-data" id="saveFood">
@@ -140,24 +147,29 @@
   </form>
 </div>
 <div class="editLoginInfo" id="editLoginInfo">
-<h2>Edit restaurnant Login Info</h2>
+<h2>Edit restaurant Login Info</h2>
 <hr class="mb-4">
   <form action="">
+    @csrf
+    <input type="text" name="old_password" value="{{$value->password}}" hidden>
         <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Resturant Id</label>
         <input  style="letter-spacing: 0.8px;" type="text" readonly class="form-control fs-4" value="{{$value->id}}">
         </div>
         <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Old Password</label>
-        <input  style="letter-spacing: 0.8px;" type="password" class="form-control fs-4" value="">
+        <input  style="letter-spacing: 0.8px;" name= "check_oldPassword" type="password" class="form-control fs-4" value="">
+        <span style="color:red;">@error('check_oldPassword'){{$message}} @enderror</span>
         </div>
         <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">New Password</label>
-        <input style="letter-spacing: 0.8px;" type="password" class="form-control fs-4">
+        <input style="letter-spacing: 0.8px;" name= "password" type="password" class="form-control fs-4">
+        <span style="color:red;">@error('password'){{$message}}@enderror</span>
         </div>
         <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Confirm Password</label>
-        <input style="letter-spacing: 0.8px;" type="password" class="form-control fs-4">
+        <input style="letter-spacing: 0.8px;" name= "confirmPassword" type="password" class="form-control fs-4">
+        <span style="color:red;">@error('confirmPassword'){{$message}}@enderror</span>
         </div>
         <button style="width: 100%; height: 50px;" class=" fs-4 mt-3 btn btn-success">Update</button>
   </form>
