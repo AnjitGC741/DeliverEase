@@ -77,6 +77,7 @@
             <div class="imgBox">
                 <img src="/img/imgForProject.png" alt="">
             </div>
+            
             <div class="p-5">
                 @if(Session::has('fail'))
                 <div class="alert text-center alert-danger" role="alert">
@@ -112,7 +113,7 @@
                     </div>
                 </div>
                 <a href="{{route('google-auth')}}"><button class="btn1 btn-login-google"><i class="fa fa-google" style="font-size:18px;margin-right:8px;"></i>Continue With Google</button></a>
-                <p class="mt-3">No account! <a href="{{url('/signup')}}" style="text-decoration: none;">Create one</a></p>
+                <p class="mt-3">No account? <a href="{{url('/signup')}}" style="text-decoration: none;">Create one</a></p>
     
             </div>
     
