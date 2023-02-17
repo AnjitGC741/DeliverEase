@@ -32,3 +32,20 @@ click1.addEventListener("click", () => {
         icon.style.visibility = "hidden";
     }
 });
+let click2 = document.querySelector(".click2");
+let list2 = document.querySelector(".list2");
+click2.addEventListener("click", () => {
+    list2.classList.toggle("newlist2");
+    var icon = document.getElementById("location-down-icon");
+    var icon1 = document.getElementById("location-up-icon");
+    if (icon1.style.visibility === "visible") {
+        icon1.style.visibility = "hidden";
+    } else {
+        icon1.style.visibility = "visible";
+    }
+    if (icon.style.visibility === "hidden") {
+        icon.style.visibility = "visible";
+    } else {
+        icon.style.visibility = "hidden";
+    }
+});

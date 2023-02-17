@@ -145,6 +145,11 @@ class RestaurantController extends Controller
         $restaurants = Restaurant::orderBy('restaurantName', 'desc')->get();
         return view('restaurant-list', compact('restaurants'));
     }
+    public function userRestaurantPage($id)
+    {
+        $data = Restaurant::find($id);
+        return view('restaurant-page',['value'=>$data]);
+    }
 
 
 }

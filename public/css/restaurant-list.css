@@ -53,17 +53,24 @@ a{
   margin-top:5px;
 }
 .totalRestaurant span {
-  font-size: 20px;
+  font-size: 1.6rem;
   color: #696969;
   margin-left:5px;
 }
 .controller {
   display: flex;
-  gap: 80px;
+  align-items: center;
+  gap: 30px;
+}
+.controller p{
+  font-size: 1.6rem;
+  color: #696969;
 }
 
 .filter {
-  width: 200px;
+  position: relative;
+}
+.location {
   position: relative;
 }
 .filter-down-icon{
@@ -85,10 +92,10 @@ a{
   height: 40px;
   display: flex;
   justify-content: space-between;
-  border: 1px solid #696969;
+  border: 1px solid #bfbfbf;
   border-radius: 5px;
   background-color: white;
-  width: 250px;
+  width: 150px;
   color: #696969;
 }
 
@@ -101,21 +108,34 @@ a{
   height: 40px;
   display: flex;
   justify-content: space-between;
-  border: 1px solid #696969;
+  border: 1px solid #bfbfbf;
   border-radius: 5px;
   background-color: white;
-  width: 250px;
+  width: 150px;
+  color: #696969;
+}
+.click2 {
+  font-size: 1.6rem;
+  line-height: 1;
+  transition: 0.3s;
+  padding: 12px;
+  line-height: 1;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #bfbfbf;
+  border-radius: 5px;
+  background-color: white;
+  width: 150px;
   color: #696969;
 }
 
 .sortBy{
-  width: 200px;
   position: relative;
-  height: 100px;
 }
 
 .list {
-  width: 250px;
+  width: 150px;
   background-color: white;
   position: absolute;
   transform: scaleY(0);
@@ -128,7 +148,20 @@ a{
   z-index: 99;
 }
 .list1 {
-  width: 250px;
+  width: 150px;
+  background-color: white;
+  position: absolute;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: 0.3s;
+  border: 1px solid #696969;
+  border-radius: 5px;
+  top: 50px;
+  padding: 10px 0;
+  z-index: 99;
+}
+.list2 {
+  width: 150px;
   background-color: white;
   position: absolute;
   transform: scaleY(0);
@@ -160,10 +193,18 @@ a{
 .newlist1 {
   transform: scaleY(1);
 }
+.newlist2{
+  transform: scaleY(1);
+}
 .links:hover {
   background-color: rgba(203, 203, 203, 0.5);
 }
 /* new */
+.restaurant-btn{
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 .restaurant-directory{
   max-width: 130rem;
   min-height: 60vh;
@@ -173,9 +214,9 @@ a{
   gap: 30px;
   flex-wrap: wrap;
   padding: 0 40px 40px 40px;
+  margin-top: 40px;
 }
 .restaurant-directory .restaurant-details:hover{
-  transform: scale(1.1);
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
@@ -201,12 +242,30 @@ a{
   gap: 1.2rem;
   padding: 20px 25px;
 }
-.restaurant-details .restaurant-info h3{
-  font-size: 2.1rem;
+.restaurant-details .restaurant-info .restaurant-name{
+  font-size: 2rem;
 }
 .restaurant-details .restaurant-info p{
   font-size: 1.4rem;
   letter-spacing: 1.5px;
+}
+.restaurant-list-icon{
+  font-size: 1.3rem;
+  color: #525252;
+}
+.for-margin{
+  margin-right: 5px;
+}
+.for-status-favorite{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.favorite-btn{
+  background: none;
+  border: none;
+  font-size: 2.4rem;
+  cursor: pointer;
 }
 .status{
   width: 80px;

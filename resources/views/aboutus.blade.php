@@ -35,4 +35,6 @@
         </p>
     </div>
 </section>
+<script src="./js/script.js"></script>
 @endsection
+<!-- composer install  npm install npm run built-->
