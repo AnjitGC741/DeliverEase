@@ -25,7 +25,7 @@
 </head>
 
 <body onload="topic();">
-<section class="navbar">
+<section class="navbar1">
     <div class="logo">
       <h1>DeliverEase</h1>  
     </div>
