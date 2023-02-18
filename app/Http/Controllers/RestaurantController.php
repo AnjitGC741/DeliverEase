@@ -151,5 +151,32 @@ class RestaurantController extends Controller
         return view('restaurant-page',['value'=>$data]);
     }
 
+    public function updateRestaurantLoginInfo(Request $req){
+        $req -> validate([
+            'password' => 'required',
+            'confirmPassword' => 'required',
+            'check_oldPassword' => 'required'
+        ]);
+
+        if($req->password !== $req->confirmPassword)
+        {
+            return back()->with('fail','Password does not match');
+        }
+        if($req->old_password !== $req->check_oldPassword)
+        {
+            return back()->with('fail','Old password does not match');
+        }
+
+    }
+
+    public function updateRestaurantInfo(Request $req){
+
+
+        $updateRestaurantInfo = Restaurant::find($req->id);
+        $input = $req -> all();
+        $updateRestaurantInfo -> update($input);
+        return redirect('restaurant-admin-page/'.$req->id);
+
+    }
 
 }

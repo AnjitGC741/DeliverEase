@@ -59,6 +59,8 @@ Route::post('/restaurant-page',[RestaurantController::class,'searchRestaurant'])
 Route::post('/restaurant-signup1',[RestaurantController::class,'registerRestaurantName'])->name('save-restaurant-name');
 Route::post('/restaurant-signup2',[RestaurantController::class,'saveRestaurantDetail'])->name('save-restaurant-detail');
 Route::post('/restaurant-signup3',[RestaurantController::class,'saveRestaurantLoginInfo'])->name('save-restaurant-loginInfo');
+// Route::post('/restaurant-admin-page',[RestaurantController::class, 'updateRestaurantLoginInfo'])->name('update-restaurant-loginInfo');
+Route::post('/restaurant-admin-page',[RestaurantController::class, 'updateRestaurantInfo'])->name('update-restaurant-Info');
 Route::post('/restaurant-admin-page/updateRestaurantCoverImg',[RestaurantController::class,'changeRestaurantCoverImg'])->name('changeBackgroundImg');
 Route::post('/restaurant-admin-page/deleteRestaurantCoverImg',[RestaurantController::class,'deleteRestaurantCoverImg'])->name('deleteBackgroundImg');
 Route::post('/restaurant-admin-page/updateRestaurantProfileImg',[RestaurantController::class,'changeRestaurantProfileImg'])->name('changeProfileImg');
@@ -78,3 +80,4 @@ Route::get('/contact-us',[ContactController::class,'contact']);
 Route::get('/Login',[UserController::class,'login']);
 Route::post('/send-message',[ContactController::class,'sendEmail'])->name('contact.send');
 
+Route::get('/contact',[ContactController::class,'index'])->name('contact');
