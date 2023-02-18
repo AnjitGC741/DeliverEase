@@ -12,7 +12,7 @@ body{
     line-height: 1;
 }
 a{
-    text-decoration: none;
+    text-decoration: none!important;
 }
 .resturant-section1
 {
@@ -225,6 +225,7 @@ a{
   border: 1px solid  rgb(214, 214, 214);
   border-radius: 5px;
   transition: all 0.3s;
+  overflow: hidden;
 }
 .restaurant-directory .restaurant-details .restaurant-logo{
   width: 28rem;
@@ -249,7 +250,7 @@ a{
   font-size: 1.4rem;
   letter-spacing: 1.5px;
 }
-.restaurant-list-icon{
+.restaurant-list-icon1{
   font-size: 1.3rem;
   color: #525252;
 }

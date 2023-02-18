@@ -39,8 +39,7 @@ a{
 }
 .resturant-details{
   color: white;
-  /* background-color: #f6be87; */
-  padding-top: 40px;
+  
 }
 .resturant-name{
   font-size: 3.6rem;
@@ -77,4 +76,65 @@ a{
   font-size: 1.8rem;
   letter-spacing: 0.2rem;
   font-weight: 300;
+}
+/* search-rate-favorite-section */
+.search-rate-favorite-section{
+  max-width: 130rem;
+  margin: 20px auto;
+  padding: 10px 0;
+}
+.favorite-btn1{
+  border: 1px solid #bfbfbf;
+  font-size: 1.8rem;
+  padding: 7px 20px;
+  display: flex;
+  align-items: center;
+}
+.rate-btn{
+  border: 1px solid #bfbfbf;
+  font-size: 1.8rem;
+  padding: 7px 15px;
+  display: flex;
+  align-items: center;
+}
+.favorite-btn1,.rate-btn ion-icon{
+  color: #828181;
+}
+.food-menu-category{
+  max-width: 130rem;
+  margin: 20px auto;
+  display: flex;
+  align-items:top;
+}
+.food-category{
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+}
+.category-title{
+  font-size: 1.8rem;
+  color: #FF7F00;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.food-category ul{
+  display: flex;
+  flex-direction: column;
+  padding-left: 0!important;
+}
+.food-category-links{
+  border-bottom: 1px solid #bfbfbf;
+  padding: 5px 5px;
+}
+.food-category-links a{
+  color: black;
+  font-size: 1.6rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+}
+.food-category-links a:hover{
+  padding-left: 8px;
+  color: #FF7F00;
 }
