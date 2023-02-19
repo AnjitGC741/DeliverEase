@@ -78,7 +78,7 @@
                         <li><a href="#">Deliver food</a></li>
                         <li><a href="#">Our Story</a></li>
                         <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Login for resturant</a></li>
+                        <li><a href="{{url('/restaurant-login')}}">Login for resturant</a></li>
                         <li><a href="#">Login for delivery</a></li>
                     </ul>
                 </div>
