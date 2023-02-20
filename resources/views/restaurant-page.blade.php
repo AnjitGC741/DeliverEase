@@ -58,14 +58,19 @@
             @foreach($value->food as $food)
             @if($category == $food->category)
             <div class="for-food-list">
+              <form action="{{route('add-to-cart')}}" method="POST">
+                @csrf
+                <input type="text" hidden name="foodId" value="{{$food->id}}">
+                <input type="text" hidden name="restaurantId" value="{{$value->id}}">
                     <div class="for-food-img">
                         <img src="{{ asset('/storage/'.$food->foodImg) }}" alt="">
                     </div>
                     <div class="for-food-description">
                         <p class="food-name">{{$food->foodName}}</p>
                         <p class="food-price">Rs {{$food->price}} per {{$food->quantity}}</p>
-                        <button  class="add-to-cart-btn">Add To Cart</button>
+                        <button type="submit"  class="add-to-cart-btn">Add To Cart</button>
                     </div>
+                </form>
                 </div>
                 @endif
                 @endforeach
