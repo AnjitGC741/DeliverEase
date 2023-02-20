@@ -28,9 +28,12 @@
 <div class="blur-box" id="blurBox" onclick="hideAll();">
 </div>
 @foreach ($value->food as $food)
-<div class="editFood" id="editFood_{{$food->id}}">
+<div class="editFood" id="editFood_{{$food->id}}" >
     <h2>Edit food information</h2>
-    <form action="#" >
+    <form action= "{{route('update-food-Info')}}" method="POST" enctype="multipart/form-data">
+      @csrf
+      <input type="text" hidden value="{{$food->id}}" name="id">
+      <input type="text" hidden value="{{$value->id}}" name="restaurantId">
     <div class="mb-3">
       <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food name</label>
       <input  style="letter-spacing: 0.8px;" type="text" class="form-control fs-4" name="foodName" id="foodName" value="{{$food->foodName}}">
@@ -61,13 +64,13 @@
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Image</label>
         <input type="file" style="letter-spacing: 0.8px;" name="foodImg" class="form-control fs-4" id="foodImg" value="{{ asset('/storage/'.$food->foodImg) }}">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
       </div>
-       <button style="width: 100%; height: 50px;" class=" fs-4 mt-3 btn btn-success">Update</button>
+       <button style="width: 100%; height: 50px;" class=" fs-4 mt-3 btn btn-success" type = "submit">Update</button>
     </form>
 </div>
 @endforeach
-<div class="editProfileForm" id="editProfileForm">
+<div class="editProfileForm" id="editProfileForm" >
     <h2>Edit restaurnant info</h2>
-    <form action="{{route('update-restaurant-Info')}}" method="POST">
+    <form action="{{route('update-Restaurant-Info')}}" method="POST" >
       @csrf
       <input type="text" hidden value="{{$value->id}}" name="id">
         <div class="mb-3">
