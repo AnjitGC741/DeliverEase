@@ -15,4 +15,8 @@ class Food extends Model
     {
         return $this->belongsTo(Restaurant::class);
     }
+    public function my_carts()
+    {
+        return $this->belongsTo(MyCart::class);
+    }
 }
