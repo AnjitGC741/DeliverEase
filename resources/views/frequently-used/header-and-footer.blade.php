@@ -25,7 +25,7 @@
 </head>
 
 <body onload="topic();">
-<section class="navbar">
+<section class="navbar1">
     <div class="logo">
       <h1>DeliverEase</h1>  
     </div>
@@ -35,7 +35,7 @@
         <li><a href="{{url('/restaurant-signup1')}}">Add Resturant</a></li>
         <li><a href="#">Deliver Food</a></li>
         <li><a href="{{url('/aboutus')}}">About</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="{{route('contact')}}">Contact</a></li>
       </ul>
     </div>
     @if((session()->get('loginCustomer')) === null)
@@ -78,7 +78,7 @@
                         <li><a href="#">Deliver food</a></li>
                         <li><a href="#">Our Story</a></li>
                         <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Login for resturant</a></li>
+                        <li><a href="{{url('/restaurant-login')}}">Login for resturant</a></li>
                         <li><a href="#">Login for delivery</a></li>
                     </ul>
                 </div>

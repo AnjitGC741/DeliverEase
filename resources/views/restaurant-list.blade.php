@@ -101,16 +101,17 @@
             @if($restaurant->restaurantLogo == "")
                 <img src="/img/restLogo1.png" alt="">
               @else
-              <img src="{{ asset('/storage/'.$value->restaurantLogo) }}">
+              <img src="{{ asset('/storage/'.$restaurant->restaurantLogo) }}">
               @endif
             </div>
             </button>
             </a>
+            <hr>
             <div class="restaurant-info">
                 <p class="restaurant-name">{{ $restaurant->restaurantName }}</p>
-                <p><ion-icon name="pizza" class="restaurant-list-icon for-margin" ></ion-icon>{{ $restaurant->cuisine }}</p>
-                <p><ion-icon name="location" class="restaurant-list-icon for-margin" ></ion-icon>{{$restaurant->street}},{{$restaurant->city}}</p>                
-                <p><ion-icon name="bag-handle" class="restaurant-list-icon for-margin"></ion-icon>{{$restaurant->service}}</p>
+                <p><ion-icon name="pizza" class="restaurant-list-icon1 for-margin" ></ion-icon>{{ $restaurant->cuisine }}</p>
+                <p><ion-icon name="location" class="restaurant-list-icon1 for-margin" ></ion-icon>{{$restaurant->street}},{{$restaurant->city}}</p>                
+                <p><ion-icon name="bag-handle" class="restaurant-list-icon1 for-margin"></ion-icon>{{$restaurant->service}}</p>
                 @if($restaurant->ratings->avg('rating') != 0)
                 <p><ion-icon name="star" style="color:yellow; font-size:16px;"></ion-icon><span style="margin-left: 5px;">{{$restaurant->ratings->avg('rating')}}</span></p>
                 @else
