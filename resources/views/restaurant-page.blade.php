@@ -46,14 +46,14 @@
                 <hr width="80px;margin-top:-50px;">
                 <ul>
                   @foreach($value->food()->distinct()->pluck('category') as $category)
-                  <li class="food-category-links"><a href="#">{{$category}}</a></li>
+                  <li class="food-category-links"><a href="#{{$category}}">{{$category}}</a></li>
                   @endforeach
                 </ul>
             </div>
             <div class="food-menu-box">
             @foreach($value->food()->distinct()->pluck('category') as $category)
-            <div class="food-menu-list">
-            <h1>{{$category}}</h1>
+            <div class="food-menu-list" id="{{$category}}">
+            <p class="categoryName">{{$category}}</p>
             <div class="food-menu">
             @foreach($value->food as $food)
             @if($category == $food->category)
