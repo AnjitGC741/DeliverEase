@@ -87,4 +87,3 @@ Route::get('/contact',[ContactController::class,'index'])->name('contact');
 // for Add to cart
 Route::post('/restaurant-page/addToCart',[MyCartController::class,'addToCart'])->name('add-to-cart');
 Route::post('/my-cart',[MyCartController::class,'myCart']);
-
