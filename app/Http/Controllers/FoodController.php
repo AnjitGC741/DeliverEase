@@ -58,4 +58,19 @@ class FoodController extends Controller
        return back();
 
     }
+    public function updateFoodInfo(Request $req){
+        $updateRestaurantInfo = Food::find($req->id);
+        $updateRestaurantInfo->foodName= $req->foodName;
+        $updateRestaurantInfo->category= $req->category;
+        $updateRestaurantInfo->foodType= $req->foodType;
+        $updateRestaurantInfo->price= $req->price;
+        $updateRestaurantInfo->quantity= $req->quantity;
+        $image = $req -> file('foodImg');
+        $image->store('img','public');
+        $file_path=$image->store('img','public');
+        $updateRestaurantInfo->foodImg = $file_path;
+        $updateRestaurantInfo->save();
+        return redirect('restaurant-admin-page/'.$req->restaurantId);
+    }
+
 }

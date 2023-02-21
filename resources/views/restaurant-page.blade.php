@@ -94,9 +94,6 @@
             </div>
             @endforeach
         </div>
-              
-            
-             
       </section>
       <script>
          function toggleMenu(){
