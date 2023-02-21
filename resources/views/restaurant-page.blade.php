@@ -2,7 +2,23 @@
 @section('title','restaurant')
 @section('other-content')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-      <section class="resturant-section">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="blur-box hidden" id="blurBox" onclick="hideAll();">
+</div>
+<div class="for-fixed-cart">
+  <button onclick="changeVisibilityCartBox();"><ion-icon name="bag-handle-outline"></ion-icon></button>
+</div>  
+<div class="cart-box hidden" id="myCart">
+    <p class="my-cart-text">My Cart</p>
+    <hr style="margin-bottom: 20px;">
+    <div class="for-empty-cart">
+    <i class="fa fa-shopping-basket" style="font-size:48px;color:gray;"></i>
+    <p class="empty-cart-text1">Your cart is empty</p>
+    <p class="empty-cart-text2">Add food to get your food</p>
+    <button class="btn btn-success" onclick="hideAll();" style="font-size: 14px;padding:5px 10px;">Add Food</button>
+    </div>
+</div>    
+<section class="resturant-section">
         <div class="img-section">
         @if($value->restaurantCoverImg == "")
             <img src="/img/rest1.jpg" alt="restaurant img" />
@@ -83,6 +99,16 @@
          function toggleMenu(){
         let subMenu = document.getElementById("subMenu");
         subMenu.classList.toggle("open-menu");
+       } 
+       function changeVisibilityCartBox(){
+        document.getElementById("myCart").classList.toggle("hidden");
+        document.getElementById("blurBox").classList.toggle("hidden");
        }
+       function hideAll()
+       {
+        document.getElementById("myCart").classList.toggle("hidden");
+        document.getElementById("blurBox").classList.toggle("hidden");
+       }
+
       </script>
 @endsection

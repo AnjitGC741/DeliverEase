@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/css/restaurant-page.css">
     <link rel="stylesheet" href="/css/restaurant-list.css">
     <link rel="stylesheet" href="/css/about-us.css">
+    <link rel="stylesheet" href="/css/user-profile.css">
     <title>@yield('title')</title>
     <link rel="shortcut icon" href="/favicon/favicon1.ico" type="image/x-icon">
 
@@ -46,7 +47,7 @@
     @else
     <div class="for-logined-user">
       <a><ion-icon name="heart-outline" class="favorite"></ion-icon></a>
-      <a><ion-icon name="cart-outline" class="cart"></ion-icon></a>
+      <a href="{{url('/my-cart')}}"><ion-icon name="cart-outline" class="cart"></ion-icon></a>
       <div>
       <span style="display: none;"> {{$value=session()->get('loginCustomer')}}</span>
         <button onclick="toggleMenu();" class="user-btn" style="color: #fff; font-size:20px; font-family:'Poppins', sans-serif; ">{{$value[0]}}</button>
@@ -59,7 +60,7 @@
           <p>{{session()->get('loginCustomer')}}</p>
         </div>
         <hr>
-          <a href="#" class="sub-menu-link"><ion-icon name="person-outline"></ion-icon> <p>Profile</p></a>
+          <a href="{{url('/user-profile')}}" class="sub-menu-link"><ion-icon name="person-outline"></ion-icon> <p>Profile</p></a>
           <a href="#" class="sub-menu-link"><ion-icon name="heart-outline"></ion-icon><p>Favourite</p> </a>
           <a href="{{url('/logout')}}" class="sub-menu-link"><ion-icon name="log-out-outline"></ion-icon><p>Log out</p> </a>
       </div>
