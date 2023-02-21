@@ -68,6 +68,7 @@ Route::post('/restaurant-admin-page/deleteRestaurantCoverImg',[RestaurantControl
 Route::post('/restaurant-admin-page/updateRestaurantProfileImg',[RestaurantController::class,'changeRestaurantProfileImg'])->name('changeProfileImg');
 Route::post('/restaurant-admin-page/deleteRestaurantProfileImg',[RestaurantController::class,'deleteRestaurantProfileImg'])->name('deleteProfileImg');
 // for Customer
+Route::get('/user-profile',[CustomerController::class,'userProfile']);
 Route::post('/login',[CustomerController::class,'loginUser'])->name('login-user');
 Route::get('/logout',[CustomerController::class,'logout']);
 Route::post('/signup',[CustomerController::class,'registerUser'])->name('register-user');
@@ -84,3 +85,4 @@ Route::post('/send-message',[ContactController::class,'sendEmail'])->name('conta
 Route::get('/contact',[ContactController::class,'index'])->name('contact');
 // for Add to cart
 Route::post('/restaurant-page/addToCart',[MyCartController::class,'addToCart'])->name('add-to-cart');
+Route::post('/my-cart',[MyCartController::class,'myCart']);

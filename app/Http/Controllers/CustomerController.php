@@ -12,7 +12,11 @@ use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
 {
-    
+    public function userProfile()
+    {   
+        $data = customer::find(session()->get('loginCustomerId'));
+        return view('user-profile',['userData'=>$data]);
+    }
     public function loginUser(Request $req)
     { 
         $req->validate([
@@ -71,7 +75,7 @@ class CustomerController extends Controller
     public function logout(){
         session::pull('loginCustomer');
         session::pull('loginCustomerId');
-        return redirect('/');
+        return back();
     }
     public function redirect()
     {

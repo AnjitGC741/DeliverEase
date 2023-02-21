@@ -10,6 +10,10 @@ class MyCartController extends Controller
 {
     public function addToCart(Request $req)
     {
+        if((session()->get('loginCustomer')) == null)
+        {
+            return view('user-login-pag');
+        }
         $foodValue = Food::find($req->foodId);
          $save =MyCart::create([
             'foodQuantity'=>1,
@@ -26,5 +30,9 @@ class MyCartController extends Controller
         else{
             dd("successful");
         }
+    }
+    public function myCart()
+    {
+        return view('my-cart');
     }
 }
