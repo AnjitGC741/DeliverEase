@@ -190,6 +190,15 @@ a{
   padding: 3px 20px;
   margin-bottom: 1rem;
 }
+.added-to-cart-btn{
+  border: none;
+  border-radius: 5px;
+  color:white;
+  background-color:rgb(180, 12, 12);
+  font-size: 1.4rem;
+  padding: 3px 20px;
+  margin-bottom: 1rem;
+}
 .categoryName{
   font-size: 2.2rem;
   width: 100%;
@@ -218,12 +227,29 @@ a{
 .for-fixed-cart button:hover{
   background-color: #ffa64d;
 }
-.cart-box{
+.cart-and-edit-box{
   position: fixed;
   z-index: 99;
   bottom: 90px;
   right: 20px;
-  width: 350px;
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 10px;
+}
+.funnyBox{
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.funnyBox img{
+  height: 100%;
+  width: 100%;
+}
+.cart-box{
+  width: 450px;
   background-color: white;
   padding: 20px;
   border-radius: 10px;
@@ -258,4 +284,17 @@ a{
 }
 .hidden{
   visibility: hidden;
+}
+.for-fixed-edit-food{
+  width: 200px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+}
+.for-changing-quantity{
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  width: 100px;
+  margin-bottom: 20px;
 }
