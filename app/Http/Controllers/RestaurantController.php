@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\customer;
 use App\Models\Food;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
@@ -148,7 +150,15 @@ class RestaurantController extends Controller
     public function userRestaurantPage($id)
     {
         $data = Restaurant::find($id);
-        return view('restaurant-page',['value'=>$data]);
+        if(session()->get('loginCustomerId')!= null)
+        {
+        $newData = customer::find(session()->get('loginCustomerId'));
+        return view('restaurant-page',['value'=>$data],['newValue'=>$newData]);
+        }
+        else
+        {
+            return view('restaurant-page',['value'=>$data]);  
+        }
     }
 
     public function updateRestaurantLoginInfo(Request $req){

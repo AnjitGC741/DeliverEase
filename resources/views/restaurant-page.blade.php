@@ -11,12 +11,36 @@
 <div class="cart-box hidden" id="myCart">
     <p class="my-cart-text">My Cart</p>
     <hr style="margin-bottom: 20px;">
+    @if((session()->get('loginCustomerId')) != null)
+    @if($newValue->my_carts()->count() > 0)
+    <table class="table">
+      <tr>
+          <th>Food Quantity</th>
+          <th>Food Price</th>
+        </tr>
+        @foreach ($newValue->my_carts as $cart)
+        <tr>
+            <td>{{$cart->foodQuantity}}</td>
+            <td>{{$cart->foodPrice}}</td>
+        </tr>
+        @endforeach
+    </table>
+    @else
     <div class="for-empty-cart">
     <i class="fa fa-shopping-basket" style="font-size:48px;color:gray;"></i>
     <p class="empty-cart-text1">Your cart is empty</p>
     <p class="empty-cart-text2">Add food to get your food</p>
     <button class="btn btn-success" onclick="hideAll();" style="font-size: 14px;padding:5px 10px;">Add Food</button>
     </div>
+    @endif
+    @else
+    <div class="for-empty-cart">
+    <i class="fa fa-shopping-basket" style="font-size:48px;color:gray;"></i>
+    <p class="empty-cart-text1">Your cart is empty</p>
+    <p class="empty-cart-text2">Add food to get your food</p>
+    <button class="btn btn-success" onclick="hideAll();" style="font-size: 14px;padding:5px 10px;">Add Food</button>
+    </div>
+    @endif
 </div>    
 <section class="resturant-section">
         <div class="img-section">

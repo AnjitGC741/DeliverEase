@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\customer;
 use App\Models\MyCart;
 use App\Models\Food;
 use Illuminate\Http\Request;
@@ -28,7 +29,7 @@ class MyCartController extends Controller
             dd("fail");
         }
         else{
-            dd("successful");
+         return back();
         }
     }
     public function myCart()
