@@ -13,13 +13,15 @@ class MyCartController extends Controller
     {
         if((session()->get('loginCustomer')) == null)
         {
-            return view('user-login-pag');
+            return view('user-login-page');
         }
         $foodValue = Food::find($req->foodId);
          $save =MyCart::create([
             'foodQuantity'=>1,
             'foodPrice'=>  $foodValue->price,
             'cartFoodImg'=>$foodValue->foodImg,
+            'foodName'=>$foodValue->foodName,
+            'total'=>1* $foodValue->price,
             'restaurant_id'=>  $req->restaurantId,
             'customer_id'=> session()->get('loginCustomerId'),
             'food_id'=>  $req->foodId,

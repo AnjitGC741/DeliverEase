@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->integer('foodQuantity');
             $table->integer('foodPrice');
-            $table->string('CartFoodImg',255);
+            $table->string('cartFoodImg',255);
+            $table->string('foodName');
+            $table->integer('total')->default(1);
             $table->unsignedBigInteger('restaurant_id');
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('food_id');

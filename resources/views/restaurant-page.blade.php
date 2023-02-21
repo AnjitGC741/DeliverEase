@@ -1,47 +1,83 @@
 @extends('/frequently-used/header-and-footer')
 @section('title','restaurant')
 @section('other-content')
+@php
+  $sn = 1;
+@endphp
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="blur-box hidden" id="blurBox" onclick="hideAll();">
 </div>
 <div class="for-fixed-cart">
   <button onclick="changeVisibilityCartBox();"><ion-icon name="bag-handle-outline"></ion-icon></button>
-</div>  
-<div class="cart-box hidden" id="myCart">
-    <p class="my-cart-text">My Cart</p>
-    <hr style="margin-bottom: 20px;">
-    @if((session()->get('loginCustomerId')) != null)
-    @if($newValue->my_carts()->count() > 0)
-    <table class="table">
-      <tr>
-          <th>Food Quantity</th>
-          <th>Food Price</th>
-        </tr>
-        @foreach ($newValue->my_carts as $cart)
+</div>
+<div class="cart-and-edit-box" >
+  <div class="funnyBox" style="visibility: hidden;" id="funnyBox">
+  <img src="/img/funny.gif" alt="" />
+  </div>
+@if((session()->get('loginCustomerId')) != null)
+      @if($newValue->my_carts()->count() > 0)
+      @foreach ($newValue->my_carts as $cart)
+      <div class="for-fixed-edit-food hidden" id="editQuantity_{{$cart->id}}">
+            <p class="my-cart-text">Edit food quanitity</p>
+            <hr style="margin-bottom: 20px;">
+            <div class="for-changing-quantity">
+              <button class="btn btn-danger" onclick="minus();">-</button>
+              <input type="text" class="form-control" name="foodQuantity" id="foodQuantity" value="{{$cart->foodQuantity}}">
+              <button class="btn btn-success" onclick="plus();">+</button>
+            </div>
+            <button class="btn btn-warning w-100">Update</button>
+       </div>
+       @endforeach
+       @endif
+  @endif
+  <div class="cart-box hidden" id="myCart">
+      <p class="my-cart-text">My Cart</p>
+      <hr style="margin-bottom: 20px;">
+      @if((session()->get('loginCustomerId')) != null)
+      @if($newValue->my_carts()->count() > 0)
+      <table class="table">
         <tr>
-            <td>{{$cart->foodQuantity}}</td>
-            <td>{{$cart->foodPrice}}</td>
-        </tr>
-        @endforeach
-    </table>
-    @else
-    <div class="for-empty-cart">
-    <i class="fa fa-shopping-basket" style="font-size:48px;color:gray;"></i>
-    <p class="empty-cart-text1">Your cart is empty</p>
-    <p class="empty-cart-text2">Add food to get your food</p>
-    <button class="btn btn-success" onclick="hideAll();" style="font-size: 14px;padding:5px 10px;">Add Food</button>
-    </div>
-    @endif
-    @else
-    <div class="for-empty-cart">
-    <i class="fa fa-shopping-basket" style="font-size:48px;color:gray;"></i>
-    <p class="empty-cart-text1">Your cart is empty</p>
-    <p class="empty-cart-text2">Add food to get your food</p>
-    <button class="btn btn-success" onclick="hideAll();" style="font-size: 14px;padding:5px 10px;">Add Food</button>
-    </div>
-    @endif
-</div>    
+            <th>SN</th>
+            <th>Food name</th>
+            <th>Food price</th>
+            <th>Food quantity</th>
+            <th>Total</th>
+            <th>Action</th>
+          </tr>
+          @foreach ($newValue->my_carts as $cart)
+          <tr>
+              <th>{{$sn++}}</th>
+              <td>{{$cart->foodName}}</td>
+              <td>{{$cart->foodPrice}}</td>
+              <td>{{$cart->foodQuantity}}</td>
+              <td>{{$cart->total}}</td>
+              <td>
+                <button  class="btn btn-success" id="{{$cart->id}}" onclick="openFoodEditBox(this.id);" style="border-radius: 50%;"><i class="fa fa-pencil" style="color:white;font-size:12px"></i></button>
+                <button class="btn btn-danger" style="border-radius: 50%;"><ion-icon name="trash"  style="color:white;font-size:12px;"></ion-icon></button>
+              </td>
+          </tr>
+          @endforeach
+      </table>
+      <p>Grand total: {{ collect($newValue->my_carts)->sum('total')}}</p>
+      @else
+      <div class="for-empty-cart">
+      <i class="fa fa-shopping-basket" style="font-size:48px;color:gray;"></i>
+      <p class="empty-cart-text1">Your cart is empty</p>
+      <p class="empty-cart-text2">Add food to get your food</p>
+      <button class="btn btn-success" onclick="hideAll();" style="font-size: 14px;padding:5px 10px;">Add Food</button>
+      </div>
+      @endif
+      @else
+      <div class="for-empty-cart">
+      <i class="fa fa-shopping-basket" style="font-size:48px;color:gray;"></i>
+      <p class="empty-cart-text1">Your cart is empty</p>
+      <p class="empty-cart-text2">Add food to get your food</p>
+      <button class="btn btn-success" onclick="hideAll();" style="font-size: 14px;padding:5px 10px;">Add Food</button>
+      </div>
+      @endif
+  </div> 
+</div>     
 <section class="resturant-section">
         <div class="img-section">
         @if($value->restaurantCoverImg == "")
@@ -108,7 +144,19 @@
                     <div class="for-food-description">
                         <p class="food-name">{{$food->foodName}}</p>
                         <p class="food-price">Rs {{$food->price}} per {{$food->quantity}}</p>
+                        @if((session()->get('loginCustomerId')) != null)
+                        @php
+                        $id = $food->id;
+                        $exists = DB::table('my_carts')->where('food_id', $id)->exists();
+                        @endphp
+                        @if($exists)
+                        <button type="submit"  class="added-to-cart-btn">Remove from Cart</button>
+                        @else
                         <button type="submit"  class="add-to-cart-btn">Add To Cart</button>
+                        @endif
+                        @else
+                        <button type="submit"  class="add-to-cart-btn">Add To Cart</button>
+                        @endif
                     </div>
                 </form>
                 </div>
@@ -119,20 +167,5 @@
             @endforeach
         </div>
       </section>
-      <script>
-         function toggleMenu(){
-        let subMenu = document.getElementById("subMenu");
-        subMenu.classList.toggle("open-menu");
-       } 
-       function changeVisibilityCartBox(){
-        document.getElementById("myCart").classList.toggle("hidden");
-        document.getElementById("blurBox").classList.toggle("hidden");
-       }
-       function hideAll()
-       {
-        document.getElementById("myCart").classList.toggle("hidden");
-        document.getElementById("blurBox").classList.toggle("hidden");
-       }
-
-      </script>
+      <script src="/js/forUserRestaurant.js"></script>
 @endsection
