@@ -86,5 +86,8 @@ Route::post('/send-message',[ContactController::class,'sendEmail'])->name('conta
 Route::get('/contact',[ContactController::class,'index'])->name('contact');
 // for Add to cart
 Route::post('/restaurant-page/addToCart',[MyCartController::class,'addToCart'])->name('add-to-cart');
+<<<<<<<<< Temporary merge branch 1
 
+=========
 Route::post('/my-cart',[MyCartController::class,'myCart']);
+>>>>>>>>> Temporary merge branch 2
