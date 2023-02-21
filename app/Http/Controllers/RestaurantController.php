@@ -176,7 +176,6 @@ class RestaurantController extends Controller
         $input = $req -> all();
         $updateRestaurantInfo -> update($input);
         return redirect('restaurant-admin-page/'.$req->id);
-
     }
 
 }
