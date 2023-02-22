@@ -54,6 +54,9 @@ Route::get('/restaurant-login', function () {
 Route::get('/restaurant-page/{id}',[RestaurantController::class,'userRestaurantPage']);
 Route::post('/restaurants-sort-asc',[RestaurantController::class,'sortRestaurantAsc'])->name('sort-restaurant-ascending');
 Route::post('/restaurants-sort-desc',[RestaurantController::class,'sortRestaurantDesc'])->name('sort-restaurant-descending');
+Route::post('/close-restaurant',[RestaurantController::class,'closeRestaurant'])->name('close-restaurant');
+Route::post('/open-restaurant',[RestaurantController::class,'openRestaurant'])->name('open-restaurant');
+Route::get('/logout-restaurant',[RestaurantController::class,'logoutRestaurant']);
 Route::get('/restaurant-admin-page/{id}',[RestaurantController::class,'adminRestaurantPage']);
 Route::get('/restaurant-signup2/{id}',[RestaurantController::class,'findRestaurantName']);
 Route::get('/restaurant-signup3/{id}',[RestaurantController::class,'findRestaurantName1']);
