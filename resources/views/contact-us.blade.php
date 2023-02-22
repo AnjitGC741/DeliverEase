@@ -41,7 +41,7 @@
                             <br>
                             <div class="form-group">
                                 <label for="msg">Message</label>
-                                <textarea name="msg" class="form-control"></textarea>
+                                <textarea name="message" class="form-control"></textarea>
                             </div>
                             <br>
                             <button type="submit" class="btn btn-primary float-right">Submit</button>

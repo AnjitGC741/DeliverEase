@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
 {
+    public function userProfile()
+    {   
+        $data = customer::find(session()->get('loginCustomerId'));
+        return view('user-profile',['userData'=>$data]);
+    }
     public function loginUser(Request $req)
     { 
         $req->validate([
@@ -24,6 +29,7 @@ class CustomerController extends Controller
             if(Hash::check($req->password,$user->password))
             {
                 session()->put('loginCustomer',$user->customerName);
+                session()->put('loginCustomerId',$user->id);
                 return view('home');
             }
             else
@@ -62,12 +68,14 @@ class CustomerController extends Controller
         }
         else{
             session()->put('loginCustomer',$save->customerName);
+            session()->put('loginCustomerId',$save->id);
             return view('home');
         }
     }
     public function logout(){
         session::pull('loginCustomer');
-        return redirect('/');
+        session::pull('loginCustomerId');
+        return back();
     }
     public function redirect()
     {
@@ -84,11 +92,13 @@ class CustomerController extends Controller
                     'email' => $google_user->getEmail(),
                 ]);
                 session()->put('loginCustomer',$user->customerName);
+                session()->put('loginCustomerId',$user->id);
                 return redirect('/');
             }
             else
             {
                 session()->put('loginCustomer',$user->customerName);
+                session()->put('loginCustomerId',$user->id);
                 return redirect('/');
                 
             }

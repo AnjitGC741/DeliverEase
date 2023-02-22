@@ -19,6 +19,7 @@ a{
   height: 60vh;
   width: 100%;
   position: relative;
+  z-index: -1;
 }
 .resturant-info{
  position: absolute;
@@ -39,8 +40,7 @@ a{
 }
 .resturant-details{
   color: white;
-  /* background-color: #f6be87; */
-  padding-top: 40px;
+  
 }
 .resturant-name{
   font-size: 3.6rem;
@@ -77,4 +77,225 @@ a{
   font-size: 1.8rem;
   letter-spacing: 0.2rem;
   font-weight: 300;
+}
+/* search-rate-favorite-section */
+.search-rate-favorite-section{
+  max-width: 130rem;
+  margin: 20px auto;
+  padding: 10px 0;
+}
+.favorite-btn1{
+  border: 1px solid #bfbfbf;
+  font-size: 1.8rem;
+  padding: 7px 20px;
+  display: flex;
+  align-items: center;
+}
+.rate-btn{
+  border: 1px solid #bfbfbf;
+  font-size: 1.8rem;
+  padding: 7px 15px;
+  display: flex;
+  align-items: center;
+}
+.favorite-btn1,.rate-btn ion-icon{
+  color: #828181;
+}
+.food-menu-category{
+  max-width: 130rem;
+  margin: 20px auto;
+  display: flex;
+  gap: 30px;
+  align-items:top;
+}
+.food-category{
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+}
+.food-menu-box{
+  width: 90%;
+}
+.food-menu{
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #f8f8f8;
+  padding: 30px 0;
+  margin-bottom: 20px;
+}
+.category-title{
+  font-size: 1.8rem;
+  color: #FF7F00;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.food-category ul{
+  display: flex;
+  flex-direction: column;
+  padding-left: 0!important;
+}
+.food-category-links{
+  border-bottom: 1px solid #bfbfbf;
+  padding: 5px 5px;
+}
+.food-category-links a{
+  color: black;
+  font-size: 1.6rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+}
+.food-category-links a:hover{
+  padding-left: 8px;
+  color: #FF7F00;
+}
+/* for food list */
+.for-food-list{
+  width: 25rem;
+  margin-bottom: 3rem;
+  margin-left: 3rem;
+}
+.for-food-list:hover{
+  background-color: white;
+}
+.for-food-img{
+  width: 25rem;
+  height: 20rem;
+}
+.for-food-img img{
+  width: 100%;
+  height: 100%;
+}
+.for-food-description{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.food-name{
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem!important;
+}
+.food-price{
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem!important;
+  font-weight: 500;
+}
+.add-to-cart-btn{
+  border: none;
+  border-radius: 5px;
+  color:white;
+  background-color: #FF7F00;
+  font-size: 1.4rem;
+  padding: 3px 20px;
+  margin-bottom: 1rem!important;
+}
+.added-to-cart-btn{
+  border: none;
+  border-radius: 5px;
+  color:white;
+  background-color:rgb(180, 12, 12);
+  font-size: 1.4rem;
+  padding: 3px 20px;
+  margin-bottom: 1rem;
+}
+.categoryName{
+  font-size: 2.2rem;
+  width: 100%;
+  background-color: white;
+  margin-bottom: 20px;
+}
+/* for cart */
+.for-fixed-cart{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 91;
+}
+.for-fixed-cart button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: #FF7F00;
+  border-radius: 50%;
+  color: white;
+  font-size: 2.4rem;
+  padding: 15px 15px;
+  cursor: pointer;
+}
+.for-fixed-cart button:hover{
+  background-color: #ffa64d;
+}
+.cart-and-edit-box{
+  position: fixed;
+  z-index: 91;
+  bottom: 90px;
+  right: 20px;
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 10px;
+}
+.funnyBox{
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.funnyBox img{
+  height: 100%;
+  width: 100%;
+}
+.cart-box{
+  width: 450px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+.blur-box {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 300vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 90;
+}
+.my-cart-text{
+    font-size: 1.6rem;
+}
+.for-empty-cart{
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.empty-cart-text1{
+  font-size: 1.6rem;
+  margin-bottom: 0!important;
+}
+.empty-cart-text2{
+  font-size: 1.6rem;
+  margin-top: 0!important;
+  color: #828181;
+}
+.hidden{
+  visibility: hidden;
+}
+.for-fixed-edit-food{
+  width: 200px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+}
+.for-changing-quantity{
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  width: 100px;
+  margin-bottom: 20px;
 }

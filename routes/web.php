@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomerController;
 use App\Mail\ContactMail;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\MyCartController;
 use App\Models\Restaurant;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -24,6 +25,7 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     session()->put(['loginCustomer']);
+    session()->put(['loginCustomerId']);
     return view('home');
 });
 Route::get('/dashboard', function () {
@@ -52,6 +54,9 @@ Route::get('/restaurant-login', function () {
 Route::get('/restaurant-page/{id}',[RestaurantController::class,'userRestaurantPage']);
 Route::post('/restaurants-sort-asc',[RestaurantController::class,'sortRestaurantAsc'])->name('sort-restaurant-ascending');
 Route::post('/restaurants-sort-desc',[RestaurantController::class,'sortRestaurantDesc'])->name('sort-restaurant-descending');
+Route::post('/close-restaurant',[RestaurantController::class,'closeRestaurant'])->name('close-restaurant');
+Route::post('/open-restaurant',[RestaurantController::class,'openRestaurant'])->name('open-restaurant');
+Route::get('/logout-restaurant',[RestaurantController::class,'logoutRestaurant']);
 Route::get('/restaurant-admin-page/{id}',[RestaurantController::class,'adminRestaurantPage']);
 Route::get('/restaurant-signup2/{id}',[RestaurantController::class,'findRestaurantName']);
 Route::get('/restaurant-signup3/{id}',[RestaurantController::class,'findRestaurantName1']);
@@ -60,12 +65,14 @@ Route::post('/restaurant-signup1',[RestaurantController::class,'registerRestaura
 Route::post('/restaurant-signup2',[RestaurantController::class,'saveRestaurantDetail'])->name('save-restaurant-detail');
 Route::post('/restaurant-signup3',[RestaurantController::class,'saveRestaurantLoginInfo'])->name('save-restaurant-loginInfo');
 // Route::post('/restaurant-admin-page',[RestaurantController::class, 'updateRestaurantLoginInfo'])->name('update-restaurant-loginInfo');
-Route::post('/restaurant-admin-page',[RestaurantController::class, 'updateRestaurantInfo'])->name('update-restaurant-Info');
+Route::post('/restaurant-admin-page',[RestaurantController::class, 'updateRestaurantInfo'])->name('update-Restaurant-Info');
+Route::post('/restaurant-admin-page/editFoodInfo',[FoodController::class,'updateFoodInfo'])->name('update-food-Info');
 Route::post('/restaurant-admin-page/updateRestaurantCoverImg',[RestaurantController::class,'changeRestaurantCoverImg'])->name('changeBackgroundImg');
 Route::post('/restaurant-admin-page/deleteRestaurantCoverImg',[RestaurantController::class,'deleteRestaurantCoverImg'])->name('deleteBackgroundImg');
 Route::post('/restaurant-admin-page/updateRestaurantProfileImg',[RestaurantController::class,'changeRestaurantProfileImg'])->name('changeProfileImg');
 Route::post('/restaurant-admin-page/deleteRestaurantProfileImg',[RestaurantController::class,'deleteRestaurantProfileImg'])->name('deleteProfileImg');
 // for Customer
+Route::get('/user-profile',[CustomerController::class,'userProfile']);
 Route::post('/login',[CustomerController::class,'loginUser'])->name('login-user');
 Route::get('/logout',[CustomerController::class,'logout']);
 Route::post('/signup',[CustomerController::class,'registerUser'])->name('register-user');
@@ -79,15 +86,5 @@ Route::get('force-delete-food/{id}',[FoodController::class,'forceDeleteFood']);
 Route::get('/contact-us',[ContactController::class,'contact']);
 Route::get('/Login',[UserController::class,'login']);
 Route::post('/send-message',[ContactController::class,'sendEmail'])->name('contact.send');
-Route::get('/contact',[websitecontroller::class,'index']);
-Route::post('/',[UserController::class'call']);
-
-Route::post('/', function(){
-    return view('cardform');
-});
-
-
-
-
-
+Route::get('/',[Website::class,'index']);
 

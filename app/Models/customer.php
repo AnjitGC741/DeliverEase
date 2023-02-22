@@ -13,4 +13,8 @@ class customer extends Model
     {
     return $this->hasMany(Rating::class);
     }
+    public function my_carts()
+    {
+    return $this->hasMany(MyCart::class);
+    }
 }

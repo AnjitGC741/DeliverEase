@@ -19,13 +19,14 @@
     <link rel="stylesheet" href="/css/restaurant-page.css">
     <link rel="stylesheet" href="/css/restaurant-list.css">
     <link rel="stylesheet" href="/css/about-us.css">
+    <link rel="stylesheet" href="/css/user-profile.css">
     <title>@yield('title')</title>
     <link rel="shortcut icon" href="/favicon/favicon1.ico" type="image/x-icon">
 
 </head>
 
 <body onload="topic();">
-<section class="navbar">
+<section class="navbar1">
     <div class="logo">
       <h1>DeliverEase</h1>  
     </div>
@@ -35,7 +36,7 @@
         <li><a href="{{url('/restaurant-signup1')}}">Add Resturant</a></li>
         <li><a href="#">Deliver Food</a></li>
         <li><a href="{{url('/aboutus')}}">About</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="{{route('contact')}}">Contact</a></li>
       </ul>
     </div>
     @if((session()->get('loginCustomer')) === null)
@@ -46,22 +47,22 @@
     @else
     <div class="for-logined-user">
       <a><ion-icon name="heart-outline" class="favorite"></ion-icon></a>
-      <a><ion-icon name="cart-outline" class="cart"></ion-icon></a>
+      <a href="{{url('/my-cart')}}"><ion-icon name="cart-outline" class="cart"></ion-icon></a>
       <div>
       <span style="display: none;"> {{$value=session()->get('loginCustomer')}}</span>
         <button onclick="toggleMenu();" class="user-btn" style="color: #fff; font-size:20px; font-family:'Poppins', sans-serif; ">{{$value[0]}}</button>
       </div>
     </div>
-    <div class="sub-menu-wrap" id="subMenu">
-      <div class="sub-menu">
+    <div class="sub-menu-wrap1" id="subMenu">
+      <div class="sub-menu1">
         <div class="user-info">
           <div class="user-btn2"><p style="font-size: 2rem;color: white;font-weight: 400;">{{$value[0]}}</p></div>
           <p>{{session()->get('loginCustomer')}}</p>
         </div>
         <hr>
-          <a href="#" class="sub-menu-link"><ion-icon name="person-outline"></ion-icon> <p>Profile</p></a>
-          <a href="#" class="sub-menu-link"><ion-icon name="heart-outline"></ion-icon><p>Favourite</p> </a>
-          <a href="{{url('/logout')}}" class="sub-menu-link"><ion-icon name="log-out-outline"></ion-icon><p>Log out</p> </a>
+          <a href="{{url('/user-profile')}}" class="sub-menu-link1"><ion-icon name="person-outline"></ion-icon> <p>Profile</p></a>
+          <a href="#" class="sub-menu-link1"><ion-icon name="heart-outline"></ion-icon><p>Favourite</p> </a>
+          <a href="{{url('/logout')}}" class="sub-menu-link1"><ion-icon name="log-out-outline"></ion-icon><p>Log out</p> </a>
       </div>
     </div>
     @endif
@@ -78,7 +79,7 @@
                         <li><a href="#">Deliver food</a></li>
                         <li><a href="#">Our Story</a></li>
                         <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Login for resturant</a></li>
+                        <li><a href="{{url('/restaurant-login')}}">Login for resturant</a></li>
                         <li><a href="#">Login for delivery</a></li>
                     </ul>
                 </div>
