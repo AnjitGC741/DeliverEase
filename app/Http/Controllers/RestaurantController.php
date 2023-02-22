@@ -178,14 +178,29 @@ class RestaurantController extends Controller
         }
 
     }
-
     public function updateRestaurantInfo(Request $req){
-
-
         $updateRestaurantInfo = Restaurant::find($req->id);
         $input = $req -> all();
         $updateRestaurantInfo -> update($input);
         return redirect('restaurant-admin-page/'.$req->id);
+    }
+    public function openRestaurant(Request $req)
+    {
+        $changeStatus = Restaurant::find($req->id);
+        $changeStatus->status = $req->status;
+        $changeStatus->save();
+        return  redirect('restaurant-admin-page/'.$req->id);
+    }
+    public function closeRestaurant(Request $req)
+    {
+        $changeStatus = Restaurant::find($req->id);
+        $changeStatus->status = $req->status;
+        $changeStatus->save();
+        return  redirect('restaurant-admin-page/'.$req->id);
+    }
+    public function logoutRestaurant()
+    {
+        return view('home');
     }
 
 }

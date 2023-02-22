@@ -131,8 +131,9 @@ a{
     font-size: 3.8rem;
     color: #525252;
   }
-  .sub-menu-wrap{
+  .sub-menu-wrap1{
     position: absolute;
+    z-index: 99;
     top: 100%;
     right: 5px;
     min-width: 200px;
@@ -140,10 +141,10 @@ a{
     overflow: hidden;
     transition: max-height 0.5s;
   }
-  .sub-menu-wrap.open-menu{
+  .sub-menu-wrap1.open-menu{
     max-height: 400px;
   }
-  .sub-menu{
+  .sub-menu1{
     background: #fff;
     border-radius: 10px;
     padding: 15px;
@@ -158,14 +159,14 @@ a{
     font-weight: 300;
     font-size: 1.6rem;
   }
-  .sub-menu hr{
+  .sub-menu1 hr{
     border: 0;
     height: 1px;
     width: 100%;
     background: #ccc;
     margin: 15px 0 10px;
   }
-  .sub-menu-link{
+  .sub-menu-link1{
     display: flex;
     gap: 20px;
     align-items: center;
@@ -175,14 +176,14 @@ a{
     margin-left: 5px;
     transition: all 0.3s;
   }
-  .sub-menu-link:hover{
+  .sub-menu-link1:hover{
     padding-left: 10px;
     color: #f6be87;
   }
-  .sub-menu-link ion-icon{
+  .sub-menu-link1 ion-icon{
     font-size: 2.2rem;
   }
-  .sub-menu-link p{
+  .sub-menu-link1 p{
     font-size: 1.6rem;
     font-weight: 300;
   }

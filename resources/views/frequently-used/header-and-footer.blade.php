@@ -53,16 +53,16 @@
         <button onclick="toggleMenu();" class="user-btn" style="color: #fff; font-size:20px; font-family:'Poppins', sans-serif; ">{{$value[0]}}</button>
       </div>
     </div>
-    <div class="sub-menu-wrap" id="subMenu">
-      <div class="sub-menu">
+    <div class="sub-menu-wrap1" id="subMenu">
+      <div class="sub-menu1">
         <div class="user-info">
           <div class="user-btn2"><p style="font-size: 2rem;color: white;font-weight: 400;">{{$value[0]}}</p></div>
           <p>{{session()->get('loginCustomer')}}</p>
         </div>
         <hr>
-          <a href="{{url('/user-profile')}}" class="sub-menu-link"><ion-icon name="person-outline"></ion-icon> <p>Profile</p></a>
-          <a href="#" class="sub-menu-link"><ion-icon name="heart-outline"></ion-icon><p>Favourite</p> </a>
-          <a href="{{url('/logout')}}" class="sub-menu-link"><ion-icon name="log-out-outline"></ion-icon><p>Log out</p> </a>
+          <a href="{{url('/user-profile')}}" class="sub-menu-link1"><ion-icon name="person-outline"></ion-icon> <p>Profile</p></a>
+          <a href="#" class="sub-menu-link1"><ion-icon name="heart-outline"></ion-icon><p>Favourite</p> </a>
+          <a href="{{url('/logout')}}" class="sub-menu-link1"><ion-icon name="log-out-outline"></ion-icon><p>Log out</p> </a>
       </div>
     </div>
     @endif

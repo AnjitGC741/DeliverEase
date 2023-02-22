@@ -18,7 +18,6 @@ function minus(){
   }
   document.getElementById("foodQuantity").value = quantity;
 }
-
 function toggleMenu(){
 let subMenu = document.getElementById("subMenu");
 subMenu.classList.toggle("open-menu");

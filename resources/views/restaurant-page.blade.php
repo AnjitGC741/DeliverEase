@@ -147,7 +147,8 @@
                         @if((session()->get('loginCustomerId')) != null)
                         @php
                         $id = $food->id;
-                        $exists = DB::table('my_carts')->where('food_id', $id)->exists();
+                        $userId = session()->get('loginCustomerId');
+                        $exists = DB::table('my_carts')->where('food_id', $id)->where('customer_id', $userId)->exists();
                         @endphp
                         @if($exists)
                         <button type="submit"  class="added-to-cart-btn">Remove from Cart</button>

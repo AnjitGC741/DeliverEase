@@ -27,7 +27,7 @@
 <body>
 <div class="blur-box" id="blurBox" onclick="hideAll();">
 </div>
-@foreach ($value->food as $food)
+@foreach($value->food as $food)
 <div class="editFood" id="editFood_{{$food->id}}" >
     <h2>Edit food information</h2>
     <form action= "{{route('update-food-Info')}}" method="POST" enctype="multipart/form-data">
@@ -260,8 +260,29 @@
             <li class="secondary-navbar-link"><button onclick="displayUnavailableFoodSection();">unavailable Foods</button></li>
             <li class="secondary-navbar-link"><button  onclick="displayOrderSection();">Orders</button></li>
             <li class="secondary-navbar-link"><button  onclick="displayAnalysisSection();">Analysis</button></li>
+            @if($value->status == 1)
+            <li style="list-style: none;">
+            <form action="{{route('close-restaurant')}}" method="POST">
+            @csrf
+            <input type="text" hidden name="id" value="{{$value->id}}">
+            <input type="text" hidden name="status" value="0">
+            <button type="submit" class="btn btn-danger fs-4">Close Restaurant</button>
+            </form>
+            </li>
+             @else
+            <li style="list-style: none;"> 
+             <form action="{{route('open-restaurant')}}" method="POST">
+             @csrf
+            <input type="text" hidden name="id" value="{{$value->id}}">
+            <input type="text" hidden name="status" value="1">
+            <button type="submit" class="btn btn-success fs-4">Open Restaurant</button>
+            </form>
+            </li>
+            @endif
+            <li style="list-style: none;"><a href="{{url('logout-restaurant')}}"><button class="btn btn-danger fs-4">Logout</button></a></li>
            </ul>
         </div>
+
 </section>
 <section class="dynamic-div">
     <div class="food-section" id="food-section">
