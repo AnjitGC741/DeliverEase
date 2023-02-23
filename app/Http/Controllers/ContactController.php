@@ -10,7 +10,7 @@ class ContactController extends Controller
 {
     public function index()
     {
-        return view('contact-us');
+        // return view('contact-us');
     }
 
     public function sendEmail(Request $request)
@@ -61,6 +61,13 @@ class ContactController extends Controller
 
 
     
+<<<<<<< HEAD
+    
+
+
+
+=======
+>>>>>>> ad2316aa223780ce5f995b33185a3bca0aa526fe
     
 
 
