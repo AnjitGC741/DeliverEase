@@ -318,7 +318,7 @@
           <td class="fs-3" style="padding-top:40px;">{{$food->price}}</td>
           <td class="fs-3" style="padding-top:40px;">{{$food->quantity}}</td>
           <td style="padding-top:40px;">
-          <a href="{{url('make-food-unavailable/'.$food->id)}}"><button class="btn btn-primary fs-4">Make unavailable</button></a>
+          <a href="{{url('make-food-unavailable/'.$food->id)}}"><button class="btn btn-primary fs-4">Make Unavailable</button></a>
           <button id="{{$food->id}}" onclick="openFoodEditBox(this.id);" class="btn btn-warning fs-4" style="margin-left:10px">Edit</button></td>
         </tr>
         @endforeach
