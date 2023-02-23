@@ -1,0 +1,102 @@
+.data-summary-section{
+    width: 100%;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6rem!important;
+    padding: 2rem 3rem;
+    margin-bottom: 6rem;
+}
+.box{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 3rem 6rem;
+}
+.for-icon{
+    font-size: 2.4rem;
+    color: white;
+    border-radius:50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.restaurant-count{
+    background-color: #FFE2E6;
+    border-radius: 10px;
+}
+.restaurant-icon{
+    background-color: #FA597E;
+}
+.count{
+    margin-bottom: 0!important;
+    line-height: 1!important;
+    font-size: 2.4rem;
+    color: black;
+    font-weight: 500;
+}
+.text-name{
+    margin-bottom: 0!important;
+    line-height: 1!important;
+    font-size: 1.6rem;
+    font-weight: 300;
+    margin-top: 0.5rem;
+}
+.customer-count{
+    background-color: #FFF4DE;
+    border-radius: 10px;
+}
+.customer-icon{
+    background-color: #FE947A;
+}
+.delivery-count{
+    background-color: #DCFCE7;
+    border-radius: 10px;
+}
+.delivery-icon{
+    background-color: #3CD755;
+}
+.location-count{
+    background-color: #F4E8FF;
+    border-radius: 10px;
+}
+.location-icon{
+    background-color: #BF83FF;
+}
+/* for graph and pie */
+.for-graph-pie{
+    width: 100%;
+    display: flex;
+    gap: 5rem!important;
+    height: 40rem;
+    padding: 2rem 3rem;
+}
+.graph{
+    width: 60%;
+    height: 100%;
+    border-radius: 10px;
+    border: 1px solid rgb(222, 222, 222);
+    padding: 2rem;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.myChart{
+    width: 100%;
+    height: 100%;
+}
+.pie{
+    width: 40%;
+    height: 100%;
+    border: 1px solid rgb(222, 222, 222);
+    border-radius: 10px;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.myPie{
+    width: 75%!important;
+    height: 90%!important;
+}
