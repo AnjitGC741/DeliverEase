@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\stripecontroller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -91,3 +92,4 @@ Route::get('/contact',[ContactController::class,'index'])->name('contact');
 // for Add to cart
 Route::post('/restaurant-page/addToCart',[MyCartController::class,'addToCart'])->name('add-to-cart');
 Route::post('/my-cart',[MyCartController::class,'myCart']);
+Route::post('/stripecontroller',[Stripe::class,"stripePayment"])->name("stripe.post");
