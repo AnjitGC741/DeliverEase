@@ -8225,6 +8225,7 @@ h1, h2, h3, h4, h5,
   max-width: 300px;
   background: #1d1919;
   color: #fff;
+  height: 400vh;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s; }
@@ -8294,3 +8295,23 @@ a[data-toggle="collapse"] {
 
 .footer p {
   color: rgba(255, 255, 255, 0.5); }
+  .blur-box {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 250vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 98;
+    visibility: hidden;
+  }
+  .addLocationBox{
+    min-width: 50rem;
+    padding:30px;
+    border:1px solid #939292;
+    position: fixed;
+    z-index: 99;
+    margin:190px 500px;
+    background-color: #ffffff;
+    visibility: hidden;
+  }
+  
