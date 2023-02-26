@@ -40,6 +40,7 @@ class MyCartController extends Controller
     }
     public function checkout()
     {
-        return view('checkout');
+        $newData = customer::find(session()->get('loginCustomerId'));
+        return view('checkout',['newValue'=>$newData]);
     }
 }
