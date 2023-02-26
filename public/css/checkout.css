@@ -19,5 +19,29 @@ a{
   height: 30vh;
   width: 100%;
   position: relative;
-  
+}
+.checkout-main-box{
+    max-width: 110rem;
+    margin: 5rem auto;
+    display: flex;
+    gap: 10px;
+
+}
+.checkout-detail{
+    width: 55%;
+}
+.cart-detail{
+    position: sticky!important;
+    width: 45%;
+}
+.detail-section{
+    margin-bottom: 20px;
+    border: 1px solid rgb(209, 209, 209);
+}
+.Info{
+    font-size: 1.8rem;
+    border-bottom: 1px solid rgb(209, 209, 209);
+    background: #fff3e7;
+    padding: 1rem 2rem;
+    text-transform: uppercase;
 }
