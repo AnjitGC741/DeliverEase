@@ -9,15 +9,35 @@
 	<link rel="stylesheet" href="/css/sidebar-style.css">
 	<title>@yield('title')</title>
 </head>
-
 <body>
+<div class="blur-box" id="blurBox" onclick="hideAll();">
+</div>
+<div class="addLocationBox" id="addLocationBox">
+    <div class="alert text-center alert-danger" style="display:none;" role="alert" id="errorMessage">
+		<p class="mt-2">Empty Field</p>
+    </div>
+  <p>Add Location</p>
+  <hr>
+  <form action="{{route('add-location')}}" enctype="multipart/form-data" method="POST" id="addLocation">
+	@csrf
+      <div class="mb-3">
+      <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Location Name</label>
+      <input  style="letter-spacing: 0.8px;font-size:15px;height:40px;" type="text" class="form-control" name="locationName" id="locationName">
+      </div>
+      <div class="mb-3">
+        <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Image</label>
+        <input type="file" style="letter-spacing: 0.8px;font-size:15px;height:40px;" name="locationImg" class="form-control" id="locationImg">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+      </div>
+      <button onclick="checkEmpty();" style="width: 100%; height: 40px;letter-spacing:1px;font-size:15px;" class=" fs-2 mt-3 btn btn-success">Add</button>
+  </form>
+</div>
 	<div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar">
 			<div class="p-4 pt-5">
 				<a href="#" class="img logo rounded-circle mb-5" style="background-image: url(images/logo.jpg);"></a>
 				<ul class="list-unstyled components mb-5">
 					<li class="active">
-						<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+						<a href="#homeSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
 						<ul class="collapse list-unstyled" id="homeSubmenu">
 							<li>
 								<a href="#">Home 1</a>

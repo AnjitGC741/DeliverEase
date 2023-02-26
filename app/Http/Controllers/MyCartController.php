@@ -38,4 +38,8 @@ class MyCartController extends Controller
     {
         return view('my-cart');
     }
+    public function checkout()
+    {
+        return view('checkout');
+    }
 }

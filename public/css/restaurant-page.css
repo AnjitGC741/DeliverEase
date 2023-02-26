@@ -291,6 +291,7 @@ a{
   padding: 20px;
   border-radius: 10px;
   background-color: white;
+  display: none;
 }
 .for-changing-quantity{
   display: flex;
@@ -298,4 +299,9 @@ a{
   margin: 0 auto;
   width: 100px;
   margin-bottom: 20px;
+}
+.message
+{
+  color: #9F1D22;
+  font-size: 1.4rem;
 }

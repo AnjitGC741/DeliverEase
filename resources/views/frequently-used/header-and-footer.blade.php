@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="/css/restaurant-list.css">
     <link rel="stylesheet" href="/css/about-us.css">
     <link rel="stylesheet" href="/css/user-profile.css">
+    <link rel="stylesheet" href="/css/checkout.css">
     <title>@yield('title')</title>
     <link rel="shortcut icon" href="/favicon/favicon1.ico" type="image/x-icon">
 

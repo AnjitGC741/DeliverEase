@@ -1,5 +1,5 @@
 
-let idValue;
+let idValue=0;
 function plus(){
   var quantity=document.getElementById("foodQuantity").value;
   quantity++;
@@ -30,12 +30,28 @@ function hideAll()
 {
 document.getElementById("myCart").classList.toggle("hidden");
 document.getElementById("blurBox").classList.toggle("hidden");
-
-document.getElementById("editQuantity_"+idValue).classList.add("hidden");
+if(idValue > 0)
+{
+  document.getElementById("editQuantity_"+idValue).style.display = "none";
+}
 document.getElementById("funnyBox").style.visibility="hidden";
 }
 function openFoodEditBox(x)
 {
-idValue=x;
-document.getElementById("editQuantity_"+x).classList.toggle("hidden");
+  if( document.getElementById("editQuantity_"+x).style.display != "block"){
+    if(idValue > 0)
+    {
+      document.getElementById("editQuantity_"+idValue).style.display = "none";
+    }
+    document.getElementById("editQuantity_"+x).style.display = "block";
+  }
+  else
+  {
+    if(idValue > 0)
+    {
+      document.getElementById("editQuantity_"+idValue).style.display = "none";
+    }
+    document.getElementById("editQuantity_"+x).style.display = "none";
+  }
+   idValue=x; 
 }
