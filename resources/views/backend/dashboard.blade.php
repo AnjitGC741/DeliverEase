@@ -126,30 +126,24 @@ $sn=1;
     <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">SN</th>
+      <th scope="col">Customer Name</th>
+      <th scope="col">Restaurant Name</th>
+      <th scope="col">Payment Option</th>
+      <th scope="col">Status</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th scope="row">1</th>
       <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
+      <td>Everest</td>
+      <td>Cash on delivery</td>
+      <td>pending</td>
+      <td>
+        <button type="button" class="btn btn-primary">View Detail</button>
+      </td>
     </tr>
   </tbody>
 </table>

@@ -61,7 +61,11 @@
       </table>
       <p>Grand total: {{ collect($newValue->my_carts)->sum('total')}}</p>
       @if((collect($newValue->my_carts)->sum('total'))>=$value->minimumOrder)
-      <button class="btn btn-warning fs-4">Proceed to Checkout</button>
+      <form action="{{route('go-checkout-page')}}" method="POST">
+        @csrf
+        <input type="text" hidden value="{{$value->id}}" name="restaurantId">
+        <button type="submit" class="btn btn-warning fs-4">Proceed to Checkout</button>
+      </form>
       @else
       <p class="message">Subtotal must exceed Rs. {{$value->minimumOrder}} for delivery orders.</p>
       @endif
@@ -147,6 +151,11 @@
                         <img src="{{ asset('/storage/'.$food->foodImg) }}" alt="">
                     </div>
                     <div class="for-food-description">
+                    <!-- @php
+                        $id = $food->restaurant_id;
+                        $restaurant = DB::table('restaurants')->where('id', $id)->first();
+                    @endphp
+                    <p>{{ $restaurant->restaurantName }}</p> -->
                         <p class="food-name">{{$food->foodName}}</p>
                         <p class="food-price">Rs {{$food->price}} per {{$food->quantity}}</p>
                         @if((session()->get('loginCustomerId')) != null)
