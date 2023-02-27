@@ -92,5 +92,6 @@ Route::get('/contact',[ContactController::class,'index'])->name('contact');
 // for Add to cart
 Route::post('/restaurant-page/addToCart',[MyCartController::class,'addToCart'])->name('add-to-cart');
 Route::post('/my-cart',[MyCartController::class,'myCart']);
-Route::get('/checkout',[MyCartController::class,'checkout']);
+Route::post('/checkout',[MyCartController::class,'checkout'])->name('go-checkout-page');
+Route::post('/checkout/save-checkout-info',[MyCartController::class,'saveCheckoutInfo'])->name('save-checkout-info');
 Route::post('/stripecontroller',[Stripe::class,"stripePayment"])->name("stripe.post");

@@ -40,8 +40,8 @@ a{
 }
 .Info{
     font-size: 1.8rem;
-    border-bottom: 1px solid rgb(209, 209, 209);
-    background: #fff3e7;
+    border-bottom: 1px solid rgb(229, 229, 229);
+    background: #dadada;
     padding: 1rem 2rem;
     text-transform: uppercase;
 }
