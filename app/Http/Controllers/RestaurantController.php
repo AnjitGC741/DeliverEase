@@ -10,9 +10,14 @@ class RestaurantController extends Controller
     public function registerRestaurantName(Request $req)
     {
         $req -> validate([
-            'restaurantName' => 'required'
+            'restaurantName' => 'required',
+            'restaurantid' => 'required',
+            'password' => 'required',
+            'confirm_password' => 'required'
+            
         ]);
-        
+
+      
         Restaurant::create([
             'restaurantName'=>  $req->restaurantName,
         ]);
@@ -86,7 +91,7 @@ class RestaurantController extends Controller
         $restaurantLoginInfo = Restaurant::find($req->id);
         $restaurantLoginInfo->password = $req->password;
         $restaurantLoginInfo->save();
-        return  redirect('restaurant-admin-page/'.$req->id);
+        return  redirect('restaurant-admin-page/'.$req->id);//to go
     }
     public function adminRestaurantPage($id)
     {
@@ -177,6 +182,18 @@ class RestaurantController extends Controller
         $updateRestaurantInfo -> update($input);
         return redirect('restaurant-admin-page/'.$req->id);
 
+        echo "<pre>";
+        print_r($req->all());
+
+    }
+
+    public function restaurantLoginSubmit(Request $request){
+        $request->validate([
+            'id'=>'required|integer',
+            'password'=> 'required',
+        ]);
+
+        
     }
 
 }

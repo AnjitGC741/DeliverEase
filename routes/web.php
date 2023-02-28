@@ -29,6 +29,9 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('backend/dashboard');
 });
+Route::get('/cardForm', function(){
+    return view('Cardform');
+});
 Route::get('/login', function () {
     return view('user-login-page');
 });
@@ -39,7 +42,7 @@ Route::get('/signup', function () {
 Route::get('/aboutus', function () {
     return view('aboutus');
 });
-Route::get('/restaurant-signup1', function () {
+Route::get('/restaurant-signup-page', function () {
     return view('restaurant-signup-page1');
 });
 Route::get('/restaurant-list', function () {
@@ -48,6 +51,8 @@ Route::get('/restaurant-list', function () {
 Route::get('/restaurant-login', function () {
     return view('restaurant-login');
 });
+//for restaurant
+Route::post('/restaurant-login-submit', [RestaurantController::class,'restaurantLoginSubmit'])->name('restaurantLoginSubmit');
 //for restaurant
 Route::get('/restaurant-page/{id}',[RestaurantController::class,'userRestaurantPage']);
 Route::post('/restaurants-sort-asc',[RestaurantController::class,'sortRestaurantAsc'])->name('sort-restaurant-ascending');
@@ -82,3 +87,4 @@ Route::post('/send-message',[ContactController::class,'sendEmail'])->name('conta
 // Route::get('/',[websitecontroller::class,'index']);
 
 Route::get('/contact',[ContactController::class,'index'])->name('contact');
+Route::get('/restaurant',[RestaurantController::class,'index'])->name('restaurant');

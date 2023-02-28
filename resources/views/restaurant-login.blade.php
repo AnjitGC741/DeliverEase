@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="shortcut icon" href="/favicon/favicon1.ico" type="image/x-icon">
+    {{-- @vite(['resources/app.js']) --}}
     <!-- font links -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,18 +72,22 @@
                 </div>
                 @endif
                 <h2 class="mb-4 mt-4">Login</h1>
-                <form action="#" method="#">
+                <form action="{{route('restaurantLoginSubmit')}}" method="post">
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Restaurant id</label>
                         <input type="text"  class="form-control" id="exampleInputEmail1"  name="id" value="{{old('customerName')}}">
-                        <span style="color: red;"> @error('email'){{$message}}@enderror</span>
                     </div>
+                    @error('id')
+                        <p class="text-danger">{{$message}}</p>
+                    @enderror
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
                         <input type="password" class="form-control"  name="password" id="myPassword">
-                        <span style="color: red;"> @error('password'){{$message}}@enderror</span>
                     </div>
+                    @error('password')
+                    <p class="text-danger">{{$message}}</p>
+                @enderror
                     <div>
                         <input type="checkbox" class="form-check-input" onclick="showPassword();"><span style="margin-left:5px;font-size:13px;">Show Password</span>
                     </div>
