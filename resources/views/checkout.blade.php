@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <section class="checkout-Section-header">
         <div class="img-section">
-            <img src="./img/try5.jpg" alt="" />
+            <img src="/img/try5.jpg" alt="" />
           </div>
           <div class="linear"></div>
           <div class="text-about">
@@ -17,13 +17,11 @@
 </section>
 <div class="checkout-main-box">
     <div class="checkout-detail">
-        <form action="{{route('save-checkout-info')}}" method="POST">
-          @csrf
-          <input type="text" hidden value="{{$value->id}}" name="restaurantId">
+    <form  action="{{ route('save-checkout') }}" method="post">
+    @csrf
+        <input type="text" hidden value="{{$value->id}}" name="restaurantId">
          <div class="detail-section">
           <p class="Info">Contact Info</p>
-
-
          <div class="d-flex mb-3" style="gap:10px;margin-left:20px;margin-right:20px;">
           <div class="mb-3  w-50">
                         <label class="form-label fs-4" style="letter-spacing: 1px;">First Name</label>
@@ -78,17 +76,17 @@
           <p class="Info">DELIVERY DATE AND TIME</p>
          <div class="d-flex mb-3" style="gap:10px;margin-left:20px;margin-right:20px;">
           <div class="mb-3  w-75">
-           <input type="text" id="actualDate" name="serviceDate2" hidden>
+        
                         <label class="form-label fs-4" style="letter-spacing: 1px;">Date</label>
-                        <select id="dates" name="serviceDate1" onchange="changeDate();" class="form-select fs-4  @error('date') is-invalid @enderror" style="letter-spacing: 1px;">
+                        <select id="dates" name="serviceDate1" onchange="changeDate();" class="form-select fs-4  @error('serviceDate') is-invalid @enderror" style="letter-spacing: 1px;">
                              <option value="">SELECT A DATE</option>
                         </select>
-                        <span style="color: red;"> @error('date'){{$message}}@enderror</span>
+                        <span style="color: red;"> @error('serviceDate'){{$message}}@enderror</span>
           </div>
           <div class="mb-3 w-25">
                         <label class="form-label fs-4" style="letter-spacing: 1px;">Time</label>
-                        <input type="text" style="letter-spacing: 1px;" class="form-control fs-4  @error('deliveryTime') is-invalid @enderror" placeholder="Time" name="deliveryTime" value="{{old('time')}}">
-                        <span style="color: red;"> @error('deliveryTime'){{$message}}@enderror</span>
+                        <input type="text" style="letter-spacing: 1px;" class="form-control fs-4  @error('serviceTime') is-invalid @enderror" placeholder="Time" name="serviceTime" value="{{old('time')}}">
+                        <span style="color: red;"> @error('serviceTime'){{$message}}@enderror</span>
           </div>
           <div class="mb-3 w-25">
           <label class="form-label fs-4" style="letter-spacing: 1px;">Service Type</label>
@@ -126,7 +124,7 @@
             <button class="btn btn-secondary fs-4">Go Back</button>
             <button type="submit" class="btn btn-success fs-4">Continue</button>
          </div>
-        </form>
+      </form>
     </div>
     <div class="cart-detail">
       <p>{{$value->restaurantName}}</p>
@@ -176,7 +174,7 @@
   function changeDate()
   {
     var dateStr = document.getElementById("dates").value;
-        const dateObj = new Date(dateStr);
+    const dateObj = new Date(dateStr);
     const year = dateObj.getFullYear();
     const month = ('0' + (dateObj.getMonth() + 1)).slice(-2);
     const day = ('0' + dateObj.getDate()).slice(-2);

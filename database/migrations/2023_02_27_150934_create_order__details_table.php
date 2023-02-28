@@ -16,13 +16,12 @@ return new class extends Migration
         Schema::create('order__details', function (Blueprint $table) {
             $table->id();
             $table->string('customerName');
-            $table->integer('contactNumber');
+            $table->bigInteger('contactNumber');
             $table->string('streetName');
             $table->string('cityName');
             $table->string('organization')->nullable();
             $table->string('direction',100);
-            $table->string('serviceDate1');
-            $table->date('serviceDate2');
+            $table->date('serviceDate');
             $table->string('serviceTime');
             $table->string('serviceType');
             $table->string('paymentOption');

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Models\Restaurant;
 use App\Models\customer;
@@ -17,24 +16,34 @@ class MyCartController extends Controller
         {
             return view('user-login-page');
         }
-        $foodValue = Food::find($req->foodId);
-         $save =MyCart::create([
-            'foodQuantity'=>1,
-            'foodPrice'=>  $foodValue->price,
-            'cartFoodImg'=>$foodValue->foodImg,
-            'foodName'=>$foodValue->foodName,
-            'total'=>1* $foodValue->price,
-            'restaurant_id'=>  $req->restaurantId,
-            'customer_id'=> session()->get('loginCustomerId'),
-            'food_id'=>  $req->foodId,
-        ]);
-        if(!$save)
+        $exists = MyCart::where('food_id', $req->foodId)->where('customer_id',  session()->get('loginCustomerId'))->exists();
+        if($exists){
+            MyCart::where('food_id', $req->foodId)->where('customer_id',session()->get('loginCustomerId'))->delete();
+            return back();
+        }
+        else
         {
-            dd("fail");
+            $foodValue = Food::find($req->foodId);
+            $save =MyCart::create([
+               'foodQuantity'=>1,
+               'foodPrice'=>  $foodValue->price,
+               'cartFoodImg'=>$foodValue->foodImg,
+               'foodName'=>$foodValue->foodName,
+               'total'=>1* $foodValue->price,
+               'restaurant_id'=>  $req->restaurantId,
+               'customer_id'=> session()->get('loginCustomerId'),
+               'food_id'=>  $req->foodId,
+           ]);
+               
+                if(!$save)
+                {
+                    dd("fail");
+                }
+                else{
+                return back();
+                }
         }
-        else{
-         return back();
-        }
+        
     }
     public function myCart()
     {
@@ -48,20 +57,18 @@ class MyCartController extends Controller
     }
     public function saveCheckoutInfo(Request $req)
     {
-        $req->validate([
-            'firstName'=>'required',
-            'lastName'=>'required',
-            'contactNumber'=>'required',
+        $req -> validate([
+            'firstName' => 'required',
+            'lastName' => 'required',
             'streetName' => 'required',
-            'cityName' => 'required',
-            'organization' => 'required',
-            'detailAddress'=>'required',
-            'serviceDate1'=>'required',
-            'serviceTime'=>'required',
-            'serviceType'=>'required',
-            'paymentMethod'=>'required',
-
-         ]);
+            'cityName'=>'required',
+            'detailAddress' => 'required',
+            'serviceDate1' => 'required',
+            'serviceTime' => 'required',
+            'serviceType' => 'required',
+            'paymentMethod' => 'required'
+            
+        ]);
          $save = Order_Detail::create([
             'customerName'=>$req->firstName.' '.$req->lastName,
             'contactNumber'=>  $req->contactNumber,
@@ -73,7 +80,7 @@ class MyCartController extends Controller
             'serviceDate2'=>  $req->serviceDate2,
             'serviceTime'=>$req->serviceTime,
             'serviceType'=>  $req->serviceType,
-            'paymentMethod'=>$req->paymentMethod,
+            'paymentOption'=>$req->paymentMethod,
             'instruction'=> $req->instruction,
             'customer_id'=> session()->get('loginCustomerId'),
             'restaurant_id'=> $req->restaurantId,
@@ -92,8 +99,6 @@ class MyCartController extends Controller
             $newOrder->save();
         }
          MyCart::where('customer_id','=',session()->get('loginCustomerId'))->where('restaurant_id','=',$req->restaurantId)->delete();
-        //  $makeFoodUnavailable = MyCart::where('customer_id','=',session()->get('loginCustomerId'))->where('restaurant_id','=',$req->restaurantId)->get();
-        //  $makeFoodUnavailable->delete();
-        return view('home');
+         return redirect('/');
     }
 }

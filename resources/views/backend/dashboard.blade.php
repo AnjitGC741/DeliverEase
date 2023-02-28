@@ -140,7 +140,7 @@ $sn=1;
       <td>Mark</td>
       <td>Everest</td>
       <td>Cash on delivery</td>
-      <td>pending</td>
+      <td><p class="p-1 pl-3 mb-2 bg-danger text-white" style="border-radius:5px;text-align:center;">Rejected</p></td>
       <td>
         <button type="button" class="btn btn-primary">View Detail</button>
       </td>

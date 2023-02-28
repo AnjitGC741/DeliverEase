@@ -61,11 +61,13 @@
       </table>
       <p>Grand total: {{ collect($newValue->my_carts)->sum('total')}}</p>
       @if((collect($newValue->my_carts)->sum('total'))>=$value->minimumOrder)
-      <form action="{{route('go-checkout-page')}}" method="POST">
-        @csrf
-        <input type="text" hidden value="{{$value->id}}" name="restaurantId">
-        <button type="submit" class="btn btn-warning fs-4">Proceed to Checkout</button>
-      </form>
+      <form action="{{route('go-checkout-page')}}" method="get">
+    @csrf
+    <input type="text" hidden value="{{$value->id}}" name="restaurantId">
+    <button type="submit" class="btn btn-warning fs-4">Proceed to Checkout</button>
+</form>
+
+
       @else
       <p class="message">Subtotal must exceed Rs. {{$value->minimumOrder}} for delivery orders.</p>
       @endif
