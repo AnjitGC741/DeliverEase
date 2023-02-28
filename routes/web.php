@@ -14,6 +14,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\stripecontroller;
+use Carbon\Carbon;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +28,7 @@ use App\Http\Controllers\stripecontroller;
 */
 
 Route::get('/', function () {
+   
     session()->put(['loginCustomer']);
     session()->put(['loginCustomerId']);
     return view('home');
@@ -91,7 +94,9 @@ Route::post('/send-message',[ContactController::class,'sendEmail'])->name('conta
 Route::get('/contact',[ContactController::class,'index'])->name('contact');
 // for Add to cart
 Route::post('/restaurant-page/addToCart',[MyCartController::class,'addToCart'])->name('add-to-cart');
-Route::post('/my-cart',[MyCartController::class,'myCart']);
-Route::post('/checkout',[MyCartController::class,'checkout'])->name('go-checkout-page');
-Route::post('/checkout/save-checkout-info',[MyCartController::class,'saveCheckoutInfo'])->name('save-checkout-info');
+Route::get('/my-cart',[MyCartController::class,'myCart']);
+Route::get('/checkout/go-to-checkout',[MyCartController::class,'checkout'])->name('go-checkout-page');
+Route::POST('/checkout/save-checkout-info',[MyCartController::class,'saveCheckoutInfo'])->name('save-checkout');
 Route::post('/stripecontroller',[Stripe::class,"stripePayment"])->name("stripe.post");
+
+Route::get('/time',[RestaurantController::class,"time"])->name("time");
