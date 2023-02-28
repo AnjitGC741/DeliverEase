@@ -200,4 +200,11 @@ class RestaurantController extends Controller
         $dt = Carbon::now();
         dd($dt->format('y', 'm','d'));
     }
+
+    public function restaurantLoginSubmit(Request $request){
+        $request->validate([
+            'id'=> 'required|integer',
+            'password'=> 'required',
+        ]);
+    }
 }

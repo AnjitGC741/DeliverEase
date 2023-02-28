@@ -52,6 +52,8 @@ Route::get('/restaurant-list', function () {
 Route::get('/restaurant-login', function () {
     return view('restaurant-login');
 });
+
+Route::post('/restaurant-login-submit',[RestaurantController::class,'restaurantLoginSubmit'])->name('restaurantLoginSubmit');
 // for super admin
 Route::get('/dashboard',[SuperAdmin::class,'dashboard']);
 Route::post('/dashboard/add-location',[SuperAdmin::class,'addLocation'])->name('add-location');
