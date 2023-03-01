@@ -3,6 +3,22 @@
 @section('other-content')
 @php
 $sn=1;
+$orderCount =1;
+$jan = DB::table('orderdetails')->whereMonth('serviceDate', '=', 1)->count();
+$feb = DB::table('orderdetails')->whereMonth('serviceDate', '=', 2)->count();
+$mar = DB::table('orderdetails')->whereMonth('serviceDate', '=', 3)->count();
+$apr = DB::table('orderdetails')->whereMonth('serviceDate', '=', 4)->count();
+$may = DB::table('orderdetails')->whereMonth('serviceDate', '=', 5)->count();
+$jun = DB::table('orderdetails')->whereMonth('serviceDate', '=', 6)->count();
+$jul = DB::table('orderdetails')->whereMonth('serviceDate', '=', 7)->count();
+$aug = DB::table('orderdetails')->whereMonth('serviceDate', '=', 8)->count();
+$sep = DB::table('orderdetails')->whereMonth('serviceDate', '=', 9)->count();
+$oct = DB::table('orderdetails')->whereMonth('serviceDate', '=', 10)->count();
+$nov = DB::table('orderdetails')->whereMonth('serviceDate', '=', 11)->count();
+$dec = DB::table('orderdetails')->whereMonth('serviceDate', '=', 12)->count();
+$totalKathmandu =  DB::table('restaurants')->where('city', '=', 'kathmandu')->count();
+$totalPokhara =  DB::table('restaurants')->where('city', '=', 'pokhara')->count();
+
 @endphp
  <!-- font awesome links -->
  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -48,7 +64,7 @@ $sn=1;
             <ion-icon name="location"></ion-icon>
             </div>
             <div class="for-text">
-                <p class="count">12</p>
+                <p class="count">{{$locationCount}}</p>
                 <p class="text-name">Location</p>
             </div>
         </div>
@@ -123,28 +139,42 @@ $sn=1;
  </div>
  <div class="recent-orders">
     <p>Recent orders</p>
-    <table class="table table-striped">
-  <thead>
+    <table class="table">
+    <thead class="thead-light">
     <tr>
       <th scope="col">SN</th>
       <th scope="col">Customer Name</th>
       <th scope="col">Restaurant Name</th>
       <th scope="col">Payment Option</th>
+      <th scope="col">Service Type</th>
       <th scope="col">Status</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
+  @foreach($orderDetail as $order)
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Everest</td>
-      <td>Cash on delivery</td>
-      <td><p class="p-1 pl-3 mb-2 bg-danger text-white" style="border-radius:5px;text-align:center;">Rejected</p></td>
+      <th scope="row">{{$orderCount++}}</th>
+      <td>{{$order->customerName}}</td>
+      @php
+      $id = $order->restaurant_id;
+      $restaurant = DB::table('restaurants')->where('id', $id)->first();
+      @endphp
+      <td>{{ $restaurant->restaurantName }}</td>
+      <td>{{$order->paymentOption}}</td>
+      <td>{{$order->serviceType}}</td>
+      @if($order->status == 0)
+      <td><p class="pending">Pending</p></td>
+      @elseif($order->status == 1)
+      <td><p class="delivered">Delivered</p></td>
+      @else($order->status == 2)
+      <td><p class="rejected">Rejected</p></td>
+      @endif
       <td>
         <button type="button" class="btn btn-primary">View Detail</button>
       </td>
     </tr>
+    @endforeach
   </tbody>
 </table>
  </div>
@@ -153,15 +183,24 @@ $sn=1;
         const myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['jan', 'feb', 'mar','api','may','jun','july','aug','sep','oct','nov','dec'],
+                labels: ['Jan','Feb','Mar','Apr','May','Jun','jul','Aug','Sep','Oct','Nov','Dec'],
                 datasets: [{
                     label: '',
-                    data: [10,20,40,50,30,20,90,40,70,60,20,30],
+                    data: [ <?= $jan ?> , <?=$feb?>, <?= $mar ?>, <?= $apr ?>, <?= $may ?>, <?=$jun ?>,<?= $jul ?>, <?= $aug ?>,<?= $sep ?>, <?= $oct ?>, <?= $nov ?>, <?= $dec ?> ],
                     backgroundColor: [
                         '#3B5BA5',
-                        '#E87A5D',
-                        '#F3B941',
-
+                        '#FF4136',
+                        '#FF851B', 
+                        '#FFDC00', 
+                        '#2ECC40',
+                        '#0074D9', 
+                        '#B10DC9', 
+                        '#85144b', 
+                        '#F012BE', 
+                        '#3D9970', 
+                        '#AAAAAA', 
+                        '#F0E68C', 
+                        '#00CED1', 
                     ],
 
                 }]
@@ -174,10 +213,10 @@ $sn=1;
         const myPie = new Chart(ctx1, {
             type: 'doughnut',
             data: {
-                labels: ['Movies', 'Games', 'Series'],
+                labels: ['kathmandu', 'pokhara'],
                 datasets: [{
                     label: 'Product Sales',
-                    data: [10,20,30 ],
+                    data: [<?= $totalKathmandu ?> ,<?= $totalPokhara ?>  ],
                     backgroundColor: [
                         '#EC6B56',
                         '#FFC154',

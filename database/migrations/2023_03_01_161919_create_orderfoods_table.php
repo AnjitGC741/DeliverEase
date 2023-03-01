@@ -13,24 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order__details', function (Blueprint $table) {
+        Schema::create('orderfoods', function (Blueprint $table) {
             $table->id();
-            $table->string('customerName');
-            $table->bigInteger('contactNumber');
-            $table->string('streetName');
-            $table->string('cityName');
-            $table->string('organization')->nullable();
-            $table->string('direction',100);
-            $table->date('serviceDate');
-            $table->string('serviceTime');
-            $table->string('serviceType');
-            $table->string('paymentOption');
-            $table->string('instruction',100)->nullable();
-            $table->integer('status')->default(0);
+         
+            $table->integer('orderFoodQuantity');
+            $table->integer('orderFoodPrice');
+            $table->string('orderFoodImg',255);
+            $table->string('orderFoodName');
+            $table->string('orderFoodType');
+            $table->integer('orderTotal');
             $table->unsignedBigInteger('restaurant_id');
             $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('orderdetail_id');
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('orderdetail_id')->references('id')->on('orderdetails')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -42,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order__details');
+        Schema::dropIfExists('orderfoods');
     }
 };
