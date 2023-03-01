@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\customer;
 use App\Models\Food;
+use App\Models\OrderDetail;
 use App\Models\Restaurant;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -83,9 +84,6 @@ class RestaurantController extends Controller
         if ($req->password !== $req->confirmPassword) {
             return back()->with('fail', 'Password does not match');
         }
-
-
-
         $restaurantLoginInfo = Restaurant::find($req->id);
         $restaurantLoginInfo->password = $req->password;
         $restaurantLoginInfo->save();
@@ -93,8 +91,9 @@ class RestaurantController extends Controller
     }
     public function adminRestaurantPage($id)
     {
+        $orders = Orderdetail::where('restaurant_id', $id)->get();
         $data = Restaurant::find($id);
-        return view('backend/admin-restaurant-page', ['value' => $data]);
+        return view('backend/admin-restaurant-page', ['value' => $data],['order' => $orders]);
     }
     public function changeRestaurantCoverImg(Request $req)
     {

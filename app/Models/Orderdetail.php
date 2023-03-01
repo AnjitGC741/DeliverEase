@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order_Detail extends Model
+class Orderdetail extends Model
 {
     use HasFactory;
     protected $fillable = ['customerName','contactNumber','streetName','cityName','organization','direction','serviceDate','serviceTime','serviceType','paymentOption','instruction','restaurant_id','customer_id'];
@@ -17,9 +17,8 @@ class Order_Detail extends Model
     {
         return $this->belongsTo(customer::class);
     }
-    public function order_food()
+    public function orderfoods()
     {
-    return $this->hasMany(OrderFood::class);
+    return $this->hasMany(Orderfood::class);
     }
 }
-

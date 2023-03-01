@@ -151,3 +151,21 @@
     padding: 2rem;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
+.pending{
+    background-color: #F2DCF5;
+    color: #B451C4;
+    text-align: center;
+    border-radius:10px ;
+}
+.delivered{
+    background-color: #D0E7DC;
+    color: #218C59;
+    text-align: center;
+    border-radius:10px ;
+}
+.rejected{
+    background-color: #e7d0d0;
+    color: #8c2121;
+    text-align: center;
+    border-radius:10px ;
+}
