@@ -44,4 +44,8 @@ class SuperAdmin extends Controller
             return  back();
         }
     }
+    public function addCuisine(Request $req)
+    {
+        dd($req);
+    }
 }

@@ -418,7 +418,7 @@
       <p class="total">Rs 100</p>
     </div>
     <div class="decision">
-      <button class="btn btn-danger" style="font-size: 14px;">Reject</button>
+      <a href="{{url('reject-food/'.$orderData->id)}}"><button class="btn btn-danger" style="font-size: 14px;">Reject</button></a>
       <button class="btn btn-success" style="font-size: 14px;margin-left: 5px;">Deliver</button>
       </div>
     </div>

@@ -77,66 +77,6 @@ $totalPokhara =  DB::table('restaurants')->where('city', '=', 'pokhara')->count(
     <canvas id="myPie" class="myPie"></canvas>
     </div>
  </div>
- <div class="cuisine-location">
- <div class="for-locaiton">
-    <div class="d-flex justify-content-between">
-    <p>City</p>
-    <button class="btn btn-success fs-5" style="height:30px;width:60px" onclick="showAddLocationBox();">Add</button>
-    </div>
-    <table class="table">
-  <thead class="thead-light">
-    <tr>
-      <th scope="col">Sn</th>
-      <th scope="col">City</th>
-      <th scope="col">Img</th>
-      <th scope="col">Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-  @foreach($locations as $location)
-    <tr>
-      <th scope="row">{{$sn++}}</th>
-      <td>{{$location->locationName}}</td>
-      <th scope="col"><img  width= 50 height=50  src="{{ asset('/storage/'.$location->locationImg) }}"  style="border-radius:50%"></th>
-      <td><button class="btn btn-danger">Remove</button></td>
-    </tr>
-    @endforeach
-  </tbody>
-</table>
-    </div>
-    <div class="for-cuisine">
-    <div class="d-flex justify-content-between">
-    <p>Cuisine</p>
-    <button class="btn btn-success fs-5" style="height:30px;width:60px">Add</button>
-    </div>
-    <table class="table">
-  <thead class="thead-light">
-    <tr>
-    <th scope="col">Sn</th>
-      <th scope="col">Cusine</th>
-      <th scope="col">Img</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <th scope="col"><img  width= 50 height=50 src="/img/burger.jpg" style="border-radius:50%"></th>
-      <td><button class="btn btn-danger">Remove</button></td>
-      
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <th scope="col"><img  width= 50 height=50 src="/img/burger.jpg" style="border-radius:50%"></th>
-      <td><button class="btn btn-danger">Remove</button></td>
-    </tr>
-  </tbody>
-</table>
-    </div>
-
- </div>
  <div class="recent-orders">
     <p>Recent orders</p>
     <table class="table">
@@ -171,14 +111,75 @@ $totalPokhara =  DB::table('restaurants')->where('city', '=', 'pokhara')->count(
       <td><p class="rejected">Rejected</p></td>
       @endif
       <td>
-        <button type="button" class="btn btn-primary">View Detail</button>
+        <button id="{{$order->id}}" class="btn btn-primary" onclick="showOrderFoodDetail(this.id);">View Detail</button>
       </td>
     </tr>
     @endforeach
   </tbody>
 </table>
  </div>
+ <div class="cuisine-location">
+ <div class="for-locaiton">
+    <div class="d-flex justify-content-between">
+    <p>City</p>
+    <button class="btn btn-success fs-5" style="height:30px;width:60px" onclick="showAddLocationBox();">Add</button>
+    </div>
+    <table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Sn</th>
+      <th scope="col">City</th>
+      <th scope="col">Img</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  @foreach($locations as $location)
+    <tr>
+      <th scope="row">{{$sn++}}</th>
+      <td>{{$location->locationName}}</td>
+      <th scope="col"><img  width= 50 height=50  src="{{ asset('/storage/'.$location->locationImg) }}"  style="border-radius:50%"></th>
+      <td><button class="btn btn-danger">Remove</button></td>
+    </tr>
+    @endforeach
+  </tbody>
+</table>
+    </div>
+    <div class="for-cuisine">
+    <div class="d-flex justify-content-between">
+    <p>Cuisine</p>
+    <button class="btn btn-success fs-5" style="height:30px;width:60px" onclick="showAddCuisineBox();">Add</button>
+    </div>
+    <table class="table">
+  <thead class="thead-light">
+    <tr>
+    <th scope="col">Sn</th>
+      <th scope="col">Cusine</th>
+      <th scope="col">Img</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <th scope="col"><img  width= 50 height=50 src="/img/burger.jpg" style="border-radius:50%"></th>
+      <td><button class="btn btn-danger">Remove</button></td>
+      
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <th scope="col"><img  width= 50 height=50 src="/img/burger.jpg" style="border-radius:50%"></th>
+      <td><button class="btn btn-danger">Remove</button></td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+ </div>
  <script>
+  let idValue;
       const ctx = document.getElementById("myChart").getContext('2d');
         const myChart = new Chart(ctx, {
             type: 'bar',
@@ -233,11 +234,25 @@ $totalPokhara =  DB::table('restaurants')->where('city', '=', 'pokhara')->count(
           {
             document.getElementById('blurBox').style.visibility="hidden";
             document.getElementById('addLocationBox').style.visibility="hidden";
+            document.getElementById('addCuisineBox').style.visibility="hidden";
+            document.getElementById("editFood_"+idValue).style.visibility = "hidden";
           }
           function showAddLocationBox()
           {
             document.getElementById('blurBox').style.visibility="visible";
             document.getElementById('addLocationBox').style.visibility="visible";
+          }
+          
+          function showAddCuisineBox()
+          {
+            document.getElementById('blurBox').style.visibility="visible";
+            document.getElementById('addCuisineBox').style.visibility="visible";
+          }
+          function showOrderFoodDetail(x)
+          {
+              idValue=x; 
+              document.getElementById("editFood_"+x).style.visibility = "visible";
+              document.getElementById('blurBox').style.visibility="visible";
           }
           function checkEmpty()
           {
@@ -251,5 +266,18 @@ $totalPokhara =  DB::table('restaurants')->where('city', '=', 'pokhara')->count(
               addLocation.submit();
             }
           }
+          function checkEmptyCusine()
+          {
+            var locationName = document.getElementById("cuisineName").value;
+            var locationImg = document.getElementById("cuisineImg").value;
+            if(locationImg=="" || locationName=="")
+            {
+              document.getElementById("errorMessage").style.display="block";
+            }
+            else{
+              addLocation.submit();
+            }
+          }
+          
  </script>
 @endsection

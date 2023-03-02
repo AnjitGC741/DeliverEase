@@ -1,6 +1,6 @@
 const inputValue=document.getElementsByTagName("input");
         console.log(inputValue);
-        for(var i=1;i<=3;i++)
+        for(var i=1;i<=4;i++)
         {
         inputValue[i].addEventListener('input',function()  {
                 if((inputValue[1].value.length > 0) && (inputValue[2].value.length > 0) && (inputValue[3].value.length > 0) && (inputValue[4].value.length > 0))
