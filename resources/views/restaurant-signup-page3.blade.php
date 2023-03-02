@@ -37,8 +37,9 @@
         <p class="text-3">Enter your restaurant login info</p>
         <form action="{{route('save-restaurant-loginInfo')}}" method="post" class="restaurant-register-form1">
          @csrf
-            <label>Restaurant id</label>
-            <input type="text" class="form-control" name="id" placeholder="Enter your restaurant id" readonly value="{{$value->id}}">
+            <label>Restaurant E-mail</label>
+            <input type="text" class="form-control" name="id" placeholder="Enter your restaurant id" hidden readonly value="{{$value->id}}">
+            <input type="email" class="form-control"   readonly value="{{$value->contactEmail}}">
 
             <div class="mb-3">
             <label>password</label>
