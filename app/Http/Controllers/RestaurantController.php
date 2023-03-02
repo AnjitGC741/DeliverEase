@@ -204,7 +204,9 @@ class RestaurantController extends Controller
     public function restaurantLoginSubmit(Request $request){
         $request->validate([
             'id'=> 'required|integer',
-            'password'=> 'required',
+            'password'=> ['required','string','confirmed',
+           // Password::min(8)->Letters()->numbers()->mixedCase()
+        ],
         ]);
     }
 }

@@ -102,3 +102,4 @@ Route::POST('/checkout/save-checkout-info',[MyCartController::class,'saveCheckou
 Route::post('/stripecontroller',[Stripe::class,"stripePayment"])->name("stripe.post");
 
 Route::get('/time',[RestaurantController::class,"time"])->name("time");
+Route::get('\Password',[PasswordController::class,"Password"]);
