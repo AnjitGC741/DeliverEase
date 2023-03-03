@@ -11,6 +11,7 @@ use App\Models\Restaurant;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\UserController;
@@ -28,12 +29,6 @@ use Carbon\Carbon;
 |
 */
 
-Route::get('/', function () {
-   
-    session()->put(['loginCustomer']);
-    session()->put(['loginCustomerId']);
-    return view('home');
-});
 Route::get('/login', function () {
     return view('user-login-page');
 });
@@ -53,6 +48,8 @@ Route::get('/restaurant-list', function () {
 Route::get('/restaurant-login', function () {
     return view('restaurant-login');
 });
+// for home
+Route::get('/',[HomeController::class,'home']);
 // for super admin
 Route::get('/dashboard',[SuperAdmin::class,'dashboard']);
 Route::post('/dashboard/add-location',[SuperAdmin::class,'addLocation'])->name('add-location');
