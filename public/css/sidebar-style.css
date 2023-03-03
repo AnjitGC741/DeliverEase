@@ -8398,10 +8398,17 @@ a[data-toggle="collapse"] {
   align-items: center;
   gap: 2rem;
 }
+.order-food-img{
+  background-color: #ced4da;
+  width: 12rem;
+  height: 10rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
 .order-food-img img{
-  width: 8rem;
-  height: 8rem;
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
 }
 .order-food-detail{
   display: flex;

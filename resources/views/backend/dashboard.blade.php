@@ -92,7 +92,8 @@ $totalPokhara =  DB::table('restaurants')->where('city', '=', 'pokhara')->count(
     </tr>
   </thead>
   <tbody>
-  @foreach($orderDetail as $order)
+   @if($orderDetail ->  isNotEmpty())
+   @foreach($orderDetail as $order)
     <tr>
       <th scope="row">{{$orderCount++}}</th>
       <td>{{$order->customerName}}</td>
@@ -115,6 +116,10 @@ $totalPokhara =  DB::table('restaurants')->where('city', '=', 'pokhara')->count(
       </td>
     </tr>
     @endforeach
+   @else
+    <h1>No Order Found</h1>
+   @endif
+
   </tbody>
 </table>
  </div>
@@ -125,26 +130,32 @@ $totalPokhara =  DB::table('restaurants')->where('city', '=', 'pokhara')->count(
     <button class="btn btn-success fs-5" style="height:30px;width:60px" onclick="showAddLocationBox();">Add</button>
     </div>
     <table class="table">
-  <thead class="thead-light">
-    <tr>
-      <th scope="col">Sn</th>
-      <th scope="col">City</th>
-      <th scope="col">Img</th>
-      <th scope="col">Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-  @foreach($locations as $location)
-    <tr>
-      <th scope="row">{{$sn++}}</th>
-      <td>{{$location->locationName}}</td>
-      <th scope="col"><img  width= 50 height=50  src="{{ asset('/storage/'.$location->locationImg) }}"  style="border-radius:50%"></th>
-      <td><button class="btn btn-danger">Remove</button></td>
-    </tr>
-    @endforeach
-  </tbody>
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Sn</th>
+          <th scope="col">City</th>
+          <th scope="col">Img</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if($locations ->isNotEmpty())
+      @foreach($locations as $location)
+        <tr>
+          <th scope="row">{{$sn++}}</th>
+          <td>{{$location->locationName}}</td>
+          <th scope="col"><img  width= 50 height=50  src="{{ asset('/storage/'.$location->locationImg) }}"  style="border-radius:50%"></th>
+          <td><button class="btn btn-danger">Remove</button></td>
+        </tr>
+        @endforeach
+        @else
+        <tr>
+          <td colspan="4"><h1 style="text-align: center;color:darkgray">No Location Found</h1></td>
+        </tr>
+        @endif
+      </tbody>
 </table>
-    </div>
+</div>
     <div class="for-cuisine">
     <div class="d-flex justify-content-between">
     <p>Cuisine</p>
@@ -160,19 +171,9 @@ $totalPokhara =  DB::table('restaurants')->where('city', '=', 'pokhara')->count(
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <th scope="col"><img  width= 50 height=50 src="/img/burger.jpg" style="border-radius:50%"></th>
-      <td><button class="btn btn-danger">Remove</button></td>
-      
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <th scope="col"><img  width= 50 height=50 src="/img/burger.jpg" style="border-radius:50%"></th>
-      <td><button class="btn btn-danger">Remove</button></td>
-    </tr>
+        <tr>
+          <td colspan="4"><h1 style="text-align: center;color:darkgray">No Cuisine Found</h1></td>
+        </tr>
   </tbody>
 </table>
     </div>
