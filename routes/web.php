@@ -48,8 +48,11 @@ Route::get('/restaurant-list', function () {
 Route::get('/restaurant-login', function () {
     return view('restaurant-login');
 });
-// for home
-Route::get('/',[HomeController::class,'home']);
+
+
+Route::post('/restaurant-login-submit',[RestaurantController::class,'restaurantLoginSubmit'])->name('restaurantLoginSubmit');
+
+
 // for super admin
 Route::get('/dashboard',[SuperAdmin::class,'dashboard']);
 Route::post('/dashboard/add-location',[SuperAdmin::class,'addLocation'])->name('add-location');
@@ -97,6 +100,3 @@ Route::get('/my-cart',[MyCartController::class,'myCart']);
 Route::get('/checkout/go-to-checkout',[MyCartController::class,'checkout'])->name('go-checkout-page');
 Route::POST('/checkout/save-checkout-info',[MyCartController::class,'saveCheckoutInfo'])->name('save-checkout');
 Route::post('/stripecontroller',[Stripe::class,"stripePayment"])->name("stripe.post");
-Route::get('/time',[RestaurantController::class,"time"])->name("time");
-// for Order
-Route::get('reject-food/{id}',[OrderDetailController::class,'rejectFood']);

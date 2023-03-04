@@ -71,12 +71,13 @@
                 </div>
                 @endif
                 <h2 class="mb-4 mt-4">Login</h1>
-                <form action="#" method="#">
+                <form action="{{route('restaurantLoginSubmit')}}" method="post">
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Restaurant id</label>
-                        <input type="email"  class="form-control" id="exampleInputEmail1"  name="email" value="{{old('customerName')}}">
+        <input type="email"  class="form-control" id="exampleInputEmail1"  name="email" value="{{old('customerName')}}">
                         <span style="color: red;"> @error('email'){{$message}}@enderror</span>
+
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
