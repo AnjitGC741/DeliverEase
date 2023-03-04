@@ -65,8 +65,12 @@
           </div>
           <div class="user-profile">
             <div class="user-text">
-             <h2>
-              K
+				@php
+				$data = $orderData->customerName;
+				$upperData =strtoupper($data);
+				@endphp
+             <h2 style="margin-top: 4px;">
+             {{$upperData[0]}}
              </h2> 
             </div>
           </div>

@@ -78,6 +78,64 @@
         </a>
       </div>
     </section>
-    <script src="./js/script.js"></script>
-    @endsection
-   
+    <section class="featured-restaurant">
+      <h2>Featured Restaurant</h2>
+      <div class="owl-carousel owl-theme">
+      @foreach ($restaurants as $restaurant)
+        <div class="restaurant-details for-home">
+           <a href="{{url('/restaurant-page/'.$restaurant->id)}}"> <button class="restaurant-btn">
+            <div class="restaurant-logo">
+            @if($restaurant->restaurantLogo == "")
+                <img src="/img/restLogo1.png" alt="">
+              @else
+              <img src="{{ asset('/storage/'.$restaurant->restaurantLogo) }}">
+              @endif
+            </div>
+            </button>
+            </a>
+            <hr>
+            <div class="restaurant-info">
+                <p class="restaurant-name">{{ $restaurant->restaurantName }}</p>
+                <p><ion-icon name="pizza" class="restaurant-list-icon1 for-margin" ></ion-icon>{{ $restaurant->cuisine }}</p>
+                <p><ion-icon name="location" class="restaurant-list-icon1 for-margin" ></ion-icon>{{$restaurant->street}},{{$restaurant->city}}</p>                
+                <p><ion-icon name="bag-handle" class="restaurant-list-icon1 for-margin"></ion-icon>{{$restaurant->service}}</p>
+                @if($restaurant->ratings->avg('rating') != 0)
+                <p><ion-icon name="star" style="color:yellow; font-size:16px;"></ion-icon><span style="margin-left: 5px;">{{$restaurant->ratings->avg('rating')}}</span></p>
+                @else
+                <p><ion-icon name="star" style="color:yellow; font-size:16px;"></ion-icon><span style="margin-left: 5px;">No rating</span></p>
+                @endif
+                <div class="for-status-favorite">
+                @if($restaurant->status == 1)
+                <p class="status open">Open</p>
+                @else
+                <p class="status close">Close</p>
+                @endif
+                <button class="favorite-btn"><ion-icon name="heart-outline"></ion-icon></button>
+                </div>
+            </div>
+        </div>
+    @endforeach      
+    </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+      $('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:4
+        }
+    }
+})
+  </script>
+  <script src="./js/script.js"></script>
+@endsection
