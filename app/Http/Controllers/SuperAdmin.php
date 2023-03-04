@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\customer;
 use App\Models\Location;
+use App\Models\Orderdetail;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,7 @@ class SuperAdmin extends Controller
             'restaurantCount' => $restaurantTotal,
             'customerCount' => $customerTotal,
             'locations' => Location::all(),
+            'orderDetail'=> Orderdetail::all(),
             'locationCount' => $locationTotal
         ];
     
@@ -41,5 +43,9 @@ class SuperAdmin extends Controller
         else{
             return  back();
         }
+    }
+    public function addCuisine(Request $req)
+    {
+        dd($req);
     }
 }

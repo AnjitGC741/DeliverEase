@@ -110,6 +110,6 @@
     
         </div>
      </section>
-     <script src="./js/forUserSignin.js"></script>
+     <script src="/js/forUserSignin.js"></script>
 </body>
 </html>

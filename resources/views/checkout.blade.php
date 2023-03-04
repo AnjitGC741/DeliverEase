@@ -78,7 +78,7 @@
           <div class="mb-3  w-75">
         
                         <label class="form-label fs-4" style="letter-spacing: 1px;">Date</label>
-                        <select id="dates" name="serviceDate1" onchange="changeDate();" class="form-select fs-4  @error('serviceDate') is-invalid @enderror" style="letter-spacing: 1px;">
+                        <select id="dates" name="serviceDate" onchange="changeDate();" class="form-select fs-4  @error('serviceDate') is-invalid @enderror" style="letter-spacing: 1px;">
                              <option value="">SELECT A DATE</option>
                         </select>
                         <span style="color: red;"> @error('serviceDate'){{$message}}@enderror</span>

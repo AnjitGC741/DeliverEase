@@ -11,6 +11,7 @@ use App\Models\Restaurant;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\stripecontroller;
@@ -57,6 +58,7 @@ Route::post('/restaurant-login-submit',[RestaurantController::class,'restaurantL
 // for super admin
 Route::get('/dashboard',[SuperAdmin::class,'dashboard']);
 Route::post('/dashboard/add-location',[SuperAdmin::class,'addLocation'])->name('add-location');
+Route::post('/dashboard/add-Cuisine',[SuperAdmin::class,'addCuisine'])->name('add-cuisine');
 //for restaurant
 Route::get('/restaurant-page/{id}',[RestaurantController::class,'userRestaurantPage']);
 Route::post('/restaurants-sort-asc',[RestaurantController::class,'sortRestaurantAsc'])->name('sort-restaurant-ascending');
@@ -100,6 +102,3 @@ Route::get('/my-cart',[MyCartController::class,'myCart']);
 Route::get('/checkout/go-to-checkout',[MyCartController::class,'checkout'])->name('go-checkout-page');
 Route::POST('/checkout/save-checkout-info',[MyCartController::class,'saveCheckoutInfo'])->name('save-checkout');
 Route::post('/stripecontroller',[Stripe::class,"stripePayment"])->name("stripe.post");
-
-Route::get('/time',[RestaurantController::class,"time"])->name("time");
-Route::get('\Password',[PasswordController::class,"Password"]);
