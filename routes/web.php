@@ -11,6 +11,7 @@ use App\Models\Restaurant;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\SuperAdmin;
@@ -100,3 +101,6 @@ Route::post('/stripecontroller',[Stripe::class,"stripePayment"])->name("stripe.p
 Route::get('/time',[RestaurantController::class,"time"])->name("time");
 // for Order
 Route::get('reject-food/{id}',[OrderDetailController::class,'rejectFood']);
+// for favorite
+Route::post('/remove-from-favorite',[FavoriteController::class,'removeFromFavorite'])->name('remove-from-favorite');
+Route::post('/add-to-favorite',[FavoriteController::class,'addToFavorite'])->name('add-to-favorite');
