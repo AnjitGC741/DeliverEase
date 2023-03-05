@@ -30,7 +30,7 @@ class CustomerController extends Controller
             {
                 session()->put('loginCustomer',$user->customerName);
                 session()->put('loginCustomerId',$user->id);
-                return view('home');
+                return redirect('/');
             }
             else
             {
@@ -69,7 +69,7 @@ class CustomerController extends Controller
         else{
             session()->put('loginCustomer',$save->customerName);
             session()->put('loginCustomerId',$save->id);
-            return view('home');
+            return redirect('/');
         }
     }
     public function logout(){

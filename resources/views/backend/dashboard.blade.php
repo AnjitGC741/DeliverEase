@@ -185,7 +185,7 @@ $totalPokhara =  DB::table('restaurants')->where('city', '=', 'pokhara')->count(
         const myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Jan','Feb','Mar','Apr','May','Jun','jul','Aug','Sep','Oct','Nov','Dec'],
+                labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
                 datasets: [{
                     label: '',
                     data: [ <?= $jan ?> , <?=$feb?>, <?= $mar ?>, <?= $apr ?>, <?= $may ?>, <?=$jun ?>,<?= $jul ?>, <?= $aug ?>,<?= $sep ?>, <?= $oct ?>, <?= $nov ?>, <?= $dec ?> ],

@@ -25,4 +25,8 @@ class customer extends Model
     {
     return $this->hasMany(Orderfood::class);
     }
+    public function favorites()
+    {
+    return $this->hasMany(Favorite::class);
+    }
 }
