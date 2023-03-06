@@ -3,7 +3,7 @@
 @section('other-content')
 <section class="hero-section">
         <div class="img-section">
-            <img src="./img/try1.jpg" alt="" />
+            <img src="./img/homePage.jpg" alt="" />
           </div>
           <div class="linear"></div>
           <div class="main-box">
@@ -27,7 +27,7 @@
     </section>
     <div class="browse-by-cuisine">
       <h2>Browse by cuisine</h2>
-      <div class="cuisine-links">
+      <!-- <div class="cuisine-links">
         <a href="#">
           <div class="cuisine-img-and-cuisine-name">
               <div class="cuisine-img">
@@ -76,7 +76,7 @@
               <p class="cuisine-name">Burger</p>
           </div>
         </a>
-      </div>
+      </div> -->
    </div>
     <section class="featured-restaurant">
       <h2>Featured Restaurant</h2>
@@ -121,44 +121,25 @@
                 $exists = DB::table('favorites')->where('restaurant_id', $id)->where('customer_id', $userId)->exists();
                 @endphp
                 @if($exists)
-                <form id="myForm" method="POST" action="{{ route('remove-from-favorite') }}">
+                <form id="removeFromFavorite" method="POST" action="{{ route('remove-from-favorite') }}">
                   @csrf
-                <input type="hidden" id="restaurant_id" name="restaurantId" value="{{ $restaurant->id }}">
-                <button type="submit" class="favorite-btn" onclick="submitForm()" style="color: red;">
+                <input type="hidden"  name="restaurantId" value="{{ $restaurant->id }}">
+                <button type="submit" class="favorite-btn" onclick="removeFromFavorite()" style="color: red;">
                 <ion-icon name="heart"></ion-icon>
                 </button>
             </form>
-
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-              <script>
-                  function submitForm() {
-                var formData = $('#myForm').serialize();
-                $.ajax({
-                    url: '{{ route("remove-from-favorite") }}',
-                    type: 'POST',
-                    data: formData,
-                    dataType: 'json',
-                    success: function(response) { 
-                    alert(response.message);
-                    location.reload()
-                }
-
-                });
-            }
-              </script>
-
-
                 @else
-                <form id="add-favorite-form">
+                <form id="addToFavorite" method="POST" action="{{ route('add-to-favorite') }}">
+                  @csrf
                   <input type="text" name="restaurantId" hidden value="{{$restaurant->id}}">
-                  <button class="favorite-btn"><ion-icon name="heart-outline"></ion-icon></button>
+                  <button class="favorite-btn" onclick="addToFavorite()"><ion-icon name="heart-outline"></ion-icon></button>
                 </form>
                 @endif
                 @else
-                <form id="add-favorite-form">
+                <form id="addToFavorite" method="POST" action="{{ route('add-to-favorite') }}">
+                  @csrf
                   <input type="text" name="restaurantId" hidden value="{{$restaurant->id}}">
-                  <button class="favorite-btn"><ion-icon name="heart-outline"></ion-icon></button>
+                  <button class="favorite-btn" onclick="addToFavorite()"><ion-icon name="heart-outline"></ion-icon></button>
                 </form>
                 @endif
                 </div>
@@ -173,47 +154,54 @@
     <section class="customer-review">
 
     </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
+   <script>
       $('.owl-carousel').owlCarousel({
-    loop:true,
-    margin:10,
-    nav:true,
-    responsive:{
-        0:{
-            items:1
-        },
-        600:{
-            items:3
-        },
-        1000:{
-            items:4
-        }
-    }
-})
+              loop:true,
+              margin:10,
+              nav:true,
+              responsive:{
+                  0:{
+                      items:1
+                  },
+                  600:{
+                      items:3
+                  },
+                  1000:{
+                      items:4
+                  }
+              }
+          })
+          function removeFromFavorite() {
+                var formData = $('#removeFromFavorite').serialize();
+                $.ajax({
+                    url: '{{ route("remove-from-favorite") }}',
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    success: function(response) { 
+                    alert(response.message);
+                    location.reload()
+                }
+
+                });
+            }
+            function addToFavorite() {
+                var formData = $('#addToFavorite').serialize();
+                $.ajax({
+                    url: '{{ route("add-to-favorite") }}',
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    success: function(response) { 
+                    alert(response.message);
+                    location.reload()
+                }
+
+                });
+            }        
   </script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                 <script>
-                  $(document).ready(function() {
-                      $('#add-favorite-form').submit(function(e) {
-                          e.preventDefault();
-
-                          var formData = $(this).serialize(); 
-
-                          $.ajax({
-                              url: "{{route('add-to-favorite')}}",
-                              type: "POST",
-                              data: formData,
-                              success: function(response) {
-                                
-                              },
-                              error: function(xhr) {
-                                 
-                              }
-                          });
-                      });
-                  });
-                </script>
   <script src="./js/script.js"></script>
 @endsection
