@@ -46,5 +46,77 @@ a{
 }
 .user-section-div
 {
-    height: 100px;
+    min-height: 30rem !important; 
+   position: relative;
+}
+.user-profile{
+    position: absolute;
+    display: none;
+}
+.user-order-history{
+    position: absolute;
+    display: none;
+}
+/* user favorite */
+.user-favorite{
+    margin-top: 20px;
+    width: 100%;
+    position: absolute;
+    display: block;
+}
+.user-favorite h2{
+    color: rgb(76, 76, 76);
+    font-weight: 500;
+    letter-spacing: 0.8px;
+}
+.user-favorite-main-div{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5rem;
+}
+.favorite-restaurant-list{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+.favorite-restaurant-logo{
+    overflow: hidden;
+    width: 5rem;
+    height: 5rem;
+    background-color: rgb(237, 237, 237);
+    border-radius: 10px;
+}
+.favorite-restaurant-logo img{
+  height: 100%;
+  width: 100%;
+}
+.favorite-restaurant-detial{
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    justify-content: left;
+}
+.favorite-restaurant-name{
+    font-size: 1.4rem;
+    letter-spacing: 0.8px;
+}
+.favorite-restaurant-address-and-cuisine{
+    font-size: 1rem;
+    color: rgb(142, 142, 142);
+    letter-spacing: 0.8px;
+
+}
+.favorite-remove-btn{
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-radius:50% ;
+    margin-left: 1rem;
+    font-size: 1.8rem;
+    padding: 2px 3px;
+    display: flex;
+    align-items: center;
+}
+.favorite-remove-btn:hover{
+    background-color: rgb(233, 233, 233);
 }
