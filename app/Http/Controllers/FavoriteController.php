@@ -16,16 +16,17 @@ class FavoriteController extends Controller
 ]);
 
    }
+   
    public function addToFavorite(Request $req)
    {
     $save =Favorite::create([
         'restaurant_id' => $req->restaurantId,
         'customer_id'=> session()->get('loginCustomerId'),
     ]);  
-         if(!$save)
-         {
+    if(!$save)
+    {
              dd("fail");
-         }
+    }
          else{
             return response()->json([
                 'status' => 'success',
