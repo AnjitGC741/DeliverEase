@@ -38,4 +38,16 @@ class MyCartController extends Controller
     {
         return view('my-cart');
     }
-}
+    public function updateFoodQuantity(Request $req)
+    {
+        $changeQuantity = MyCart::find($req->cartId);
+        $changeQuantity->foodQuantity = $req->foodQuantity;
+        $changeQuantity->save();
+        return back();
+    }
+    public function deleteFood($id)
+    {
+        dd("It worked");
+    }
+} 
+?>

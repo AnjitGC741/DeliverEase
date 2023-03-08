@@ -87,3 +87,5 @@ Route::get('/contact',[ContactController::class,'index'])->name('contact');
 // for Add to cart
 Route::post('/restaurant-page/addToCart',[MyCartController::class,'addToCart'])->name('add-to-cart');
 Route::post('/my-cart',[MyCartController::class,'myCart']);
+Route::post('/my-cart/update-food-quantity',[MyCartController::class,'updateFoodQuantity'])->name('update-food-quantity');
+Route::post('/my-cart/delete-food/{id}',[MyCartController::class,'deleteFood']);

@@ -19,14 +19,19 @@
       @if($newValue->my_carts()->count() > 0)
       @foreach ($newValue->my_carts as $cart)
       <div class="for-fixed-edit-food hidden" id="editQuantity_{{$cart->id}}">
+    
             <p class="my-cart-text">Edit food quanitity</p>
             <hr style="margin-bottom: 20px;">
             <div class="for-changing-quantity">
+              <form action="{{route('update-food-quantity')}}" method="POST">
+                @csrf
+               <input type="text" hidden value="{{$cart->id}}" name="cartId">
               <button class="btn btn-danger" onclick="minus();">-</button>
               <input type="text" class="form-control" name="foodQuantity" id="foodQuantity" value="{{$cart->foodQuantity}}">
               <button class="btn btn-success" onclick="plus();">+</button>
             </div>
-            <button class="btn btn-warning w-100">Update</button>
+            <button type="submit" class="btn btn-warning w-100">Update</button>
+              </form>
        </div>
        @endforeach
        @endif
@@ -136,6 +141,7 @@
             <div class="for-food-list">
               <form action="{{route('add-to-cart')}}" method="POST">
                 @csrf
+        
                 <input type="text" hidden name="foodId" value="{{$food->id}}">
                 <input type="text" hidden name="restaurantId" value="{{$value->id}}">
                     <div class="for-food-img">
@@ -150,9 +156,8 @@
                           $userId = session()->get('loginCustomerId');
                           $exists = DB::table('my_carts')->where('food_id', $id)->where('customer_id', $userId)->exists();
                         @endphp
-
                         @if($exists)
-                        <button type="submit"  class="added-to-cart-btn">Remove from Cart</button>
+                        <button  type= "submit" class="add-to-cart-btn">Remove from Cart</button>
                         @else
                         <button type="submit"  class="add-to-cart-btn">Add To Cart</button>
                         @endif
