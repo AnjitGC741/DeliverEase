@@ -17,4 +17,16 @@ class customer extends Model
     {
     return $this->hasMany(MyCart::class);
     }
+    public function orderdetails()
+    {
+    return $this->hasMany(Orderdetail::class);
+    }
+    public function orderfoods()
+    {
+    return $this->hasMany(Orderfood::class);
+    }
+    public function favorites()
+    {
+    return $this->hasMany(Favorite::class);
+    }
 }

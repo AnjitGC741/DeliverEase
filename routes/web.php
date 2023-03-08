@@ -11,7 +11,14 @@ use App\Models\Restaurant;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\stripecontroller;
+use Carbon\Carbon;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,14 +30,6 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    session()->put(['loginCustomer']);
-    session()->put(['loginCustomerId']);
-    return view('home');
-});
-Route::get('/dashboard', function () {
-    return view('backend/dashboard');
-});
 Route::get('/login', function () {
     return view('user-login-page');
 });
@@ -50,10 +49,19 @@ Route::get('/restaurant-list', function () {
 Route::get('/restaurant-login', function () {
     return view('restaurant-login');
 });
+// for home
+Route::get('/',[HomeController::class,'home']);
+// for super admin
+Route::get('/dashboard',[SuperAdmin::class,'dashboard']);
+Route::post('/dashboard/add-location',[SuperAdmin::class,'addLocation'])->name('add-location');
+Route::post('/dashboard/add-Cuisine',[SuperAdmin::class,'addCuisine'])->name('add-cuisine');
 //for restaurant
 Route::get('/restaurant-page/{id}',[RestaurantController::class,'userRestaurantPage']);
 Route::post('/restaurants-sort-asc',[RestaurantController::class,'sortRestaurantAsc'])->name('sort-restaurant-ascending');
 Route::post('/restaurants-sort-desc',[RestaurantController::class,'sortRestaurantDesc'])->name('sort-restaurant-descending');
+Route::post('/close-restaurant',[RestaurantController::class,'closeRestaurant'])->name('close-restaurant');
+Route::post('/open-restaurant',[RestaurantController::class,'openRestaurant'])->name('open-restaurant');
+Route::get('/logout-restaurant',[RestaurantController::class,'logoutRestaurant']);
 Route::get('/restaurant-admin-page/{id}',[RestaurantController::class,'adminRestaurantPage']);
 Route::get('/restaurant-signup2/{id}',[RestaurantController::class,'findRestaurantName']);
 Route::get('/restaurant-signup3/{id}',[RestaurantController::class,'findRestaurantName1']);
@@ -86,6 +94,14 @@ Route::post('/send-message',[ContactController::class,'sendEmail'])->name('conta
 Route::get('/contact',[ContactController::class,'index'])->name('contact');
 // for Add to cart
 Route::post('/restaurant-page/addToCart',[MyCartController::class,'addToCart'])->name('add-to-cart');
-Route::post('/my-cart',[MyCartController::class,'myCart']);
 Route::post('/my-cart/update-food-quantity',[MyCartController::class,'updateFoodQuantity'])->name('update-food-quantity');
-Route::post('/my-cart/delete-food/{id}',[MyCartController::class,'deleteFood']);
+Route::get('/my-cart',[MyCartController::class,'myCart']);
+Route::get('/checkout/go-to-checkout',[MyCartController::class,'checkout'])->name('go-checkout-page');
+Route::POST('/checkout/save-checkout-info',[MyCartController::class,'saveCheckoutInfo'])->name('save-checkout');
+Route::post('/stripecontroller',[Stripe::class,"stripePayment"])->name("stripe.post");
+Route::get('/time',[RestaurantController::class,"time"])->name("time");
+// for Order
+Route::get('reject-food/{id}',[OrderDetailController::class,'rejectFood']);
+// for favorite
+Route::post('/remove-from-favorite',[FavoriteController::class,'removeFromFavorite'])->name('remove-from-favorite');
+Route::post('/add-to-favorite',[FavoriteController::class,'addToFavorite'])->name('add-to-favorite');

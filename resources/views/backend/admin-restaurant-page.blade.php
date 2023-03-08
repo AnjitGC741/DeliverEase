@@ -1,5 +1,6 @@
 @php
   $sn=1;
+  $orderCount =1;
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +28,7 @@
 <body>
 <div class="blur-box" id="blurBox" onclick="hideAll();">
 </div>
-@foreach ($value->food as $food)
+@foreach($value->food as $food)
 <div class="editFood" id="editFood_{{$food->id}}" >
     <h2>Edit food information</h2>
     <form action= "{{route('update-food-Info')}}" method="POST" enctype="multipart/form-data">
@@ -260,8 +261,29 @@
             <li class="secondary-navbar-link"><button onclick="displayUnavailableFoodSection();">unavailable Foods</button></li>
             <li class="secondary-navbar-link"><button  onclick="displayOrderSection();">Orders</button></li>
             <li class="secondary-navbar-link"><button  onclick="displayAnalysisSection();">Analysis</button></li>
+            @if($value->status == 1)
+            <li style="list-style: none;">
+            <form action="{{route('close-restaurant')}}" method="POST">
+            @csrf
+            <input type="text" hidden name="id" value="{{$value->id}}">
+            <input type="text" hidden name="status" value="0">
+            <button type="submit" class="btn btn-danger fs-4">Close Restaurant</button>
+            </form>
+            </li>
+             @else
+            <li style="list-style: none;"> 
+             <form action="{{route('open-restaurant')}}" method="POST">
+             @csrf
+            <input type="text" hidden name="id" value="{{$value->id}}">
+            <input type="text" hidden name="status" value="1">
+            <button type="submit" class="btn btn-success fs-4">Open Restaurant</button>
+            </form>
+            </li>
+            @endif
+            <li style="list-style: none;"><a href="{{url('logout-restaurant')}}"><button class="btn btn-danger fs-4">Logout</button></a></li>
            </ul>
         </div>
+
 </section>
 <section class="dynamic-div">
     <div class="food-section" id="food-section">
@@ -297,7 +319,7 @@
           <td class="fs-3" style="padding-top:40px;">{{$food->price}}</td>
           <td class="fs-3" style="padding-top:40px;">{{$food->quantity}}</td>
           <td style="padding-top:40px;">
-          <a href="{{url('make-food-unavailable/'.$food->id)}}"><button class="btn btn-primary fs-4">Make unavailable</button></a>
+          <a href="{{url('make-food-unavailable/'.$food->id)}}"><button class="btn btn-primary fs-4">Make Unavailable</button></a>
           <button id="{{$food->id}}" onclick="openFoodEditBox(this.id);" class="btn btn-warning fs-4" style="margin-left:10px">Edit</button></td>
         </tr>
         @endforeach
@@ -358,7 +380,52 @@
       </div>
       <div class="order-list-section" id="order-section">
        <h1>Your Orders</h1> 
+       <div class="food-order-lists">
+       @foreach ($order as $orderData)
+<div class="food-order-box">
+        <div class="order-time-and-user-profile">
+          <div class="order-time">
+            <p class="order-count">Order:{{$orderCount++}}</p>
+            <p class="food-delivery-time">{{$orderData->serviceDate}},<span style="margin-left: 5px;">{{$orderData->serviceTime}}</span></p>
+            <p class="contact-name">{{$orderData->customerName}},<span style="margin-left: 5px;">{{$orderData->contactNumber}}</span></p>
+          </div>
+          <div class="user-profile">
+            <div class="user-text">
+              <h2>
+                K
+              </h2> 
+            </div>
+          </div>
+        </div>
+  @foreach ($orderData->orderfoods as $orderFood)
+  <div class="order-food-section">
+    <div class="order-food-img">
+      <img src="{{ asset('/storage/'.$orderFood->orderFoodImg) }}">
+    </div>
+    <div class="order-food-detail">
+      <p class="order-food-name">{{$orderFood -> orderFoodName}}</p>
+      <p class="order-food-type">Veg</p>
+      <div class="order-food-quantity-price">
+        <p class="order-food-price">Rs {{$orderFood ->orderFoodPrice}}</p>
+        <p class="order-food-quantity">Qty: {{$orderFood ->orderFoodQuantity}}</p>
       </div>
+    </div>
+  </div>
+  @endforeach
+  <div class="total-decision-section">
+    <div class="iteam-total">
+      <p class="total-iteam">x2</p>
+      <p class="total">Rs 100</p>
+    </div>
+    <div class="decision">
+      <a href="{{url('reject-food/'.$orderData->id)}}"><button class="btn btn-danger" style="font-size: 14px;">Reject</button></a>
+      <button class="btn btn-success" style="font-size: 14px;margin-left: 5px;">Deliver</button>
+      </div>
+    </div>
+  </div>
+  @endforeach
+    </div>
+  </div>
       <div class="analysis-section" id="analysis-section">
        <h1>Your restaurant Info</h1> 
       </div>

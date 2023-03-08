@@ -386,3 +386,144 @@ th{
   font-size: 2.4rem;
   letter-spacing: 1px;
 }
+
+/* food order box */
+.food-order-lists{
+  margin: 0 auto;
+  background-color: #F5F4F7;
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.food-order-box{
+  width: 38rem;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  padding: 2rem;
+  margin-bottom: 5rem;
+}
+.order-time-and-user-profile{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.order-time{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 0.2rem;
+}
+.order-count{
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 0!important;
+}
+.contact-name{
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #8a8988;
+  margin-bottom: 0!important;
+}
+.contact-info{
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #8a8988;
+  margin-bottom: 0!important;
+}
+.food-delivery-time{
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #8a8988;
+  margin-bottom: 0!important;
+}
+.user-text{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: darkgoldenrod;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+}
+.user-text h2{
+  color: white;
+  font-size: 2.8rem;
+}
+.order-food-section{
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.order-food-img img{
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+}
+.order-food-detail{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  width: 100%;
+  border-bottom:1px solid  #b6b6b6 ;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  margin-bottom: 1rem;
+}
+.order-food-name{
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0!important;
+  letter-spacing: 1px;
+  gap: 0.5rem;
+}
+.order-food-type{
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #5c5c5c;
+  margin-bottom: 0.3rem!important;
+}
+.order-food-quantity-price{
+  display: flex;
+  gap: 8rem;
+}
+.order-food-price{
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0!important;
+  letter-spacing: 1px;
+}
+.order-food-quantity{
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0!important;
+  letter-spacing: 1px;
+}
+.total-decision-section{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.iteam-total{
+  margin-left: 2rem;
+  padding-top: 1rem;
+}
+.total-iteam{
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #8a8988;
+  margin-bottom: 0!important;
+}
+.total{
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 0!important;
+}

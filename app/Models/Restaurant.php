@@ -17,9 +17,21 @@ class Restaurant extends Model
     {
     return $this->hasMany(Rating::class);
     }
+    public function favorites()
+    {
+    return $this->hasMany(Favorite::class);
+    }
     public function my_carts()
     {
     return $this->hasMany(MyCart::class);
+    }
+    public function orderdetails()
+    {
+    return $this->hasMany(Orderdetail::class);
+    }
+    public function orderfoods()
+    {
+    return $this->hasMany(Orderfood::class);
     }
 }
 

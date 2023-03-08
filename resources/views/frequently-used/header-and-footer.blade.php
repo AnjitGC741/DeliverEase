@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- font awesome links -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
@@ -20,6 +22,7 @@
     <link rel="stylesheet" href="/css/restaurant-list.css">
     <link rel="stylesheet" href="/css/about-us.css">
     <link rel="stylesheet" href="/css/user-profile.css">
+    <link rel="stylesheet" href="/css/checkout.css">
     <title>@yield('title')</title>
     <link rel="shortcut icon" href="/favicon/favicon1.ico" type="image/x-icon">
 
@@ -53,16 +56,16 @@
         <button onclick="toggleMenu();" class="user-btn" style="color: #fff; font-size:20px; font-family:'Poppins', sans-serif; ">{{$value[0]}}</button>
       </div>
     </div>
-    <div class="sub-menu-wrap" id="subMenu">
-      <div class="sub-menu">
+    <div class="sub-menu-wrap1" id="subMenu">
+      <div class="sub-menu1">
         <div class="user-info">
           <div class="user-btn2"><p style="font-size: 2rem;color: white;font-weight: 400;">{{$value[0]}}</p></div>
           <p>{{session()->get('loginCustomer')}}</p>
         </div>
         <hr>
-          <a href="{{url('/user-profile')}}" class="sub-menu-link"><ion-icon name="person-outline"></ion-icon> <p>Profile</p></a>
-          <a href="#" class="sub-menu-link"><ion-icon name="heart-outline"></ion-icon><p>Favourite</p> </a>
-          <a href="{{url('/logout')}}" class="sub-menu-link"><ion-icon name="log-out-outline"></ion-icon><p>Log out</p> </a>
+          <a href="{{url('/user-profile')}}" class="sub-menu-link1"><ion-icon name="person-outline"></ion-icon> <p>Profile</p></a>
+          <a href="#" class="sub-menu-link1"><ion-icon name="heart-outline"></ion-icon><p>Favourite</p> </a>
+          <a href="{{url('/logout')}}" class="sub-menu-link1"><ion-icon name="log-out-outline"></ion-icon><p>Log out</p> </a>
       </div>
     </div>
     @endif

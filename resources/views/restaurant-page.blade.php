@@ -18,8 +18,7 @@
 @if((session()->get('loginCustomerId')) != null)
       @if($newValue->my_carts()->count() > 0)
       @foreach ($newValue->my_carts as $cart)
-      <div class="for-fixed-edit-food hidden" id="editQuantity_{{$cart->id}}">
-    
+      <div class="for-fixed-edit-food" id="editQuantity_{{$cart->id}}">
             <p class="my-cart-text">Edit food quanitity</p>
             <hr style="margin-bottom: 20px;">
             <div class="for-changing-quantity">
@@ -65,6 +64,17 @@
           @endforeach
       </table>
       <p>Grand total: {{ collect($newValue->my_carts)->sum('total')}}</p>
+      @if((collect($newValue->my_carts)->sum('total'))>=$value->minimumOrder)
+      <form action="{{route('go-checkout-page')}}" method="get">
+    @csrf
+    <input type="text" hidden value="{{$value->id}}" name="restaurantId">
+    <button type="submit" class="btn btn-warning fs-4">Proceed to Checkout</button>
+</form>
+
+
+      @else
+      <p class="message">Subtotal must exceed Rs. {{$value->minimumOrder}} for delivery orders.</p>
+      @endif
       @else
       <div class="for-empty-cart">
       <i class="fa fa-shopping-basket" style="font-size:48px;color:gray;"></i>
@@ -148,13 +158,18 @@
                         <img src="{{ asset('/storage/'.$food->foodImg) }}" alt="">
                     </div>
                     <div class="for-food-description">
+                    <!-- @php
+                        $id = $food->restaurant_id;
+                        $restaurant = DB::table('restaurants')->where('id', $id)->first();
+                    @endphp
+                    <p>{{ $restaurant->restaurantName }}</p> -->
                         <p class="food-name">{{$food->foodName}}</p>
                         <p class="food-price">Rs {{$food->price}} per {{$food->quantity}}</p>
                         @if((session()->get('loginCustomerId')) != null)
                         @php
-                         $id = $food->id;
-                          $userId = session()->get('loginCustomerId');
-                          $exists = DB::table('my_carts')->where('food_id', $id)->where('customer_id', $userId)->exists();
+                        $id = $food->id;
+                        $userId = session()->get('loginCustomerId');
+                        $exists = DB::table('my_carts')->where('food_id', $id)->where('customer_id', $userId)->exists();
                         @endphp
                         @if($exists)
                         <button  type= "submit" class="add-to-cart-btn">Remove from Cart</button>
