@@ -6,7 +6,7 @@
 @endphp
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div class="blur-box hidden" id="blurBox" onclick="hideAll();">
+<div class="blur-box1 hidden" id="blurBox" onclick="hideAll();">
 </div>
 <div class="for-fixed-cart">
   <button onclick="changeVisibilityCartBox();"><ion-icon name="bag-handle-outline"></ion-icon></button>
@@ -22,12 +22,13 @@
             <p class="my-cart-text">Edit food quanitity</p>
             <hr style="margin-bottom: 20px;">
             <div class="for-changing-quantity">
-              <form action="{{route('update-food-quantity')}}" method="POST">
+              <form action="{{route('update-food-quantity')}}" class="for-changing-quantity" method="POST">
                 @csrf
+                <input type="number" hidden value="{{$cart->foodPrice}}" name="price">
                <input type="text" hidden value="{{$cart->id}}" name="cartId">
-              <button class="btn btn-danger" onclick="minus();">-</button>
+              <button type="button" class="btn btn-danger" onclick="minus();">-</button>
               <input type="text" class="form-control" name="foodQuantity" id="foodQuantity" value="{{$cart->foodQuantity}}">
-              <button class="btn btn-success" onclick="plus();">+</button>
+              <button type="button" class="btn btn-success" onclick="plus();">+</button>
             </div>
             <button type="submit" class="btn btn-warning w-100">Update</button>
               </form>
@@ -172,7 +173,7 @@
                         $exists = DB::table('my_carts')->where('food_id', $id)->where('customer_id', $userId)->exists();
                         @endphp
                         @if($exists)
-                        <button  type= "submit" class="add-to-cart-btn">Remove from Cart</button>
+                        <button  type= "submit" class="added-to-cart-btn">Remove from Cart</button>
                         @else
                         <button type="submit"  class="add-to-cart-btn">Add To Cart</button>
                         @endif

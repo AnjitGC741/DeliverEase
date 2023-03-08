@@ -27,7 +27,7 @@
     </section>
     <div class="browse-by-cuisine">
       <h2>Browse by cuisine</h2>
-      <!-- <div class="cuisine-links">
+      <div class="cuisine-links">
         <a href="#">
           <div class="cuisine-img-and-cuisine-name">
               <div class="cuisine-img">
@@ -76,7 +76,7 @@
               <p class="cuisine-name">Burger</p>
           </div>
         </a>
-      </div> -->
+      </div>
    </div>
     <section class="featured-restaurant">
       <h2>Featured Restaurant</h2>
@@ -127,7 +127,7 @@
                 <button type="submit" class="favorite-btn" onclick="removeFromFavorite()" style="color: red;">
                 <ion-icon name="heart"></ion-icon>
                 </button>
-            </form>
+                </form>
                 @else
                 <form id="addToFavorite" method="POST" action="{{ route('add-to-favorite') }}">
                   @csrf

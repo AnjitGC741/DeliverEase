@@ -75,7 +75,7 @@ class CustomerController extends Controller
     public function logout(){
         session::pull('loginCustomer');
         session::pull('loginCustomerId');
-        return back();
+        return redirect('/');
     }
     public function redirect()
     {

@@ -44,6 +44,7 @@ function openFoodEditBox(x)
       document.getElementById("editQuantity_"+idValue).style.display = "none";
     }
     document.getElementById("editQuantity_"+x).style.display = "block";
+    
   }
   else
   {
@@ -53,5 +54,6 @@ function openFoodEditBox(x)
     }
     document.getElementById("editQuantity_"+x).style.display = "none";
   }
+  document.getElementById("funnyBox").style.visibility="hidden";
    idValue=x; 
 }
