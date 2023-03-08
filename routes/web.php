@@ -94,6 +94,7 @@ Route::post('/send-message',[ContactController::class,'sendEmail'])->name('conta
 Route::get('/contact',[ContactController::class,'index'])->name('contact');
 // for Add to cart
 Route::post('/restaurant-page/addToCart',[MyCartController::class,'addToCart'])->name('add-to-cart');
+Route::post('/my-cart/update-food-quantity',[MyCartController::class,'updateFoodQuantity'])->name('update-food-quantity');
 Route::get('/my-cart',[MyCartController::class,'myCart']);
 Route::get('/checkout/go-to-checkout',[MyCartController::class,'checkout'])->name('go-checkout-page');
 Route::POST('/checkout/save-checkout-info',[MyCartController::class,'saveCheckoutInfo'])->name('save-checkout');

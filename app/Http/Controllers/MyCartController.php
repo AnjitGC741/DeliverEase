@@ -50,6 +50,13 @@ class MyCartController extends Controller
     {
         return view('my-cart');
     }
+    public function updateFoodQuantity(Request $req)
+    {
+        $changeQuantity = MyCart::find($req->cartId);
+        $changeQuantity->foodQuantity = $req->foodQuantity;
+        $changeQuantity->save();
+        return back();
+    }
     public function checkout(Request $req)
     {
         $data = Restaurant::find($req->restaurantId);
@@ -103,3 +110,4 @@ class MyCartController extends Controller
          return redirect('/');
     }
 }
+?>
