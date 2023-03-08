@@ -54,6 +54,7 @@ class MyCartController extends Controller
     {
         $changeQuantity = MyCart::find($req->cartId);
         $changeQuantity->foodQuantity = $req->foodQuantity;
+        $changeQuantity->total = $req->foodQuantity * $req->price;
         $changeQuantity->save();
         return back();
     }

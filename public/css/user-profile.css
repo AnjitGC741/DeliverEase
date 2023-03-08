@@ -1,4 +1,13 @@
 
+.blur-box{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 150vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 98;
+    visibility: hidden;
+  }
 .user-section
 {
     max-width: 130rem;
@@ -31,21 +40,52 @@
 }
 .user-section-div
 {
-    min-height: 30rem !important; 
+    min-height: 50rem !important; 
    position: relative;
 }
+/* user profile */
 .user-profile{
     margin-top: 20px;
     width: 100%;
     position: absolute;
-    display: none;
+    display: block;
+}
+.user-profile h2{
+  color: rgb(76, 76, 76);
+  font-weight: 500;
+  letter-spacing: 0.8px;
+}
+.user-profile-main-div{
+    max-width:40rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.user-img h1{
+  font-size: 5rem;
+  background-color: rgb(173, 153, 37);
+  border-radius: 50%;
+  width: 80px;
+  padding: 10px 0;
+  text-align: center;
+  color: white;
+}
+.user-information{
+  width: 100%;
+  margin-top: 20px;
+}
+.saveCancelBtn{
+  visibility: hidden;
+  display: flex!important;
+  gap: 20px;
 }
 /* user purchase history */
 .user-order-history{
     margin-top: 20px;
     width: 100%;
     position: absolute;
-    display: block;
+    display: none;
 }
 .user-order-history h2{
     color: rgb(76, 76, 76);
@@ -117,3 +157,125 @@
 .favorite-remove-btn:hover{
     background-color: rgb(233, 233, 233);
 }
+/* popup box */
+.view-order-detail{
+    border:1px solid #939292;
+    position: fixed;
+    z-index: 99;
+    margin:180px 600px;
+    background-color: #ffffff;
+    visibility: hidden;
+  }
+  .food-order-box{
+    width: 38rem;
+    padding: 2rem;
+  }
+  .order-time-and-user-profile{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .order-time{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    gap: 0.2rem;
+  }
+  .order-count{
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 0!important;
+  }
+  .contact-name{
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #8a8988;
+    margin-bottom: 0!important;
+  }
+  .contact-info{
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #8a8988;
+    margin-bottom: 0!important;
+  }
+  .food-delivery-time{
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #8a8988;
+    margin-bottom: 0!important;
+  }
+  .user-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: darkgoldenrod;
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+  }
+  .user-text h2{
+    color: white;
+    font-size: 2.8rem;
+  }
+  .order-food-section{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .order-food-img{
+    background-color: #ced4da;
+    width: 12rem;
+    height: 10rem;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .order-food-img img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+  .order-food-detail{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 100%;
+    border-bottom:1px solid  #b6b6b6 ;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .order-food-name{
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0!important;
+    letter-spacing: 1px;
+    gap: 0.5rem;
+  }
+  .order-food-type{
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #5c5c5c;
+    margin-bottom: 0.3rem!important;
+  }
+  .order-food-quantity-price{
+    display: flex;
+    gap: 8rem;
+  }
+  .order-food-price{
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0!important;
+    letter-spacing: 1px;
+  }
+  .order-food-quantity{
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0!important;
+    letter-spacing: 1px;
+  }

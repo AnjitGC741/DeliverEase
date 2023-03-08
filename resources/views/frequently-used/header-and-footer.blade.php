@@ -89,10 +89,12 @@
                 <div class="footer-col">
                     <h4>Cities</h4>
                     <ul>
-                        <li><a href="#">Kathmandu</a></li>
-                        <li><a href="#">Bhaktapur</a></li>
-                        <li><a href="#">Lalitpur</a></li>
-                        <li><a href="#">Pokhara</a></li>
+                    @php
+                    $locations = App\Models\Location::all();
+                    @endphp
+                    @foreach($locations as $location)
+                        <li><a href="#">{{$location->locationName}}</a></li>
+                    @endforeach
                     </ul>
                 </div>
                 <div class="footer-col">
