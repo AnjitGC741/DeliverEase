@@ -41,11 +41,11 @@
     </div>
   <p>Add Cuisine</p>
   <hr>
-  <form action="#" enctype="multipart/form-data" method="POST" id="addCuisine">
+  <form action="{{route('add-cuisine')}}" enctype="multipart/form-data" method="POST" id="addCuisine">
 	@csrf
       <div class="mb-3">
       <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Cuisine Name</label>
-      <input  style="letter-spacing: 0.8px;font-size:15px;height:40px;" type="text" class="form-control" name="cuisineName" id="locationName">
+      <input  style="letter-spacing: 0.8px;font-size:15px;height:40px;" type="text" class="form-control" name="cuisineName" id="cuisineName">
       </div>
       <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Cuisine Image</label>

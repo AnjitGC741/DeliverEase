@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cuisine;
 use App\Models\customer;
 use App\Models\Food;
 use App\Models\OrderDetail;
@@ -31,6 +32,13 @@ class RestaurantController extends Controller
             ->get();
 
         return view('restaurant-list', compact('restaurants'));
+    }
+    public function browseByCuisine($cuisine)
+    {
+        $restaurants = Restaurant::where('restaurantName', 'like', '%' . $cuisine . '%')
+        ->orWhere('cuisine', 'like', '%' . $cuisine . '%')
+        ->get();
+    return view('restaurant-list', compact('restaurants'));
     }
 
     public function findRestaurantName($id)

@@ -72,7 +72,6 @@
     <button type="submit" class="btn btn-warning fs-4">Proceed to Checkout</button>
 </form>
 
-
       @else
       <p class="message">Subtotal must exceed Rs. {{$value->minimumOrder}} for delivery orders.</p>
       @endif
@@ -123,12 +122,15 @@
       </section>
       <div class="search-rate-favorite-section">
         <div class="d-flex justify-content-end align-items-center" style="gap:20px">
+        <button class="restaurant-features-link">Menu</button>
+        <button class="restaurant-features-link">Customer review</button>
+        <button class="restaurant-features-link">Photo gallary</button>
           <form class="d-flex" role="search">
-            <input class="form-control me-2 fs-3" type="search" placeholder="Search food" aria-label="Search">
+            <input class="form-control me-2 " style="font-size: 16px;" type="search" placeholder="Search food" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
           <button class="favorite-btn1"><ion-icon name="heart-outline" ></ion-icon></button>
-        <button class="rate-btn"><ion-icon name="star-outline"></ion-icon></button>
+          <button class="rate-btn"><ion-icon name="star-outline"></ion-icon></button>
         </div>
       </div>
       <hr style="max-width: 1300px;margin: 0 auto;">
@@ -152,18 +154,12 @@
             <div class="for-food-list">
               <form action="{{route('add-to-cart')}}" method="POST">
                 @csrf
-        
                 <input type="text" hidden name="foodId" value="{{$food->id}}">
                 <input type="text" hidden name="restaurantId" value="{{$value->id}}">
                     <div class="for-food-img">
                         <img src="{{ asset('/storage/'.$food->foodImg) }}" alt="">
                     </div>
                     <div class="for-food-description">
-                    <!-- @php
-                        $id = $food->restaurant_id;
-                        $restaurant = DB::table('restaurants')->where('id', $id)->first();
-                    @endphp
-                    <p>{{ $restaurant->restaurantName }}</p> -->
                         <p class="food-name">{{$food->foodName}}</p>
                         <p class="food-price">Rs {{$food->price}} per {{$food->quantity}}</p>
                         @if((session()->get('loginCustomerId')) != null)

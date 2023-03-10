@@ -84,6 +84,19 @@ a{
   margin: 20px auto;
   padding: 10px 0;
 }
+.restaurant-features-link{
+  border: none;
+  background:none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  font-weight: 400;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  margin-right: 1rem;
+}
+.restaurant-features-link:hover{
+  color:#FF7F00;
+}
 .favorite-btn1{
   border: 1px solid #bfbfbf;
   font-size: 1.8rem;

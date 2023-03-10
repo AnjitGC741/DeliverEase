@@ -3,7 +3,7 @@
 @section('other-content')
 <section class="resturant-section1">
         <div class="img-section">
-            <img src="./img/try6.jpg" alt="" />
+            <img src="/img/try6.jpg" alt="" />
           </div>
           <div class="linear"></div>
           <div class="text-restaurant">

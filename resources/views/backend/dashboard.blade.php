@@ -3,6 +3,7 @@
 @section('other-content')
 @php
 $sn=1;
+$cusineSn=1;
 $orderCount =1;
 $jan = DB::table('orderdetails')->whereMonth('serviceDate', '=', 1)->count();
 $feb = DB::table('orderdetails')->whereMonth('serviceDate', '=', 2)->count();
@@ -139,13 +140,19 @@ $totalPokhara =  DB::table('restaurants')->where('city', '=', 'pokhara')->count(
         </tr>
       </thead>
       <tbody>
-        @if($locations ->isNotEmpty())
+      @if($locations ->isNotEmpty())
       @foreach($locations as $location)
         <tr>
           <th scope="row">{{$sn++}}</th>
           <td>{{$location->locationName}}</td>
           <th scope="col"><img  width= 50 height=50  src="{{ asset('/storage/'.$location->locationImg) }}"  style="border-radius:50%"></th>
-          <td><button class="btn btn-danger">Remove</button></td>
+          <td>
+          <form action="{{route('delete-location')}}" method="POST">
+            @csrf
+            <input type="text" hidden value="{{$location->id}}" name="id">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+          </td>
         </tr>
         @endforeach
         @else
@@ -171,9 +178,27 @@ $totalPokhara =  DB::table('restaurants')->where('city', '=', 'pokhara')->count(
     </tr>
   </thead>
   <tbody>
+  cuisines
+  @if($cuisines ->isNotEmpty())
+      @foreach($cuisines as $cuisine)
+       <tr>
+          <th scope="row">{{$cusineSn++}}</th>
+          <td>{{$cuisine->cuisineName}}</td>
+          <th scope="col"><img  width= 50 height=50  src="{{ asset('/storage/'.$cuisine->cuisineImg) }}"  style="border-radius:50%"></th>
+          <td>
+          <form action="{{route('delete-cuisine')}}" method="POST">
+            @csrf
+            <input type="text" hidden value="{{$cuisine->id}}" name="id">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+          </td>
+        </tr>
+        @endforeach
+        @else
         <tr>
           <td colspan="4"><h1 style="text-align: center;color:darkgray">No Cuisine Found</h1></td>
         </tr>
+        @endif
   </tbody>
 </table>
     </div>
