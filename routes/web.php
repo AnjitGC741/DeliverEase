@@ -55,7 +55,11 @@ Route::get('/',[HomeController::class,'home']);
 Route::get('/dashboard',[SuperAdmin::class,'dashboard']);
 Route::post('/dashboard/add-location',[SuperAdmin::class,'addLocation'])->name('add-location');
 Route::post('/dashboard/add-Cuisine',[SuperAdmin::class,'addCuisine'])->name('add-cuisine');
+Route::post('/dashboard/delete-location',[SuperAdmin::class,'deleteLocation'])->name('delete-location');
+Route::post('/dashboard/delete-cuisine',[SuperAdmin::class,'deleteCuisine'])->name('delete-cuisine');
+
 //for restaurant
+Route::get('/browse-by-cuisine/{cuisine}',[RestaurantController::class,'browseByCuisine']);
 Route::get('/restaurant-page/{id}',[RestaurantController::class,'userRestaurantPage']);
 Route::post('/restaurants-sort-asc',[RestaurantController::class,'sortRestaurantAsc'])->name('sort-restaurant-ascending');
 Route::post('/restaurants-sort-desc',[RestaurantController::class,'sortRestaurantDesc'])->name('sort-restaurant-descending');

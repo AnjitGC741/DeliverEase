@@ -28,54 +28,19 @@
     <div class="browse-by-cuisine">
       <h2>Browse by cuisine</h2>
       <div class="cuisine-links">
-        <a href="#">
+        @php
+        $cuisines = App\Models\Cuisine::all();
+        @endphp
+        @foreach($cuisines as $cuisine) 
+        <a href="{{url('browse-by-cuisine/'.$cuisine->cuisineName)}}">
           <div class="cuisine-img-and-cuisine-name">
               <div class="cuisine-img">
-                <img src="./img/newari-food.jpg" alt="">
+                <img src="{{ asset('/storage/'.$cuisine->cuisineImg) }}" alt="">
               </div>   
-              <p class="cuisine-name">Newari</p>
+              <p class="cuisine-name">{{$cuisine->cuisineName}}</p>
           </div>
         </a>
-        <a href="#">
-          <div class="cuisine-img-and-cuisine-name">
-              <div class="cuisine-img">
-                <img src="./img/nepali.jpg" alt="">
-              </div> 
-              <p class="cuisine-name">Nepali</p>  
-          </div>
-        </a>
-        <a href="#">
-          <div class="cuisine-img-and-cuisine-name">
-              <div class="cuisine-img">
-                <img src="./img/bakery.jpg" alt="">
-              </div>   
-              <p class="cuisine-name">Bakery</p>
-          </div>
-        </a>
-        <a href="#">
-          <div class="cuisine-img-and-cuisine-name">
-              <div class="cuisine-img">
-                <img src="./img/Korean.jpg" alt="">
-              </div>   
-              <p class="cuisine-name">Korean</p>
-          </div>
-        </a>
-        <a href="#">
-          <div class="cuisine-img-and-cuisine-name">
-              <div class="cuisine-img">
-                <img src="./img/momo.jfif" alt="">
-              </div>   
-              <p class="cuisine-name">MoMo</p>
-          </div>
-        </a>
-        <a href="#">
-          <div class="cuisine-img-and-cuisine-name">
-              <div class="cuisine-img">
-                <img src="./img/burger.jpg" alt="">
-              </div>   
-              <p class="cuisine-name">Burger</p>
-          </div>
-        </a>
+        @endforeach
       </div>
    </div>
     <section class="featured-restaurant">
@@ -149,10 +114,54 @@
     </div>
     </section>
     <section class="how-it-works">
+      <div class="how-it-works-maindiv">
+      <h2>How it works</h2>
+      <p>Get your favorite food at 4 simple steps</p>
+      <div class="how-it-work-boxes">
+         <div class="how-it-work-box">
+              <div class="how-it-work-img">
+              <img src="./img/search.png" alt="">
+              </div>
+              <div class="how-it-work-text">
+                <h1>Search</h1>
+                <p>Find all restaurants available near you or your favorite one</p>
+              </div>
+          </div>
+          <div class="how-it-work-box">
+              <div class="how-it-work-img">
+              <img src="./img/order.png" alt="">
+              </div>
+              <div class="how-it-work-text">
+                <h1>Choose</h1>
+                <p>Browse hundreds of menus to find the food you like</p>
+              </div>
+          </div>
+          <div class="how-it-work-box">
+              <div class="how-it-work-img">
+              <img src="./img/pay.png" alt="">
+              </div>
+              <div class="how-it-work-text">
+                <h1>Pay</h1>
+                <p>It's quick, secure and easy</p>
+              </div>
+          </div>
+          <div class="how-it-work-box">
+              <div class="how-it-work-img">
+              <img src="./img/deliver.png" alt="">
+              </div>
+              <div class="how-it-work-text">
+                <h1>Enjoy</h1>
+                <p>Food is prepared & delivered to your</p>
+              </div>
+          </div>
+      </div>
 
+      </div>
     </section>
     <section class="customer-review">
-
+      <div class="customer-review-maindiv">
+       <h2>What our customer has to say</h2>
+      </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
