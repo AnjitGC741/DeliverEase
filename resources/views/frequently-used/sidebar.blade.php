@@ -98,17 +98,17 @@
 			<div class="p-4 pt-5">
 				<a href="#" class="img logo rounded-circle mb-5" style="background-image: url(images/logo.jpg);"></a>
 				<ul class="list-unstyled components mb-5">
-					<li class="active">
-						<a href="#">Dashboard</a>
+					<li>
+						<a href="{{url('/dashboard')}}" class="d-flex" style="align-items: center;gap:40px;"><ion-icon name="grid-outline"  style="font-size: 20px;"></ion-icon>Dashboard</a>
 					</li>
 					<li>
-						<a href="#">Restaurant</a>
+						<a href="{{url('/dashboard/restaurant-list')}}" class="d-flex" style="align-items: center;gap:40px;"><ion-icon name="home-outline"  style="font-size: 20px;"></ion-icon>Restaurant</a>
 					</li>
 					<li>
-						<a href="#">Customer</a>
+						<a href="{{url('/dashboard/customer-list')}}" class="d-flex" style="align-items: center;gap:40px;"><ion-icon name="person-outline"  style="font-size: 20px;"></ion-icon>Customer</a>
 					</li>
 					<li>
-						<a href="#">Message</a>
+						<a href="#" class="d-flex" style="align-items: center;gap:40px;"><ion-icon name="mail-outline" style="font-size: 20px;"></ion-icon>Message</a>
 					</li>
 				</ul>
 

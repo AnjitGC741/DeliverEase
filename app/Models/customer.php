@@ -29,4 +29,8 @@ class customer extends Model
     {
     return $this->hasMany(Favorite::class);
     }
+    public function customermessages()
+    {
+    return $this->hasMany(Customermessage::class);
+    }
 }

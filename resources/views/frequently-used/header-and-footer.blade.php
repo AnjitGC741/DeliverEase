@@ -78,9 +78,9 @@
                     <h4>Quick Link</h4>
                     <ul>
                         <li><a href="{{url('/')}}">Home</a></li>
-                        <li><a href="#">Add resturant</a></li>
+                        <li><a href="{{url('/restaurant-signup1')}}">Add resturant</a></li>
                         <li><a href="#">Deliver food</a></li>
-                        <li><a href="#">Our Story</a></li>
+                        <li><a href="{{url('/aboutus')}}">Our Story</a></li>
                         <li><a href="#">Contact Us</a></li>
                         <li><a href="{{url('/restaurant-login')}}">Login for resturant</a></li>
                         <li><a href="#">Login for delivery</a></li>

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('service')->nullable();
             $table->unsignedBigInteger('minimumOrder')->nullable();
             $table->string('status')->nullable()->default(1);
+            $table->string('verification')->nullable()->default(0);
             $table->string('password')->nullable();
             $table->string('restaurantLogo',255)->nullable();
             $table->string('restaurantCoverImg',255)->nullable();

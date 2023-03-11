@@ -103,6 +103,7 @@ a{
   padding: 7px 20px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .rate-btn{
   border: 1px solid #bfbfbf;
@@ -110,6 +111,7 @@ a{
   padding: 7px 15px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .favorite-btn1,.rate-btn ion-icon{
   color: #828181;
@@ -251,6 +253,7 @@ a{
   flex-direction: column;
   align-items: end;
   gap: 10px;
+  display: none;
 }
 .funnyBox{
   height: 200px;

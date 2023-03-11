@@ -94,6 +94,7 @@
 </section>
 <hr style="max-width: 1300px;margin:20px auto;">
 <div class="restaurant-directory">
+@if($restaurants->isNotEmpty())
 @foreach ($restaurants as $restaurant)
         <div class="restaurant-details">
            <a href="{{url('/restaurant-page/'.$restaurant->id)}}"> <button class="restaurant-btn">
@@ -127,7 +128,13 @@
                 </div>
             </div>
         </div>
-@endforeach      
+@endforeach
+@else
+        <div class="nothing-found-box">
+              <img src="/img/nothing-found.jpg" alt="" />
+              <p>No Restaurant Found</p>
+        </div>
+@endif  
     </div>
 <script src="./js/forRestaurantList.js"></script>
 @endsection

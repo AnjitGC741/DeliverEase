@@ -23,6 +23,7 @@ let subMenu = document.getElementById("subMenu");
 subMenu.classList.toggle("open-menu");
 } 
 function changeVisibilityCartBox(){
+document.getElementById("cart-and-edit-box").style.display="block";
 document.getElementById("myCart").classList.toggle("hidden");
 document.getElementById("blurBox").classList.toggle("hidden");
 }
@@ -30,6 +31,8 @@ function hideAll()
 {
 document.getElementById("myCart").classList.toggle("hidden");
 document.getElementById("blurBox").classList.toggle("hidden");
+document.getElementById("cart-and-edit-box").style.display="none";
+
 if(idValue > 0)
 {
   document.getElementById("editQuantity_"+idValue).style.display = "none";

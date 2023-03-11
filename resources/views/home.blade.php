@@ -51,6 +51,7 @@
       $restaurants = App\Models\Restaurant::all();
       @endphp
       @foreach ($restaurants as $restaurant)
+      @if($restaurant->verification == 1)
         <div class="restaurant-details for-home">
            <a href="{{url('/restaurant-page/'.$restaurant->id)}}"> <button class="restaurant-btn">
             <div class="restaurant-logo">
@@ -110,6 +111,7 @@
                 </div>
             </div>
         </div>
+       @endif
     @endforeach      
     </div>
     </section>

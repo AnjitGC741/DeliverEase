@@ -188,6 +188,17 @@
           @endif
           </div>
           <div class="linear"></div>
+          @if($value->verification == 0)
+  <div class="verificationMessageBox not-verified">
+         <ion-icon name="storefront" class="msg-restaurant-icon" style="color: #46A8F5;"></ion-icon>
+         <p class="verification-msg"><strong style="margin-right: 10px;">Info!</strong>Your restaurant is not verified yet.</p>
+  </div>
+  @elseif($value->verification == 2)
+  <div class="verificationMessageBox banned">
+         <ion-icon name="storefront" class="msg-restaurant-icon"   style="color:#F66358;"></ion-icon>
+         <p class="verification-msg"><strong style="margin-right: 10px;">Info!</strong>Your restaurant is banned for now.</p>
+  </div>
+  @endif
           <button class="changeBackground" id="changeBackground" onclick="displayBackgroundImgOption();">
             <ion-icon name="camera" style="font-size: 24px;"></ion-icon><p style="font-size: 12px;margin-top:7px;">Change Background Image</p>
           </button>
@@ -300,27 +311,29 @@
       @if($value->food() ->count() > 0)
       <table class="table table-striped table-hover">
         <tr style="height:50px;">
-        <th style="padding-top:15px;">SN</th>
-        <th style="padding-top:15px;">Food Name</th>
-        <th style="padding-top:15px;padding-left:30px;">Image</th>
-        <th  style="padding-top:15px;">Category</th>
-        <th style="padding-top:15px;">Food Type</th>
-        <th style="padding-top:15px;">Price</th>
-        <th style="padding-top:15px;">Quantity</th>
-        <th  style="padding:15px 0 0 60px;" colspan="3">Action</th>
+        <th style="padding-top:15px;padding-left:25px">SN</th>
+        <th style="padding-top:15px;padding-left:25px">Food Name</th>
+        <th style="padding-top:15px;padding-left:25pxpadding-left:30px;">Image</th>
+        <th  style="padding-top:15px;padding-left:25px">Category</th>
+        <th style="padding-top:15px;padding-left:25px">Food Type</th>
+        <th style="padding-top:15px;padding-left:25px">Price</th>
+        <th style="padding-top:15px;padding-left:25px">Quantity</th>
+        <th  style="padding:15px 0 0 60px;padding-left:25px" colspan="3">Action</th>
         </tr>
         @foreach ($value->food as $food)
         <tr>
-          <td class="fs-3" style="padding-top:40px;">{{$sn++}}</td>
-          <td class="fs-3" style="padding-top:40px;">{{$food->foodName}}</td>
+          <td class="fs-3" style="padding-top:40px;padding-left:25px;">{{$sn++}}</td>
+          <td class="fs-3" style="padding-top:40px;padding-left:25px;">{{$food->foodName}}</td>
           <td> <img  width= 100 height=100 src="{{ asset('/storage/'.$food->foodImg) }}" style="border-radius:50%"></td>
-          <td class="fs-3" style="padding-top:40px;">{{$food->category}}</td>
-          <td class="fs-3" style="padding-top:40px;">{{$food->foodType}}</td>
-          <td class="fs-3" style="padding-top:40px;">{{$food->price}}</td>
-          <td class="fs-3" style="padding-top:40px;">{{$food->quantity}}</td>
-          <td style="padding-top:40px;">
+          <td class="fs-3" style="padding-top:40px;padding-left:25px">{{$food->category}}</td>
+          <td class="fs-3" style="padding-top:40px;padding-left:25px">{{$food->foodType}}</td>
+          <td class="fs-3" style="padding-top:40px;padding-left:25px">{{$food->price}}</td>
+          <td class="fs-3" style="padding-top:40px;padding-left:25px">{{$food->quantity}}</td>
+          <td style="padding-top:40px;padding-left:25px">
           <a href="{{url('make-food-unavailable/'.$food->id)}}"><button class="btn btn-primary fs-4">Make Unavailable</button></a>
-          <button id="{{$food->id}}" onclick="openFoodEditBox(this.id);" class="btn btn-warning fs-4" style="margin-left:10px">Edit</button></td>
+          <button id="{{$food->id}}" onclick="openFoodEditBox(this.id);" class="btn btn-warning fs-4" style="margin-left:10px">Edit</button>
+          <button class="btn btn-success fs-4" style="margin-left:10px;">Provide Discount</button>
+        </td>
         </tr>
         @endforeach
       </table>
@@ -431,7 +444,8 @@
       </div>
 </section>
 
-
+<script>
+</script>
 <script src="/js/forAdminRestaurantPage.js"></script>
 </body>
 </html>

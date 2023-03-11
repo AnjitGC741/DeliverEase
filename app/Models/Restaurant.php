@@ -33,5 +33,14 @@ class Restaurant extends Model
     {
     return $this->hasMany(Orderfood::class);
     }
+    public function customermessages()
+    {
+    return $this->hasMany(Customermessage::class);
+    }
+    public function imagegallaries()
+    {
+    return $this->hasMany(Imagegallary::class);
+    }
+
 }
 
