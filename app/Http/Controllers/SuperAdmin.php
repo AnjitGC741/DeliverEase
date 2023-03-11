@@ -16,16 +16,15 @@ class SuperAdmin extends Controller
         $restaurantTotal = Restaurant::count();
         $customerTotal = Customer::count();
         $locationTotal = Location::count();
-    
         $data = [
             'restaurantCount' => $restaurantTotal,
             'customerCount' => $customerTotal,
+            'customers'=> customer::all(),
             'locations' => Location::all(),
             'cuisines' => Cuisine::all(),
             'orderDetail'=> Orderdetail::all(),
             'locationCount' => $locationTotal
         ];
-    
         return view('backend/dashboard', $data);
     }
     
@@ -74,5 +73,28 @@ class SuperAdmin extends Controller
         $makeFoodUnavailable = Cuisine::find($req->id);
         $makeFoodUnavailable->delete();
         return back();
+    }
+    public function dashboardRestaurantList()
+    {
+        $restaurantTotal = Restaurant::count();
+        $data = [
+            'restaurantCount' => $restaurantTotal,
+            'restaurants' => Restaurant::all(),
+            'cuisines' => Cuisine::all(),
+            'orderDetail'=> Orderdetail::all(),
+           
+        ];
+        return view('backend/dashboard-restaurant-list',$data);
+    }
+    public function dashboardCustomerList()
+    {
+        $customerTotal = customer::count();
+        $data = [
+            'restaurantCount' => $customerTotal,
+            'customers' => customer::all(),
+            'orderDetail'=> Orderdetail::all(),
+           
+        ];
+        return view('backend/dashboard-user-list',$data);
     }
 }

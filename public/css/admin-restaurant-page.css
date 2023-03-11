@@ -18,6 +18,36 @@ a{
 hr{
   margin: 0!important;
 }
+/* for verification message */
+.verificationMessageBox{
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 98;
+  top: 10px;
+  right: 0;
+}
+.msg-restaurant-icon{
+  background-color: white;
+  font-size: 2.4rem;
+  padding: 8px 8px;
+  border-radius: 50%;
+}
+.verification-msg{
+  font-size: 2rem;
+  letter-spacing: 1px;
+  color: white;
+}
+.not-verified{
+  background-color: #46A8F5;
+}
+.banned{
+  background-color: #F66358;
+}
+/* ends */
 .blur-box {
   position: absolute;
   top: 0;

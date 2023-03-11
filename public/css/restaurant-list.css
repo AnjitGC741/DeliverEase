@@ -14,6 +14,21 @@ body{
 a{
     text-decoration: none!important;
 }
+.nothing-found-box{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ }
+ .nothing-found-box img{
+   width: 25rem;
+   height: 25rem;
+ }
+ .nothing-found-box p{
+   font-size: 2.4rem;
+   letter-spacing: 1px;
+ }
 .resturant-section1
 {
   height: 30vh;

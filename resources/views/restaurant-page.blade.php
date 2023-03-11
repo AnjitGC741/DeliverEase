@@ -11,7 +11,7 @@
 <div class="for-fixed-cart">
   <button onclick="changeVisibilityCartBox();"><ion-icon name="bag-handle-outline"></ion-icon></button>
 </div>
-<div class="cart-and-edit-box" >
+<div class="cart-and-edit-box" id="cart-and-edit-box">
   <div class="funnyBox" style="visibility: hidden;" id="funnyBox">
   <img src="/img/funny.gif" alt="" />
   </div>
@@ -125,11 +125,26 @@
         <button class="restaurant-features-link">Menu</button>
         <button class="restaurant-features-link">Customer review</button>
         <button class="restaurant-features-link">Photo gallary</button>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2 " style="font-size: 16px;" type="search" placeholder="Search food" aria-label="Search">
+          <form class="d-flex" method="POST" action="{{route('search-food')}}">
+            @csrf
+             <input type="text" hidden name="restaurantId" value="{{$value->id}}">
+            <input class="form-control me-2 " name="food" style="font-size: 16px;" type="search" placeholder="Search food" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
-          <button class="favorite-btn1"><ion-icon name="heart-outline" ></ion-icon></button>
+          @if(session()->get('loginCustomerId') != null)
+          @php
+                $id = $value->id;
+                $userId = session()->get('loginCustomerId');
+                $exists = DB::table('favorites')->where('restaurant_id', $id)->where('customer_id', $userId)->exists();
+          @endphp
+          <form id="removeFromFavorite" method="POST" action="{{ route('remove-from-favorite') }}">
+                  @csrf
+                <input type="hidden"  name="restaurantId" value="{{ $value->id }}">
+                <button type="submit" class="favorite-btn1"><ion-icon name="heart" style="color:red;"></ion-icon></button>
+          </form>
+          @else
+          <button class="favorite-btn1"><ion-icon name="heart-outline"></ion-icon></button>
+          @endif
           <button class="rate-btn"><ion-icon name="star-outline"></ion-icon></button>
         </div>
       </div>
@@ -139,17 +154,17 @@
                 <p class="category-title"><ion-icon name="wine"></ion-icon>Categories</p>
                 <hr width="80px;margin-top:-50px;">
                 <ul>
-                  @foreach($value->food()->distinct()->pluck('category') as $category)
+                @foreach($foods->pluck('category')->unique() as $category)
                   <li class="food-category-links"><a href="#{{$category}}">{{$category}}</a></li>
                   @endforeach
                 </ul>
             </div>
             <div class="food-menu-box">
-            @foreach($value->food()->distinct()->pluck('category') as $category)
+            @foreach($foods->pluck('category')->unique() as $category)
             <div class="food-menu-list" id="{{$category}}">
             <p class="categoryName">{{$category}}</p>
             <div class="food-menu">
-            @foreach($value->food as $food)
+            @foreach($foods as $food)
             @if($category == $food->category)
             <div class="for-food-list">
               <form action="{{route('add-to-cart')}}" method="POST">

@@ -27,16 +27,19 @@ class RestaurantController extends Controller
     public function searchRestaurant(Request $req)
     {
         $query = $req->restaurantName;
-        $restaurants = Restaurant::where('restaurantName', 'like', '%' . $query . '%')
-            ->orWhere('cuisine', 'like', '%' . $query . '%')
+        $restaurants = Restaurant::where(function($q) use ($query) {
+                $q->where('restaurantName', 'like', '%' . $query . '%')
+                  ->orWhere('cuisine', 'like', '%' . $query . '%');
+            })
+            ->where('verification', '=', '1')
             ->get();
-
         return view('restaurant-list', compact('restaurants'));
     }
     public function browseByCuisine($cuisine)
     {
         $restaurants = Restaurant::where('restaurantName', 'like', '%' . $cuisine . '%')
         ->orWhere('cuisine', 'like', '%' . $cuisine . '%')
+        ->where('verification', '=', '1')
         ->get();
     return view('restaurant-list', compact('restaurants'));
     }
@@ -65,7 +68,6 @@ class RestaurantController extends Controller
 
             ]
         );
-
         $restaurantDetail = Restaurant::find($req->id);
         $restaurantDetail->restaurantNumber = $req->restaurantNumber;
         $restaurantDetail->contactName = $req->contactName;
@@ -153,12 +155,34 @@ class RestaurantController extends Controller
     }
     public function userRestaurantPage($id)
     {
-        $data = Restaurant::find($id);
+        $restaurant = Restaurant::find($id);
+        $foods = $restaurant->food()->get();
         if (session()->get('loginCustomerId') != null) {
             $newData = customer::find(session()->get('loginCustomerId'));
-            return view('restaurant-page', ['value' => $data], ['newValue' => $newData]);
+            $data = [
+                'value' => $restaurant,
+                 'newValue' => $newData,
+                'foods' => $foods,   
+            ];
+            return view('restaurant-page', $data);
         } else {
-            return view('restaurant-page', ['value' => $data]);
+            return view('restaurant-page', ['value' => $restaurant],['foods'=>$foods]);
+        }
+    }
+    public function searchFood(Request $req)
+    {
+        $restaurant = Restaurant::find($req->restaurantId);
+        $foods = $restaurant->food()->where('foodName', 'like', '%'.$req->food.'%')->get();
+        if (session()->get('loginCustomerId') != null) {
+            $newData = customer::find(session()->get('loginCustomerId'));
+            $data = [
+                'value' => $restaurant,
+                 'newValue' => $newData,
+                'foods' => $foods,   
+            ];
+            return view('restaurant-page', $data);
+        } else {
+            return view('restaurant-page', ['value' => $restaurant],['foods'=>$foods]);
         }
     }
 

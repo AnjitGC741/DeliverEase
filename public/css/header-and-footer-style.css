@@ -108,6 +108,7 @@ a{
     width: 40px;
     height: 40px;
     cursor:pointer;
+    border-style: none;
   }
   .user-btn:hover .user{
     color: #f6be87;
