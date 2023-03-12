@@ -83,6 +83,8 @@ Route::post('/restaurant-admin-page/updateRestaurantCoverImg',[RestaurantControl
 Route::post('/restaurant-admin-page/deleteRestaurantCoverImg',[RestaurantController::class,'deleteRestaurantCoverImg'])->name('deleteBackgroundImg');
 Route::post('/restaurant-admin-page/updateRestaurantProfileImg',[RestaurantController::class,'changeRestaurantProfileImg'])->name('changeProfileImg');
 Route::post('/restaurant-admin-page/deleteRestaurantProfileImg',[RestaurantController::class,'deleteRestaurantProfileImg'])->name('deleteProfileImg');
+Route::post('/restaurant-admin-page/add-image-restaurant',[RestaurantController::class,'addImageRestaurant'])->name('add-image-restaurant');
+Route::post('/restaurant-admin-page/delete-image-restaurant',[RestaurantController::class,'deleteImageRestaurant'])->name('delete-image-restaurant');
 // for Customer
 Route::get('/user-profile',[CustomerController::class,'userProfile']);
 Route::post('/login',[CustomerController::class,'loginUser'])->name('login-user');
@@ -106,7 +108,6 @@ Route::get('/my-cart',[MyCartController::class,'myCart']);
 Route::get('/checkout/go-to-checkout',[MyCartController::class,'checkout'])->name('go-checkout-page');
 Route::POST('/checkout/save-checkout-info',[MyCartController::class,'saveCheckoutInfo'])->name('save-checkout');
 Route::post('/stripecontroller',[Stripe::class,"stripePayment"])->name("stripe.post");
-Route::get('/time',[RestaurantController::class,"time"])->name("time");
 // for Order
 Route::get('reject-food/{id}',[OrderDetailController::class,'rejectFood']);
 // for favorite

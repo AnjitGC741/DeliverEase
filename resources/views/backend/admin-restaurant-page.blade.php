@@ -178,6 +178,23 @@
         <button style="width: 100%; height: 50px;" class=" fs-4 mt-3 btn btn-success">Update</button>
   </form>
 </div>
+<!-- add photo for restaurant -->
+<div class="addImage" id="addImage">
+<h2>Add image to your restaurant</h2>
+<form action="{{route('add-image-restaurant')}}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="text" hidden name="restaurantId" value="{{$value->id}}">
+    <div class="mb-3">
+      <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Image</label>
+      <input type="file" style="letter-spacing: 0.8px;" name="restaurantImgs" class="form-control fs-4" id="restaurantImgs">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+    </div>
+    <div class="mb-3">
+         <label class="form-label fs-4" style="letter-spacing: 1px;">Description</label>
+        <textarea type="text" style="letter-spacing: 0.8px;" class="form-control fs-4" id="photoDescription" placeholder="photoDescription"  name="photoDescription"></textarea>
+      </div>
+      <button type="submit" style="width: 100%; height: 50px;letter-spacing:1px;" class=" fs-2 mt-3 btn btn-success">Add</button> 
+  </form>
+</div>
 
 <section class="resturant-section">
         <div class="img-section">
@@ -268,10 +285,12 @@
 <section class="secondary-navbar">
         <div>
           <ul class="secondary-navbar-links">
-            <li class="secondary-navbar-link "><button  onclick="displayFoodSection();">Foods</button></li>
-            <li class="secondary-navbar-link"><button onclick="displayUnavailableFoodSection();">unavailable Foods</button></li>
-            <li class="secondary-navbar-link"><button  onclick="displayOrderSection();">Orders</button></li>
-            <li class="secondary-navbar-link"><button  onclick="displayAnalysisSection();">Analysis</button></li>
+            <li class="secondary-navbar-link"><button id="food-section-btn" class="active"  onclick="displayFoodSection();">Foods</button></li>
+            <li class="secondary-navbar-link"><button id="unavailable-food-section-btn" class="" onclick="displayUnavailableFoodSection();">unavailable Foods</button></li>
+            <li class="secondary-navbar-link"><button id="order-section-btn" class="" onclick="displayOrderSection();">Orders</button></li>
+            <li class="secondary-navbar-link"><button id="analysis-section-btn" class="" onclick="displayAnalysisSection();">Analysis</button></li>
+            <li class="secondary-navbar-link"><button id="photo-gallary-section-btn" class="" onclick="displayPhotoGallarySection();">Photo Gallary</button></li>
+            <li class="secondary-navbar-link"><button id="customer-review-section-btn" class="" onclick="displayCustomerReviewSection();">Customer Review</button></li>
             @if($value->status == 1)
             <li style="list-style: none;">
             <form action="{{route('close-restaurant')}}" method="POST">
@@ -313,7 +332,7 @@
         <tr style="height:50px;">
         <th style="padding-top:15px;padding-left:25px">SN</th>
         <th style="padding-top:15px;padding-left:25px">Food Name</th>
-        <th style="padding-top:15px;padding-left:25pxpadding-left:30px;">Image</th>
+        <th style="padding-top:15px;padding-left:25px;padding-left:30px;">Image</th>
         <th  style="padding-top:15px;padding-left:25px">Category</th>
         <th style="padding-top:15px;padding-left:25px">Food Type</th>
         <th style="padding-top:15px;padding-left:25px">Price</th>
@@ -441,6 +460,48 @@
   </div>
       <div class="analysis-section" id="analysis-section">
        <h1>Your restaurant Info</h1> 
+      </div>
+      <div class="photo-gallary-section" id="photo-gallary-section">
+       <h1 class="mb-5 mt-3">Your restaurant photos</h1> 
+       <button onclick="displayAddImage();" class="btn btn-success fs-4 mb-5">Add Image</button>
+       @if($value->imagegallaries() ->count() > 0)
+       <table class="table table-striped table-hover">
+        <tr style="height:50px;">
+        <th style="padding-top:15px;padding-left:25px">SN</th>
+        <th style="padding-top:15px;padding-left:25px">Photo</th>
+        <th style="padding-top:15px;padding-left:25px;padding-left:30px;">Description</th>
+        <th  style="padding:15px 0 0 60px;padding-left:25px" colspan="3">Action</th>
+        </tr>
+        
+        @foreach($value->imagegallaries as $photo)
+        <tr>
+        <td class="fs-3" style="padding-top:20px;padding-left:25px;">{{$sn++}}</td>
+        <td class="fs-3" style="padding-left:25px;">
+          <img src="{{ asset('/storage/'.$photo->restaurantImgs) }}" width="80" height="80" alt="">
+       </td>
+        <td class="fs-3" style="padding-top:20px;padding-left:25px;">{{$photo->photoDescription}}</td>
+        <td  style="padding-top:20px;padding-left:25px;">
+          <div class="d-flex">
+          <form action="{{route('delete-image-restaurant')}}" method="POST">
+              @csrf
+              <input type="text" value="{{$photo->id}}" hidden name="photoId">
+              <button type="submit" class="btn btn-danger fs-5">Delete</button>
+           </form>
+           <button class="btn btn-warning fs-5" style="margin-left: 10px;">Edit</button>
+          </div>
+        </td>
+        </tr>
+        @endforeach
+       </table>
+       @else
+       <div class="nothing-found-box">
+       <img src="/img/nothing-found.jpg" alt="" />
+       <p>Nothing Found</p>
+       </div>
+      @endif
+      </div>
+      <div class="customer-review-section" id="customer-review-section">
+       <h1>Customer Review</h1> 
       </div>
 </section>
 

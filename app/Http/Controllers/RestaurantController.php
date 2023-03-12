@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cuisine;
 use App\Models\customer;
 use App\Models\Food;
+use App\Models\Imagegallary;
 use App\Models\OrderDetail;
 use App\Models\Restaurant;
 use Carbon\Carbon;
@@ -226,9 +227,29 @@ class RestaurantController extends Controller
     {
         return view('home');
     }
-    public function time()
+    // for restaurant image section
+    public function addImageRestaurant(Request $req)
     {
-        $dt = Carbon::now();
-        dd($dt->format('y', 'm','d'));
+        $image = $req -> file('restaurantImgs');
+        $image->store('img','public');
+        $file_path=$image->store('img','public');
+        $save =Imagegallary::create([
+            'restaurantImgs'=>$file_path,
+            'photoDescription'=> $req->photoDescription,
+            'restaurant_id'=> $req->restaurantId,
+        ]);
+        if(!$save)
+        {
+           dd("error");
+        }
+        else{
+            return  back();
+        }
+    }
+    public function deleteImageRestaurant(Request $req)
+    {
+        $makeFoodUnavailable = Imagegallary::find($req->photoId);
+        $makeFoodUnavailable->delete();
+        return back();
     }
 }
