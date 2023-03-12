@@ -122,9 +122,9 @@
       </section>
       <div class="search-rate-favorite-section">
         <div class="d-flex justify-content-end align-items-center" style="gap:20px">
-        <button class="restaurant-features-link">Menu</button>
-        <button class="restaurant-features-link">Customer review</button>
-        <button class="restaurant-features-link">Photo gallary</button>
+        <button class="restaurant-features-link active" id="food-menu-category-btn" onclick="showMenu();">Menu</button>
+        <button class="restaurant-features-link" id="restaurant-customer-review-btn" onclick="showCustomerReview();">Customer review</button>
+        <button class="restaurant-features-link" id="restaurant-photo-gallary-btn" onclick="showPhotoGallary();">Photo gallary</button>
           <form class="d-flex" method="POST" action="{{route('search-food')}}">
             @csrf
              <input type="text" hidden name="restaurantId" value="{{$value->id}}">
@@ -149,57 +149,66 @@
         </div>
       </div>
       <hr style="max-width: 1300px;margin: 0 auto;">
-      <section class="food-menu-category">
-            <div class="food-category">
-                <p class="category-title"><ion-icon name="wine"></ion-icon>Categories</p>
-                <hr width="80px;margin-top:-50px;">
-                <ul>
-                @foreach($foods->pluck('category')->unique() as $category)
-                  <li class="food-category-links"><a href="#{{$category}}">{{$category}}</a></li>
+      <div class="multiple-div">
+        <div class="food-menu-category" id="food-menu-category">
+              <div class="food-category">
+                  <p class="category-title"><ion-icon name="wine"></ion-icon>Categories</p>
+                  <hr width="80px;margin-top:-50px;">
+                  <ul>
+                  @foreach($foods->pluck('category')->unique() as $category)
+                    <li class="food-category-links"><a href="#{{$category}}">{{$category}}</a></li>
+                    @endforeach
+                  </ul>
+              </div>
+              <div class="food-menu-box">
+              @foreach($foods->pluck('category')->unique() as $category)
+              <div class="food-menu-list" id="{{$category}}">
+              <p class="categoryName">{{$category}}</p>
+              <div class="food-menu">
+              @foreach($foods as $food)
+              @if($category == $food->category)
+              <div class="for-food-list">
+                <form action="{{route('add-to-cart')}}" method="POST">
+                  @csrf
+                  <input type="text" hidden name="foodId" value="{{$food->id}}">
+                  <input type="text" hidden name="restaurantId" value="{{$value->id}}">
+                      <div class="for-food-img">
+                          <img src="{{ asset('/storage/'.$food->foodImg) }}" alt="">
+                      </div>
+                      <div class="for-food-description">
+                          <p class="food-name">{{$food->foodName}}</p>
+                          <p class="food-price">Rs {{$food->price}} per {{$food->quantity}}</p>
+                          @if((session()->get('loginCustomerId')) != null)
+                          @php
+                          $id = $food->id;
+                          $userId = session()->get('loginCustomerId');
+                          $exists = DB::table('my_carts')->where('food_id', $id)->where('customer_id', $userId)->exists();
+                          @endphp
+                          @if($exists)
+                          <button  type= "submit" class="added-to-cart-btn">Remove from Cart</button>
+                          @else
+                          <button type="submit"  class="add-to-cart-btn">Add To Cart</button>
+                          @endif
+                          @else
+                          <button type="submit"  class="add-to-cart-btn">Add To Cart</button>
+                          @endif
+                      </div>
+                  </form>
+                  </div>
+                  @endif
                   @endforeach
-                </ul>
-            </div>
-            <div class="food-menu-box">
-            @foreach($foods->pluck('category')->unique() as $category)
-            <div class="food-menu-list" id="{{$category}}">
-            <p class="categoryName">{{$category}}</p>
-            <div class="food-menu">
-            @foreach($foods as $food)
-            @if($category == $food->category)
-            <div class="for-food-list">
-              <form action="{{route('add-to-cart')}}" method="POST">
-                @csrf
-                <input type="text" hidden name="foodId" value="{{$food->id}}">
-                <input type="text" hidden name="restaurantId" value="{{$value->id}}">
-                    <div class="for-food-img">
-                        <img src="{{ asset('/storage/'.$food->foodImg) }}" alt="">
-                    </div>
-                    <div class="for-food-description">
-                        <p class="food-name">{{$food->foodName}}</p>
-                        <p class="food-price">Rs {{$food->price}} per {{$food->quantity}}</p>
-                        @if((session()->get('loginCustomerId')) != null)
-                        @php
-                        $id = $food->id;
-                        $userId = session()->get('loginCustomerId');
-                        $exists = DB::table('my_carts')->where('food_id', $id)->where('customer_id', $userId)->exists();
-                        @endphp
-                        @if($exists)
-                        <button  type= "submit" class="added-to-cart-btn">Remove from Cart</button>
-                        @else
-                        <button type="submit"  class="add-to-cart-btn">Add To Cart</button>
-                        @endif
-                        @else
-                        <button type="submit"  class="add-to-cart-btn">Add To Cart</button>
-                        @endif
-                    </div>
-                </form>
-                </div>
-                @endif
-                @endforeach
-            </div>
-            </div>
-            @endforeach
+              </div>
+              </div>
+              @endforeach
+          </div>
         </div>
-      </section>
+        <div class="restaurant-photo-gallary" id="restaurant-photo-gallary">
+          <h1>Photo gallary</h1>
+        </div>
+        <div class="restaurant-customer-review" id="restaurant-customer-review">
+          <h1>Customer review</h1>
+        </div>
+      </div>
+      
       <script src="/js/forUserRestaurant.js"></script>
 @endsection

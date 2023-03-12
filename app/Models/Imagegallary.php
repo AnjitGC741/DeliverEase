@@ -9,7 +9,7 @@ class Imagegallary extends Model
 {
     use HasFactory;
     use HasFactory;
-    protected $fillable = ['restaurantImgs','restaurant_id'];
+    protected $fillable = ['restaurantImgs','photoDescription','restaurant_id'];
     public function restaurants()
     {
         return $this->belongsTo(Restaurant::class);

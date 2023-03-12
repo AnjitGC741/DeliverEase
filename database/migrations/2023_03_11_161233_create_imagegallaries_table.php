@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('imagegallaries', function (Blueprint $table) {
             $table->id();
             $table->string('restaurantImgs',255);
+            $table->string('photoDescription',30)->nullable();
             $table->unsignedBigInteger('restaurant_id');
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
             $table->timestamps();

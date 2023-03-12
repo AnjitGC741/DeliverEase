@@ -118,6 +118,21 @@ visibility: hidden;
   font-weight: 400;
   letter-spacing: 0.8px;
 }
+.addImage{
+  min-width: 50rem;
+  padding:30px;
+  border:1px solid #939292;
+  position: fixed;
+  z-index: 99;
+  margin:130px 500px;
+  background-color: #ffffff;
+  visibility: hidden;
+}
+.addImage h2{
+  margin-bottom: 10px;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+}
 .resturant-section
 {
   height: 60vh;
@@ -345,7 +360,7 @@ visibility: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 80px;
+  gap: 50px;
 }
 .secondary-navbar-link{
   list-style: none;
@@ -378,6 +393,7 @@ th{
   position: absolute;
   z-index: 10;
   width: 100%;
+  visibility: visible;
 }
 .unavailable-food-list-section{
   position: absolute;
@@ -392,6 +408,18 @@ th{
   visibility: hidden;
 }
 .analysis-section{
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  visibility: hidden;
+}
+.photo-gallary-section{
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  visibility: hidden;
+}
+.customer-review-section{
   position: absolute;
   width: 100%;
   z-index: 1;

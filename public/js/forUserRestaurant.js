@@ -60,3 +60,30 @@ function openFoodEditBox(x)
   document.getElementById("funnyBox").style.visibility="hidden";
    idValue=x; 
 }
+function showMenu()
+{
+  document.getElementById("food-menu-category").style.visibility="visible";
+  document.getElementById("restaurant-photo-gallary").style.visibility="hidden";
+  document.getElementById("restaurant-customer-review").style.visibility="hidden";
+  document.getElementById("food-menu-category-btn").classList.add("active");
+  document.getElementById("restaurant-photo-gallary-btn").classList.remove("active");
+  document.getElementById("restaurant-customer-review-btn").classList.remove("active");
+}
+function showCustomerReview()
+{
+  document.getElementById("food-menu-category").style.visibility="hidden";
+  document.getElementById("restaurant-photo-gallary").style.visibility="hidden";
+  document.getElementById("restaurant-customer-review").style.visibility="visible";
+  document.getElementById("food-menu-category-btn").classList.remove("active");
+  document.getElementById("restaurant-photo-gallary-btn").classList.remove("active");
+  document.getElementById("restaurant-customer-review-btn").classList.add("active");
+}
+function showPhotoGallary()
+{
+  document.getElementById("food-menu-category").style.visibility="hidden";
+  document.getElementById("restaurant-photo-gallary").style.visibility="visible";
+  document.getElementById("restaurant-customer-review").style.visibility="hidden";
+  document.getElementById("food-menu-category-btn").classList.remove("active");
+  document.getElementById("restaurant-photo-gallary-btn").classList.add("active");
+  document.getElementById("restaurant-customer-review-btn").classList.remove("active");
+}
