@@ -122,7 +122,7 @@
       </section>
       <div class="search-rate-favorite-section">
         <div class="d-flex justify-content-end align-items-center" style="gap:20px">
-        <button class="restaurant-features-link active" id="food-menu-category-btn" onclick="showMenu();">Menu</button>
+        <button class="restaurant-features-link active1" id="food-menu-category-btn" onclick="showMenu();">Menu</button>
         <button class="restaurant-features-link" id="restaurant-customer-review-btn" onclick="showCustomerReview();">Customer review</button>
         <button class="restaurant-features-link" id="restaurant-photo-gallary-btn" onclick="showPhotoGallary();">Photo gallary</button>
           <form class="d-flex" method="POST" action="{{route('search-food')}}">
@@ -149,7 +149,7 @@
         </div>
       </div>
       <hr style="max-width: 1300px;margin: 0 auto;">
-      <div class="multiple-div">
+      <div class="multiple-div" id="multiple-div">
         <div class="food-menu-category" id="food-menu-category">
               <div class="food-category">
                   <p class="category-title"><ion-icon name="wine"></ion-icon>Categories</p>
@@ -204,11 +204,36 @@
         </div>
         <div class="restaurant-photo-gallary" id="restaurant-photo-gallary">
           <h1>Photo gallary</h1>
+          @if($value->imagegallaries() ->count() > 0)
+          <div class="main-posts">
+            <div class="container">
+                <div class="row">
+                    <div class="blog-masonry masonry-true">
+                    @foreach($value->imagegallaries as $photo)
+                        <div class="post-masonry col-md-4 col-sm-6">
+                            <div class="post-thumb">
+                                <img src="{{ asset('/storage/'.$photo->restaurantImgs) }}" alt="">
+                                <div class="title-over">
+                                    <p>{{$photo->photoDescription}}</p>
+                                </div> 
+                            </div>
+                        </div> 
+                      @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+        @else
+        <h2>No image found</h2>
+        @endif
         </div>
         <div class="restaurant-customer-review" id="restaurant-customer-review">
           <h1>Customer review</h1>
         </div>
       </div>
-      
       <script src="/js/forUserRestaurant.js"></script>
+      <script src="/js/vendor/jquery-1.10.2.min.js"></script>
+        <script src="/js/min/plugins.min.js"></script>
+        <script src="/js/min/mainPhoto.min.js"></script>
+ 
 @endsection

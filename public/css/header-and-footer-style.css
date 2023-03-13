@@ -207,7 +207,7 @@ ul{
 	background-color: #24262b;
     padding: 70px 0;
     position: relative;
-    margin-top: 5rem;
+    clear: both;
 }
 .footer-col{
    width: 25%;
