@@ -1,5 +1,10 @@
 
 let idValue=0;
+window.onload = function() {
+  var child = document.getElementById("food-menu-category");
+  var childHeight = child.offsetHeight;
+  document.getElementById("multiple-div").style.height = childHeight + "px";
+};
 function plus(){
   var quantity=document.getElementById("foodQuantity").value;
   quantity++;
@@ -62,28 +67,37 @@ function openFoodEditBox(x)
 }
 function showMenu()
 {
+  var child = document.getElementById("food-menu-category");
+  var childHeight = child.offsetHeight;
+  document.getElementById("multiple-div").style.height = childHeight + "px";
   document.getElementById("food-menu-category").style.visibility="visible";
   document.getElementById("restaurant-photo-gallary").style.visibility="hidden";
   document.getElementById("restaurant-customer-review").style.visibility="hidden";
-  document.getElementById("food-menu-category-btn").classList.add("active");
-  document.getElementById("restaurant-photo-gallary-btn").classList.remove("active");
-  document.getElementById("restaurant-customer-review-btn").classList.remove("active");
+  document.getElementById("food-menu-category-btn").classList.add("active1");
+  document.getElementById("restaurant-photo-gallary-btn").classList.remove("active1");
+  document.getElementById("restaurant-customer-review-btn").classList.remove("active1");
 }
 function showCustomerReview()
 {
+  var child = document.getElementById("restaurant-customer-review");
+  var childHeight = child.offsetHeight;
+  document.getElementById("multiple-div").style.height = childHeight + "px";
   document.getElementById("food-menu-category").style.visibility="hidden";
   document.getElementById("restaurant-photo-gallary").style.visibility="hidden";
   document.getElementById("restaurant-customer-review").style.visibility="visible";
-  document.getElementById("food-menu-category-btn").classList.remove("active");
-  document.getElementById("restaurant-photo-gallary-btn").classList.remove("active");
-  document.getElementById("restaurant-customer-review-btn").classList.add("active");
+  document.getElementById("food-menu-category-btn").classList.remove("active1");
+  document.getElementById("restaurant-photo-gallary-btn").classList.remove("active1");
+  document.getElementById("restaurant-customer-review-btn").classList.add("active1");
 }
 function showPhotoGallary()
 {
+  var child = document.getElementById("restaurant-photo-gallary");
+  var childHeight = child.offsetHeight;
+  document.getElementById("multiple-div").style.height = childHeight + "px";
   document.getElementById("food-menu-category").style.visibility="hidden";
   document.getElementById("restaurant-photo-gallary").style.visibility="visible";
   document.getElementById("restaurant-customer-review").style.visibility="hidden";
-  document.getElementById("food-menu-category-btn").classList.remove("active");
-  document.getElementById("restaurant-photo-gallary-btn").classList.add("active");
-  document.getElementById("restaurant-customer-review-btn").classList.remove("active");
+  document.getElementById("food-menu-category-btn").classList.remove("active1");
+  document.getElementById("restaurant-photo-gallary-btn").classList.add("active1");
+  document.getElementById("restaurant-customer-review-btn").classList.remove("active1");
 }
