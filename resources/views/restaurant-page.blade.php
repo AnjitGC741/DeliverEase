@@ -229,6 +229,58 @@
         </div>
         <div class="restaurant-customer-review" id="restaurant-customer-review">
           <h1>Customer review</h1>
+          <div class="customer-review-collection">
+            <div class="write-review">
+              <p>Write Review</p>
+              <form class="rating">
+                  <div class="form1">
+                   <div>
+                   <label>
+                    <input type="radio" name="stars" value="1" />
+                    <span class="icon">★</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="stars" value="2" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="stars" value="3" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>   
+                  </label>
+                  <label>
+                    <input type="radio" name="stars" value="4" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="stars" value="5" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                  </label>
+                   </div>
+                   <div class="rate-submit-btn">
+                     <button class="btn btn-success">Submit</button>
+                   </div>
+                  </div>
+                  <div class="form2">
+                      <div class="mb-3">
+                        <input type="text" style="letter-spacing: 0.8px;"  placeholder="Your name" class="form-control fs-4" id="">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                      </div>
+                      <div class="mb-3">
+                        <textarea type="text" style="letter-spacing: 0.8px;" class="form-control fs-4" id="photoDescription" placeholder="photoDescription"  name="photoDescription"></textarea>
+                      </div>
+                  </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
       <script src="/js/forUserRestaurant.js"></script>
