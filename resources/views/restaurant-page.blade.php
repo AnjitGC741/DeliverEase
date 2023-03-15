@@ -12,14 +12,15 @@ $sn = 1;
 <div class="for-fixed-cart">
   <button onclick="changeVisibilityCartBox();"><ion-icon name="bag-handle-outline"></ion-icon></button>
 </div>
-<div class="cart-and-edit-box" id="cart-and-edit-box">
-  <div class="funnyBox" style="visibility: hidden;" id="funnyBox">
+<div class="cart-and-edit-box" id="cart-and-edit-box1">
+<div style="display:flex;flex-direction:column;align-items: end;">
+<div class="funnyBox1" style="visibility: hidden;" id="funnyBox">
     <img src="/img/funny.gif" alt="" />
   </div>
   @if((session()->get('loginCustomerId')) != null)
   @if($newValue->my_carts()->count() > 0)
   @foreach ($newValue->my_carts as $cart)
-  <div class="for-fixed-edit-food" id="editQuantity_{{$cart->id}}">
+  <div class="for-fixed-edit-food1" id="editQuantity_{{$cart->id}}">
     <p class="my-cart-text">Edit food quanitity</p>
     <hr style="margin-bottom: 20px;">
     <div class="for-changing-quantity">
@@ -93,6 +94,8 @@ $sn = 1;
     </div>
     @endif
   </div>
+  </div>
+  
 </div>
 <section class="resturant-section">
   <div class="img-section">

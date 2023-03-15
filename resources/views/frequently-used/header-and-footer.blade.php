@@ -54,7 +54,7 @@
       <a href="{{url('/my-cart')}}"><ion-icon name="cart-outline" class="cart"></ion-icon></a>
       <div>
       <span style="display: none;"> {{$value=session()->get('loginCustomer')}}</span>
-        <button onclick="toggleMenu();" class="user-btn" style="color: #fff; font-size:20px; font-family:'Poppins', sans-serif; ">{{$value[0]}}</button>
+        <button onclick="toggleMenu();" class="user-btn" style="color: #fff; font-size:20px; ">{{$value[0]}}</button>
       </div>
     </div>
     <div class="sub-menu-wrap1" id="subMenu">

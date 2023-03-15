@@ -1,19 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-html{
-    font-size: 10px;
-}
-body{
-    font-family: 'Roboto', sans-serif;
-    line-height: 1;
-}
-a{
-    text-decoration: none;
-}
+
 .active1{
   color: #FF7F00;
   text-decoration: underline;
@@ -132,7 +117,7 @@ a{
   gap: 30px;
   align-items:top;
   position: absolute;
-  visibility: hidden;
+
 }
 .food-category{
   display: flex;
@@ -300,6 +285,7 @@ a{
 .restaurant-customer-review {
   width: 100%;
   position: absolute;
+  visibility: hidden;
 }
 /* customer message collection */
 .customer-review-collection{
@@ -487,19 +473,15 @@ a{
   bottom: 90px;
   right: 20px;
   width: 450px;
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-  gap: 10px;
   display: none;
 }
-.funnyBox{
+.funnyBox1{
   height: 200px;
   width: 200px;
   border-radius: 10px;
   overflow: hidden;
 }
-.funnyBox img{
+.funnyBox1 img{
   height: 100%;
   width: 100%;
 }
@@ -540,7 +522,7 @@ a{
 .hidden{
   visibility: hidden;
 }
-.for-fixed-edit-food{
+.for-fixed-edit-food1{
   width: 200px;
   padding: 20px;
   border-radius: 10px;
