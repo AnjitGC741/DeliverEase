@@ -14,6 +14,7 @@ class HomeController extends Controller
     {
     session()->put(['loginCustomer']);
     session()->put(['loginCustomerId']);
+    session()->put(['loginCustomer']);
     $restaurants = Restaurant::all();
     return view('home',compact('restaurants'));
     }

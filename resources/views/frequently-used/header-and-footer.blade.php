@@ -17,7 +17,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- css link -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/header-and-footer-style.css">
     <link rel="stylesheet" href="/css/home-page.css">
     <link rel="stylesheet" href="/css/restaurant-page.css">
@@ -51,7 +50,7 @@
     </div> 
     @else
     <div class="for-logined-user">
-      <a><ion-icon name="heart-outline" class="favorite"></ion-icon></a>
+      <a href="{{url('/user-profile/my-favorite')}}"><ion-icon name="heart-outline" class="favorite"></ion-icon></a>
       <a href="{{url('/my-cart')}}"><ion-icon name="cart-outline" class="cart"></ion-icon></a>
       <div>
       <span style="display: none;"> {{$value=session()->get('loginCustomer')}}</span>
@@ -66,7 +65,6 @@
         </div>
         <hr>
           <a href="{{url('/user-profile')}}" class="sub-menu-link1"><ion-icon name="person-outline"></ion-icon> <p>Profile</p></a>
-          <a href="#" class="sub-menu-link1"><ion-icon name="heart-outline"></ion-icon><p>Favourite</p> </a>
           <a href="{{url('/logout')}}" class="sub-menu-link1"><ion-icon name="log-out-outline"></ion-icon><p>Log out</p> </a>
       </div>
     </div>

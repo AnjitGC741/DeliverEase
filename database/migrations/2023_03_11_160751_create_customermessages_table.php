@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('customermessages', function (Blueprint $table) {
             $table->id();
             $table->string('customerMsg',255);
+            $table->string('customerName',20);
             $table->unsignedBigInteger('restaurant_id');
             $table->unsignedBigInteger('customer_id');
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
