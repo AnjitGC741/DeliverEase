@@ -13,9 +13,30 @@ use Illuminate\Support\Facades\Session;
 class CustomerController extends Controller
 {
     public function userProfile()
-    {   
+    {   if(session()->has('myFavoriteValue'))
+        {
+        session::pull('myFavoriteValue');
+        }
         $data = customer::find(session()->get('loginCustomerId'));
         return view('user-profile',['userData'=>$data]);
+    }
+    public function userProfileMyFavorite()
+    {
+        session()->put('myFavoriteValue',1);
+        $data = customer::find(session()->get('loginCustomerId'));
+        return view('user-profile',['userData'=>$data]);
+    }
+    public function saveUserProfileInfo(Request $req)
+    {
+        $req->validate([
+            'customerName'=>'required',
+        ]);
+      
+        $customerDetail = customer::find((session()->get('loginCustomerId')));  
+        $customerDetail->customerName = $req->customerName;
+        $customerDetail->customerNumber= $req->customerNumber;
+        $customerDetail->save();
+        return back();
     }
     public function loginUser(Request $req)
     { 

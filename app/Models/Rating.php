@@ -13,7 +13,6 @@ class Rating extends Model
     {
         return $this->belongsTo(Restaurant::class);
     }
-
     public function customers()
     {
         return $this->belongsTo(customer::class);

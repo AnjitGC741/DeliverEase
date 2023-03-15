@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class customer extends Model
 {
     use HasFactory;
-    protected $fillable = ['customerName','email','password','img'];
+    protected $fillable = ['customerName','email','password','customerNumber'];
     public function ratings()
     {
     return $this->hasMany(Rating::class);

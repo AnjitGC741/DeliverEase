@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Customermessage extends Model
 {
     use HasFactory;
-    protected $fillable = ['customerMsg','restaurant_id','customer_id'];
+    protected $fillable = ['customerMsg','customerName','restaurant_id','customer_id'];
     public function restaurants()
     {
         return $this->belongsTo(Restaurant::class);

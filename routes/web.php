@@ -11,6 +11,7 @@ use App\Models\Restaurant;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CustomermessageController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderDetailController;
@@ -59,7 +60,6 @@ Route::post('/dashboard/add-location',[SuperAdmin::class,'addLocation'])->name('
 Route::post('/dashboard/add-Cuisine',[SuperAdmin::class,'addCuisine'])->name('add-cuisine');
 Route::post('/dashboard/delete-location',[SuperAdmin::class,'deleteLocation'])->name('delete-location');
 Route::post('/dashboard/delete-cuisine',[SuperAdmin::class,'deleteCuisine'])->name('delete-cuisine');
-
 //for restaurant
 Route::get('/browse-by-cuisine/{cuisine}',[RestaurantController::class,'browseByCuisine']);
 Route::post('/search-food',[RestaurantController::class,'searchFood'])->name('search-food');
@@ -87,6 +87,8 @@ Route::post('/restaurant-admin-page/add-image-restaurant',[RestaurantController:
 Route::post('/restaurant-admin-page/delete-image-restaurant',[RestaurantController::class,'deleteImageRestaurant'])->name('delete-image-restaurant');
 // for Customer
 Route::get('/user-profile',[CustomerController::class,'userProfile']);
+Route::get('/user-profile/my-favorite',[CustomerController::class,'userProfileMyFavorite']);
+Route::post('/save-userprofile-info',[CustomerController::class,'saveUserProfileInfo'])->name('edit-userprofile-info');
 Route::post('/login',[CustomerController::class,'loginUser'])->name('login-user');
 Route::get('/logout',[CustomerController::class,'logout']);
 Route::post('/signup',[CustomerController::class,'registerUser'])->name('register-user');
@@ -113,3 +115,5 @@ Route::get('reject-food/{id}',[OrderDetailController::class,'rejectFood']);
 // for favorite
 Route::post('/remove-from-favorite',[FavoriteController::class,'removeFromFavorite'])->name('remove-from-favorite');
 Route::post('/add-to-favorite',[FavoriteController::class,'addToFavorite'])->name('add-to-favorite');
+// customer rating and message
+Route::post('/save-rating-message',[CustomermessageController::class,'saveRatingMessage'])->name('save-rating-message');

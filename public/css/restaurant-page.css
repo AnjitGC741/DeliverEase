@@ -294,19 +294,83 @@ a{
   display: block;
 }
 /* restaurant-customer-review */
+.customer-review-and-write-review{
+  display: flex;
+}
 .restaurant-customer-review {
   width: 100%;
   position: absolute;
 }
+/* customer message collection */
+.customer-review-collection{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 2rem 0;
+  width: 50%;
+}
+.customer-review-box{
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.customer-review-img-name{
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 0!important;
+}
+.customer-review-letter{
+  width: 3.5rem;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 1.6rem;
+  padding: 0.5rem 0;
+  color: #fff;
+  background-color: #FF7F00;
+  font-weight: 500;
+}
+.customer-review-name{
+  font-size: 1.4rem;
+  letter-spacing: 1.2px;
+}
+.customer-review-rate-date{
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.star-display{
+  font-size: 1.6rem;
+}
+.customer-review-date{
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+.customer-review-message{
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+}
+.write-review{
+  width: 50%;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  padding: 2rem;
+  position: sticky;
+}
+.write-review-text{
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+}
 /* take rating */
+.rating1{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
 .rating {
   position: relative;
   line-height: 10px;
   font-size: 2rem;
-}
-.form1{
-  display: flex;
-  gap: 2rem;
 }
 
 .rating label {
@@ -355,7 +419,7 @@ a{
 }
 
 .rating label:last-child .icon {
-  color: #000;
+  color: #8b8b8b;
 }
 
 .rating:not(:hover) label input:checked ~ .icon,
@@ -364,8 +428,11 @@ a{
 }
 
 .rating label input:focus:not(:checked) ~ .icon:last-child {
-  color: #000;
+  color: #8b8b8b;
   text-shadow: 0 0 5px #ffcd02;
+}
+.form2{
+  width: 60rem;
 }
 /* add to cart */
 .add-to-cart-btn{
