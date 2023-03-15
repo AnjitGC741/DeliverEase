@@ -115,7 +115,7 @@
     @endforeach      
     </div>
     </section>
-    <section class="how-it-works">
+    <!-- <section class="how-it-works">
       <div class="how-it-works-maindiv">
       <h2>How it works</h2>
       <p>Get your favorite food at 4 simple steps</p>
@@ -159,7 +159,7 @@
       </div>
 
       </div>
-    </section>
+    </section> -->
     <section class="customer-review">
       <div class="customer-review-maindiv">
        <h2>What our customer has to say</h2>

@@ -127,6 +127,7 @@
       </form>
     </div>
     <div class="cart-detail">
+      <h1>ORDER SUMMARY</h1>
       <p>{{$value->restaurantName}}</p>
     <table class="table">
         <tr>

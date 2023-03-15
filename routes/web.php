@@ -60,6 +60,13 @@ Route::post('/dashboard/add-location',[SuperAdmin::class,'addLocation'])->name('
 Route::post('/dashboard/add-Cuisine',[SuperAdmin::class,'addCuisine'])->name('add-cuisine');
 Route::post('/dashboard/delete-location',[SuperAdmin::class,'deleteLocation'])->name('delete-location');
 Route::post('/dashboard/delete-cuisine',[SuperAdmin::class,'deleteCuisine'])->name('delete-cuisine');
+Route::post('/dashboard/verify-restaurant',[SuperAdmin::class,'verifyRestaurant'])->name('verify-restaurant');
+Route::post('/dashboard/unblock-restaurant',[SuperAdmin::class,'unblockRestaurant'])->name('unblock-restaurant');
+Route::post('/dashboard/remove-restaurant',[SuperAdmin::class,'removeRestaurant'])->name('remove-restaurant');
+Route::post('/dashboard/block-restaurant',[SuperAdmin::class,'blockRestaurant'])->name('block-restaurant');
+Route::post('/dashboard/search-active-restaurant',[SuperAdmin::class,'searchActiveRestaurant'])->name('search-active-restaurant');
+Route::post('/dashboard/search-block-restaurant',[SuperAdmin::class,'searchBlockRestaurant'])->name('search-block-restaurant');
+Route::post('/dashboard/search-unverified-restaurant',[SuperAdmin::class,'searchUnverifiedRestaurant'])->name('search-unverified-restaurant');
 //for restaurant
 Route::get('/browse-by-cuisine/{cuisine}',[RestaurantController::class,'browseByCuisine']);
 Route::post('/search-food',[RestaurantController::class,'searchFood'])->name('search-food');
@@ -104,6 +111,7 @@ Route::get('/Login',[UserController::class,'login']);
 Route::post('/send-message',[ContactController::class,'sendEmail'])->name('contact.send');
 Route::get('/contact',[ContactController::class,'index'])->name('contact');
 // for Add to cart
+Route::get('/successful-order',[MyCartController::class,'successfulOrder']);
 Route::post('/restaurant-page/addToCart',[MyCartController::class,'addToCart'])->name('add-to-cart');
 Route::post('/my-cart/update-food-quantity',[MyCartController::class,'updateFoodQuantity'])->name('update-food-quantity');
 Route::get('/my-cart',[MyCartController::class,'myCart']);

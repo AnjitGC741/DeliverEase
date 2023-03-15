@@ -1,0 +1,40 @@
+/* nothing found div */
+.nothing-found-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.nothing-found-box img {
+    width: 25rem;
+    height: 25rem;
+}
+.nothing-found-box p {
+    font-size: 2.4rem;
+    letter-spacing: 1px;
+}
+.restaurant-type-btn {
+    border: none;
+    background: none;
+}
+.restaurant-type-btn:hover {
+    color: #ff7f00;
+}
+.restaurant-parent-box {
+    position: relative;
+    margin: 5rem 10rem;
+}
+.active-restaurant-list {
+    position: absolute;
+    width: 100%;
+}
+.blocked-restaurant-list {
+    position: absolute;
+    visibility: hidden;
+    width: 100%;
+}
+.unverified-restaurant-list {
+    position: absolute;
+    visibility: hidden;
+    width: 100%;
+}

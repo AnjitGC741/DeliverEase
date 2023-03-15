@@ -108,7 +108,11 @@ class MyCartController extends Controller
             $newOrder->save();
         }
          MyCart::where('customer_id','=',session()->get('loginCustomerId'))->where('restaurant_id','=',$req->restaurantId)->delete();
-         return redirect('/');
+         return redirect('/successful-order');
+    }
+    public function successfulOrder()
+    {
+        return view('order-successful');
     }
 }
 ?>
