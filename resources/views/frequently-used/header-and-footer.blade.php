@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,9 +28,7 @@
     <link rel="stylesheet" href="/css/checkout.css">
     <title>@yield('title')</title>
     <link rel="shortcut icon" href="/favicon/favicon1.ico" type="image/x-icon">
-
 </head>
-
 <body onload="topic();">
 <section class="navbar1">
     <div class="logo">
@@ -39,11 +36,11 @@
     </div>
     <div class="nav-links">
       <ul>
-        <li><a href="{{url('/')}}">Home</a></li>
-        <li><a href="{{url('/restaurant-signup1')}}">Add Resturant</a></li>
-        <li><a href="#">Deliver Food</a></li>
-        <li><a href="{{url('/aboutus')}}">About</a></li>
-        <li><a href="{{route('contact')}}">Contact</a></li>
+        <li><a style="text-decoration: none;" href="{{url('/')}}">Home</a></li>
+        <li><a style="text-decoration: none;"  href="{{url('/restaurant-signup1')}}">Add Resturant</a></li>
+        <li><a style="text-decoration: none;"  href="#">Deliver Food</a></li>
+        <li><a style="text-decoration: none;"  href="{{url('/aboutus')}}">About</a></li>
+        <li><a style="text-decoration: none;"  href="{{route('contact')}}">Contact</a></li>
       </ul>
     </div>
     @if((session()->get('loginCustomer')) === null)
@@ -101,16 +98,16 @@
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Get help</h4>
+                    <h4>Cuisine</h4>
                     <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Terms & conditions</a></li>
-                        <li><a href="#">Privacy policy</a></li>
-                        <li><a href="#">order status</a></li>
-                        <li><a href="#">payment options</a></li>
+                    @php
+                    $cuisines = App\Models\Cuisine::all();
+                    @endphp
+                    @foreach($cuisines as $cuisine)
+                        <li><a href="#">{{$cuisine->cuisineName}}</a></li>
+                    @endforeach
                     </ul>
                 </div>
-
                 <div class="footer-col">
                     <h4>Follow us</h4>
                     <div class="social-links">
@@ -124,5 +121,4 @@
         </div>
     </footer>
 </body>
-
 </html>

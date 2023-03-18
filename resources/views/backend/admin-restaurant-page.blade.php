@@ -102,6 +102,12 @@ $orderCount =1;
           </select>
         </div>
       </div>
+      @if($food->discountAmount != 0)
+      <div class="mb-3">
+        <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Discount Amount</label>
+        <input type="text" style="letter-spacing: 0.8px;" class="form-control fs-4" name="foodType" id="foodType" value="{{$food->discountAmount}}">
+      </div>
+      @endif
       <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Food Image</label>
         <input type="file" style="letter-spacing: 0.8px;" name="foodImg" class="form-control fs-4" id="foodImg" value="{{ asset('/storage/'.$food->foodImg) }}">
@@ -147,6 +153,26 @@ $orderCount =1;
       <button style="width: 100%; height: 50px;" class=" fs-4 mt-3 btn btn-success">Update</button>
     </form>
   </div>
+  @foreach($value->food as $food)
+  <div class="giveDiscount" id="giveDiscount_{{$food->id}}">
+  <h2>Give discount to {{$food->foodName}}</h2>
+  <hr>
+  <form action="{{route('add-discount')}}" method="POST">
+    @csrf
+    <input type="text" hidden name="foodId" value="{{$food->id}}">
+    <input type="text" hidden name="restaurantId" value="{{$value->id}}">
+  <div class="mb-3">
+        <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Original Price</label>
+        <input style="letter-spacing: 0.8px;" type="text" readonly class="form-control fs-4" value="{{$food->price}}">
+      </div>
+      <div class="mb-3">
+        <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Discount Price</label>
+        <input type="text" style="letter-spacing: 0.8px;" class="form-control fs-4" name="discountAmount">
+      </div>
+      <button type="submit" style="width: 100%; height: 50px;letter-spacing:1px;" class=" fs-2 mt-3 btn btn-success">Add Discount</button>
+  </form>
+  </div>
+  @endforeach
   <div class="addFood" id="addFood">
     @if(Session::has('fail'))
     <div class="alert text-center alert-danger" role="alert">
@@ -378,8 +404,9 @@ $orderCount =1;
             <th style="padding-top:15px;padding-left:25px">Category</th>
             <th style="padding-top:15px;padding-left:25px">Food Type</th>
             <th style="padding-top:15px;padding-left:25px">Price</th>
+            <th style="padding-top:15px;padding-left:25px">Discount Amount</th>
             <th style="padding-top:15px;padding-left:25px">Quantity</th>
-            <th style="padding:15px 0 0 60px;padding-left:25px" colspan="3">Action</th>
+            <th style="padding:15px 0 0 60px;padding-left:140px" colspan="3">Action</th>
           </tr>
           @foreach ($value->food as $food)
           <tr>
@@ -389,11 +416,25 @@ $orderCount =1;
             <td class="fs-3" style="padding-top:40px;padding-left:25px">{{$food->category}}</td>
             <td class="fs-3" style="padding-top:40px;padding-left:25px">{{$food->foodType}}</td>
             <td class="fs-3" style="padding-top:40px;padding-left:25px">{{$food->price}}</td>
+            <td class="fs-3" style="padding-top:40px;padding-left:25px">{{$food->discountAmount}}</td>
             <td class="fs-3" style="padding-top:40px;padding-left:25px">{{$food->quantity}}</td>
             <td style="padding-top:40px;padding-left:25px">
-              <a href="{{url('make-food-unavailable/'.$food->id)}}"><button class="btn btn-primary fs-4">Make Unavailable</button></a>
+            <div class="d-flex">
+            <a href="{{url('make-food-unavailable/'.$food->id)}}"><button class="btn btn-primary fs-4">Make Unavailable</button></a>
+              
               <button id="{{$food->id}}" onclick="openFoodEditBox(this.id);" class="btn btn-warning fs-4" style="margin-left:10px">Edit</button>
-              <button class="btn btn-success fs-4" style="margin-left:10px;">Provide Discount</button>
+            
+              @if($food->discountAmount == 0)
+              <button  id="{{$food->id}}" class="btn btn-success fs-4" onclick="openGiveDiscountBox(this.id);" style="margin-left:10px;">Give Discount</button>
+              @else
+              <form action="{{route('remove-discount')}}" method="POST">
+                @csrf
+                 <input type="text" hidden name="foodId" value="{{$food->id}}">
+                 <input type="text" hidden name="restaurantId" value="{{$value->id}}">
+                <button type="submit"  class="btn btn-danger fs-4" style="margin-left:10px;">Remove Discount</button>
+              </form>
+              @endif
+              </div>
             </td>
           </tr>
           @endforeach

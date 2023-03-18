@@ -5,14 +5,14 @@ window.onload = function() {
   var childHeight = child.offsetHeight;
   document.getElementById("multiple-div").style.height = childHeight + "px";
 };
-function plus(){
-  var quantity=document.getElementById("foodQuantity").value;
+function plus(value){
+  var quantity=document.getElementById("foodQuantity_"+value).value;
   quantity++;
   document.getElementById("funnyBox").style.visibility="hidden";
-  document.getElementById("foodQuantity").value = quantity;
+  document.getElementById("foodQuantity_"+value).value = quantity;
 }
-function minus(){
-  var quantity=document.getElementById("foodQuantity").value;
+function minus(value){
+  var quantity=document.getElementById("foodQuantity_"+value).value;
   if(quantity > 1)
   {
   quantity--;
@@ -21,7 +21,7 @@ function minus(){
   {
     document.getElementById("funnyBox").style.visibility="visible";
   }
-  document.getElementById("foodQuantity").value = quantity;
+  document.getElementById("foodQuantity_"+value).value = quantity;
 }
 function toggleMenu(){
 let subMenu = document.getElementById("subMenu");

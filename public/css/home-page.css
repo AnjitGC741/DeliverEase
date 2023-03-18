@@ -218,10 +218,23 @@
   .restaurant-coverImg{
     width: 25rem;
     height: 15rem;
+    position: relative;
   }
   .restaurant-coverImg img{
     height: 100%;
     width: 100%;
+  }
+  .discount-tag{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: white;
+    background-color:#E67A00;
+    font-size: 1.4rem;
+    letter-spacing: 0.1rem;
+    padding: 5px 2px;
+    width: 200px;
+    
   }
   .restaurant-info{
     border: none;

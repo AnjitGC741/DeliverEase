@@ -86,7 +86,6 @@ Route::post('/restaurant-signup2',[RestaurantController::class,'saveRestaurantDe
 Route::post('/restaurant-signup3',[RestaurantController::class,'saveRestaurantLoginInfo'])->name('save-restaurant-loginInfo');
 // Route::post('/restaurant-admin-page',[RestaurantController::class, 'updateRestaurantLoginInfo'])->name('update-restaurant-loginInfo');
 Route::post('/restaurant-admin-page',[RestaurantController::class, 'updateRestaurantInfo'])->name('update-Restaurant-Info');
-Route::post('/restaurant-admin-page/editFoodInfo',[FoodController::class,'updateFoodInfo'])->name('update-food-Info');
 Route::post('/restaurant-admin-page/updateRestaurantCoverImg',[RestaurantController::class,'changeRestaurantCoverImg'])->name('changeBackgroundImg');
 Route::post('/restaurant-admin-page/deleteRestaurantCoverImg',[RestaurantController::class,'deleteRestaurantCoverImg'])->name('deleteBackgroundImg');
 Route::post('/restaurant-admin-page/updateRestaurantProfileImg',[RestaurantController::class,'changeRestaurantProfileImg'])->name('changeProfileImg');
@@ -103,7 +102,10 @@ Route::post('/signup',[CustomerController::class,'registerUser'])->name('registe
 Route::get('auth/google',[CustomerController::class,'redirect'])->name('google-auth');
 Route::get('auth/google/call-back',[CustomerController::class,'callbackGoogle']);
 // for food
+Route::post('/restaurant-admin-page/editFoodInfo',[FoodController::class,'updateFoodInfo'])->name('update-food-Info');
 Route::post('/restaurant-admin-page/saveFoodInfo',[FoodController::class,'saveFood'])->name('save-food-info');
+Route::post('/restaurant-admin-page/remove-discount',[FoodController::class,'removeDiscount'])->name('remove-discount');
+Route::post('/restaurant-admin-page/add-discount',[FoodController::class,'addDiscount'])->name('add-discount');
 Route::get('make-food-unavailable/{id}',[FoodController::class,'makeFoodUnavailable']);
 Route::get('restore-food/{id}',[FoodController::class,'restoreFood']);
 Route::get('force-delete-food/{id}',[FoodController::class,'forceDeleteFood']);

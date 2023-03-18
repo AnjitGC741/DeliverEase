@@ -27,11 +27,11 @@ class MyCartController extends Controller
             $foodValue = Food::find($req->foodId);
             $save =MyCart::create([
                'foodQuantity'=>1,
-               'foodPrice'=>  $foodValue->price,
+               'foodPrice'=>  ($foodValue->discountAmount ? $foodValue->discountAmount : $foodValue->price),
                'cartFoodImg'=>$foodValue->foodImg,
                'foodName'=>$foodValue->foodName,
                'foodType'=>$foodValue->foodType,
-               'total'=>1* $foodValue->price,
+               'total'=>1* ($foodValue->discountAmount ? $foodValue->discountAmount : $foodValue->price),
                'restaurant_id'=>  $req->restaurantId,
                'customer_id'=> session()->get('loginCustomerId'),
                'food_id'=>  $req->foodId,

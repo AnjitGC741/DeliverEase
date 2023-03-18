@@ -72,5 +72,42 @@ class FoodController extends Controller
         $updateRestaurantInfo->save();
         return redirect('restaurant-admin-page/'.$req->restaurantId);
     }
+    // for discount
+    public function addDiscount(Request $req)
+    {
+        $addDiscount = Food::find($req->foodId);
+        $discountRestaurant = Restaurant::find($req->restaurantId);
+        $addDiscount->discountAmount= $req->discountAmount;
+        $discountRestaurant->discount=1;
+        $discountRestaurant->save();
+        $addDiscount->save();
+        return back();
+    }
+    public function removeDiscount(Request $req)
+    {
+        $flag = 0;
+        $discountRestaurant = Restaurant::find($req->restaurantId);
+        $removeDiscount = Food::find($req->foodId);
+        $removeDiscount->discountAmount= 0;
+        $removeDiscount->save();
+        $checkDiscount = Food::where('restaurant_id','=',$req->restaurantId)->get();
+        foreach ($checkDiscount as $discount) {
+            if($discount->discountAmount != 0)
+            {
+                $flag++;
+                break;
+            }
+        }
+        if($flag == 0)
+        {
+            $discountRestaurant->discount=0;
+        }
+        else
+        {
+            $discountRestaurant->discount=1;
+        }
+        $discountRestaurant->save();
+        return back();
+    }
 
 }

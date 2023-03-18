@@ -173,6 +173,18 @@
 .for-food-img{
   width: 25rem;
   height: 20rem;
+  position: relative;
+}
+.discount-tag{
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: white;
+  background-color:#E67A00;
+  font-size: 1.4rem;
+  letter-spacing: 0.1rem;
+  padding: 5px 10px;
+  width: 100px;
 }
 .for-food-img img{
   width: 100%;
