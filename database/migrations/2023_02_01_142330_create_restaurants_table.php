@@ -23,6 +23,9 @@ return new class extends Migration
             $table->string('street')->nullable();
             $table->string('cuisine')->nullable();
             $table->string('service')->nullable();
+            $table->time('openTime')->nullable();
+            $table->time('closeTime')->nullable();
+            $table->string('discount')->nullable()->default(0);
             $table->unsignedBigInteger('minimumOrder')->nullable();
             $table->string('status')->nullable()->default(1);
             $table->string('verification')->nullable()->default(0);

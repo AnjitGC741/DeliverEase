@@ -118,6 +118,21 @@ visibility: hidden;
   font-weight: 400;
   letter-spacing: 0.8px;
 }
+.giveDiscount{
+  min-width: 50rem;
+  padding:30px;
+  border:1px solid #939292;
+  position: fixed;
+  z-index: 99;
+  margin:130px 500px;
+  background-color: #ffffff;
+  visibility: hidden;
+}
+.giveDiscount h2{
+  margin-bottom: 10px;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+}
 .addImage{
   min-width: 50rem;
   padding:30px;

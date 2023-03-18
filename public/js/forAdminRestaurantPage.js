@@ -1,5 +1,6 @@
-let idValue;
-let idValueNew;
+let idValue1=0;
+let idValueNew=0;
+let discountId=0;
 var fileInput=document.querySelector("#change");
 var fileInput2=document.querySelector("#change2");
 fileInput.addEventListener("change",function(){
@@ -65,19 +66,25 @@ function displayAddImage()
 }
 function hideAll()
 {
+  document.getElementById("editFood_"+idValue1).style.visibility = "hidden";
   document.getElementById('blurBox').style.visibility="hidden";
+  document.getElementById("giveDiscount_"+discountId).style.visibility="hidden";
+  document.getElementById("viewOrderDetail_"+idValueNew).style.visibility = "hidden";
   document.getElementById('editProfileForm').style.visibility="hidden";
   document.getElementById('editLoginInfo').style.visibility="hidden";
   document.getElementById('addFood').style.visibility="hidden";
   document.getElementById('addImage').style.visibility="hidden";
-  document.getElementById("editFood_"+idValue).style.visibility = "hidden";
-  document.getElementById("viewOrderDetail_"+idValueNew).style.visibility = "hidden";
 }
 function openFoodEditBox(x)
 {
-    idValue=x; 
+    idValue1=x; 
     document.getElementById("editFood_"+x).style.visibility = "visible";
     document.getElementById('blurBox').style.visibility="visible";
+}
+function openGiveDiscountBox(z){
+  discountId=z;
+  document.getElementById('blurBox').style.visibility="visible";
+  document.getElementById("giveDiscount_"+z).style.visibility="visible";
 }
 function displayFoodSection()
 {

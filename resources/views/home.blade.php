@@ -44,7 +44,6 @@
     @endforeach
   </div>
 </div>
-
 <section class="featured-restaurant">
   <div class="title-and-link">
     <h2>Featured Restaurant</h2>
@@ -63,6 +62,9 @@
                             <img src="/img/rest1.jpg" alt="restaurant img" />
                         @else
                             <img src="{{ asset('/storage/'.$restaurant->restaurantCoverImg) }}">
+                        @endif
+                        @if($restaurant->discount != 0)
+                        <p class="discount-tag">Discount Available</p>
                         @endif
                     </div>
                 </button>

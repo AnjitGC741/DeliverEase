@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('category');
             $table->String('foodType');
             $table->integer('price');
+            $table->integer('discountAmount')->default(0);
             $table->String('quantity');
             $table->string('foodImg',255);
             $table->unsignedBigInteger('restaurant_id');

@@ -28,9 +28,9 @@ $sn = 1;
         @csrf
         <input type="number" hidden value="{{$cart->foodPrice}}" name="price">
         <input type="text" hidden value="{{$cart->id}}" name="cartId">
-        <button type="button" class="btn btn-danger" onclick="minus();">-</button>
-        <input type="text" class="form-control" name="foodQuantity" id="foodQuantity" value="{{$cart->foodQuantity}}">
-        <button type="button" class="btn btn-success" onclick="plus();">+</button>
+        <button type="button" id="{{$cart->id}}" class="btn btn-danger" onclick="minus(this.id);">-</button>
+        <input type="text" class="form-control" name="foodQuantity" id="foodQuantity_{{$cart->id}}" value="{{$cart->foodQuantity}}">
+        <button type="button" id="{{$cart->id}}" class="btn btn-success" onclick="plus(this.id);">+</button>
     </div>
     <button type="submit" class="btn btn-warning w-100">Update</button>
     </form>
@@ -160,7 +160,7 @@ $sn = 1;
       <hr width="80px;margin-top:-50px;">
       <ul>
         @foreach($foods->pluck('category')->unique() as $category)
-        <li class="food-category-links"><a href="#{{$category}}">{{$category}}</a></li>
+        <li class="food-category-links"><a href="#{{$category}}" style="text-decoration: none;">{{$category}}</a></li>
         @endforeach
       </ul>
     </div>
@@ -178,10 +178,19 @@ $sn = 1;
               <input type="text" hidden name="restaurantId" value="{{$value->id}}">
               <div class="for-food-img">
                 <img src="{{ asset('/storage/'.$food->foodImg) }}" alt="">
+                @if($food->discountAmount != 0)
+                <p class="discount-tag">Rs {{$food->price - $food->discountAmount}} OFF</p>
+                @endif
               </div>
               <div class="for-food-description">
                 <p class="food-name">{{$food->foodName}}</p>
-                <p class="food-price">Rs {{$food->price}} per {{$food->quantity}}</p>
+                <p class="food-price"> @if($food->discountAmount != 0)
+                  <del style="color:red;">Rs {{$food->price}}</del>
+                  Rs {{$food->discountAmount}}
+                  @else
+                  Rs {{$food->price}}
+                  @endif
+                   per {{$food->quantity}}</p>
                 @if((session()->get('loginCustomerId')) != null)
                 @php
                 $id = $food->id;
