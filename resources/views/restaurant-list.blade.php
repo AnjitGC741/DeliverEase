@@ -1,6 +1,7 @@
 @extends('/frequently-used/header-and-footer')
 @section('title','Restaurant')
 @section('other-content')
+<link rel="stylesheet" href="/css/restaurant-list.css">
 <section class="resturant-section1">
         <div class="img-section">
             <img src="/img/try6.jpg" alt="" />

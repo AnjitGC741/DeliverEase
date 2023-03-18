@@ -585,3 +585,71 @@ th{
   letter-spacing: 1px;
   margin-bottom: 0!important;
 }
+.recent-history-btn-ul{
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px 0;
+  padding-left: 0!important;
+}
+.recent-history-btn-ul li{
+  list-style: none;
+}
+.recent-history-btn{
+  background: none;
+  font-size: 1.6rem;
+  border: none;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+.recent-history-btn:hover{
+  color: #FF7F00;
+}
+.recent-history-order{
+  width: 100%;
+  position: relative;
+}
+.food-order-lists{
+  width: 100%;
+  background-color: #F5F4F7;
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  position: absolute;
+  visibility: hidden;
+}
+.view-order-detail{
+  border:1px solid #939292;
+  position: fixed;
+  z-index: 99;
+  margin:180px 600px;
+  background-color: #ffffff;
+  visibility: hidden;
+}
+.food-order-history-lists{
+  position: absolute;
+  z-index: 92;
+  width: 100%;
+  visibility: hidden;
+  padding: 2rem;
+}
+.pending{
+  background-color: #F2DCF5;
+  color: #B451C4;
+  text-align: center;
+  border-radius:10px ;
+}
+.delivered{
+  background-color: #D0E7DC;
+  color: #218C59;
+  text-align: center;
+  border-radius:10px ;
+}
+.rejected{
+  background-color: #e5b6b6;
+  color: #8c2121;
+  text-align: center;
+  border-radius:10px ;
+  font-size: 1.4rem;
+}

@@ -1,4 +1,5 @@
 let idValue;
+let idValueNew;
 var fileInput=document.querySelector("#change");
 var fileInput2=document.querySelector("#change2");
 fileInput.addEventListener("change",function(){
@@ -70,6 +71,7 @@ function hideAll()
   document.getElementById('addFood').style.visibility="hidden";
   document.getElementById('addImage').style.visibility="hidden";
   document.getElementById("editFood_"+idValue).style.visibility = "hidden";
+  document.getElementById("viewOrderDetail_"+idValueNew).style.visibility = "hidden";
 }
 function openFoodEditBox(x)
 {
@@ -91,6 +93,8 @@ function displayFoodSection()
   document.getElementById("analysis-section-btn").classList.remove("active");
   document.getElementById("customer-review-section-btn").classList.remove("active");
   document.getElementById("photo-gallary-section-btn").classList.remove("active");
+  document.getElementById("food-order-lists").style.visibility = "hidden";
+  document.getElementById("food-order-history-lists").style.visibility = "hidden";
 }
 function displayUnavailableFoodSection()
 {
@@ -106,6 +110,8 @@ function displayUnavailableFoodSection()
   document.getElementById("analysis-section-btn").classList.remove("active");
   document.getElementById("customer-review-section-btn").classList.remove("active");
   document.getElementById("photo-gallary-section-btn").classList.remove("active");
+  document.getElementById("food-order-lists").style.visibility = "hidden";
+  document.getElementById("food-order-history-lists").style.visibility = "hidden";
 
 }
 function displayOrderSection()
@@ -116,6 +122,7 @@ function displayOrderSection()
   document.getElementById("photo-gallary-section").style.visibility = "hidden";
   document.getElementById("analysis-section").style.visibility = "hidden";
   document.getElementById("customer-review-section").style.visibility = "hidden";
+  document.getElementById("food-order-lists").style.visibility = "visible";
   document.getElementById("food-section-btn").classList.remove("active");
   document.getElementById("unavailable-food-section-btn").classList.remove("active");
   document.getElementById("order-section-btn").classList.add("active");
@@ -137,6 +144,8 @@ function displayAnalysisSection()
   document.getElementById("analysis-section-btn").classList.add("active");
   document.getElementById("customer-review-section-btn").classList.remove("active");
   document.getElementById("photo-gallary-section-btn").classList.remove("active");
+  document.getElementById("food-order-lists").style.visibility = "hidden";
+  document.getElementById("food-order-history-lists").style.visibility = "hidden";
 }
 function displayPhotoGallarySection()
 {
@@ -152,6 +161,8 @@ function displayPhotoGallarySection()
   document.getElementById("analysis-section-btn").classList.remove("active");
   document.getElementById("customer-review-section-btn").classList.remove("active");
   document.getElementById("photo-gallary-section-btn").classList.add("active");
+  document.getElementById("food-order-lists").style.visibility = "hidden";
+  document.getElementById("food-order-history-lists").style.visibility = "hidden";
 }
 function displayCustomerReviewSection()
 {
@@ -167,4 +178,21 @@ function displayCustomerReviewSection()
   document.getElementById("analysis-section-btn").classList.remove("active");
   document.getElementById("customer-review-section-btn").classList.add("active");
   document.getElementById("photo-gallary-section-btn").classList.remove("active");
+  document.getElementById("food-order-lists").style.visibility = "hidden";
+  document.getElementById("food-order-history-lists").style.visibility = "hidden";
+}
+function displayRecentOrder(){
+  document.getElementById("food-order-lists").style.visibility = "visible";
+  document.getElementById("food-order-history-lists").style.visibility = "hidden";
+  
+}
+function displayOrderHistory(){
+  document.getElementById("food-order-lists").style.visibility = "hidden";
+  document.getElementById("food-order-history-lists").style.visibility = "visible";
+}
+function showOrderFoodDetail(y)
+{
+    idValueNew=y; 
+    document.getElementById("viewOrderDetail_"+y).style.visibility = "visible";
+    document.getElementById('blurBox').style.visibility="visible";
 }
