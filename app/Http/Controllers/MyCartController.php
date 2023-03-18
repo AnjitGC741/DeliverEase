@@ -7,6 +7,7 @@ use App\Models\Food;
 use App\Models\Orderdetail;
 use App\Models\Orderfood;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class MyCartController extends Controller
 {
@@ -66,18 +67,53 @@ class MyCartController extends Controller
     }
     public function saveCheckoutInfo(Request $req)
     {
-        $req -> validate([
-            'firstName' => 'required',
-            'lastName' => 'required',
-            'streetName' => 'required',
-            'cityName'=>'required',
-            'detailAddress' => 'required',
-            'serviceDate' => 'required',
-            'serviceTime' => 'required',
-            'serviceType' => 'required',
-            'paymentMethod' => 'required'
+        // $req -> validate([
+        //     'firstName' => 'required',
+        //     'lastName' => 'required',
+        //     'streetName' => 'required',
+        //     'cityName'=>'required',
+        //     'detailAddress' => 'required',
+        //     'serviceDate' => 'required',
+        //     'serviceTime' => 'required',
+        //     'serviceType' => 'required',
+        //     'paymentMethod' => 'required'
             
-        ]);
+        // ]);
+        // $currentTime = \Carbon\Carbon::now('Asia/Kathmandu');
+        // $currentTime2= Carbon::createFromFormat('Y-m-d H:i:s', $currentTime);
+        // $deliveryDateTime = Carbon::createFromFormat('Y-m-d', $req->serviceDate);
+        // $deliveryDateTime->setTimeFromTimeString($req->serviceTime);
+        // $formattedDeliveryDateTime = $deliveryDateTime->format('Y-m-d H:i:s');
+        // $deliveryDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $formattedDeliveryDateTime);
+        // $diffInHours = $currentTime2->diffInHours($deliveryDateTime);
+        // $diff = $deliveryDateTime->diffAsCarbonInterval($currentTime2);
+    //    dd( $diff->format('%R%d days, %H hours, %I minutes, %S seconds'));
+        // if ($currentTime2->greaterThan($deliveryDateTime)) {
+        //     dd("current time is greater"," $currentTime2","  $deliveryDateTime ");
+        // }
+        // else
+        // {
+        //     dd("delivery time is greater"," $currentTime2","  $deliveryDateTime ");
+        // }
+        $currentTime = \Carbon\Carbon::now('Asia/Kathmandu');
+        $deliveryDateTime = Carbon::createFromFormat('Y-m-d', $req->serviceDate);
+        $deliveryDateTime->setTimeFromTimeString($req->serviceTime);
+        $formattedDeliveryDateTime = $deliveryDateTime->format('Y-m-d H:i:s');
+        // $deliveryDateTime = Carbon::createFromFormat('Y-m-d', $req->serviceDate);
+        // $deliveryDateTime->setTimeFromTimeString($req->serviceTime);
+        // $diffInHours = $currentTime->diffInHours($deliveryDateTime);
+        $diffInMinutes = $currentTime->floatDiffInMinutes($formattedDeliveryDateTime);
+        if($diffInMinutes < 60)
+        {
+            dd("The differece is less than one hours"," $diffInMinutes","$currentTime","$formattedDeliveryDateTime");
+        }
+        else if($diffInMinutes > 60){
+            dd("The difference is more than one hours"," $diffInMinutes","$currentTime","$formattedDeliveryDateTime");
+        }
+        else{
+            dd("It is equal"," $diffInMinutes","$currentTime","$formattedDeliveryDateTime");
+        }
+        dd("It didnot worked");
          $save = Orderdetail::create([
             'customerName'=>$req->firstName.' '.$req->lastName,
             'contactNumber'=>  $req->contactNumber,

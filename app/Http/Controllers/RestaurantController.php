@@ -36,6 +36,11 @@ class RestaurantController extends Controller
             ->get();
         return view('restaurant-list', compact('restaurants'));
     }
+    public function returnRestaurant()
+    {
+        $restaurants = Restaurant::all();
+        return view('restaurant-list', compact('restaurants'));
+    }
     public function browseByCuisine($cuisine)
     {
         $restaurants = Restaurant::where('restaurantName', 'like', '%' . $cuisine . '%')

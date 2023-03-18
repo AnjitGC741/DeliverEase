@@ -204,7 +204,7 @@ $totalPokhara =  DB::table('restaurants')->where('city', '=', 'pokhara')->count(
     </div>
 
  </div>
- <script src="/js/dashboard.js"></script>
+ <script src="./js/dashboard.js"></script>
  <script>
         const ctx = document.getElementById("myChart").getContext('2d');
         const myChart = new Chart(ctx, {

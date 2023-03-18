@@ -8225,7 +8225,7 @@ h1, h2, h3, h4, h5,
   max-width: 300px;
   background: #1d1919;
   color: #fff;
-  height: 400vh;
+  height: 300vh;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s; }
@@ -8241,7 +8241,9 @@ h1, h2, h3, h4, h5,
   #sidebar ul.components {
     padding: 0; }
   #sidebar ul li {
-    font-size: 16px; }
+    font-size: 16px; 
+    margin-bottom: 20px;
+  }
     #sidebar ul li > ul {
       margin-left: 10px; }
       #sidebar ul li > ul li {
