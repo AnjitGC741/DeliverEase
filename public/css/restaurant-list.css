@@ -215,62 +215,101 @@ a{
   background-color: rgba(203, 203, 203, 0.5);
 }
 /* new */
-.restaurant-btn{
-  background: none;
-  border: none;
-  cursor: pointer;
-}
 .restaurant-directory{
   max-width: 130rem;
-  min-height: 60vh;
-  margin: 0 auto;
-  margin-top: 20px;
+  min-height: 40rem;
+  margin: 10px auto;
   display: flex;
   gap: 30px;
   flex-wrap: wrap;
   padding: 0 40px 40px 40px;
-  margin-top: 40px;
 }
-.restaurant-directory .restaurant-details:hover{
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-.restaurant-directory .restaurant-details{
-  width: 28rem;
-  border: 1px solid  rgb(214, 214, 214);
-  border-radius: 5px;
+.restaurant-btn{
+  border: none;
+  background: none;
+  cursor: pointer;
   transition: all 0.3s;
-  overflow: hidden;
 }
-.restaurant-directory .restaurant-details .restaurant-logo{
-  width: 28rem;
-  height: 28rem;
+.restaurant-details{
+  width: 25rem;
+  height: 27.8rem;
+  border: 1px solid #d8d9db;
+  border-radius: 5px;
+  overflow: hidden!important;
+  margin-top: 20px;
+  transition: all 0.3s;
 }
-.restaurant-directory .restaurant-details .restaurant-logo img{
-  width: 100%;
+.restaurant-details:hover{
+ margin-top: 10px;
+ box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+.restaurant-coverImg{
+  width: 25rem;
+  height: 15rem;
+  position: relative;
+}
+.restaurant-coverImg img{
   height: 100%;
+  width: 100%;
 }
-.restaurant-details .restaurant-info{
+.discount-tag{
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: white;
+  background-color:#E67A00;
+  font-size: 1.4rem;
+  letter-spacing: 0.1rem;
+  padding: 5px 2px;
+  width: 200px;
+  
+}
+.restaurant-info{
+  border: none;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: left;
-  align-items: left;
-  gap: 1.2rem;
-  padding: 20px 25px;
+  gap: 1rem;
 }
-.restaurant-details .restaurant-info .restaurant-name{
-  font-size: 2rem;
+.restaurant-name{
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+  letter-spacing: 0.8px;
 }
-.restaurant-details .restaurant-info p{
+.customer-review-rate{
+display: flex;
+gap:2rem;
+align-items: center;
+}
+.reviews-counts{
   font-size: 1.4rem;
-  letter-spacing: 1.5px;
+  font-weight: 400;
+  letter-spacing: 0.8px;
 }
-.restaurant-list-icon1{
-  font-size: 1.3rem;
-  color: #525252;
+.home-star{
+  font-size: 1.6rem;
+  color: gray;
 }
-.for-margin{
-  margin-right: 5px;
+.restaurant-cuisine-address{
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+.status{
+  width: 80px;
+  font-size: 1.2rem;
+  color: white;
+  padding: 6px 20px;
+  border-radius: 2px;
+}
+.open{
+  background-color: forestgreen;
+}
+.close{
+  background-color:rgb(222, 29, 29);
 }
 .for-status-favorite{
   display: flex;
@@ -282,17 +321,4 @@ a{
   border: none;
   font-size: 2.4rem;
   cursor: pointer;
-}
-.status{
-  width: 80px;
-  font-size: 1rem;
-  color: white;
-  padding: 6px 20px;
-  border-radius: 2px;
-}
-.open{
-  background-color: forestgreen;
-}
-.close{
-  background-color:red;
 }

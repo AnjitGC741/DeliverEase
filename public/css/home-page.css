@@ -370,3 +370,11 @@
     margin-bottom: 5px;
     letter-spacing: 1px;
   }
+  /* recentlty added restaurant */
+  .recently-added-restaurant
+  {
+    max-width: 130rem;
+    margin: 0 auto;
+    margin-bottom: 5rem;
+    padding: 20px 0;
+  }

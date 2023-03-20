@@ -2,6 +2,7 @@
 $sn=1;
 $orderCount =1;
 @endphp
+@inject('carbon', 'Carbon\Carbon')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,44 +32,44 @@ $orderCount =1;
   <div class="blur-box" id="blurBox" onclick="hideAll();">
   </div>
   @foreach($order as $orderData)
-<div class="view-order-detail" id="viewOrderDetail_{{$orderData->id}}">
-<div class="food-order-box">
-        <div class="order-time-and-user-profile">
-          <div class="order-time">
-            <p class="order-count">Order</p>
-			<p class="food-delivery-time">{{$orderData->serviceDate}},<span style="margin-left: 5px;">{{$orderData->serviceTime}}</span></p>
-            <p class="contact-name">{{$orderData->customerName}},<span style="margin-left: 5px;">{{$orderData->contactNumber}}</span></p>
-          </div>
-          <div class="user-profile">
-            <div class="user-text">
-				@php
-				$data = $orderData->customerName;
-				$upperData =strtoupper($data);
-				@endphp
-             <h2 style="margin-top: 4px;">
-             {{$upperData[0]}}
-             </h2> 
-            </div>
+  <div class="view-order-detail" id="viewOrderDetail_{{$orderData->id}}">
+    <div class="food-order-box">
+      <div class="order-time-and-user-profile">
+        <div class="order-time">
+          <p class="order-count">Order</p>
+          <p class="food-delivery-time">{{$orderData->serviceDate}},<span style="margin-left: 5px;">{{$orderData->serviceTime}}</span></p>
+          <p class="contact-name">{{$orderData->customerName}},<span style="margin-left: 5px;">{{$orderData->contactNumber}}</span></p>
+        </div>
+        <div class="user-profile">
+          <div class="user-text">
+            @php
+            $data = $orderData->customerName;
+            $upperData =strtoupper($data);
+            @endphp
+            <h2 style="margin-top: 4px;">
+              {{$upperData[0]}}
+            </h2>
           </div>
         </div>
-        @foreach ($orderData->orderfoods as $orderFood)
-		<div class="order-food-section">
-			<div class="order-food-img">
-			<img src="{{ asset('/storage/'.$orderFood->orderFoodImg) }}">
-			</div>
-			<div class="order-food-detail">
-			<p class="order-food-name">{{$orderFood -> orderFoodName}}</p>
-			<p class="order-food-type">Veg</p>
-			<div class="order-food-quantity-price">
-				<p class="order-food-price">Rs {{$orderFood ->orderFoodPrice}}</p>
-				<p class="order-food-quantity">Qty: {{$orderFood ->orderFoodQuantity}}</p>
-			</div>
-			</div>
-		</div>
-  @endforeach
       </div>
-</div>
-@endforeach
+      @foreach ($orderData->orderfoods as $orderFood)
+      <div class="order-food-section">
+        <div class="order-food-img">
+          <img src="{{ asset('/storage/'.$orderFood->orderFoodImg) }}">
+        </div>
+        <div class="order-food-detail">
+          <p class="order-food-name">{{$orderFood -> orderFoodName}}</p>
+          <p class="order-food-type">Veg</p>
+          <div class="order-food-quantity-price">
+            <p class="order-food-price">Rs {{$orderFood ->orderFoodPrice}}</p>
+            <p class="order-food-quantity">Qty: {{$orderFood ->orderFoodQuantity}}</p>
+          </div>
+        </div>
+      </div>
+      @endforeach
+    </div>
+  </div>
+  @endforeach
   @foreach($value->food as $food)
   <div class="editFood" id="editFood_{{$food->id}}">
     <h2>Edit food information</h2>
@@ -155,13 +156,13 @@ $orderCount =1;
   </div>
   @foreach($value->food as $food)
   <div class="giveDiscount" id="giveDiscount_{{$food->id}}">
-  <h2>Give discount to {{$food->foodName}}</h2>
-  <hr>
-  <form action="{{route('add-discount')}}" method="POST">
-    @csrf
-    <input type="text" hidden name="foodId" value="{{$food->id}}">
-    <input type="text" hidden name="restaurantId" value="{{$value->id}}">
-  <div class="mb-3">
+    <h2>Give discount to {{$food->foodName}}</h2>
+    <hr>
+    <form action="{{route('add-discount')}}" method="POST">
+      @csrf
+      <input type="text" hidden name="foodId" value="{{$food->id}}">
+      <input type="text" hidden name="restaurantId" value="{{$value->id}}">
+      <div class="mb-3">
         <label class="fs-4 mb-1" style="letter-spacing: 0.8px;">Original Price</label>
         <input style="letter-spacing: 0.8px;" type="text" readonly class="form-control fs-4" value="{{$food->price}}">
       </div>
@@ -170,7 +171,7 @@ $orderCount =1;
         <input type="text" style="letter-spacing: 0.8px;" class="form-control fs-4" name="discountAmount">
       </div>
       <button type="submit" style="width: 100%; height: 50px;letter-spacing:1px;" class=" fs-2 mt-3 btn btn-success">Add Discount</button>
-  </form>
+    </form>
   </div>
   @endforeach
   <div class="addFood" id="addFood">
@@ -419,21 +420,21 @@ $orderCount =1;
             <td class="fs-3" style="padding-top:40px;padding-left:25px">{{$food->discountAmount}}</td>
             <td class="fs-3" style="padding-top:40px;padding-left:25px">{{$food->quantity}}</td>
             <td style="padding-top:40px;padding-left:25px">
-            <div class="d-flex">
-            <a href="{{url('make-food-unavailable/'.$food->id)}}"><button class="btn btn-primary fs-4">Make Unavailable</button></a>
-              
-              <button id="{{$food->id}}" onclick="openFoodEditBox(this.id);" class="btn btn-warning fs-4" style="margin-left:10px">Edit</button>
-            
-              @if($food->discountAmount == 0)
-              <button  id="{{$food->id}}" class="btn btn-success fs-4" onclick="openGiveDiscountBox(this.id);" style="margin-left:10px;">Give Discount</button>
-              @else
-              <form action="{{route('remove-discount')}}" method="POST">
-                @csrf
-                 <input type="text" hidden name="foodId" value="{{$food->id}}">
-                 <input type="text" hidden name="restaurantId" value="{{$value->id}}">
-                <button type="submit"  class="btn btn-danger fs-4" style="margin-left:10px;">Remove Discount</button>
-              </form>
-              @endif
+              <div class="d-flex">
+                <a href="{{url('make-food-unavailable/'.$food->id)}}"><button class="btn btn-primary fs-4">Make Unavailable</button></a>
+
+                <button id="{{$food->id}}" onclick="openFoodEditBox(this.id);" class="btn btn-warning fs-4" style="margin-left:10px">Edit</button>
+
+                @if($food->discountAmount == 0)
+                <button id="{{$food->id}}" class="btn btn-success fs-4" onclick="openGiveDiscountBox(this.id);" style="margin-left:10px;">Give Discount</button>
+                @else
+                <form action="{{route('remove-discount')}}" method="POST">
+                  @csrf
+                  <input type="text" hidden name="foodId" value="{{$food->id}}">
+                  <input type="text" hidden name="restaurantId" value="{{$value->id}}">
+                  <button type="submit" class="btn btn-danger fs-4" style="margin-left:10px;">Remove Discount</button>
+                </form>
+                @endif
               </div>
             </td>
           </tr>
@@ -502,8 +503,56 @@ $orderCount =1;
       <div class="recent-history-order">
         <div class="food-order-lists" id="food-order-lists">
           @foreach ($order as $orderData)
-          @if($orderData->status == 0)
+          @if($orderData->status == 0 || $orderData->status == 3)
           <div class="food-order-box">
+            @php
+            $flag =0;
+            $currentTime = Carbon\Carbon::now('Asia/Kathmandu');
+            $currentTime2= Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $currentTime);
+            $deliveryDateTime = Carbon\Carbon::createFromFormat('Y-m-d', $orderData->serviceDate);
+            $deliveryDateTime->setTimeFromTimeString($orderData->serviceTime);
+            $formattedDeliveryDateTime = $deliveryDateTime->format('Y-m-d H:i:s');
+            $deliveryDateTime = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $formattedDeliveryDateTime);
+            if ($currentTime2->greaterThan($deliveryDateTime)){
+            $flag = 1;
+            }
+            else{
+            $diffInMinutes = $currentTime->floatDiffInMinutes($formattedDeliveryDateTime);
+            $timeValue = (int)$diffInMinutes;
+            }
+            @endphp
+            @if($flag == 0)
+            <p id="timeValue" class="forOrderTime"><ion-icon name="time-outline" style="font-size: 18px;margin-right: 5px;"></ion-icon>Time left to deliver<span id="countdown" style="margin-left: 5px;" ></span></p>
+            <script>
+              countDown(<?= $timeValue ?>);
+
+              function countDown(x) {
+                var countDownDate = new Date();
+                countDownDate.setMinutes(countDownDate.getMinutes() + x);
+                var x = setInterval(function() {
+                  var now = new Date().getTime();
+                  var distance = countDownDate - now;
+                  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                  var countdownElement = document.getElementById("countdown");
+                  countdownElement.innerHTML = minutes + "m " + seconds + "s ";
+                  if (distance < 900000) { // 300000 ms = 5 minutes
+                    document.getElementById("timeValue").style.backgroundColor="#F66358";
+                  } else {
+                    document.getElementById("timeValue").style.backgroundColor="#2EB886";
+                  }
+
+                  if (distance < 0) {
+                    clearInterval(x);
+                    countdownElement.innerHTML = "expired";
+                  }
+                }, 1000);
+              }
+            </script>
+            @else
+            <p class="forOrderTime timeup"><ion-icon name="time-outline" style="font-size: 18px;margin-right: 5px;"></ion-icon>Delivery time has already passed</p>
+            @endif
+            <div class="food-order-box2">
             <div class="order-time-and-user-profile">
               <div class="order-time">
                 <p class="order-count">Order:{{$orderCount++}}</p>
@@ -511,11 +560,16 @@ $orderCount =1;
                 <p class="contact-name">{{$orderData->customerName}},<span style="margin-left: 5px;">{{$orderData->contactNumber}}</span></p>
               </div>
               <div class="user-profile">
+                @if($orderData->status == 0)
                 <div class="user-text">
                   <h2>
                     K
                   </h2>
                 </div>
+                @else
+                <img class="cooking-food-gif" src="/img/cooking2.gif" alt="">
+                <h3 style="text-align: center;margin-top:5px">Cooking</h3>
+                @endif
               </div>
             </div>
             @foreach ($orderData->orderfoods as $orderFood)
@@ -535,12 +589,17 @@ $orderCount =1;
             @endforeach
             <div class="total-decision-section">
               <div class="iteam-total">
-                <p class="total-iteam">x2</p>
-                <p class="total">Rs 100</p>
+                <p class="total-iteam">x{{$orderData->orderfoods->count()}}</p>
+                <p class="total">Rs {{($orderData->orderfoods)->sum('orderTotal')}}</p>
               </div>
               <div class="decision">
+                @if($orderData->status == 0)
                 <a href="{{url('reject-food/'.$orderData->id)}}"><button class="btn btn-danger" style="font-size: 14px;">Reject</button></a>
-                <button class="btn btn-success" style="font-size: 14px;margin-left: 5px;">Deliver</button>
+                <a href="{{url('prepare-food/'.$orderData->id)}}"><button class="btn btn-primary" style="font-size: 14px;margin-left: 5px;">Prepare</button></a>
+                @elseif($orderData->status == 3)
+                <a href="{{url('reject-food/'.$orderData->id)}}"><button class="btn btn-danger" style="font-size: 14px;">Reject</button></a>
+                <a href="{{url('deliver-food/'.$orderData->id)}}"><button class="btn btn-success" style="font-size: 14px;margin-left: 5px;">Deliver</button></a>
+                @endif
               </div>
             </div>
           </div>
@@ -549,6 +608,7 @@ $orderCount =1;
             <img src="/img/nothing-found.jpg" alt="" />
             <p>You have received no order yet</p>
           </div>
+            </div>
           @endif
           @endforeach
         </div>
@@ -569,13 +629,14 @@ $orderCount =1;
             </thead>
             <tbody>
               @foreach($order as $orderHistory)
+              @if($orderHistory->status != 0)
               <td class="fs-4">{{ $sn++ }}</td>
               <td class="fs-4">{{$orderHistory->customerName}}</td>
               <td class="fs-4">{{$orderHistory->paymentOption}}</td>
               <td class="fs-4">{{$orderHistory->serviceType}}</td>
               @if($orderHistory->status == 1)
               <td>
-                <p class="delivered">Delivered</p>
+                <p class="delivered" style="padding: 5px;">Delivered</p>
               </td>
               @elseif($orderHistory->status == 2)
               <td>
@@ -583,8 +644,9 @@ $orderCount =1;
               </td>
               @endif
               <td>
-              <button id="{{$orderHistory->id}}" class="btn btn-primary fs-4" onclick="showOrderFoodDetail(this.id);">View Detail</button>
+                <button id="{{$orderHistory->id}}" class="btn btn-primary fs-5" onclick="showOrderFoodDetail(this.id);">View Detail</button>
               </td>
+              @endif
               @endforeach
             </tbody>
           </table>

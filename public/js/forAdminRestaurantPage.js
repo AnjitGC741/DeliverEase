@@ -1,6 +1,12 @@
 let idValue1=0;
 let idValueNew=0;
 let discountId=0;
+window.onload = function() {
+  idValue1 = 0;
+ idValueNew = 0;
+   discountId = 0;
+};
+
 var fileInput=document.querySelector("#change");
 var fileInput2=document.querySelector("#change2");
 fileInput.addEventListener("change",function(){
@@ -66,14 +72,23 @@ function displayAddImage()
 }
 function hideAll()
 {
-  document.getElementById("editFood_"+idValue1).style.visibility = "hidden";
-  document.getElementById('blurBox').style.visibility="hidden";
-  document.getElementById("giveDiscount_"+discountId).style.visibility="hidden";
-  document.getElementById("viewOrderDetail_"+idValueNew).style.visibility = "hidden";
+  if(idValue1!==0)
+  {
+    document.getElementById("editFood_"+idValue1).style.visibility = "hidden";
+  }
+  if(idValueNew !== 0)
+  {
+    document.getElementById("viewOrderDetail_"+idValueNew).style.visibility = "hidden";
+  }
+  if(discountId !== 0)
+  {
+    document.getElementById("giveDiscount_"+discountId).style.visibility="hidden";
+  }
   document.getElementById('editProfileForm').style.visibility="hidden";
   document.getElementById('editLoginInfo').style.visibility="hidden";
   document.getElementById('addFood').style.visibility="hidden";
   document.getElementById('addImage').style.visibility="hidden";
+  document.getElementById('blurBox').style.visibility="hidden";
 }
 function openFoodEditBox(x)
 {

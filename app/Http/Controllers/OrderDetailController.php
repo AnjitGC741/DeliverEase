@@ -23,6 +23,13 @@ class OrderDetailController extends Controller
         });
         return back();
     }
+    public function prepareFood($id)
+    {
+        $changeStatus = Orderdetail::find($id);
+        $changeStatus->status = 3;
+        $changeStatus->save();
+        return back();
+    }
     public function deliverFood($id)
     {
         $changeStatus = Orderdetail::find($id);

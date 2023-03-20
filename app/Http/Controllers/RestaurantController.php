@@ -66,7 +66,10 @@ class RestaurantController extends Controller
                 'city' => 'required',
                 'street' => 'required',
                 'cuisine' => 'required',
-                'service' => 'required'
+                'service' => 'required',
+                'minimumOrder' => 'required',
+                'openTime' => 'required',
+                'closeTime' => 'required'
             ],
             [
                 'restaurantNumber.numeric' => 'The Number format is incorrect',
@@ -83,6 +86,8 @@ class RestaurantController extends Controller
         $restaurantDetail->minimumOrder = $req->minimumOrder;
         $restaurantDetail->cuisine = $req->cuisine;
         $restaurantDetail->service = $req->service;
+        $restaurantDetail->openTime = $req->openTime;
+        $restaurantDetail->closeTime = $req->closeTime;
         $restaurantDetail->save();
         return  redirect('restaurant-signup3/' . $req->id);
     }
