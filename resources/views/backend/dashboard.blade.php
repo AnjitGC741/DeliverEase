@@ -109,8 +109,10 @@ $totalPokhara =  DB::table('restaurants')->where('city', '=', 'pokhara')->count(
       <td><p class="pending">Pending</p></td>
       @elseif($order->status == 1)
       <td><p class="delivered">Delivered</p></td>
-      @else($order->status == 2)
+      @elseif($order->status == 2)
       <td><p class="rejected">Rejected</p></td>
+      @elseif($order->status == 3)
+      <td><p class="preparing">Preparing</p></td>
       @endif
       <td>
         <button id="{{$order->id}}" class="btn btn-primary" onclick="showOrderFoodDetail(this.id);">View Detail</button>

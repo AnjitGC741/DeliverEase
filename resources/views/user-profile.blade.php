@@ -34,14 +34,14 @@ $orderDetail= App\Models\Orderdetail::all()
     </div>
 </div>
 @endforeach
-<section class="resturant-section1">
-    <div class="img-section">
-        <img src="/img/try6.jpg" alt="" />
-    </div>
-    <div class="linear"></div>
-    <div class="text-restaurant">
-        <h1>My profile</h1>
-    </div>
+<section class="About-Section-header">
+        <div class="img-section">
+            <img src="./img/try5.jpg" alt="" />
+          </div>
+          <div class="linear"></div>
+          <div class="text-about">
+              <h1>My Profile</h1>
+          </div>
 </section>
 <section class="user-section">
     <div class="user-nav-links">
@@ -49,6 +49,7 @@ $orderDetail= App\Models\Orderdetail::all()
             <li><button class="user-link active1" id="show-profile-btn" onclick="showProfile();"><ion-icon name="person-outline"></ion-icon>Profile</button></li>
             <li><button class="user-link" id="show-favorite-btn" onclick="showFavorite();"><ion-icon name="heart-outline"></ion-icon>Favorite</button></li>
             <li><button class="user-link" id="show-history-btn" onclick="showHistory();"><ion-icon name="book-outline"></ion-icon>Order History</button></li>
+            <li><button class="user-link" id="show-order-btn" onclick="showMyOrder();"><ion-icon name="bag-remove-outline"></ion-icon>Order History</button></li>
         </ul>
     </div>
     <hr style="color:gray;">
@@ -166,6 +167,9 @@ $orderDetail= App\Models\Orderdetail::all()
             @else
             <h2>You have no purchase made</h2>
             @endif
+        </div>
+        <div class="my-order" id="myOrder">
+            <h1>My order</h1>
         </div>
     </div>
 </section>

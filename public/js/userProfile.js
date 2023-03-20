@@ -24,27 +24,46 @@
         document.getElementById("userProfile").style.display = "block";
         document.getElementById("userFavorite").style.display = "none";
         document.getElementById("userHistory").style.display = "none";
+        document.getElementById("myOrder").style.display = "none";
         document.getElementById("show-profile-btn").classList.add("active1");
         document.getElementById("show-favorite-btn").classList.remove("active1");
         document.getElementById("show-history-btn").classList.remove("active1");
+        document.getElementById("show-order-btn").classList.remove("active1");
+
     }
 
     function showFavorite() {
         document.getElementById("userProfile").style.display = "none";
         document.getElementById("userFavorite").style.display = "block";
         document.getElementById("userHistory").style.display = "none";
+        document.getElementById("myOrder").style.display = "none";
         document.getElementById("show-profile-btn").classList.remove("active1");
         document.getElementById("show-favorite-btn").classList.add("active1");
         document.getElementById("show-history-btn").classList.remove("active1");
+        document.getElementById("show-order-btn").classList.remove("active1");
+
     }
 
     function showHistory() {
         document.getElementById("userProfile").style.display = "none";
         document.getElementById("userFavorite").style.display = "none";
         document.getElementById("userHistory").style.display = "block";
+        document.getElementById("myOrder").style.display = "none";
         document.getElementById("show-profile-btn").classList.remove("active1");
         document.getElementById("show-favorite-btn").classList.remove("active1");
         document.getElementById("show-history-btn").classList.add("active1");
+        document.getElementById("show-order-btn").classList.remove("active1");
+
+    }
+    function showMyOrder() {
+        document.getElementById("userProfile").style.display = "none";
+        document.getElementById("userFavorite").style.display = "none";
+        document.getElementById("userHistory").style.display = "none";
+        document.getElementById("myOrder").style.display = "block";
+        document.getElementById("show-profile-btn").classList.remove("active1");
+        document.getElementById("show-favorite-btn").classList.remove("active1");
+        document.getElementById("show-history-btn").classList.remove("active1");
+        document.getElementById("show-order-btn").classList.add("active1");
     }
 
     function hideAll() {
@@ -66,8 +85,8 @@
     }
 
     function cancel() {
-        document.getElementById("customerName").setAttribute("readonly", false);
-        document.getElementById("contactNumber").setAttribute("readonly", false);
         document.getElementById("edit-btn").style.display = "block";
         document.getElementById("saveCancelBtn").style.visibility = "hidden";
+        document.getElementById("customerName").setAttribute("readonly", false);
+        document.getElementById("customerNumber").setAttribute("readonly", false);
     }

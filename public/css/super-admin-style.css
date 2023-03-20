@@ -174,7 +174,6 @@
     color: #B451C4;
     text-align: center;
     border-radius:10px ;
-    padding: 1rem!important;
 }
 .delivered{
     background-color: #D0E7DC;
@@ -187,4 +186,10 @@
     color: #8c2121;
     text-align: center;
     border-radius:10px ;
+}
+.preparing{
+        background-color: #ffdab7;
+        color: #d26b0b;
+        text-align: center;
+        border-radius:10px ;
 }

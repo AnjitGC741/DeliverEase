@@ -148,6 +148,12 @@
     @endforeach
   </div>
 </section>
+<section class="recently-added-restaurant">
+<div class="title-and-link">
+    <h2>Recently Added Restaurant</h2>
+    <a href="#">View all</a>
+  </div>
+</section>
 <!-- <section class="how-it-works">
       <div class="how-it-works-maindiv">
       <h2>How it works</h2>

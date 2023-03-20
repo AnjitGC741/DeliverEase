@@ -123,6 +123,8 @@ Route::POST('/checkout/save-checkout-info',[MyCartController::class,'saveCheckou
 Route::post('/stripecontroller',[Stripe::class,"stripePayment"])->name("stripe.post");
 // for Order
 Route::get('reject-food/{id}',[OrderDetailController::class,'rejectFood']);
+Route::get('prepare-food/{id}',[OrderDetailController::class,'prepareFood']);
+Route::get('deliver-food/{id}',[OrderDetailController::class,'deliverFood']);
 // for favorite
 Route::post('/remove-from-favorite',[FavoriteController::class,'removeFromFavorite'])->name('remove-from-favorite');
 Route::post('/add-to-favorite',[FavoriteController::class,'addToFavorite'])->name('add-to-favorite');

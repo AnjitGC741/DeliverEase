@@ -17,6 +17,12 @@ $sn = 1;
 </section>
 <div class="checkout-main-box">
   <div class="checkout-detail">
+    @if(Session::has('fail'))
+    <div class="alert text-center alert-danger fs-4" role="alert">
+     <p class="d-flex" style="align-items: center;justify-content:center;gap:10px;"> <ion-icon name="alarm-outline" class="fs-2"></ion-icon>
+     {{Session::get('fail')}}</p>
+    </div>
+    @endif
     <form action="{{ route('save-checkout') }}" method="post">
       @csrf
       <input type="text" hidden value="{{$value->id}}" name="restaurantId">
@@ -26,19 +32,19 @@ $sn = 1;
           <div class="mb-3  w-50">
             <label class="form-label fs-4" style="letter-spacing: 1px;">First Name</label>
             <input type="text" style="letter-spacing: 1px;" class="form-control fs-4  @error('firstName') is-invalid @enderror" name="firstName" placeholder="Your First Name" value="{{old('firstName')}}">
-            <span style="color: red;"> @error('firstName'){{$message}}@enderror</span>
+            <span class="fs-4" style="color: red;"> @error('firstName'){{$message}}@enderror</span>
           </div>
           <div class="mb-3 w-50">
             <label class="form-label fs-4" style="letter-spacing: 1px;">Last Name</label>
             <input type="text" style="letter-spacing: 1px;" class="form-control fs-4  @error('lastName') is-invalid @enderror" placeholder="Your Last Name" name="lastName" value="{{old('lastName')}}">
-            <span style="color: red;"> @error('lastName'){{$message}}@enderror</span>
+            <span class="fs-4" style="color: red;"> @error('lastName'){{$message}}@enderror</span>
           </div>
         </div>
         <div style="margin-right:40px;">
           <div class="mb-3 w-100" style="margin-left:20px;">
             <label class="form-label fs-4" style="letter-spacing: 1px;">PHONE NUMBER</label>
             <input type="text" style="letter-spacing: 1px;" class="form-control fs-4  @error('contactNumber') is-invalid @enderror" id="" placeholder="YOUR NUMBER" name="contactNumber" value="{{old('phoneNumber')}}">
-            <span style="color: red;"> @error('contactNumber'){{$message}}@enderror</span>
+            <span class="fs-4" style="color: red;"> @error('contactNumber'){{$message}}@enderror</span>
           </div>
         </div>
       </div>
@@ -49,26 +55,26 @@ $sn = 1;
           <div class="mb-3  w-50">
             <label class="form-label fs-4" style="letter-spacing: 1px;">Street Name</label>
             <input type="text" style="letter-spacing: 1px;" class="form-control fs-4  @error('streetName') is-invalid @enderror" name="streetName" placeholder="Your street Name" value="{{old('streetName')}}">
-            <span style="color: red;"> @error('streetName'){{$message}}@enderror</span>
+            <span class="fs-4" style="color: red;"> @error('streetName'){{$message}}@enderror</span>
           </div>
           <div class="mb-3 w-50">
             <label class="form-label fs-4" style="letter-spacing: 1px;">City Name</label>
             <input type="text" style="letter-spacing: 1px;" class="form-control fs-4  @error('cityName') is-invalid @enderror" placeholder="Your City Name" name="cityName" value="{{old('cityName')}}">
-            <span style="color: red;"> @error('cityName'){{$message}}@enderror</span>
+            <span class="fs-4" style="color: red;"> @error('cityName'){{$message}}@enderror</span>
           </div>
         </div>
         <div style="margin-right:40px;">
           <div class="mb-3 w-100" style="margin-left:20px;">
             <label class="form-label fs-4" style="letter-spacing: 1px;">Near By Organization</label>
             <input type="text" style="letter-spacing: 1px;" class="form-control fs-4 " placeholder="Enter Near By Organization(If Exists)" name="organization" value="{{old('organization')}}">
-            <span style="color: red;"> @error('organization'){{$message}}@enderror</span>
+            <span class="fs-4" style="color: red;"> @error('organization'){{$message}}@enderror</span>
           </div>
         </div>
         <div style="margin-right:40px;">
           <div class="mb-5 w-100" style="margin-left:20px;">
             <label class="form-label fs-4" style="letter-spacing: 1px;">Detail Address Direction</label>
             <textarea type="text" style="letter-spacing: 1px;" class="form-control fs-4  @error('detailAddress') is-invalid @enderror" id="" placeholder="Enter Detail Address Location" name="detailAddress" value="{{old('detailAddress')}}"></textarea>
-            <span style="color: red;"> @error('detailAddress'){{$message}}@enderror</span>
+            <span class="fs-4" style="color: red;"> @error('detailAddress'){{$message}}@enderror</span>
           </div>
         </div>
       </div>
@@ -81,12 +87,12 @@ $sn = 1;
             <select id="dates" name="serviceDate" onchange="changeDate();" class="form-select fs-4  @error('serviceDate') is-invalid @enderror" style="letter-spacing: 1px;">
               <option value="">SELECT A DATE</option>
             </select>
-            <span style="color: red;"> @error('serviceDate'){{$message}}@enderror</span>
+            <span class="fs-4" style="color: red;"> @error('serviceDate'){{$message}}@enderror</span>
           </div>
           <div class="mb-3 w-25">
             @php
-            $startTime = "13:00:00";
-            $endTime = "17:00:00";
+            $startTime = $value->openTime;
+            $endTime = $value->closeTime;
             $startDateTime = new DateTime($startTime);
             $startDateTime->modify('+1 hour');
             $newStartTime = $startDateTime->format('H:i:s');
@@ -102,19 +108,30 @@ $sn = 1;
               <label class="form-label fs-4" style="letter-spacing: 1px;">Time</label>
               <select style="letter-spacing: 1px;" class="form-select fs-4  @error('serviceType') is-invalid @enderror" aria-label="Default select example" name="serviceTime" value="{{old('time')}}">
                 <option value="">Time</option>
-                <?php foreach ($timeList as $time) : ?>
+                <!-- <?php foreach ($timeList as $time) : ?>
                   <option value="<?php echo $time; ?>"><?php echo $time; ?></option>
-                <?php endforeach; ?>
+                <?php endforeach; ?> -->
+                <option value="21:00">21:00</option>
+                <option value="22:00">22:00</option>
+                <option value="23:00">23:00</option>
+                <option value="00:00">00:00</option>
               </select>
-              <span style="color: red;"> @error('serviceTime'){{$message}}@enderror</span>
+              <span class="fs-4" style="color: red;"> @error('serviceTime'){{$message}}@enderror</span>
           </div>
           <div class="mb-3 w-25">
             <label class="form-label fs-4" style="letter-spacing: 1px;">Service Type</label>
+            @if($value->service == "Delivery & Pickup")
             <select id="dates" name="serviceType" class="form-select fs-4  @error('serviceType') is-invalid @enderror" style="letter-spacing: 1px;">
+            <option value="">Service</option>
               <option value="delivery">Delivery</option>
               <option value="pickup">Pickup</option>
             </select>
-            <span style="color: red;"> @error('date'){{$message}}@enderror</span>
+            @elseif($value->service == "Pickup Only")
+            <input class="form-check-input fs-4 @error('serviceType') is-invalid @enderror" type="text" readonly name="serviceType" value="{{$value->service}}">
+            @else
+            <input class="form-check-input fs-4 @error('serviceType') is-invalid @enderror" type="text" readonly name="serviceType" value="{{$value->service}}">
+            @endif
+            <span class="fs-4" style="color: red;"> @error('serviceType'){{$message}}@enderror</span>
           </div>
         </div>
 
@@ -129,7 +146,7 @@ $sn = 1;
           <input class="form-check-input fs-4" type="radio" name="paymentMethod" id="inlineRadio2" value="payOnline">
           <label class="form-check-label fs-4" style="letter-spacing: 1px;" for="inlineRadio2">Pay Online</label>
         </div>
-        <p style="color: red;margin-left: 30px;"> @error('paymentMethod'){{$message}}@enderror</p>
+        <p class="fs-4" style="color: red;margin-left: 30px;"> @error('paymentMethod'){{$message}}@enderror</p>
       </div>
       <div class="detail-section">
         <p class="Info">SPECIAL INSTRUCTION</p>
