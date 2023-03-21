@@ -244,6 +244,10 @@ $sn = 1;
     <h1>Customer review</h1>
     <div class="customer-review-and-write-review">
       <div class="customer-review-collection">
+        @php
+        $existRating = DB::table('ratings')->where('restaurant_id', $value->id)->exists();
+        @endphp
+        @if($existRating)
         <div class="customer-review">
           @foreach($value->customermessages as $index => $message)
           <div class="customer-review-box">
@@ -290,6 +294,9 @@ $sn = 1;
 
           <hr style="width:40%;">
         </div>
+        @else
+        <h1>No rating for this restaurant</h1>
+        @endif
       </div>
       <div class="write-review">
         <p class="write-review-text">Write Review</p>

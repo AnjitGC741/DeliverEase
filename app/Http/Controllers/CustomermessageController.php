@@ -29,11 +29,11 @@ class CustomermessageController extends Controller
         else
         {
             $message = Customermessage::where('restaurant_id', $req->restaurantId)->where('customer_id', session()->get('loginCustomerId'))->first();
+            $rating = Rating::where('restaurant_id', $req->restaurantId) ->where('customer_id', session()->get('loginCustomerId'))->first();
             $message->customerName = $req->customerName;
             $message->customerMsg = $req->customerMsg;
-            $message->save();
-            $rating = Rating::where('restaurant_id', $req->restaurantId) ->where('customer_id', session()->get('loginCustomerId'))->first();
             $rating->rating = $req->rating;
+            $message->save();
             $rating->save();
         }
         return back();

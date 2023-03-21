@@ -63,12 +63,12 @@
     min-height: 50rem !important; 
    position: relative;
 }
-/* user profile */
+/* user profile ////////////////////////*/
 .user-profile{
     margin-top: 20px;
     width: 100%;
     position: absolute;
-    display: block;
+    display: none;
 }
 .user-profile h2{
   color: rgb(76, 76, 76);
@@ -304,5 +304,70 @@
     margin-top: 20px;
     width: 100%;
     position: absolute;
-    display: none;
+    display: block;
+  }
+  .my-order-main-box{
+    width: 100%;
+  }
+  .my-order-main-box h2{
+    text-align: center;
+    letter-spacing: 1px;
+    padding-bottom: 2rem;
+    border-bottom:1px solid #d8d9db;
+  }
+  .user-order-food-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .order-food-section1{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    width: 40rem;
+  }
+  .order-food-img1 img{
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+  }
+  .order-food-detail{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 100%;
+    border-bottom:1px solid  #b6b6b6 ;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .order-food-name{
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0!important;
+    letter-spacing: 1px;
+    gap: 0.5rem;
+  }
+  .order-food-type{
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #5c5c5c;
+    margin-bottom: 0.3rem!important;
+  }
+  .order-food-quantity-price{
+    display: flex;
+    gap: 8rem;
+  }
+  .order-food-price{
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0!important;
+    letter-spacing: 1px;
+  }
+  .order-food-quantity{
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0!important;
+    letter-spacing: 1px;
   }

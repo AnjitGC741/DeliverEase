@@ -73,6 +73,8 @@ Route::post('/search-food',[RestaurantController::class,'searchFood'])->name('se
 Route::get('/restaurant-page/{id}',[RestaurantController::class,'userRestaurantPage']);
 Route::post('/restaurants-sort-asc',[RestaurantController::class,'sortRestaurantAsc'])->name('sort-restaurant-ascending');
 Route::post('/restaurants-sort-desc',[RestaurantController::class,'sortRestaurantDesc'])->name('sort-restaurant-descending');
+Route::post('/restaurants-sort-location',[RestaurantController::class,'sortByLocation'])->name('sort-by-location');
+Route::post('/restaurants-sort-cuisine',[RestaurantController::class,'sortByCuisine'])->name('sort-by-cuisine');
 Route::post('/close-restaurant',[RestaurantController::class,'closeRestaurant'])->name('close-restaurant');
 Route::post('/open-restaurant',[RestaurantController::class,'openRestaurant'])->name('open-restaurant');
 Route::get('/logout-restaurant',[RestaurantController::class,'logoutRestaurant']);

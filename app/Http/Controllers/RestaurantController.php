@@ -13,25 +13,58 @@ use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
 {
-    public function registerRestaurantName(Request $req)
+    // searching and sorting restaurant
+    public function sortRestaurantAsc()
     {
-        $req->validate([
-            'restaurantName' => 'required'
-        ]);
+        $sessionRestaurant = session()->get('searchRestaurant');
+        $restaurants = Restaurant::where(function ($q) use ($sessionRestaurant) {
+            $q->orderBy('restaurantName', 'asc')
+                ->where('restaurantName', 'like', '%' . $sessionRestaurant . '%')
+                ->orWhere('cuisine', 'like', '%' . $sessionRestaurant . '%');
+        })
+            ->where('verification', '=', '1')
+            ->get();
+        return view('restaurant-list', compact('restaurants'));
+    }
+    public function sortRestaurantDesc()
+    {
+        $sessionRestaurant = session()->get('searchRestaurant');
+        $restaurants = Restaurant::where(function ($q) use ($sessionRestaurant) {
+            $q->orderBy('restaurantName', 'desc')
+                ->where('restaurantName', 'like', '%' . $sessionRestaurant . '%')
+                ->orWhere('cuisine', 'like', '%' . $sessionRestaurant . '%');
+        })
+            ->where('verification', '=', '1')
+            ->get();
+        return view('restaurant-list', compact('restaurants'));
+    }
+    public function sortByCuisine(Request $req)
+    {
+        $cuisine = $req->cuisineName;
 
-        Restaurant::create([
-            'restaurantName' =>  $req->restaurantName,
-        ]);
-        $list = Restaurant::query()->where('restaurantName', 'LIKE', "%{$req->restaurantName}%")->first('id');
-        return  redirect('restaurant-signup2/' . $list->id);
+        $restaurants = Restaurant::where('cuisine', 'like', '%' . $cuisine . '%')
+        ->where('verification', '=', '1')
+        ->get();
+        return view('restaurant-list', compact('restaurants'));
+    }
+    public function sortByLocation(Request $req)
+    {
+        $location = $req->locationName;
+        $restaurants = Restaurant::where('city', 'like', '%' . $location . '%')
+            ->where('verification', '=', '1')
+            ->get();
+        return view('restaurant-list', compact('restaurants'));
     }
     public function searchRestaurant(Request $req)
     {
+        if ($req->restaurantName != null) {
+            session()->put('searchRestaurant', $req->restaurantName);
+        }
         $query = $req->restaurantName;
-        $restaurants = Restaurant::where(function($q) use ($query) {
-                $q->where('restaurantName', 'like', '%' . $query . '%')
-                  ->orWhere('cuisine', 'like', '%' . $query . '%');
-            })
+        $restaurants = Restaurant::where(function ($q) use ($query) {
+            $q->where('restaurantName', 'like', '%' . $query . '%')
+                ->orWhere('cuisine', 'like', '%' . $query . '%');
+        })
             ->where('verification', '=', '1')
             ->get();
         return view('restaurant-list', compact('restaurants'));
@@ -44,12 +77,24 @@ class RestaurantController extends Controller
     public function browseByCuisine($cuisine)
     {
         $restaurants = Restaurant::where('restaurantName', 'like', '%' . $cuisine . '%')
-        ->orWhere('cuisine', 'like', '%' . $cuisine . '%')
-        ->where('verification', '=', '1')
-        ->get();
-    return view('restaurant-list', compact('restaurants'));
+            ->orWhere('cuisine', 'like', '%' . $cuisine . '%')
+            ->where('verification', '=', '1')
+            ->get();
+        return view('restaurant-list', compact('restaurants'));
     }
+    // register restaurant
+    public function registerRestaurantName(Request $req)
+    {
+        $req->validate([
+            'restaurantName' => 'required'
+        ]);
 
+        Restaurant::create([
+            'restaurantName' =>  $req->restaurantName,
+        ]);
+        $list = Restaurant::query()->where('restaurantName', 'LIKE', "%{$req->restaurantName}%")->first('id');
+        return  redirect('restaurant-signup2/' . $list->id);
+    }
     public function findRestaurantName($id)
     {
         $data = Restaurant::find($id);
@@ -114,7 +159,7 @@ class RestaurantController extends Controller
     {
         $orders = Orderdetail::where('restaurant_id', $id)->get();
         $data = Restaurant::find($id);
-        return view('backend/admin-restaurant-page', ['value' => $data],['order' => $orders]);
+        return view('backend/admin-restaurant-page', ['value' => $data], ['order' => $orders]);
     }
     public function changeRestaurantCoverImg(Request $req)
     {
@@ -154,16 +199,6 @@ class RestaurantController extends Controller
         $restaurantData->save();
         return  redirect('restaurant-admin-page/' . $req->id);
     }
-    public function sortRestaurantAsc()
-    {
-        $restaurants = Restaurant::orderBy('restaurantName', 'asc')->get();
-        return view('restaurant-list', compact('restaurants'));
-    }
-    public function sortRestaurantDesc()
-    {
-        $restaurants = Restaurant::orderBy('restaurantName', 'desc')->get();
-        return view('restaurant-list', compact('restaurants'));
-    }
     public function userRestaurantPage($id)
     {
         $restaurant = Restaurant::find($id);
@@ -172,28 +207,28 @@ class RestaurantController extends Controller
             $newData = customer::find(session()->get('loginCustomerId'));
             $data = [
                 'value' => $restaurant,
-                 'newValue' => $newData,
-                'foods' => $foods,   
+                'newValue' => $newData,
+                'foods' => $foods,
             ];
             return view('restaurant-page', $data);
         } else {
-            return view('restaurant-page', ['value' => $restaurant],['foods'=>$foods]);
+            return view('restaurant-page', ['value' => $restaurant], ['foods' => $foods]);
         }
     }
     public function searchFood(Request $req)
     {
         $restaurant = Restaurant::find($req->restaurantId);
-        $foods = $restaurant->food()->where('foodName', 'like', '%'.$req->food.'%')->get();
+        $foods = $restaurant->food()->where('foodName', 'like', '%' . $req->food . '%')->get();
         if (session()->get('loginCustomerId') != null) {
             $newData = customer::find(session()->get('loginCustomerId'));
             $data = [
                 'value' => $restaurant,
-                 'newValue' => $newData,
-                'foods' => $foods,   
+                'newValue' => $newData,
+                'foods' => $foods,
             ];
             return view('restaurant-page', $data);
         } else {
-            return view('restaurant-page', ['value' => $restaurant],['foods'=>$foods]);
+            return view('restaurant-page', ['value' => $restaurant], ['foods' => $foods]);
         }
     }
 
@@ -240,19 +275,17 @@ class RestaurantController extends Controller
     // for restaurant image section
     public function addImageRestaurant(Request $req)
     {
-        $image = $req -> file('restaurantImgs');
-        $image->store('img','public');
-        $file_path=$image->store('img','public');
-        $save =Imagegallary::create([
-            'restaurantImgs'=>$file_path,
-            'photoDescription'=> $req->photoDescription,
-            'restaurant_id'=> $req->restaurantId,
+        $image = $req->file('restaurantImgs');
+        $image->store('img', 'public');
+        $file_path = $image->store('img', 'public');
+        $save = Imagegallary::create([
+            'restaurantImgs' => $file_path,
+            'photoDescription' => $req->photoDescription,
+            'restaurant_id' => $req->restaurantId,
         ]);
-        if(!$save)
-        {
-           dd("error");
-        }
-        else{
+        if (!$save) {
+            dd("error");
+        } else {
             return  back();
         }
     }

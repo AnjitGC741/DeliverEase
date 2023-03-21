@@ -54,12 +54,12 @@ $orderCount =1;
       </div>
       @foreach ($orderData->orderfoods as $orderFood)
       <div class="order-food-section">
-        <div class="order-food-img">
+        <div class="order-food-img1">
           <img src="{{ asset('/storage/'.$orderFood->orderFoodImg) }}">
         </div>
         <div class="order-food-detail">
           <p class="order-food-name">{{$orderFood -> orderFoodName}}</p>
-          <p class="order-food-type">Veg</p>
+          <p class="order-food-type">{{$orderFood -> orderFoodType}}</p>
           <div class="order-food-quantity-price">
             <p class="order-food-price">Rs {{$orderFood ->orderFoodPrice}}</p>
             <p class="order-food-quantity">Qty: {{$orderFood ->orderFoodQuantity}}</p>
@@ -603,12 +603,13 @@ $orderCount =1;
               </div>
             </div>
           </div>
+          </div>
           @else
           <div class="nothing-found-box" style="margin:0 auto;">
             <img src="/img/nothing-found.jpg" alt="" />
             <p>You have received no order yet</p>
           </div>
-            </div>
+           
           @endif
           @endforeach
         </div>
@@ -629,7 +630,8 @@ $orderCount =1;
             </thead>
             <tbody>
               @foreach($order as $orderHistory)
-              @if($orderHistory->status != 0)
+              <tr>
+              @if($orderHistory->status == 1 || $orderHistory->status == 2)
               <td class="fs-4">{{ $sn++ }}</td>
               <td class="fs-4">{{$orderHistory->customerName}}</td>
               <td class="fs-4">{{$orderHistory->paymentOption}}</td>
@@ -647,6 +649,7 @@ $orderCount =1;
                 <button id="{{$orderHistory->id}}" class="btn btn-primary fs-5" onclick="showOrderFoodDetail(this.id);">View Detail</button>
               </td>
               @endif
+              </tr>
               @endforeach
             </tbody>
           </table>
