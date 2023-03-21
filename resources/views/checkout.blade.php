@@ -108,13 +108,9 @@ $sn = 1;
               <label class="form-label fs-4" style="letter-spacing: 1px;">Time</label>
               <select style="letter-spacing: 1px;" class="form-select fs-4  @error('serviceType') is-invalid @enderror" aria-label="Default select example" name="serviceTime" value="{{old('time')}}">
                 <option value="">Time</option>
-                <!-- <?php foreach ($timeList as $time) : ?>
+                <?php foreach ($timeList as $time) : ?>
                   <option value="<?php echo $time; ?>"><?php echo $time; ?></option>
-                <?php endforeach; ?> -->
-                <option value="21:00">21:00</option>
-                <option value="22:00">22:00</option>
-                <option value="23:00">23:00</option>
-                <option value="00:00">00:00</option>
+                <?php endforeach; ?>
               </select>
               <span class="fs-4" style="color: red;"> @error('serviceTime'){{$message}}@enderror</span>
           </div>

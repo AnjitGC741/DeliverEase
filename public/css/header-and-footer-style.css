@@ -58,6 +58,7 @@ a{
     padding: 10px 15px;
     border-radius: 10px;
     transition: all 0.3s;
+    text-decoration: none!important;
   }
   .signIn:hover{
     background-color: #181818;
@@ -71,6 +72,7 @@ a{
     border-radius: 10px;
     margin-left: 5px;
     transition: all 0.3s;
+    text-decoration: none!important;
   }
   .logIn:hover{
     background-color: #f6be87;

@@ -35,13 +35,13 @@ $orderDetail= App\Models\Orderdetail::all()
 </div>
 @endforeach
 <section class="About-Section-header">
-        <div class="img-section">
-            <img src="./img/try5.jpg" alt="" />
-          </div>
-          <div class="linear"></div>
-          <div class="text-about">
-              <h1>My Profile</h1>
-          </div>
+    <div class="img-section">
+        <img src="./img/try5.jpg" alt="" />
+    </div>
+    <div class="linear"></div>
+    <div class="text-about">
+        <h1>My Profile</h1>
+    </div>
 </section>
 <section class="user-section">
     <div class="user-nav-links">
@@ -49,7 +49,7 @@ $orderDetail= App\Models\Orderdetail::all()
             <li><button class="user-link active1" id="show-profile-btn" onclick="showProfile();"><ion-icon name="person-outline"></ion-icon>Profile</button></li>
             <li><button class="user-link" id="show-favorite-btn" onclick="showFavorite();"><ion-icon name="heart-outline"></ion-icon>Favorite</button></li>
             <li><button class="user-link" id="show-history-btn" onclick="showHistory();"><ion-icon name="book-outline"></ion-icon>Order History</button></li>
-            <li><button class="user-link" id="show-order-btn" onclick="showMyOrder();"><ion-icon name="bag-remove-outline"></ion-icon>Order History</button></li>
+            <li><button class="user-link" id="show-order-btn" onclick="showMyOrder();"><ion-icon name="bag-remove-outline"></ion-icon>My Order</button></li>
         </ul>
     </div>
     <hr style="color:gray;">
@@ -138,7 +138,6 @@ $orderDetail= App\Models\Orderdetail::all()
             @php
             $userId = session()->get('loginCustomerId');
             $userOrderHistory = App\Models\Orderdetail::where('customer_id', $userId)->get();
-
             $sn = 1;
             @endphp
             @if($userOrderHistory->isNotEmpty())
@@ -151,6 +150,7 @@ $orderDetail= App\Models\Orderdetail::all()
                     <th class="fs-4">View Food</th>
                 </tr>
                 @foreach($userOrderHistory as $order)
+                @if($order->status == 1 || $order->status==2)
                 <tr>
                     <td class="fs-5">{{$sn++}}</td>
                     @php
@@ -162,6 +162,7 @@ $orderDetail= App\Models\Orderdetail::all()
                     <td class="fs-5">{{$order->serviceType}}</td>
                     <td class="fs-5"><button id="{{$order->id}}" class="btn btn-warning fs-5" onclick="showOrderFoodDetail(this.id);">View Detail</button></td>
                 </tr>
+                @endif
                 @endforeach
             </table>
             @else
@@ -169,23 +170,64 @@ $orderDetail= App\Models\Orderdetail::all()
             @endif
         </div>
         <div class="my-order" id="myOrder">
-            <h1>My order</h1>
+            <h1>My Recent Order</h1>
+            <div class="my-order-main-box">
+                <h2>Order Details</h2>
+                @php
+                $userId = session()->get('loginCustomerId');
+                $userRecentOrder = App\Models\Orderdetail::where('customer_id', $userId)->where(function($query){
+                $query->where('status','0')
+                ->orWhere('status','3');
+                })
+                ->get();
+                @endphp
+                @if($userRecentOrder->isNotEmpty())
+                @foreach($userRecentOrder as $recentOrder)
+                <p>{{$recentOrder->customerName}}</p>
+                <p>{{$recentOrder->streetName}},{{$recentOrder->cityName}}</p>
+                @if($recentOrder->status == 0)
+                <p>Your order has been placed by the outlet</p>
+                @else
+                <p>Your order is being prepared by the outlet</p>
+                @endif
+                <h1>Your order Food</h1>
+                <div class="user-order-food-list">
+                @foreach ($recentOrder->orderfoods as $recentOrderFood)
+                <div class="order-food-section1">
+                    <div class="order-food-img">
+                    <img src="{{ asset('/storage/'.$recentOrderFood->orderFoodImg) }}">
+                    </div>
+                    <div class="order-food-detail">
+                    <p class="order-food-name">{{$recentOrderFood -> orderFoodName}}</p>
+                    <p class="order-food-type">{{$recentOrderFood -> orderFoodType}}</p>
+                    <div class="order-food-quantity-price">
+                        <p class="order-food-price">Rs {{$recentOrderFood->orderFoodPrice}}</p>
+                        <p class="order-food-quantity">Qty: {{$recentOrderFood->orderFoodQuantity}}</p>
+                    </div>
+                    </div>
+                </div>
+                @endforeach
+                </div>
+                <p>Rs {{($orderData->orderfoods)->sum('orderTotal')}}</p>
+                @endforeach
+                @else
+                <h1>You have no any order</h1>
+                @endif
+            </div>
         </div>
     </div>
 </section>
 <script src="/js/userProfile.js"></script>
 <script>
     window.onload = function() {
-     if(<?=session()->get('myFavoriteValue')?> == 1)
-     {
-        document.getElementById("userProfile").style.display = "none";
-        document.getElementById("userFavorite").style.display = "block";
-        document.getElementById("userHistory").style.display = "none";
-        document.getElementById("show-profile-btn").classList.remove("active1");
-        document.getElementById("show-favorite-btn").classList.add("active1");
-        document.getElementById("show-history-btn").classList.remove("active1");
-     }
+        if (<?= session()->get('myFavoriteValue') ?> == 1) {
+            document.getElementById("userProfile").style.display = "none";
+            document.getElementById("userFavorite").style.display = "block";
+            document.getElementById("userHistory").style.display = "none";
+            document.getElementById("show-profile-btn").classList.remove("active1");
+            document.getElementById("show-favorite-btn").classList.add("active1");
+            document.getElementById("show-history-btn").classList.remove("active1");
+        }
     }
-
 </script>
 @endsection

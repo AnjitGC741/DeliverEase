@@ -27,18 +27,18 @@
                  </div>
             </button>
             <div class="list2">
-                    <input type="text" hidden value="" name="" />
-                    <button type="submit" class="links">
-                        Kathmandu
-                    </button>
-                    <input type="text" hidden value="" name="" />
-                    <button type="submit" class="links">
-                        Bhaktpaur
-                    </button>
-                    <input type="text" hidden value="" name="" />
-                    <button type="submit" class="links">
-                        Pokhara
-                    </button>
+                    @php
+                    $locations = App\Models\Location::all();
+                    @endphp
+                    @foreach($locations as $location)
+                    <form action="{{route('sort-by-location')}}" method="POST">
+                    @csrf
+                    <input type="text" hidden value="{{$location->locationName}}" name="locationName" />
+                        <button type="submit" class="links">
+                        {{$location->locationName}}
+                        </button>
+                    </form>
+                @endforeach
                 </div>
             </div>
             <div class="filter">
@@ -51,18 +51,18 @@
                 </button>
 
                 <div class="list">
-                    <input type="text" hidden value="" name="" />
-                    <button type="submit" class="links">
-                        Nepali
-                    </button>
-                    <input type="text" hidden value="" name="" />
-                    <button type="submit" class="links">
-                        Newari
-                    </button>
-                    <input type="text" hidden value="" name="" />
-                    <button type="submit" class="links">
-                        Thakali
-                    </button>
+                     @php
+                    $cuisines = App\Models\Cuisine::all();
+                    @endphp
+                    @foreach($cuisines as $cuisine)
+                    <form action="{{route('sort-by-cuisine')}}" method="POST">
+                    @csrf
+                    <input type="text" hidden value="{{$cuisine->cuisineName}}" name="cuisineName" />
+                        <button type="submit" class="links">
+                        {{$cuisine->cuisineName}}
+                        </button>
+                    </form>
+                @endforeach
                 </div>
             </div>
             <div class="sortBy">

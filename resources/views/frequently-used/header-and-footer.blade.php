@@ -64,8 +64,8 @@
           <p>{{session()->get('loginCustomer')}}</p>
         </div>
         <hr>
-          <a href="{{url('/user-profile')}}" class="sub-menu-link1"><ion-icon name="person-outline"></ion-icon> <p>Profile</p></a>
-          <a href="{{url('/logout')}}" class="sub-menu-link1"><ion-icon name="log-out-outline"></ion-icon><p>Log out</p> </a>
+          <a href="{{url('/user-profile')}}" class="sub-menu-link1" style="text-decoration: none;"><ion-icon name="person-outline"></ion-icon> <p style="text-decoration: none;">Profile</p></a>
+          <a href="{{url('/logout')}}"  class="sub-menu-link1" style="text-decoration: none;"><ion-icon name="log-out-outline"></ion-icon><p style="text-decoration: none;">Log out</p> </a>
       </div>
     </div>
     @endif
