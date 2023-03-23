@@ -20,6 +20,8 @@ $orderCount =1;
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
   <!-- css link -->
   <link rel="stylesheet" href="/css/admin-restaurant-page.css">
+  <!-- graph and pie -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
   <!-- bootstrap link -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <title>My restaurant</title>
@@ -522,7 +524,7 @@ $orderCount =1;
             }
             @endphp
             @if($flag == 0)
-            <p id="timeValue" class="forOrderTime"><ion-icon name="time-outline" style="font-size: 18px;margin-right: 5px;"></ion-icon>Time left to deliver<span id="countdown" style="margin-left: 5px;" ></span></p>
+            <p id="timeValue" class="forOrderTime"><ion-icon name="time-outline" style="font-size: 18px;margin-right: 5px;"></ion-icon>Time left to deliver<span id="countdown" style="margin-left: 5px;"></span></p>
             <script>
               countDown(<?= $timeValue ?>);
 
@@ -537,9 +539,9 @@ $orderCount =1;
                   var countdownElement = document.getElementById("countdown");
                   countdownElement.innerHTML = minutes + "m " + seconds + "s ";
                   if (distance < 900000) { // 300000 ms = 5 minutes
-                    document.getElementById("timeValue").style.backgroundColor="#F66358";
+                    document.getElementById("timeValue").style.backgroundColor = "#F66358";
                   } else {
-                    document.getElementById("timeValue").style.backgroundColor="#2EB886";
+                    document.getElementById("timeValue").style.backgroundColor = "#2EB886";
                   }
 
                   if (distance < 0) {
@@ -553,63 +555,63 @@ $orderCount =1;
             <p class="forOrderTime timeup"><ion-icon name="time-outline" style="font-size: 18px;margin-right: 5px;"></ion-icon>Delivery time has already passed</p>
             @endif
             <div class="food-order-box2">
-            <div class="order-time-and-user-profile">
-              <div class="order-time">
-                <p class="order-count">Order:{{$orderCount++}}</p>
-                <p class="food-delivery-time">{{$orderData->serviceDate}},<span style="margin-left: 5px;">{{$orderData->serviceTime}}</span></p>
-                <p class="contact-name">{{$orderData->customerName}},<span style="margin-left: 5px;">{{$orderData->contactNumber}}</span></p>
-              </div>
-              <div class="user-profile">
-                @if($orderData->status == 0)
-                <div class="user-text">
-                  <h2>
-                    K
-                  </h2>
+              <div class="order-time-and-user-profile">
+                <div class="order-time">
+                  <p class="order-count">Order:{{$orderCount++}}</p>
+                  <p class="food-delivery-time">{{$orderData->serviceDate}},<span style="margin-left: 5px;">{{$orderData->serviceTime}}</span></p>
+                  <p class="contact-name">{{$orderData->customerName}},<span style="margin-left: 5px;">{{$orderData->contactNumber}}</span></p>
                 </div>
-                @else
-                <img class="cooking-food-gif" src="/img/cooking2.gif" alt="">
-                <h3 style="text-align: center;margin-top:5px">Cooking</h3>
-                @endif
-              </div>
-            </div>
-            @foreach ($orderData->orderfoods as $orderFood)
-            <div class="order-food-section">
-              <div class="order-food-img">
-                <img src="{{ asset('/storage/'.$orderFood->orderFoodImg) }}">
-              </div>
-              <div class="order-food-detail">
-                <p class="order-food-name">{{$orderFood -> orderFoodName}}</p>
-                <p class="order-food-type">Veg</p>
-                <div class="order-food-quantity-price">
-                  <p class="order-food-price">Rs {{$orderFood ->orderFoodPrice}}</p>
-                  <p class="order-food-quantity">Qty: {{$orderFood ->orderFoodQuantity}}</p>
+                <div class="user-profile">
+                  @if($orderData->status == 0)
+                  <div class="user-text">
+                    <h2>
+                      K
+                    </h2>
+                  </div>
+                  @else
+                  <img class="cooking-food-gif" src="/img/cooking2.gif" alt="">
+                  <h3 style="text-align: center;margin-top:5px">Cooking</h3>
+                  @endif
                 </div>
               </div>
-            </div>
-            @endforeach
-            <div class="total-decision-section">
-              <div class="iteam-total">
-                <p class="total-iteam">x{{$orderData->orderfoods->count()}}</p>
-                <p class="total">Rs {{($orderData->orderfoods)->sum('orderTotal')}}</p>
+              @foreach ($orderData->orderfoods as $orderFood)
+              <div class="order-food-section">
+                <div class="order-food-img">
+                  <img src="{{ asset('/storage/'.$orderFood->orderFoodImg) }}">
+                </div>
+                <div class="order-food-detail">
+                  <p class="order-food-name">{{$orderFood -> orderFoodName}}</p>
+                  <p class="order-food-type">Veg</p>
+                  <div class="order-food-quantity-price">
+                    <p class="order-food-price">Rs {{$orderFood ->orderFoodPrice}}</p>
+                    <p class="order-food-quantity">Qty: {{$orderFood ->orderFoodQuantity}}</p>
+                  </div>
+                </div>
               </div>
-              <div class="decision">
-                @if($orderData->status == 0)
-                <a href="{{url('reject-food/'.$orderData->id)}}"><button class="btn btn-danger" style="font-size: 14px;">Reject</button></a>
-                <a href="{{url('prepare-food/'.$orderData->id)}}"><button class="btn btn-primary" style="font-size: 14px;margin-left: 5px;">Prepare</button></a>
-                @elseif($orderData->status == 3)
-                <a href="{{url('reject-food/'.$orderData->id)}}"><button class="btn btn-danger" style="font-size: 14px;">Reject</button></a>
-                <a href="{{url('deliver-food/'.$orderData->id)}}"><button class="btn btn-success" style="font-size: 14px;margin-left: 5px;">Deliver</button></a>
-                @endif
+              @endforeach
+              <div class="total-decision-section">
+                <div class="iteam-total">
+                  <p class="total-iteam">x{{$orderData->orderfoods->count()}}</p>
+                  <p class="total">Rs {{($orderData->orderfoods)->sum('orderTotal')}}</p>
+                </div>
+                <div class="decision">
+                  @if($orderData->status == 0)
+                  <a href="{{url('reject-food/'.$orderData->id)}}"><button class="btn btn-danger" style="font-size: 14px;">Reject</button></a>
+                  <a href="{{url('prepare-food/'.$orderData->id)}}"><button class="btn btn-primary" style="font-size: 14px;margin-left: 5px;">Prepare</button></a>
+                  @elseif($orderData->status == 3)
+                  <a href="{{url('reject-food/'.$orderData->id)}}"><button class="btn btn-danger" style="font-size: 14px;">Reject</button></a>
+                  <a href="{{url('deliver-food/'.$orderData->id)}}"><button class="btn btn-success" style="font-size: 14px;margin-left: 5px;">Deliver</button></a>
+                  @endif
+                </div>
               </div>
             </div>
-          </div>
           </div>
           @else
           <div class="nothing-found-box" style="margin:0 auto;">
             <img src="/img/nothing-found.jpg" alt="" />
             <p>You have received no order yet</p>
           </div>
-           
+
           @endif
           @endforeach
         </div>
@@ -631,24 +633,24 @@ $orderCount =1;
             <tbody>
               @foreach($order as $orderHistory)
               <tr>
-              @if($orderHistory->status == 1 || $orderHistory->status == 2)
-              <td class="fs-4">{{ $sn++ }}</td>
-              <td class="fs-4">{{$orderHistory->customerName}}</td>
-              <td class="fs-4">{{$orderHistory->paymentOption}}</td>
-              <td class="fs-4">{{$orderHistory->serviceType}}</td>
-              @if($orderHistory->status == 1)
-              <td>
-                <p class="delivered" style="padding: 5px;">Delivered</p>
-              </td>
-              @elseif($orderHistory->status == 2)
-              <td>
-                <p class="rejected" style="padding: 5px;">Rejected</p>
-              </td>
-              @endif
-              <td>
-                <button id="{{$orderHistory->id}}" class="btn btn-primary fs-5" onclick="showOrderFoodDetail(this.id);">View Detail</button>
-              </td>
-              @endif
+                @if($orderHistory->status == 1 || $orderHistory->status == 2)
+                <td class="fs-4">{{ $sn++ }}</td>
+                <td class="fs-4">{{$orderHistory->customerName}}</td>
+                <td class="fs-4">{{$orderHistory->paymentOption}}</td>
+                <td class="fs-4">{{$orderHistory->serviceType}}</td>
+                @if($orderHistory->status == 1)
+                <td>
+                  <p class="delivered" style="padding: 5px;">Delivered</p>
+                </td>
+                @elseif($orderHistory->status == 2)
+                <td>
+                  <p class="rejected" style="padding: 5px;">Rejected</p>
+                </td>
+                @endif
+                <td>
+                  <button id="{{$orderHistory->id}}" class="btn btn-primary fs-5" onclick="showOrderFoodDetail(this.id);">View Detail</button>
+                </td>
+                @endif
               </tr>
               @endforeach
             </tbody>
@@ -658,6 +660,14 @@ $orderCount =1;
     </div>
     <div class="analysis-section" id="analysis-section">
       <h1>Your restaurant Info</h1>
+      <div class="for-graph-pie">
+        <div class="graph">
+          <canvas id="myChart" class="myChart"></canvas>
+        </div>
+        <div class="pie">
+          <canvas id="myPie" class="myPie"></canvas>
+        </div>
+      </div>
     </div>
     <div class="photo-gallary-section" id="photo-gallary-section">
       <h1 class="mb-5 mt-3">Your restaurant photos</h1>
@@ -704,7 +714,57 @@ $orderCount =1;
   </section>
 
   <script>
-  </script>
+        const ctx = document.getElementById("myChart").getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                datasets: [{
+                    label: '',
+                    data: [ 1,2,3,4,5,6,7,8,9,10,11,12 ],
+                    backgroundColor: [
+                        '#3B5BA5',
+                        '#FF4136',
+                        '#FF851B', 
+                        '#FFDC00', 
+                        '#2ECC40',
+                        '#0074D9', 
+                        '#B10DC9', 
+                        '#85144b', 
+                        '#F012BE', 
+                        '#3D9970', 
+                        '#AAAAAA', 
+                        '#F0E68C', 
+                        '#00CED1', 
+                    ],
+
+                }]
+            },
+            options: {
+                Response: true,
+            }
+        });
+        const ctx1 = document.getElementById('myPie').getContext('2d');
+        const myPie = new Chart(ctx1, {
+            type: 'doughnut',
+            data: {
+                labels: ['kathmandu', 'pokhara','dharan'],
+                datasets: [{
+                    label: 'Product Sales',
+                    data: [10,30,40],
+                    backgroundColor: [
+                        '#EC6B56',
+                        '#FFC154',
+                        '#47B39C',
+                    ],
+
+                }]
+            },
+            options: {
+                Response: true,
+            }
+        });
+ </script>
   <script src="/js/forAdminRestaurantPage.js"></script>
 </body>
 

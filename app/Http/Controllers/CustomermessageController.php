@@ -10,6 +10,12 @@ class CustomermessageController extends Controller
 {
     public function saveRatingMessage(Request $req)
     {
+        if(session()->get('loginCustomerId') == null)
+        {
+            return redirect('/login');
+        }
+        else
+        {
         $exists = Customermessage::where('restaurant_id', $req->restaurantId)->where('customer_id',session()->get('loginCustomerId') )->exists();
         if(!$exists)
         {
@@ -37,5 +43,33 @@ class CustomermessageController extends Controller
             $rating->save();
         }
         return back();
+    }
+    }
+    public function saveRating(Request $req)
+    {
+        if(session()->get('loginCustomerId') == null)
+        {
+            return redirect('/login');
+        }
+        else
+        {
+        $exists = Customermessage::where('restaurant_id', $req->restaurantId)->where('customer_id',session()->get('loginCustomerId') )->exists();
+        if(!$exists)
+        {
+            Rating::create([
+                'rating'=>$req->rating,
+                'restaurant_id'=> $req->restaurantId,
+                'customer_id'=>session()->get('loginCustomerId')
+            ]);
+        }
+        else
+        {
+      
+            $rating = Rating::where('restaurant_id', $req->restaurantId) ->where('customer_id', session()->get('loginCustomerId'))->first();
+            $rating->rating = $req->rating;
+            $rating->save();
+        }
+        return back();
+    }
     }
 }
