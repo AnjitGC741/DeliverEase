@@ -1,5 +1,14 @@
 
 let idValue=0;
+window.addEventListener('load', function() {
+  var loader = document.querySelector('.loader');
+  setTimeout(function() {
+    loader.style.opacity = '0';
+    setTimeout(function() {
+      loader.style.display = 'none';
+    }, 1000);
+  }, 2000); 
+});
 window.onload = function() {
   var child = document.getElementById("food-menu-category");
   var childHeight = child.offsetHeight;
@@ -100,4 +109,12 @@ function showPhotoGallary()
   document.getElementById("food-menu-category-btn").classList.remove("active1");
   document.getElementById("restaurant-photo-gallary-btn").classList.add("active1");
   document.getElementById("restaurant-customer-review-btn").classList.remove("active1");
+}
+function showRatingBox()
+{
+  document.getElementById("rating-box").style.display="block";
+}
+function closeRatingBox()
+{
+  document.getElementById("rating-box").style.display="none";
 }

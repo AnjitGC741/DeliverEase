@@ -30,6 +30,7 @@
     <link rel="shortcut icon" href="/favicon/favicon1.ico" type="image/x-icon">
 </head>
 <body onload="topic();">
+<div class="loader"></div>
 <section class="navbar1">
     <div class="logo">
       <h1>DeliverEase</h1>  

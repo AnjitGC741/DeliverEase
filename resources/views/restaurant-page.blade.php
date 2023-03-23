@@ -4,6 +4,7 @@
 @php
 $sn = 1;
 @endphp
+
 <link rel="stylesheet" href="/css/bootstrap.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -106,6 +107,47 @@ $sn = 1;
     @endif
   </div>
   <div class="linear"></div>
+  <div class="for-user-rating" id="rating-box">
+    <p><button onclick="closeRatingBox();" class="rating-close-btn"><ion-icon name="close-outline"></ion-icon></button></p>
+    <h5>Rate Us!</h5>
+    <form action="{{route('save-rating')}}" method="POST">
+      @csrf
+      <input type="text" hidden name="restaurantId" value="{{ $value->id }}">
+      <div class="form1 rating">
+            <label>
+              <input type="radio" name="rating" value="1" />
+              <span class="icon">★</span>
+            </label>
+            <label>
+              <input type="radio" name="rating" value="2" />
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+            </label>
+            <label>
+              <input type="radio" name="rating" value="3" />
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+            </label>
+            <label>
+              <input type="radio" name="rating" value="4" />
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+            </label>
+            <label>
+              <input type="radio" name="rating" value="5" />
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+            </label>
+          </div>
+          <button type="submit" class="btn btn-success w-100">Rate</button>
+        </form>
+  </div>
   <div class="resturant-info">
     <div class="resturant-logo">
       @if($value->restaurantLogo == "")
@@ -141,15 +183,66 @@ $sn = 1;
     $userId = session()->get('loginCustomerId');
     $exists = DB::table('favorites')->where('restaurant_id', $id)->where('customer_id', $userId)->exists();
     @endphp
+    @if($exists)
     <form id="removeFromFavorite" method="POST" action="{{ route('remove-from-favorite') }}">
       @csrf
       <input type="hidden" name="restaurantId" value="{{ $value->id }}">
-      <button type="submit" class="favorite-btn1"><ion-icon name="heart" style="color:red;"></ion-icon></button>
+      <button onclick="removeFromFavorite();" class="favorite-btn1"><ion-icon name="heart" style="color:red;"></ion-icon></button>
     </form>
     @else
-    <button class="favorite-btn1"><ion-icon name="heart-outline"></ion-icon></button>
+    <form id="addToFavorite" method="POST" action="{{ route('add-to-favorite') }}">
+      @csrf
+      <input type="hidden" name="restaurantId" value="{{ $value->id }}">
+      <button onclick="addToFavorite();" class="favorite-btn1"><ion-icon name="heart-outline"></ion-icon></button>
+    </form>
     @endif
-    <button class="rate-btn"><ion-icon name="star-outline"></ion-icon></button>
+    @else
+    <form id="addToFavorite" method="POST" action="{{ route('add-to-favorite') }}">
+      @csrf
+      <input type="hidden" name="restaurantId" value="{{ $value->id }}">
+      <button onclick="addToFavorite();" class="favorite-btn1"><ion-icon name="heart-outline"></ion-icon></button>
+    </form>
+    @endif
+    <!-- for rating -->
+    @if(session()->get('loginCustomerId') != null)
+    @php
+    $id = $value->id;
+    $userId = session()->get('loginCustomerId');
+    $existsRating = DB::table('ratings')->where('restaurant_id', $id)->where('customer_id', $userId)->first();
+    @endphp
+    @if($existsRating)
+    <div class="user-rating-value">
+      <p>Your rate</p>
+      <div class="customer-review-rate">
+                <ion-icon class="star-display" name="star"></ion-icon>
+                <ion-icon class="star-display" name="star"></ion-icon>
+                <ion-icon class="star-display" name="star"></ion-icon>
+                <ion-icon class="star-display" name="star"></ion-icon>
+                <ion-icon class="star-display" name="star"></ion-icon>
+        </div>
+              <script>
+                displayRating(<?= $existsRating->rating ?>);
+
+                function displayRating(ratingValue) {
+                  let stars = document.querySelectorAll('.star-display');
+                  stars.forEach((star, index) => {
+                    if (index < Math.floor(ratingValue)) {
+                      star.style.color = 'gold';
+                    } else if (index === Math.floor(ratingValue) && ratingValue % 1 !== 0) {
+                      star.setAttribute('name', 'star-half');
+                      star.style.color = 'gold';
+                    } else {
+                      star.style.color = 'gray';
+                    }
+                  });
+                }
+              </script>
+    </div>
+    <button class="favorite-btn1" onclick="showRatingBox();" style=" padding: 7px 7px;"><ion-icon name="pencil-outline"></ion-icon></button>
+    @endif
+    @else
+    <button class="rate-btn" onclick="showRatingBox();"><ion-icon name="star-outline"></ion-icon></button>
+    @endif
   </div>
 </div>
 <hr style="max-width: 1300px;margin: 0 auto;">
@@ -356,5 +449,38 @@ $sn = 1;
 <script src="/js/vendor/jquery-1.10.2.min.js"></script>
 <script src="/js/min/plugins.min.js"></script>
 <script src="/js/min/mainPhoto.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  function removeFromFavorite() {
+  var formData = $('#removeFromFavorite').serialize();
+  $.ajax({
+    url: '{{ route("remove-from-favorite") }}',
+    type: 'POST',
+    data: formData,
+    dataType: 'json',
+    success: function(response) {
+      alert("remove from favorite");
+      location.reload()
+    }
 
+  });
+}
+
+function addToFavorite() {
+  var formData = $('#addToFavorite').serialize();
+  $.ajax({
+    url: '{{ route("add-to-favorite") }}',
+    type: 'POST',
+    data: formData,
+    dataType: 'json',
+    success: function(response) {
+      alert("added to favorite")
+      location.reload()
+    }
+
+  });
+}
+</script>
 @endsection

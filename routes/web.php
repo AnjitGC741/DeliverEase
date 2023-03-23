@@ -132,3 +132,4 @@ Route::post('/remove-from-favorite',[FavoriteController::class,'removeFromFavori
 Route::post('/add-to-favorite',[FavoriteController::class,'addToFavorite'])->name('add-to-favorite');
 // customer rating and message
 Route::post('/save-rating-message',[CustomermessageController::class,'saveRatingMessage'])->name('save-rating-message');
+Route::post('/save-rating',[CustomermessageController::class,'saveRating'])->name('save-rating');
