@@ -1,6 +1,18 @@
 @php
 $sn=1;
 $orderCount =1;
+$jan = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMonth('serviceDate', '=', 1)->count();
+$feb = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMonth('serviceDate', '=', 2)->count();
+$mar = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMonth('serviceDate', '=', 3)->count();
+$apr = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMonth('serviceDate', '=', 4)->count();
+$may = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMonth('serviceDate', '=', 5)->count();
+$jun = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMonth('serviceDate', '=', 6)->count();
+$jul = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMonth('serviceDate', '=', 7)->count();
+$aug = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMonth('serviceDate', '=', 8)->count();
+$sep = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMonth('serviceDate', '=', 9)->count();
+$oct = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMonth('serviceDate', '=', 10)->count();
+$nov = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMonth('serviceDate', '=', 11)->count();
+$dec = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMonth('serviceDate', '=', 12)->count();
 @endphp
 @inject('carbon', 'Carbon\Carbon')
 <!DOCTYPE html>
@@ -72,7 +84,7 @@ $orderCount =1;
     </div>
   </div>
   @endforeach
-  @foreach($value->food as $food)
+  @foreach($foods as $food)
   <div class="editFood" id="editFood_{{$food->id}}">
     <h2>Edit food information</h2>
     <form action="{{route('update-food-Info')}}" method="POST" enctype="multipart/form-data">
@@ -156,7 +168,7 @@ $orderCount =1;
       <button style="width: 100%; height: 50px;" class=" fs-4 mt-3 btn btn-success">Update</button>
     </form>
   </div>
-  @foreach($value->food as $food)
+  @foreach($foods as $food)
   <div class="giveDiscount" id="giveDiscount_{{$food->id}}">
     <h2>Give discount to {{$food->foodName}}</h2>
     <hr>
@@ -391,14 +403,16 @@ $orderCount =1;
       <nav class="navbar mb-4">
         <div class="container-fluid">
           <button onclick="displayAddFood();" class="btn btn-success fs-4">Add Food</button>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2 fs-4" type="search" placeholder="Search" aria-label="Search">
+          <form method="POST" action="{{route('admin-search-food')}}" class="d-flex" role="search">
+            @csrf
+            <input type="text" hidden value="{{$value->id}}" name="restaurantId">
+            <input class="form-control me-2 fs-4" name="foodName" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success fs-4" type="submit">Search</button>
           </form>
         </div>
       </nav>
       <div class="food-list">
-        @if($value->food() ->count() > 0)
+        @if($foods ->count() > 0)
         <table class="table table-striped table-hover">
           <tr style="height:50px;">
             <th style="padding-top:15px;padding-left:25px">SN</th>
@@ -411,7 +425,7 @@ $orderCount =1;
             <th style="padding-top:15px;padding-left:25px">Quantity</th>
             <th style="padding:15px 0 0 60px;padding-left:140px" colspan="3">Action</th>
           </tr>
-          @foreach ($value->food as $food)
+          @foreach ($foods as $food)
           <tr>
             <td class="fs-3" style="padding-top:40px;padding-left:25px;">{{$sn++}}</td>
             <td class="fs-3" style="padding-top:40px;padding-left:25px;">{{$food->foodName}}</td>
@@ -451,14 +465,6 @@ $orderCount =1;
       </div>
     </div>
     <div class="unavailable-food-list-section" id="unavailable-food-section">
-      <nav class="navbar mb-4 d-flex justify-content-end">
-        <div>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2 fs-4" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success fs-4" type="submit">Search</button>
-          </form>
-        </div>
-      </nav>
       <div class="not-available-food-list">
         @if($value->food()->onlyTrashed()->get() -> isNotEmpty())
         <table class="table table-striped table-hover">
@@ -504,6 +510,9 @@ $orderCount =1;
       </ul>
       <div class="recent-history-order">
         <div class="food-order-lists" id="food-order-lists">
+          @php
+          $count=0;
+          @endphp
           @foreach ($order as $orderData)
           @if($orderData->status == 0 || $orderData->status == 3)
           <div class="food-order-box">
@@ -607,13 +616,17 @@ $orderCount =1;
             </div>
           </div>
           @else
+          @php
+          $count++;
+          @endphp
+          @endif
+          @endforeach
+          @if($order->count() == $count)
           <div class="nothing-found-box" style="margin:0 auto;">
             <img src="/img/nothing-found.jpg" alt="" />
             <p>You have received no order yet</p>
           </div>
-
           @endif
-          @endforeach
         </div>
         <div class="food-order-history-lists" id="food-order-history-lists">
           @php
@@ -660,6 +673,51 @@ $orderCount =1;
     </div>
     <div class="analysis-section" id="analysis-section">
       <h1>Your restaurant Info</h1>
+      <div class="data-summary-section">
+        <div class="box restaurant-count">
+          <div class="for-icon restaurant-icon">
+            <ion-icon name="pizza"></ion-icon>
+          </div>
+          <div class="for-text">
+            <p class="count">{{$food->count()}}</p>
+            <p class="text-name">Total Food</p>
+          </div>
+        </div>
+        <div class="box customer-count">
+          <div class="for-icon customer-icon">
+            <ion-icon name="cart"></ion-icon>
+          </div>
+          <div class="for-text">
+            <p class="count">{{$order->count()}}</p>
+            <p class="text-name">Total Order</p>
+          </div>
+        </div>
+        <div class="box delivery-count">
+          <div class="for-icon delivery-icon">
+            <ion-icon name="cash"></ion-icon>
+          </div>
+          <div class="for-text">
+            @php
+            $earned = App\Models\Orderdetail::where('restaurant_id', '=', $value->id)->where('status', '=', 1)->first();
+            $totalEarned = 0;
+            if ($earned) {
+            $totalEarned = $earned->orderfoods->sum('orderTotal');
+            }
+            @endphp
+            <p class="count">{{ $totalEarned }}</p>
+            <p class="text-name">Earn</p>
+          </div>
+        </div>
+        <div class="box location-count">
+          <div class="for-icon location-icon">
+            <ion-icon name="people"></ion-icon>
+          </div>
+          <div class="for-text">
+            <p class="count">{{$value->customermessages()->count()}}</p>
+            <p class="text-name">Customer Review</p>
+          </div>
+        </div>
+      </div>
       <div class="for-graph-pie">
         <div class="graph">
           <canvas id="myChart" class="myChart"></canvas>
@@ -714,57 +772,57 @@ $orderCount =1;
   </section>
 
   <script>
-        const ctx = document.getElementById("myChart").getContext('2d');
-        const myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-                datasets: [{
-                    label: '',
-                    data: [ 1,2,3,4,5,6,7,8,9,10,11,12 ],
-                    backgroundColor: [
-                        '#3B5BA5',
-                        '#FF4136',
-                        '#FF851B', 
-                        '#FFDC00', 
-                        '#2ECC40',
-                        '#0074D9', 
-                        '#B10DC9', 
-                        '#85144b', 
-                        '#F012BE', 
-                        '#3D9970', 
-                        '#AAAAAA', 
-                        '#F0E68C', 
-                        '#00CED1', 
-                    ],
+    const ctx = document.getElementById("myChart").getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [{
+          label: '',
+          data: [<?= $jan ?>, <?= $feb ?>, <?= $mar ?>, <?= $apr ?>, <?= $may ?>, <?= $jun ?>, <?= $jul ?>, <?= $aug ?>, <?= $sep ?>, <?= $oct ?>, <?= $nov ?>, <?= $dec ?>],
+          backgroundColor: [
+            '#3B5BA5',
+            '#FF4136',
+            '#FF851B',
+            '#FFDC00',
+            '#2ECC40',
+            '#0074D9',
+            '#B10DC9',
+            '#85144b',
+            '#F012BE',
+            '#3D9970',
+            '#AAAAAA',
+            '#F0E68C',
+            '#00CED1',
+          ],
 
-                }]
-            },
-            options: {
-                Response: true,
-            }
-        });
-        const ctx1 = document.getElementById('myPie').getContext('2d');
-        const myPie = new Chart(ctx1, {
-            type: 'doughnut',
-            data: {
-                labels: ['kathmandu', 'pokhara','dharan'],
-                datasets: [{
-                    label: 'Product Sales',
-                    data: [10,30,40],
-                    backgroundColor: [
-                        '#EC6B56',
-                        '#FFC154',
-                        '#47B39C',
-                    ],
+        }]
+      },
+      options: {
+        Response: true,
+      }
+    });
+    const ctx1 = document.getElementById('myPie').getContext('2d');
+    const myPie = new Chart(ctx1, {
+      type: 'doughnut',
+      data: {
+        labels: ['kathmandu', 'pokhara', 'dharan'],
+        datasets: [{
+          label: 'Product Sales',
+          data: [10, 30, 40],
+          backgroundColor: [
+            '#EC6B56',
+            '#FFC154',
+            '#47B39C',
+          ],
 
-                }]
-            },
-            options: {
-                Response: true,
-            }
-        });
- </script>
+        }]
+      },
+      options: {
+        Response: true,
+      }
+    });
+  </script>
   <script src="/js/forAdminRestaurantPage.js"></script>
 </body>
 
