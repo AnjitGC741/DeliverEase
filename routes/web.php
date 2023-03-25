@@ -70,6 +70,7 @@ Route::post('/dashboard/search-unverified-restaurant',[SuperAdmin::class,'search
 //for restaurant
 Route::get('/browse-by-cuisine/{cuisine}',[RestaurantController::class,'browseByCuisine']);
 Route::post('/search-food',[RestaurantController::class,'searchFood'])->name('search-food');
+Route::post('/admin-search-food',[RestaurantController::class,'adminSearchFood'])->name('admin-search-food');
 Route::get('/restaurant-page/{id}',[RestaurantController::class,'userRestaurantPage']);
 Route::post('/restaurants-sort-asc',[RestaurantController::class,'sortRestaurantAsc'])->name('sort-restaurant-ascending');
 Route::post('/restaurants-sort-desc',[RestaurantController::class,'sortRestaurantDesc'])->name('sort-restaurant-descending');

@@ -197,4 +197,15 @@
 @endif  
 </div>
 <script src="./js/forRestaurantList.js"></script>
+<script>
+    window.addEventListener('load', function() {
+    var loader = document.querySelector('.loader');
+    setTimeout(function() {
+      loader.style.opacity = '0';
+      setTimeout(function() {
+        loader.style.display = 'none';
+      }, 1000);
+    }, 2000); 
+  });
+</script>
 @endsection
