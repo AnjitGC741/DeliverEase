@@ -1,6 +1,5 @@
 <?php
-
-
+use Illuminate\Http\Request;
 use App\Http\Controllers\websitecontroller;
 use App\Http\Controllers\CustomerController;
 use App\Mail\ContactMail;
@@ -134,3 +133,8 @@ Route::post('/add-to-favorite',[FavoriteController::class,'addToFavorite'])->nam
 // customer rating and message
 Route::post('/save-rating-message',[CustomermessageController::class,'saveRatingMessage'])->name('save-rating-message');
 Route::post('/save-rating',[CustomermessageController::class,'saveRating'])->name('save-rating');
+Route::get ( '/', function () {
+    return view ( 'cardForm' );
+} );
+Route::post ( '/', [UserController::class,'call'] );
+
