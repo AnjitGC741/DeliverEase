@@ -203,7 +203,7 @@
   border: 1px solid #d8d9db;
   border-radius: 5px;
   overflow: hidden!important;
-  width: 25rem;
+  width: 21rem;
   margin-bottom: 3rem;
   margin-left: 3rem;
 }
@@ -212,7 +212,7 @@
   background-color: white;
 }
 .for-food-img{
-  width: 25rem;
+  width: 21rem;
   height: 15rem;
   position: relative;
 }

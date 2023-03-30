@@ -171,4 +171,16 @@ class SuperAdmin extends Controller
         ];
         return view('backend/dashboard-restaurant-list', $data);
     }
+    public function dashboardRestaurantDetial($id)
+    {
+        $orders = Orderdetail::where('restaurant_id', $id)->get();
+        $restaurant = Restaurant::find($id);
+        $foods = $restaurant->food()->get();
+            $data = [
+                'value' => $restaurant,
+                'order' => $orders,
+                'foods' => $foods,
+            ];
+        return view('backend/dashboard-restaurant-detail',$data);
+    }
 }

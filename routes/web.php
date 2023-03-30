@@ -66,6 +66,7 @@ Route::post('/dashboard/block-restaurant',[SuperAdmin::class,'blockRestaurant'])
 Route::post('/dashboard/search-active-restaurant',[SuperAdmin::class,'searchActiveRestaurant'])->name('search-active-restaurant');
 Route::post('/dashboard/search-block-restaurant',[SuperAdmin::class,'searchBlockRestaurant'])->name('search-block-restaurant');
 Route::post('/dashboard/search-unverified-restaurant',[SuperAdmin::class,'searchUnverifiedRestaurant'])->name('search-unverified-restaurant');
+Route::get('/dashboard/restaurant-page/{id}',[SuperAdmin::class,'dashboardRestaurantDetial']);
 //for restaurant
 Route::get('/browse-by-cuisine/{cuisine}',[RestaurantController::class,'browseByCuisine']);
 Route::post('/search-food',[RestaurantController::class,'searchFood'])->name('search-food');
@@ -78,7 +79,6 @@ Route::post('/restaurants-sort-cuisine',[RestaurantController::class,'sortByCuis
 Route::post('/close-restaurant',[RestaurantController::class,'closeRestaurant'])->name('close-restaurant');
 Route::post('/open-restaurant',[RestaurantController::class,'openRestaurant'])->name('open-restaurant');
 Route::get('/logout-restaurant',[RestaurantController::class,'logoutRestaurant']);
-Route::get('/restaurant-admin-page/{id}',[RestaurantController::class,'adminRestaurantPage']);
 Route::get('/restaurant-signup2/{id}',[RestaurantController::class,'findRestaurantName']);
 Route::get('/restaurant-signup3/{id}',[RestaurantController::class,'findRestaurantName1']);
 Route::post('/restaurant-list',[RestaurantController::class,'searchRestaurant'])->name('search-restaurant');
@@ -87,6 +87,7 @@ Route::post('/restaurant-signup1',[RestaurantController::class,'registerRestaura
 Route::post('/restaurant-signup2',[RestaurantController::class,'saveRestaurantDetail'])->name('save-restaurant-detail');
 Route::post('/restaurant-signup3',[RestaurantController::class,'saveRestaurantLoginInfo'])->name('save-restaurant-loginInfo');
 // Route::post('/restaurant-admin-page',[RestaurantController::class, 'updateRestaurantLoginInfo'])->name('update-restaurant-loginInfo');
+Route::get('/restaurant-admin-page/{id}',[RestaurantController::class,'adminRestaurantPage']);
 Route::post('/restaurant-admin-page',[RestaurantController::class, 'updateRestaurantInfo'])->name('update-Restaurant-Info');
 Route::post('/restaurant-admin-page/updateRestaurantCoverImg',[RestaurantController::class,'changeRestaurantCoverImg'])->name('changeBackgroundImg');
 Route::post('/restaurant-admin-page/deleteRestaurantCoverImg',[RestaurantController::class,'deleteRestaurantCoverImg'])->name('deleteBackgroundImg');
