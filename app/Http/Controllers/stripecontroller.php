@@ -8,37 +8,31 @@ use Illuminate\Http\Request;
 use Stripe;
 use Session;
 
-class StripeController extends Controller
+class UserController extends Controller
 {
-    public function index(){
+    //
+    public function call(Request $request) {
+        \Stripe\Stripe::setApiKey('SET_YOUR_SECRET_KEY_HERE');
+        $customer = \Stripe\Customer::create(array(
+          'name' => 'test',
+          'description' => 'test description',
+          'email' => 'email@gmail.com',
+          'source' => $request->input('stripeToken'),
+           "address" => ["city" => "San Francisco", "country" => "US", "line1" => "510 Townsend St", "postal_code" => "98140", "state" => "CA"]
 
-      \Stripe\Stripe::setApiKey('PASTE_YOU_SECRET_KEY_HERE');
-
-      $YOUR_DOMAIN = 'http://127.0.0.1:8000/';
-
-      $checkout_session = \Stripe\Checkout\Session::create([
-        'payment_method_types' => ['card'],
-          'line_items' => [[
-            'price_data' => [
-              'currency' => 'usd',
-              'product_data' => [
-                'name' => 'Blue-Shoes',
-              ],
-              'unit_amount' => 3000,
-            ],
-            'quantity' => 1,
-          ]],
-        'mode' => 'payment',
-        'success_url' => $YOUR_DOMAIN . 'success',
-        'cancel_url' => $YOUR_DOMAIN . 'cancel',
-      ]);
-       return Redirect($checkout_session->url);
-    }
-
-    public function success(){
-        return view("success");
-    }
-    public function cancel(){
-        return view("cancel");
+      ));
+        try {
+            \Stripe\Charge::create ( array (
+                    "amount" => 300 * 100,
+                    "currency" => "usd",
+                    "customer" =>  $customer["id"],
+                    "description" => "Test payment."
+            ) );
+            Session::flash ( 'success-message', 'Payment done successfully !' );
+            return view ( 'cardForm' );
+        } catch ( \Stripe\Error\Card $e ) {
+            Session::flash ( 'fail-message', $e->get_message() );
+            return view ( 'cardForm' );
+        }
     }
 }
