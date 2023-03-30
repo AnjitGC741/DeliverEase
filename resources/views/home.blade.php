@@ -51,61 +51,60 @@
   </div>
   <div class="owl-carousel owl-theme">
     @php
-        $restaurants = App\Models\Restaurant::all();
+    $restaurants = App\Models\Restaurant::all();
     @endphp
-    @foreach ($restaurants as $restaurant)
-        @if($restaurant->verification == 1)
-            <div class="restaurant-details">
-                <a href="{{url('/restaurant-page/'.$restaurant->id)}}"> <button class="restaurant-btn">
-                    <div class="restaurant-coverImg">
-                        @if($restaurant->restaurantCoverImg == "")
-                            <img src="/img/rest1.jpg" alt="restaurant img" />
-                        @else
-                            <img src="{{ asset('/storage/'.$restaurant->restaurantCoverImg) }}">
-                        @endif
-                        @if($restaurant->discount != 0)
-                        <p class="discount-tag">Discount Available</p>
-                        @endif
-                    </div>
-                </button>
-                </a>
-                <div class="restaurant-info">
-                    <h3 class="restaurant-name">{{ $restaurant->restaurantName }}</h3>
-                    <div class="customer-review-rate">
-                      <div class="rating">
-                        <ion-icon class="home-star" name="star"></ion-icon>
-                        <ion-icon class="home-star" name="star"></ion-icon>
-                        <ion-icon class="home-star" name="star"></ion-icon>
-                        <ion-icon class="home-star" name="star"></ion-icon>
-                        <ion-icon class="home-star" name="star"></ion-icon>
-                    </div>
-                    @php
-                    $rateValue = $restaurant->ratings->avg('rating');
-                    @endphp
-                    <script>
-                      let rate = <?= $rateValue ?>;
-                        changeStarColor(rate);
-                        function changeStarColor(ratingValue) {
-                            let stars = document.querySelectorAll('.home-star');
-                            stars.forEach((star, index) => {
-                                if (index < Math.floor(ratingValue)) {
-                                    star.style.color = '#FF7F00';
-                          
-                                } else if (index === Math.floor(ratingValue) && ratingValue % 1 !== 0) {
-                                    star.setAttribute('name', 'star-half');
-                                    star.style.color = '#FF7F00';
-                           
-                                } else {
-                                    star.style.color = 'gray';
-                                }
-                            });
-                        }
-                    </script>
-                    <p class="reviews-counts">{{$restaurant->ratings->count()}} <span>reviews</span></p>
-                    </div>
+    @foreach ($restaurants as $index =>$restaurant)
+    @if($restaurant->verification == 1)
+    <div class="restaurant-details">
+      <a href="{{url('/restaurant-page/'.$restaurant->id)}}"> <button class="restaurant-btn">
+          <div class="restaurant-coverImg">
+            @if($restaurant->restaurantCoverImg == "")
+            <img src="/img/rest1.jpg" alt="restaurant img" />
+            @else
+            <img src="{{ asset('/storage/'.$restaurant->restaurantCoverImg) }}">
+            @endif
+            @if($restaurant->discount != 0)
+            <p class="discount-tag">Discount Available</p>
+            @endif
+          </div>
+        </button>
+      </a>
+      <div class="restaurant-info">
+        <h3 class="restaurant-name">{{ $restaurant->restaurantName }}</h3>
+        <div class="customer-review-rate">
+          <div class="rating" id="rating-{{ $index }}">
+            <ion-icon class="home-star" name="star"></ion-icon>
+            <ion-icon class="home-star" name="star"></ion-icon>
+            <ion-icon class="home-star" name="star"></ion-icon>
+            <ion-icon class="home-star" name="star"></ion-icon>
+            <ion-icon class="home-star" name="star"></ion-icon>
+          </div>
+          @php
+          $rateValue = $restaurant->ratings->avg('rating');
+          @endphp
+          <script>
+            displayRating(<?= $index ?>, <?= $rateValue ?>);
+
+            function displayRating(reviewIndex, ratingValue) {
+              let ratingDiv = document.querySelector(`#rating-${reviewIndex}`);
+              let stars = ratingDiv.querySelectorAll('.home-star');
+              stars.forEach((star, index) => {
+                if (index < Math.floor(ratingValue)) {
+                  star.style.color = '#FF7F00';
+                } else if (index === Math.floor(ratingValue) && ratingValue % 1 !== 0) {
+                  star.setAttribute('name', 'star-half');
+                  star.style.color = '#FF7F00';
+                } else {
+                  star.style.color = 'gray';
+                }
+              });
+            }
+          </script>
+          <p class="reviews-counts">{{$restaurant->ratings->count()}} <span>reviews</span></p>
+        </div>
         <div style="display: flex;gap:5px">
-           <p class="restaurant-cuisine-address"><ion-icon name="pizza" style="color:gray;font-size:12px;"></ion-icon>{{ $restaurant->cuisine }}</p>
-           <p class="restaurant-cuisine-address"><ion-icon name="location" style="color:gray;font-size:12px;"></ion-icon>{{$restaurant->street}},{{$restaurant->city}}</p>
+          <p class="restaurant-cuisine-address"><ion-icon name="pizza" style="color:gray;font-size:12px;"></ion-icon>{{ $restaurant->cuisine }}</p>
+          <p class="restaurant-cuisine-address"><ion-icon name="location" style="color:gray;font-size:12px;"></ion-icon>{{$restaurant->street}},{{$restaurant->city}}</p>
         </div>
         <div class="for-status-favorite">
           @if($restaurant->status == 1)
@@ -119,26 +118,22 @@
           $userId = session()->get('loginCustomerId');
           $exists = DB::table('favorites')->where('restaurant_id', $id)->where('customer_id', $userId)->exists();
           @endphp
-          @if($exists)
-          <form id="removeFromFavorite" method="POST" action="{{ route('remove-from-favorite') }}">
+          <form id="addToFavorite-{{ $index }}">
             @csrf
-            <input type="hidden" name="restaurantId" value="{{ $restaurant->id }}">
-            <button type="submit" class="favorite-btn" onclick="removeFromFavorite()" style="color: red;">
-              <ion-icon name="heart"></ion-icon>
+            <input type="text" name="restaurantId" hidden value="{{$restaurant->id}}">
+            @if($exists)
+            <button type="submit" id="favoriteBtn-{{ $index }}" class="favorite-btn" style="color: red;">
+              <ion-icon id="favoriteBtnIcon-{{ $index }}" name="heart"></ion-icon>
             </button>
+            @else
+            <button class="favorite-btn" id="favoriteBtn-{{ $index }}" type="submit"><ion-icon id="favoriteBtnIcon-{{ $index}}"  name="heart-outline"></ion-icon></button>
+            @endif
           </form>
           @else
-          <form id="addToFavorite" method="POST" action="{{ route('add-to-favorite') }}">
+          <form id="addToFavorite-{{ $index }}">
             @csrf
             <input type="text" name="restaurantId" hidden value="{{$restaurant->id}}">
-            <button class="favorite-btn" onclick="addToFavorite()"><ion-icon name="heart-outline"></ion-icon></button>
-          </form>
-          @endif
-          @else
-          <form id="addToFavorite" method="POST" action="{{ route('add-to-favorite') }}">
-            @csrf
-            <input type="text" name="restaurantId" hidden value="{{$restaurant->id}}">
-            <button class="favorite-btn" onclick="addToFavorite()"><ion-icon name="heart-outline"></ion-icon></button>
+            <button class="favorite-btn" type="submit"><ion-icon name="heart-outline"></ion-icon></button>
           </form>
           @endif
         </div>
@@ -148,8 +143,9 @@
     @endforeach
   </div>
 </section>
+<div id="response-message"></div>
 <section class="recently-added-restaurant">
-<div class="title-and-link">
+  <div class="title-and-link">
     <h2>Recently Added Restaurant</h2>
     <a href="#">View all</a>
   </div>
@@ -209,15 +205,42 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-window.addEventListener('load', function() {
-  var loader = document.querySelector('.loader');
-  setTimeout(function() {
-    loader.style.opacity = '0';
+  $('[id^="addToFavorite-"]').submit(function(e) {
+    e.preventDefault();
+    var index = $(this).attr('id').split('-')[1];
+    var formData = $(this).serialize();
+    $.ajax({
+      url: "{{ url('/add-to-favorite') }}",
+      type: 'POST',
+      data: formData,
+      success: function(response) {
+        if (response.message === "added") {
+        document.getElementById("favoriteBtn-"+index).style.color = "red";
+        document.getElementById("favoriteBtnIcon-"+index).setAttribute('name','heart');
+        } else if (response.message === "removed") {
+          document.getElementById("favoriteBtn-"+index).style.color = "none";
+        document.getElementById("favoriteBtnIcon-"+index).setAttribute('name','heart-outline');
+        document.getElementById("favoriteBtnIcon-"+index).style.color="black";
+        }
+        else if(response.message === "redirect")
+        {
+          window.location.href = '/login';
+        }
+      },
+      error: function(xhr, status, error) {
+        $('#response-message').html(xhr.responseText);
+      }
+    });
+  });
+  window.addEventListener('load', function() {
+    var loader = document.querySelector('.loader');
     setTimeout(function() {
-      loader.style.display = 'none';
-    }, 1000);
-  }, 2000); 
-});
+      loader.style.opacity = '0';
+      setTimeout(function() {
+        loader.style.display = 'none';
+      }, 1000);
+    }, 2000);
+  });
 
 
   $('.owl-carousel').owlCarousel({
@@ -237,39 +260,8 @@ window.addEventListener('load', function() {
     }
   })
 
-  function removeFromFavorite() {
-    var formData = $('#removeFromFavorite').serialize();
-    $.ajax({
-      url: '{{ route("remove-from-favorite") }}',
-      type: 'POST',
-      data: formData,
-      dataType: 'json',
-      success: function(response) {
-        alert("remove from favorite");
-        location.reload()
-      }
-
-    });
-  }
-
-  function addToFavorite() {
-    var formData = $('#addToFavorite').serialize();
-    $.ajax({
-      url: '{{ route("add-to-favorite") }}',
-      type: 'POST',
-      data: formData,
-      dataType: 'json',
-      success: function(response) {
-
-        alert("added to favorite")
-        location.reload()
-      }
-
-    });
-  }
   const btn = document.querySelector('.restaurant-btn');
-const details = document.querySelector('.restaurant-details');
-
+  const details = document.querySelector('.restaurant-details');
 </script>
 <script src="./js/script.js"></script>
 @endsection

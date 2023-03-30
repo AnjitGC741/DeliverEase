@@ -65,7 +65,7 @@ $snB = 1;
             @endif
             <td>
              <div class="d-flex" style="gap: 10px;">
-             <button class="btn btn-warning">View Detail</button>
+             <button class="btn btn-warning"><a href="{{ url('/dashboard/restaurant-page/' . $restaurant->id) }}" style="text-decoration: none;color:black;">View Detail</a></button>
               <form action="{{route('block-restaurant')}}" method="POST">
                 @csrf
                 <input type="text" value="{{$restaurant->id}}" hidden name="id">

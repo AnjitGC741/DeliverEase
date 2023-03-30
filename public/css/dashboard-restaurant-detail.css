@@ -1,0 +1,795 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 10px;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    line-height: 1;
+}
+a{
+    text-decoration: none;
+}
+hr{
+  margin: 0!important;
+}
+/* for verification message */
+.verificationMessageBox{
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 98;
+  top: 10px;
+  right: 0;
+}
+.msg-restaurant-icon{
+  background-color: white;
+  font-size: 2.4rem;
+  padding: 8px 8px;
+  border-radius: 50%;
+}
+.verification-msg{
+  font-size: 2rem;
+  letter-spacing: 1px;
+  color: white;
+}
+.not-verified{
+  background-color: #46A8F5;
+}
+.banned{
+  background-color: #F66358;
+}
+/* ends */
+.blur-box {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 300vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 98;
+  visibility: hidden;
+}
+/* popup box design */
+.editProfileForm{
+  min-width: 50rem;
+  padding:30px;
+  border:1px solid #939292;
+  position: fixed;
+  z-index: 99;
+  margin:110px 500px;
+  background-color: #ffffff;
+  visibility: hidden;
+}
+.editProfileForm h2{
+  margin-bottom: 10px;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+}
+.editFood{
+min-width: 50rem;
+padding:30px;
+border:1px solid #939292;
+position: fixed;
+z-index: 99;
+margin:110px 500px;
+background-color: #ffffff;
+visibility: hidden;
+}
+.editFood h2{
+  margin-bottom: 10px;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+}
+.editLoginInfo{
+  min-width: 50rem;
+  padding:30px;
+  border:1px solid #939292;
+  position: fixed;
+  z-index: 99;
+  margin:130px 500px;
+  background-color: #ffffff;
+  visibility: hidden;
+}
+.editLoginInfo h2{
+  margin-bottom: 10px;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+}
+.addFood{
+  min-width: 50rem;
+  padding:30px;
+  border:1px solid #939292;
+  position: fixed;
+  z-index: 99;
+  margin:130px 500px;
+  background-color: #ffffff;
+  visibility: hidden;
+}
+.addFood h2{
+  margin-bottom: 10px;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+}
+.giveDiscount{
+  min-width: 50rem;
+  padding:30px;
+  border:1px solid #939292;
+  position: fixed;
+  z-index: 99;
+  margin:130px 500px;
+  background-color: #ffffff;
+  visibility: hidden;
+}
+.giveDiscount h2{
+  margin-bottom: 10px;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+}
+.addImage{
+  min-width: 50rem;
+  padding:30px;
+  border:1px solid #939292;
+  position: fixed;
+  z-index: 99;
+  margin:130px 500px;
+  background-color: #ffffff;
+  visibility: hidden;
+}
+.addImage h2{
+  margin-bottom: 10px;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+}
+.resturant-section
+{
+  height: 60vh;
+  width: 100%;
+  position: relative;
+}
+.img-section {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+   
+  }
+  .img-section img {
+    height: 100%;
+    width: 100%; 
+    object-fit: cover;
+  }
+  .linear {
+    background: rgba(0, 0, 0, 0.4);
+    background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.8) 0,
+      transparent 60%,
+      rgba(0, 0, 0, 0.8)
+    );
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+.resturant-info{
+ position: absolute;
+ bottom: 15px;
+ left: 3rem;
+ min-width: 450px;
+ height:200px; 
+ display: flex;
+ gap: 20px;
+}
+.resturant-logo{
+  height: 100%;
+  width: 200px;
+  position: relative;
+}
+.resturant-logo img{
+  height: 100%;
+  width: 100%;
+}
+.resturant-details{
+  color: white;
+}
+.changeRestaurantData{
+  position: absolute;
+  bottom:20rem;
+  left:17rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  visibility: hidden;
+  }
+  .changeRestaurantInfo{
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    gap: 40px;
+    border-style: none;
+    font-size: 1.4rem;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+  }
+  .changeRestaurantLoginInfo{
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    gap: 40px;
+    border-style: none;
+    font-size: 1.4rem;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+  }
+  .changeRestaurantInfo:hover{
+    background-color: #d4d4d4;
+  }
+  .changeRestaurantLoginInfo:hover{
+    background-color: #d4d4d4;
+  }
+.restaurant-name-and-edit{
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+.resturant-name{
+  font-size: 3.6rem;
+  font-weight: 400;
+  letter-spacing: 0.2rem;
+}
+.restaurant-detail-edit-btn{
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+.edit-pencil{
+  font-size: 2.2rem;
+}
+.icon{
+  margin-right: 10px;
+}
+.icon1{
+  margin-right: 4px;
+}
+
+.resturant-location{
+  font-size: 1.8rem;
+  letter-spacing: 0.2rem;
+  font-weight: 300;
+}
+.resturant-type{
+  font-size: 1.8rem;
+  letter-spacing: 0.2rem;
+  font-weight: 300;
+}
+.minimum-order{
+  font-size: 1.8rem;
+  letter-spacing: 0.2rem;
+  font-weight: 300;
+}
+.service-type{
+  font-size: 1.8rem;
+  letter-spacing: 0.2rem;
+  font-weight: 300;
+}
+.changeProfile{
+  position: absolute;
+  bottom: 0;
+  right: 3rem;
+  padding: 7px 10px;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.changeBackgroundImgOption{
+  position: absolute;
+  bottom: 90px;
+  right: 3rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  visibility: hidden;
+}
+.changeProfileImgOption{
+  position: absolute;
+  bottom:5rem;
+  left:0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  visibility: hidden;
+}
+.uploadImgBtn{
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  gap: 50px;
+  border-style: none;
+  font-size: 1.4rem;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+}
+.deleteImgBtn{
+  width: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  gap: 50px;
+  border-style: none;
+  font-size: 1.4rem;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+}
+.uploadImgBtn:hover{
+  background-color: #d4d4d4;
+}
+.deleteImgBtn:hover{
+  background-color: #d4d4d4;
+}
+.changeBackground{
+  position: absolute;
+  bottom: 40px;
+  right: 3rem;
+  background-color:white;
+  display: flex;
+  padding: 2px 8px;
+  align-items: center!important;
+  gap: 8px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+/* secondary navbar */
+.secondary-navbar{
+  width: 100%;
+  margin: 10px 0 10px 0 ;
+}
+.secondary-navbar div{
+  max-width: 130rem;
+  padding: 20px;
+  margin: 0 auto;
+  border-bottom: 1px solid gray;
+}
+.secondary-navbar-links{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+.secondary-navbar-link{
+  list-style: none;
+  text-decoration: none;
+  color: #181818;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  
+}
+.secondary-navbar-link button{
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.secondary-navbar-link button:hover{
+  color: #FF7F00;
+}
+/* table design */
+th{
+  font-size: 1.6rem;
+}
+/* dynamic div  */
+.dynamic-div{
+  max-width: 130rem;
+  margin: 0 auto;
+  position: relative;
+}
+.food-section{
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  visibility: visible;
+}
+.unavailable-food-list-section{
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  visibility: hidden;
+}
+.order-list-section{
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  visibility:hidden;
+}
+.analysis-section{
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  visibility: hidden;
+}
+.photo-gallary-section{
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  visibility: hidden;
+}
+.customer-review-section{
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  visibility: hidden;
+}
+.active{
+  color: #FF7F00;
+  text-decoration: underline;
+}
+/* nothing found div */
+.nothing-found-box{
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+}
+.nothing-found-box img{
+  width: 25rem;
+  height: 25rem;
+}
+.nothing-found-box p{
+  font-size: 2.4rem;
+  letter-spacing: 1px;
+}
+
+/* food order box */
+.food-order-lists{
+  margin: 0 auto;
+  background-color: #F5F4F7;
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.food-order-box{
+  width: 38rem;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  margin-bottom: 5rem;
+  overflow: hidden;
+}
+.forOrderTime{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: #2EB886; */
+  color: white;
+  font-size: 1.2rem;
+  padding: 1rem 0;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+.timeup{
+  background-color: #F66358;
+}
+.food-order-box2{
+  width: 100%;
+  padding:2rem!important;
+}
+.order-time-and-user-profile{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.order-time{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 0.2rem;
+}
+.order-count{
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 0!important;
+}
+.contact-name{
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #8a8988;
+  margin-bottom: 0!important;
+}
+.contact-info{
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #8a8988;
+  margin-bottom: 0!important;
+}
+.food-delivery-time{
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #8a8988;
+  margin-bottom: 0!important;
+}
+.user-text{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: darkgoldenrod;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+}
+.user-text h2{
+  color: white;
+  font-size: 2.8rem;
+}
+.cooking-food-gif{
+  width: 10rem;
+  height: 10rem;
+}
+.order-food-section{
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.order-food-img img{
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+}
+.order-food-detail{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  width: 100%;
+  border-bottom:1px solid  #b6b6b6 ;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  margin-bottom: 1rem;
+}
+.order-food-name{
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0!important;
+  letter-spacing: 1px;
+  gap: 0.5rem;
+}
+.order-food-type{
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #5c5c5c;
+  margin-bottom: 0.3rem!important;
+}
+.order-food-quantity-price{
+  display: flex;
+  gap: 8rem;
+}
+.order-food-price{
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0!important;
+  letter-spacing: 1px;
+}
+.order-food-quantity{
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0!important;
+  letter-spacing: 1px;
+}
+.total-decision-section{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.iteam-total{
+  margin-left: 2rem;
+  padding-top: 1rem;
+}
+.total-iteam{
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #8a8988;
+  margin-bottom: 0!important;
+}
+.total{
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 0!important;
+}
+.recent-history-btn-ul{
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px 0;
+  padding-left: 0!important;
+}
+.recent-history-btn-ul li{
+  list-style: none;
+}
+.recent-history-btn{
+  background: none;
+  font-size: 1.6rem;
+  border: none;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+.recent-history-btn:hover{
+  color: #FF7F00;
+}
+.recent-history-order{
+  width: 100%;
+  position: relative;
+}
+.food-order-lists{
+  width: 100%;
+  background-color: #F5F4F7;
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  position: absolute;
+  visibility: hidden;
+}
+.view-order-detail{
+  border:1px solid #939292;
+  position: fixed;
+  z-index: 99;
+  margin:180px 600px;
+  background-color: #ffffff;
+  visibility: hidden;
+}
+.food-order-history-lists{
+  position: absolute;
+  z-index: 92;
+  width: 100%;
+  visibility: hidden;
+  padding: 2rem;
+}
+.pending{
+  background-color: #F2DCF5;
+  color: #B451C4;
+  text-align: center;
+  border-radius:10px ;
+}
+.delivered{
+  background-color: #D0E7DC;
+  color: #218C59;
+  text-align: center;
+  border-radius:10px ;
+}
+.rejected{
+  background-color: #e5b6b6;
+  color: #8c2121;
+  text-align: center;
+  border-radius:10px ;
+  font-size: 1.4rem;
+}
+/* for graph and pie */
+.for-graph-pie{
+  width: 100%;
+  display: flex;
+  gap: 5rem!important;
+  height: 40rem;
+  padding: 2rem 3rem;
+}
+.graph{
+  width: 60%;
+  height: 100%;
+  border-radius: 10px;
+  border: 1px solid rgb(222, 222, 222);
+  padding: 2rem;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.myChart{
+  width: 100%;
+  height: 100%;
+}
+.pie{
+  width: 40%;
+  height: 100%;
+  border: 1px solid rgb(222, 222, 222);
+  border-radius: 10px;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.myPie{
+  width: 75%!important;
+  height: 90%!important;
+}
+.data-summary-section{
+  width: 100%;
+  height: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6rem!important;
+  padding: 2rem 3rem;
+  margin-bottom: 6rem;
+}
+.box{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 3rem 6rem;
+}
+.for-icon{
+  font-size: 2.4rem;
+  color: white;
+  border-radius:50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.restaurant-count{
+  background-color: #FFE2E6;
+  border-radius: 10px;
+}
+.restaurant-icon{
+  background-color: #FA597E;
+}
+.count{
+  margin-bottom: 0!important;
+  line-height: 1!important;
+  font-size: 2.4rem;
+  color: black;
+  font-weight: 500;
+}
+.text-name{
+  margin-bottom: 0!important;
+  line-height: 1!important;
+  font-size: 1.6rem;
+  font-weight: 300;
+  margin-top: 0.5rem;
+}
+.customer-count{
+  background-color: #FFF4DE;
+  border-radius: 10px;
+}
+.customer-icon{
+  background-color: #FE947A;
+}
+.delivery-count{
+  background-color: #DCFCE7;
+  border-radius: 10px;
+}
+.delivery-icon{
+  background-color: #3CD755;
+}
+.location-count{
+  background-color: #F4E8FF;
+  border-radius: 10px;
+}
+.location-icon{
+  background-color: #BF83FF;
+}
