@@ -767,7 +767,26 @@ $dec = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMo
       @endif
     </div>
     <div class="customer-review-section" id="customer-review-section">
-      <h1>Customer Review</h1>
+      <h1 style="text-align:center;margin-bottom:16px;">Customer Review</h1>
+      <table class="table table-striped table-hover">
+        <tr style="height:50px;">
+                <th style="padding-top:15px;padding-left:25px">SN</th>
+                <th style="padding-top:15px;padding-left:10px">Customer Name</th>
+                <th style="padding-top:15px;padding-left:10px">Rating</th>
+                <th style="padding-top:15px;padding-left:25px">Message</th>
+              </tr>
+            @foreach($value->customermessages as $message)
+            <tr>
+            <td class="fs-3" style="padding-top:10px;padding-left:25px;">{{$sn++}}</td>
+            <td class="fs-3" style="padding-top:10px;padding-left:10px;">{{$message->customerName}}</td>
+            @php
+            $rating =  App\Models\Rating::where('restaurant_id', '=', $value->id)->where('customer_id', '=', $message->customer_id)->first();
+            @endphp
+            <td class="fs-3" style="padding-top:10px;padding-left:10px;color:#FF7F00;">{{$rating->rating}}<span><ion-icon style="font-size: 18px;color:#FF7F00;margin-left:5px;" name="star"></ion-icon></span></td>
+            <td class="fs-3" style="padding-top:10px;padding-left:25px;">{{$message->customerMsg}}</td>
+            </tr>
+            @endforeach
+      </table>     
     </div>
   </section>
 

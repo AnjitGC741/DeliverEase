@@ -104,103 +104,71 @@ function openGiveDiscountBox(z){
 function displayFoodSection()
 {
   document.getElementById("food-section").style.visibility = "visible";
-  document.getElementById("unavailable-food-section").style.visibility = "hidden";
   document.getElementById("order-section").style.visibility = "hidden";
   document.getElementById("photo-gallary-section").style.visibility = "hidden";
   document.getElementById("analysis-section").style.visibility = "hidden";
   document.getElementById("customer-review-section").style.visibility = "hidden";
   document.getElementById("food-section-btn").classList.add("active");
-  document.getElementById("unavailable-food-section-btn").classList.remove("active");
   document.getElementById("order-section-btn").classList.remove("active");
   document.getElementById("analysis-section-btn").classList.remove("active");
   document.getElementById("customer-review-section-btn").classList.remove("active");
   document.getElementById("photo-gallary-section-btn").classList.remove("active");
-  document.getElementById("food-order-lists").style.visibility = "hidden";
   document.getElementById("food-order-history-lists").style.visibility = "hidden";
-}
-function displayUnavailableFoodSection()
-{
-  document.getElementById("food-section").style.visibility = "hidden";
-  document.getElementById("unavailable-food-section").style.visibility = "visible";
-  document.getElementById("order-section").style.visibility = "hidden";
-  document.getElementById("photo-gallary-section").style.visibility = "hidden";
-  document.getElementById("analysis-section").style.visibility = "hidden";
-  document.getElementById("customer-review-section").style.visibility = "hidden";
-  document.getElementById("food-section-btn").classList.remove("active");
-  document.getElementById("unavailable-food-section-btn").classList.add("active");
-  document.getElementById("order-section-btn").classList.remove("active");
-  document.getElementById("analysis-section-btn").classList.remove("active");
-  document.getElementById("customer-review-section-btn").classList.remove("active");
-  document.getElementById("photo-gallary-section-btn").classList.remove("active");
-  document.getElementById("food-order-lists").style.visibility = "hidden";
-  document.getElementById("food-order-history-lists").style.visibility = "hidden";
-
 }
 function displayOrderSection()
 {
-  document.getElementById("food-section").style.visibility = "hidden";
-  document.getElementById("unavailable-food-section").style.visibility = "hidden";
-  document.getElementById("order-section").style.visibility = "visible";
-  document.getElementById("photo-gallary-section").style.visibility = "hidden";
-  document.getElementById("analysis-section").style.visibility = "hidden";
-  document.getElementById("customer-review-section").style.visibility = "hidden";
-  document.getElementById("food-order-lists").style.visibility = "visible";
-  document.getElementById("food-section-btn").classList.remove("active");
-  document.getElementById("unavailable-food-section-btn").classList.remove("active");
+    document.getElementById("food-section").style.visibility = "hidden";
+    document.getElementById("order-section").style.visibility = "visible";
+    document.getElementById("photo-gallary-section").style.visibility = "hidden";
+    document.getElementById("analysis-section").style.visibility = "hidden";
+    document.getElementById("customer-review-section").style.visibility = "hidden";
+    document.getElementById("food-section-btn").classList.remove("active");
   document.getElementById("order-section-btn").classList.add("active");
   document.getElementById("analysis-section-btn").classList.remove("active");
   document.getElementById("customer-review-section-btn").classList.remove("active");
   document.getElementById("photo-gallary-section-btn").classList.remove("active");
+  document.getElementById("food-order-history-lists").style.visibility = "visible";
 }
 function displayAnalysisSection()
 {
   document.getElementById("food-section").style.visibility = "hidden";
-  document.getElementById("unavailable-food-section").style.visibility = "hidden";
   document.getElementById("order-section").style.visibility = "hidden";
   document.getElementById("photo-gallary-section").style.visibility = "hidden";
   document.getElementById("analysis-section").style.visibility = "visible";
   document.getElementById("customer-review-section").style.visibility = "hidden";
   document.getElementById("food-section-btn").classList.remove("active");
-  document.getElementById("unavailable-food-section-btn").classList.remove("active");
   document.getElementById("order-section-btn").classList.remove("active");
   document.getElementById("analysis-section-btn").classList.add("active");
   document.getElementById("customer-review-section-btn").classList.remove("active");
   document.getElementById("photo-gallary-section-btn").classList.remove("active");
-  document.getElementById("food-order-lists").style.visibility = "hidden";
   document.getElementById("food-order-history-lists").style.visibility = "hidden";
 }
 function displayPhotoGallarySection()
 {
   document.getElementById("food-section").style.visibility = "hidden";
-  document.getElementById("unavailable-food-section").style.visibility = "hidden";
   document.getElementById("order-section").style.visibility = "hidden";
   document.getElementById("analysis-section").style.visibility = "hidden";
   document.getElementById("photo-gallary-section").style.visibility = "visible";
   document.getElementById("customer-review-section").style.visibility = "hidden";
   document.getElementById("food-section-btn").classList.remove("active");
-  document.getElementById("unavailable-food-section-btn").classList.remove("active");
   document.getElementById("order-section-btn").classList.remove("active");
   document.getElementById("analysis-section-btn").classList.remove("active");
   document.getElementById("customer-review-section-btn").classList.remove("active");
   document.getElementById("photo-gallary-section-btn").classList.add("active");
-  document.getElementById("food-order-lists").style.visibility = "hidden";
   document.getElementById("food-order-history-lists").style.visibility = "hidden";
 }
 function displayCustomerReviewSection()
 {
   document.getElementById("food-section").style.visibility = "hidden";
-  document.getElementById("unavailable-food-section").style.visibility = "hidden";
   document.getElementById("order-section").style.visibility = "hidden";
   document.getElementById("analysis-section").style.visibility = "hidden";
   document.getElementById("photo-gallary-section").style.visibility = "hidden";
   document.getElementById("customer-review-section").style.visibility = "visible";
   document.getElementById("food-section-btn").classList.remove("active");
-  document.getElementById("unavailable-food-section-btn").classList.remove("active");
   document.getElementById("order-section-btn").classList.remove("active");
   document.getElementById("analysis-section-btn").classList.remove("active");
   document.getElementById("customer-review-section-btn").classList.add("active");
   document.getElementById("photo-gallary-section-btn").classList.remove("active");
-  document.getElementById("food-order-lists").style.visibility = "hidden";
   document.getElementById("food-order-history-lists").style.visibility = "hidden";
 }
 function displayRecentOrder(){
