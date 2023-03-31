@@ -180,7 +180,6 @@ $totalPokhara =  DB::table('restaurants')->where('city', '=', 'pokhara')->count(
     </tr>
   </thead>
   <tbody>
-  cuisines
   @if($cuisines ->isNotEmpty())
       @foreach($cuisines as $cuisine)
        <tr>
