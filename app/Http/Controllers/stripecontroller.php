@@ -12,9 +12,9 @@ class UserController extends Controller
 {
     //
     public function call(Request $request) {
-        \Stripe\Stripe::setApiKey('SET_YOUR_SECRET_KEY_HERE');
+        \Stripe\Stripe::setApiKey('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
         $customer = \Stripe\Customer::create(array(
-          'name' => 'test',
+          'name' => 'programming solution',
           'description' => 'test description',
           'email' => 'email@gmail.com',
           'source' => $request->input('stripeToken'),

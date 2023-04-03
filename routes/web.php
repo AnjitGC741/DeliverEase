@@ -134,8 +134,8 @@ Route::post('/add-to-favorite',[FavoriteController::class,'addToFavorite'])->nam
 // customer rating and message
 Route::post('/save-rating-message',[CustomermessageController::class,'saveRatingMessage'])->name('save-rating-message');
 Route::post('/save-rating',[CustomermessageController::class,'saveRating'])->name('save-rating');
-Route::get ( '/', function () {
-    return view ( 'cardForm' );
-} );
+Route::get ( '/cardform', function () {
+   return view ( 'cardForm' );
+ });
 Route::post ( '/', [UserController::class,'call'] );
 
