@@ -4,7 +4,15 @@
         let subMenu = document.getElementById("subMenu");
         subMenu.classList.toggle("open-menu");
     }
-
+    window.addEventListener('load', function() {
+        var loader = document.querySelector('.loader');
+        setTimeout(function() {
+          loader.style.opacity = '0';
+          setTimeout(function() {
+            loader.style.display = 'none';
+          }, 1000); 
+        }, 2000); 
+      });
     function removeFromFavorite() {
         var formData = $('#removeFromFavorite').serialize();
         $.ajax({
@@ -16,10 +24,8 @@
                 alert(response.message);
                 location.reload()
             }
-
         });
     }
-
     function showProfile() {
         document.getElementById("userProfile").style.display = "block";
         document.getElementById("userFavorite").style.display = "none";
@@ -29,9 +35,7 @@
         document.getElementById("show-favorite-btn").classList.remove("active1");
         document.getElementById("show-history-btn").classList.remove("active1");
         document.getElementById("show-order-btn").classList.remove("active1");
-
     }
-
     function showFavorite() {
         document.getElementById("userProfile").style.display = "none";
         document.getElementById("userFavorite").style.display = "block";
@@ -41,9 +45,7 @@
         document.getElementById("show-favorite-btn").classList.add("active1");
         document.getElementById("show-history-btn").classList.remove("active1");
         document.getElementById("show-order-btn").classList.remove("active1");
-
     }
-
     function showHistory() {
         document.getElementById("userProfile").style.display = "none";
         document.getElementById("userFavorite").style.display = "none";
@@ -53,7 +55,6 @@
         document.getElementById("show-favorite-btn").classList.remove("active1");
         document.getElementById("show-history-btn").classList.add("active1");
         document.getElementById("show-order-btn").classList.remove("active1");
-
     }
     function showMyOrder() {
         document.getElementById("userProfile").style.display = "none";
@@ -65,7 +66,6 @@
         document.getElementById("show-history-btn").classList.remove("active1");
         document.getElementById("show-order-btn").classList.add("active1");
     }
-
     function hideAll() {
         document.getElementById('blurBox').style.visibility = "hidden";
         document.getElementById("editFood_" + idValue).style.visibility = "hidden";

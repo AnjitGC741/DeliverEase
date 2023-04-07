@@ -1,7 +1,4 @@
-<?php
 
-use App\Models\Favorite;
-?>
 @extends('/frequently-used/header-and-footer')
 @section('title','Restaurant')
 @section('other-content')
@@ -36,7 +33,7 @@ $orderDetail= App\Models\Orderdetail::all()
 @endforeach
 <section class="About-Section-header">
     <div class="img-section">
-        <img src="./img/try5.jpg" alt="" />
+        <img src="/img/try5.jpg" alt="" />
     </div>
     <div class="linear"></div>
     <div class="text-about">
@@ -217,17 +214,20 @@ $orderDetail= App\Models\Orderdetail::all()
         </div>
     </div>
 </section>
-<script src="/js/userProfile.js"></script>
 <script>
-    window.onload = function() {
-        if (<?= session()->get('myFavoriteValue') ?> == 1) {
+    alert("hello");
+    if(<?=session()->get('myFavoriteValue')?> !== null)
+    {
             document.getElementById("userProfile").style.display = "none";
             document.getElementById("userFavorite").style.display = "block";
             document.getElementById("userHistory").style.display = "none";
+            document.getElementById("myOrder").style.display = "none";
             document.getElementById("show-profile-btn").classList.remove("active1");
             document.getElementById("show-favorite-btn").classList.add("active1");
             document.getElementById("show-history-btn").classList.remove("active1");
-        }
+            document.getElementById("show-order-btn").classList.remove("active1");
+  
     }
 </script>
+        <script src="/js/userProfile.js"></script>
 @endsection
