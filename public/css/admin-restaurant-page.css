@@ -793,3 +793,40 @@ th{
 .location-icon{
   background-color: #BF83FF;
 }
+.overallInformation{
+  font-size: 1.8rem;
+  padding-left:0 0 2rem 2rem;
+  margin-top: 2rem;
+  letter-spacing: 0.7px;
+  width: 20rem;
+  border-bottom:1px solid gray;
+}
+/* today's record */
+.today-order-count{
+  background-color:  #AED9E0;
+  border-radius: 10px;
+}
+.today-order-icon{
+  background-color:  #005792;
+}
+.today-deliver-count{
+  background-color:  #D7CCC8;
+  border-radius: 10px;
+}
+.today-deliver-icon{
+  background-color: #6C4F3D;
+}
+.today-reject-count{
+  background-color: #F2B5C2;
+  border-radius: 10px;
+}
+.today-reject-icon{
+  background-color: #7D1935;
+}
+.today-earn-count{
+  background-color: #B2DFDB;
+  border-radius: 10px;
+}
+.today-earn-icon{
+  background-color:   #008080;
+}

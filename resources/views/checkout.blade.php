@@ -189,6 +189,19 @@ $sn = 1;
   </div>
 </div>
 <script>
+   function toggleMenu(){
+  let subMenu = document.getElementById("subMenu");
+  subMenu.classList.toggle("open-menu");
+ }
+ window.addEventListener('load', function() {
+  var loader = document.querySelector('.loader');
+  setTimeout(function() {
+    loader.style.opacity = '0';
+    setTimeout(function() {
+      loader.style.display = 'none';
+    }, 1000); 
+  }, 2000); 
+});
   var today = new Date();
   var monthNames = [
     "January", "February", "March", "April",
