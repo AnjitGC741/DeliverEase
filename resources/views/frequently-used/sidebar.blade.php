@@ -90,6 +90,9 @@
 			</div>
 		</div>
   @endforeach
+  @if($orderData->status == 2)
+      <p style="color:#9F1D22;font-size:16px;margin-top:5px;"><strong>Reason for rejecting order:</strong> {{$orderData->reason}}</p>
+        @endif   
       </div>
 </div>
 @endforeach

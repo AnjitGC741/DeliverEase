@@ -118,13 +118,14 @@ Route::get('/contact',[ContactController::class,'index'])->name('contact');
 // for Add to cart
 Route::get('/successful-order',[MyCartController::class,'successfulOrder']);
 Route::post('/restaurant-page/addToCart',[MyCartController::class,'addToCart'])->name('add-to-cart');
+Route::post('/restaurant-page/removeFromCart',[MyCartController::class,'removeFromCart'])->name('remove-from-cart');
 Route::post('/my-cart/update-food-quantity',[MyCartController::class,'updateFoodQuantity'])->name('update-food-quantity');
 Route::get('/my-cart',[MyCartController::class,'myCart']);
 Route::get('/checkout/go-to-checkout',[MyCartController::class,'checkout'])->name('go-checkout-page');
 Route::POST('/checkout/save-checkout-info',[MyCartController::class,'saveCheckoutInfo'])->name('save-checkout');
 Route::post('/stripecontroller',[Stripe::class,"stripePayment"])->name("stripe.post");
 // for Order
-Route::get('reject-food/{id}',[OrderDetailController::class,'rejectFood']);
+Route::post('reject-food',[OrderDetailController::class,'rejectFood'])->name('reject-food');
 Route::get('prepare-food/{id}',[OrderDetailController::class,'prepareFood']);
 Route::get('deliver-food/{id}',[OrderDetailController::class,'deliverFood']);
 // for favorite
