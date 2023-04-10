@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Orderdetail extends Model
 {
     use HasFactory;
-    protected $fillable = ['customerName','contactNumber','streetName','cityName','organization','direction','serviceDate','serviceTime','serviceType','paymentOption','instruction','restaurant_id','customer_id'];
+    protected $fillable = ['customerName','contactNumber','streetName','cityName','organization','direction','serviceDate','serviceTime','serviceType','paymentOption','reason','instruction','restaurant_id','customer_id'];
     public function restaurants()
     {
         return $this->belongsTo(Restaurant::class);

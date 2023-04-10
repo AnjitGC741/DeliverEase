@@ -1,6 +1,7 @@
 let idValue1=0;
 let idValueNew=0;
 let discountId=0;
+let oldReasonId=0;
 window.onload = function() {
   idValue1 = 0;
  idValueNew = 0;
@@ -84,6 +85,10 @@ function hideAll()
   {
     document.getElementById("giveDiscount_"+discountId).style.visibility="hidden";
   }
+  if(oldReasonId !== 0)
+  {
+    document.getElementById("reasonBox_"+oldReasonId).style.visibility="hidden";
+  }
   document.getElementById('editProfileForm').style.visibility="hidden";
   document.getElementById('editLoginInfo').style.visibility="hidden";
   document.getElementById('addFood').style.visibility="hidden";
@@ -100,6 +105,11 @@ function openGiveDiscountBox(z){
   discountId=z;
   document.getElementById('blurBox').style.visibility="visible";
   document.getElementById("giveDiscount_"+z).style.visibility="visible";
+}
+function displayRejectReasonBox(reasonId){
+  oldReasonId = reasonId;
+  document.getElementById('blurBox').style.visibility="visible";
+  document.getElementById("reasonBox_"+reasonId).style.visibility="visible";
 }
 function displayFoodSection()
 {

@@ -51,6 +51,19 @@ $one = DB::table('ratings')->where('restaurant_id','=',$value->id)->where('ratin
   <div class="blur-box" id="blurBox" onclick="hideAll();">
   </div>
   @foreach($order as $orderData)
+  <div class="reasonBox" id="reasonBox_{{$orderData->id}}">
+    <form action="{{route('reject-food')}}" method="POST">
+      @csrf
+      <input type="text" name="id" value="{{$orderData->id}}" hidden>
+    <div class="mb-3">
+      <label class="form-label fs-4" style="letter-spacing: 1px;">Reason</label>
+      <textarea type="text" style="letter-spacing: 0.8px;" class="form-control fs-4"  placeholder="Why you reject the order" name="reason"></textarea>
+    </div>
+    <button type="submit" style="width: 100%; height: 50px;letter-spacing:1px" class=" fs-3 mt-3 btn btn-danger">Reject Order</button>
+    </form>
+  </div>
+  @endforeach
+  @foreach($order as $orderData)
   <div class="view-order-detail" style="padding:20px" id="viewOrderDetail_{{$orderData->id}}">
     <div class="food-order-box">
       <div class="order-time-and-user-profile">
@@ -86,6 +99,9 @@ $one = DB::table('ratings')->where('restaurant_id','=',$value->id)->where('ratin
         </div>
       </div>
       @endforeach
+      @if($orderData->status == 2)
+      <p style="color:#9F1D22;font-size:16px;margin-top:5px;"><strong>Reason for rejecting order:</strong> {{$orderData->reason}}</p>
+        @endif   
     </div>
   </div>
   @endforeach
@@ -374,7 +390,7 @@ $one = DB::table('ratings')->where('restaurant_id','=',$value->id)->where('ratin
     <div>
       <ul class="secondary-navbar-links">
         <li class="secondary-navbar-link"><button id="food-section-btn" class="active" onclick="displayFoodSection();">Foods</button></li>
-        <li class="secondary-navbar-link"><button id="unavailable-food-section-btn" class="" onclick="displayUnavailableFoodSection();">unavailable Foods</button></li>
+        <li class="secondary-navbar-link"><button id="unavailable-food-section-btn" class="" onclick="displayUnavailableFoodSection();">Unavailable Foods</button></li>
         <li class="secondary-navbar-link"><button id="order-section-btn" class="" onclick="displayOrderSection();">Orders</button></li>
         <li class="secondary-navbar-link"><button id="analysis-section-btn" class="" onclick="displayAnalysisSection();">Analysis</button></li>
         <li class="secondary-navbar-link"><button id="photo-gallary-section-btn" class="" onclick="displayPhotoGallarySection();">Photo Gallary</button></li>
@@ -581,32 +597,31 @@ $one = DB::table('ratings')->where('restaurant_id','=',$value->id)->where('ratin
               countDown(<?= $timeValue ?>);
 
               function countDown(timeInMinutes) {
-  var countDownDate = new Date().getTime() + (timeInMinutes * 60 * 1000);
-  var x = setInterval(function() {
-    var now = new Date().getTime();
-    var distance = countDownDate - now;
-    var hours = Math.floor(distance / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    var countdownElement = document.getElementById("countdown");
-    var countdownText = "";
-    if (hours > 0) {
-      countdownText += hours + "h ";
-    }
-    countdownText += minutes + "m " + seconds + "s";
-    countdownElement.innerHTML = countdownText;
-    if (distance < 300000) { // 300000 ms = 5 minutes
-      document.getElementById("timeValue").style.backgroundColor = "#F66358";
-    } else {
-      document.getElementById("timeValue").style.backgroundColor = "#2EB886";
-    }
-    if (distance < 0) {
-      clearInterval(x);
-      countdownElement.innerHTML = "expired";
-    }
-  }, 1000);
-}
-
+                var countDownDate = new Date().getTime() + (timeInMinutes * 60 * 1000);
+                var x = setInterval(function() {
+                  var now = new Date().getTime();
+                  var distance = countDownDate - now;
+                  var hours = Math.floor(distance / (1000 * 60 * 60));
+                  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                  var countdownElement = document.getElementById("countdown");
+                  var countdownText = "";
+                  if (hours > 0) {
+                    countdownText += hours + "h ";
+                  }
+                  countdownText += minutes + "m " + seconds + "s";
+                  countdownElement.innerHTML = countdownText;
+                  if (distance < 300000) { // 300000 ms = 5 minutes
+                    document.getElementById("timeValue").style.backgroundColor = "#F66358";
+                  } else {
+                    document.getElementById("timeValue").style.backgroundColor = "#2EB886";
+                  }
+                  if (distance < 0) {
+                    clearInterval(x);
+                    countdownElement.innerHTML = "expired";
+                  }
+                }, 1000);
+              }
             </script>
             @else
             <p class="forOrderTime timeup"><ion-icon name="time-outline" style="font-size: 18px;margin-right: 5px;"></ion-icon>Delivery time has already passed</p>
@@ -617,6 +632,7 @@ $one = DB::table('ratings')->where('restaurant_id','=',$value->id)->where('ratin
                   <p class="order-count">Order:{{$orderCount++}}</p>
                   <p class="food-delivery-time">{{$orderData->serviceDate}},<span style="margin-left: 5px;">{{$orderData->serviceTime}}</span></p>
                   <p class="contact-name">{{$orderData->customerName}},<span style="margin-left: 5px;">{{$orderData->contactNumber}}</span></p>
+                  <p class="contact-name">{{$orderData->serviceType}}</p>
                 </div>
                 <div class="user-profile">
                   @if($orderData->status == 0)
@@ -653,10 +669,10 @@ $one = DB::table('ratings')->where('restaurant_id','=',$value->id)->where('ratin
                 </div>
                 <div class="decision">
                   @if($orderData->status == 0)
-                  <a href="{{url('reject-food/'.$orderData->id)}}"><button class="btn btn-danger" style="font-size: 14px;">Reject</button></a>
+                  <button id="{{$orderData->id}}" onclick="displayRejectReasonBox(this.id);" class="btn btn-danger" style="font-size: 14px;">Reject</button>
                   <a href="{{url('prepare-food/'.$orderData->id)}}"><button class="btn btn-primary" style="font-size: 14px;margin-left: 5px;">Prepare</button></a>
                   @elseif($orderData->status == 3)
-                  <a href="{{url('reject-food/'.$orderData->id)}}"><button class="btn btn-danger" style="font-size: 14px;">Reject</button></a>
+                  <button id="{{$orderData->id}}" onclick="displayRejectReasonBox(this.id);" class="btn btn-danger" style="font-size: 14px;">Reject</button>
                   <a href="{{url('deliver-food/'.$orderData->id)}}"><button class="btn btn-success" style="font-size: 14px;margin-left: 5px;">Deliver</button></a>
                   @endif
                 </div>
@@ -728,7 +744,11 @@ $one = DB::table('ratings')->where('restaurant_id','=',$value->id)->where('ratin
             <ion-icon name="pizza"></ion-icon>
           </div>
           <div class="for-text">
+        @if($foods ->count() > 0)
             <p class="count">{{$food->count()}}</p>
+        @else
+        <p class="count">0</p>
+        @endif
             <p class="text-name">Total Food</p>
           </div>
         </div>

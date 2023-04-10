@@ -14,88 +14,96 @@ $sn = 1;
   <button onclick="changeVisibilityCartBox();"><ion-icon name="bag-handle-outline"></ion-icon></button>
 </div>
 <div class="cart-and-edit-box" id="cart-and-edit-box1">
-<div style="display:flex;flex-direction:column;align-items: end;">
-<div class="funnyBox1" style="visibility: hidden;" id="funnyBox">
-    <img src="/img/funny.gif" alt="" />
-  </div>
-  @if((session()->get('loginCustomerId')) != null)
-  @if($newValue->my_carts()->count() > 0)
-  @foreach ($newValue->my_carts as $cart)
-  <div class="for-fixed-edit-food1" id="editQuantity_{{$cart->id}}">
-    <p class="my-cart-text">Edit food quanitity</p>
-    <hr style="margin-bottom: 20px;">
-    <div class="for-changing-quantity">
-      <form action="{{route('update-food-quantity')}}" class="for-changing-quantity" method="POST">
-        @csrf
-        <input type="number" hidden value="{{$cart->foodPrice}}" name="price">
-        <input type="text" hidden value="{{$cart->id}}" name="cartId">
-        <button type="button" id="{{$cart->id}}" class="btn btn-danger" onclick="minus(this.id);">-</button>
-        <input type="text" class="form-control" name="foodQuantity" id="foodQuantity_{{$cart->id}}" value="{{$cart->foodQuantity}}">
-        <button type="button" id="{{$cart->id}}" class="btn btn-success" onclick="plus(this.id);">+</button>
+  <div style="display:flex;flex-direction:column;align-items: end;gap:10px;">
+    <div class="funnyBox1" style="visibility: hidden;" id="funnyBox">
+      <img src="/img/funny.gif" alt="" />
     </div>
-    <button type="submit" class="btn btn-warning w-100">Update</button>
-    </form>
-  </div>
-  @endforeach
-  @endif
-  @endif
-  <div class="cart-box hidden" id="myCart">
-    <p class="my-cart-text">My Cart</p>
-    <hr style="margin-bottom: 20px;">
     @if((session()->get('loginCustomerId')) != null)
     @if($newValue->my_carts()->count() > 0)
-    <table class="table">
-      <tr>
-        <th>SN</th>
-        <th>Food name</th>
-        <th>Food price</th>
-        <th>Food quantity</th>
-        <th>Total</th>
-        <th>Action</th>
-      </tr>
-      @foreach ($newValue->my_carts as $cart)
-      <tr>
-        <th>{{$sn++}}</th>
-        <td>{{$cart->foodName}}</td>
-        <td>{{$cart->foodPrice}}</td>
-        <td>{{$cart->foodQuantity}}</td>
-        <td>{{$cart->total}}</td>
-        <td>
-          <button class="btn btn-success" id="{{$cart->id}}" onclick="openFoodEditBox(this.id);" style="border-radius: 50%;"><i class="fa fa-pencil" style="color:white;font-size:12px"></i></button>
-          <button class="btn btn-danger" style="border-radius: 50%;"><ion-icon name="trash" style="color:white;font-size:12px;"></ion-icon></button>
-        </td>
-      </tr>
-      @endforeach
-    </table>
-    <p>Grand total: {{ collect($newValue->my_carts)->sum('total')}}</p>
-    @if((collect($newValue->my_carts)->sum('total'))>=$value->minimumOrder)
-    <form action="{{route('go-checkout-page')}}" method="GET">
-      @csrf
-      <input type="text" hidden value="{{$value->id}}" name="restaurantId">
-      <button type="submit" class="btn btn-warning fs-4">Proceed to Checkout</button>
-    </form>
-    @else
-    <p class="message">Subtotal must exceed Rs. {{$value->minimumOrder}} for delivery orders.</p>
-    @endif
-    @else
-    <div class="for-empty-cart">
-      <i class="fa fa-shopping-basket" style="font-size:48px;color:gray;"></i>
-      <p class="empty-cart-text1">Your cart is empty</p>
-      <p class="empty-cart-text2">Add food to get your food</p>
-      <button class="btn btn-success" onclick="hideAll();" style="font-size: 14px;padding:5px 10px;">Add Food</button>
+    @foreach ($newValue->my_carts as $cart)
+    <div class="for-fixed-edit-food1" id="editQuantity_{{$cart->id}}">
+      <p class="my-cart-text">Edit {{$cart->foodName}} quanitity</p>
+      <hr style="margin-bottom: 20px;">
+      <div class="for-changing-quantity">
+        <form action="{{route('update-food-quantity')}}" class="for-changing-quantity" method="POST">
+          @csrf
+          <input type="number" hidden value="{{$cart->foodPrice}}" name="price">
+          <input type="text" hidden value="{{$cart->id}}" name="cartId">
+          <div class="edit-food-btns">
+          <button type="button" id="{{$cart->id}}" class="minus" onclick="minus(this.id);">-</button>
+          <input type="text"  name="foodQuantity" id="foodQuantity_{{$cart->id}}" value="{{$cart->foodQuantity}}">
+          <button type="button" id="{{$cart->id}}" class="plus" onclick="plus(this.id);">+</button>
+          </div>
+      </div>
+      <button type="submit" class="btn btn-warning w-100 fs-4">Update</button>
+      </form>
     </div>
+    @endforeach
     @endif
-    @else
-    <div class="for-empty-cart">
-      <i class="fa fa-shopping-basket" style="font-size:48px;color:gray;"></i>
-      <p class="empty-cart-text1">Your cart is empty</p>
-      <p class="empty-cart-text2">Add food to get your food</p>
-      <button class="btn btn-success" onclick="hideAll();" style="font-size: 14px;padding:5px 10px;">Add Food</button>
+    @endif
+    <div class="cart-box hidden" id="myCart">
+      <p class="my-cart-text">My Cart</p>
+      <hr style="margin-bottom: 20px;">
+      @if((session()->get('loginCustomerId')) != null)
+      @if($newValue->my_carts->where('restaurant_id', $value->id)->count() > 0)
+      <table class="table">
+        <tr>
+          <th>SN</th>
+          <th>Food name</th>
+          <th>Food price</th>
+          <th>Food quantity</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+        @foreach ($newValue->my_carts->where('restaurant_id', $value->id) as $cart)
+        <tr>
+          <th>{{$sn++}}</th>
+          <td>{{$cart->foodName}}</td>
+          <td>{{$cart->foodPrice}}</td>
+          <td>{{$cart->foodQuantity}}</td>
+          <td>{{$cart->total}}</td>
+          <td>
+             <div style="display:flex;gap:6px;">
+             <button class="btn btn-success" id="{{$cart->id}}" onclick="openFoodEditBox(this.id);" style="border-radius: 50%;"><i class="fa fa-pencil" style="color:white;font-size:12px"></i></button>
+            <form method="POST" action="{{route('remove-from-cart')}}">
+              @csrf
+              <input type="text" hidden name="foodId" value="{{$cart->food_id}}">
+              <button type="submit" class="btn btn-danger" style="border-radius: 50%;cursor:pointer;"><ion-icon name="trash" style="color:white;font-size:12px;"></ion-icon></button>
+            </form>
+             </div>
+          </td>
+        </tr>
+        @endforeach
+      </table>
+      <p>Grand total: {{ collect($newValue->my_carts->where('restaurant_id', $value->id))->sum('total')}}</p>
+      @if((collect($newValue->my_carts->where('restaurant_id', $value->id))->sum('total'))>=$value->minimumOrder)
+      <form action="{{route('go-checkout-page')}}" method="GET">
+        @csrf
+        <input type="text" hidden value="{{$value->id}}" name="restaurantId">
+        <button type="submit" class="btn btn-warning fs-4">Proceed to Checkout</button>
+      </form>
+      @else
+      <p class="message">Subtotal must exceed Rs. {{$value->minimumOrder}} for delivery orders.</p>
+      @endif
+      @else
+      <div class="for-empty-cart">
+        <i class="fa fa-shopping-basket" style="font-size:48px;color:gray;"></i>
+        <p class="empty-cart-text1">Your cart is empty</p>
+        <p class="empty-cart-text2">Add food to get your food</p>
+        <button class="btn btn-success" onclick="hideAll();" style="font-size: 14px;padding:5px 10px;">Add Food</button>
+      </div>
+      @endif
+      @else
+      <div class="for-empty-cart">
+        <i class="fa fa-shopping-basket" style="font-size:48px;color:gray;"></i>
+        <p class="empty-cart-text1">Your cart is empty</p>
+        <p class="empty-cart-text2">Add food to get your food</p>
+        <button class="btn btn-success" onclick="hideAll();" style="font-size: 14px;padding:5px 10px;">Add Food</button>
+      </div>
+      @endif
     </div>
-    @endif
   </div>
-  </div>
-  
+
 </div>
 <section class="resturant-section">
   <div class="img-section">
@@ -113,39 +121,39 @@ $sn = 1;
       @csrf
       <input type="text" hidden name="restaurantId" value="{{ $value->id }}">
       <div class="form1 rating">
-            <label>
-              <input type="radio" name="rating" value="1" />
-              <span class="icon">★</span>
-            </label>
-            <label>
-              <input type="radio" name="rating" value="2" />
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-            </label>
-            <label>
-              <input type="radio" name="rating" value="3" />
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-            </label>
-            <label>
-              <input type="radio" name="rating" value="4" />
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-            </label>
-            <label>
-              <input type="radio" name="rating" value="5" />
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-              <span class="icon">★</span>
-            </label>
-          </div>
-          <button type="submit" class="btn btn-success w-100">Rate</button>
-        </form>
+        <label>
+          <input type="radio" name="rating" value="1" />
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="rating" value="2" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="rating" value="3" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="rating" value="4" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="rating" value="5" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+      </div>
+      <button type="submit" class="btn btn-success w-100">Rate</button>
+    </form>
   </div>
   <div class="resturant-info">
     <div class="resturant-logo">
@@ -209,29 +217,29 @@ $sn = 1;
     <div class="user-rating-value">
       <p>Your rate</p>
       <div class="customer-review-rate">
-                <ion-icon class="star-display" name="star"></ion-icon>
-                <ion-icon class="star-display" name="star"></ion-icon>
-                <ion-icon class="star-display" name="star"></ion-icon>
-                <ion-icon class="star-display" name="star"></ion-icon>
-                <ion-icon class="star-display" name="star"></ion-icon>
-        </div>
-              <script>
-                displayRating(<?= $existsRating->rating ?>);
+        <ion-icon class="star-display" name="star"></ion-icon>
+        <ion-icon class="star-display" name="star"></ion-icon>
+        <ion-icon class="star-display" name="star"></ion-icon>
+        <ion-icon class="star-display" name="star"></ion-icon>
+        <ion-icon class="star-display" name="star"></ion-icon>
+      </div>
+      <script>
+        displayRating(<?= $existsRating->rating ?>);
 
-                function displayRating(ratingValue) {
-                  let stars = document.querySelectorAll('.star-display');
-                  stars.forEach((star, index) => {
-                    if (index < Math.floor(ratingValue)) {
-                      star.style.color = 'gold';
-                    } else if (index === Math.floor(ratingValue) && ratingValue % 1 !== 0) {
-                      star.setAttribute('name', 'star-half');
-                      star.style.color = 'gold';
-                    } else {
-                      star.style.color = 'gray';
-                    }
-                  });
-                }
-              </script>
+        function displayRating(ratingValue) {
+          let stars = document.querySelectorAll('.star-display');
+          stars.forEach((star, index) => {
+            if (index < Math.floor(ratingValue)) {
+              star.style.color = 'gold';
+            } else if (index === Math.floor(ratingValue) && ratingValue % 1 !== 0) {
+              star.setAttribute('name', 'star-half');
+              star.style.color = 'gold';
+            } else {
+              star.style.color = 'gray';
+            }
+          });
+        }
+      </script>
     </div>
     <button class="favorite-btn1" onclick="showRatingBox();" style=" padding: 7px 7px;"><ion-icon name="pencil-outline"></ion-icon></button>
     @else
@@ -278,7 +286,8 @@ $sn = 1;
                   @else
                   Rs {{$food->price}}
                   @endif
-                   per {{$food->quantity}}</p>
+                  per {{$food->quantity}}
+                </p>
                 @if((session()->get('loginCustomerId')) != null)
                 @php
                 $id = $food->id;
@@ -357,6 +366,7 @@ $sn = 1;
               </div>
               <script>
                 displayRating(<?= $index ?>, <?= $rating->rating ?>);
+
                 function displayRating(reviewIndex, ratingValue) {
                   let stars = document.querySelectorAll('.customer-review-box:nth-child(' + (reviewIndex + 1) + ') .star-display');
                   stars.forEach((star, index) => {
@@ -447,7 +457,7 @@ $sn = 1;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
- $('#addToFavorite').submit(function(e) {
+  $('#addToFavorite').submit(function(e) {
     e.preventDefault();
     var formData = $(this).serialize();
     $.ajax({
@@ -456,15 +466,13 @@ $sn = 1;
       data: formData,
       success: function(response) {
         if (response.message === "added") {
-        document.getElementById("favoriteBtnIcon").style.color = "red";
-        document.getElementById("favoriteBtnIcon").setAttribute('name','heart');
+          document.getElementById("favoriteBtnIcon").style.color = "red";
+          document.getElementById("favoriteBtnIcon").setAttribute('name', 'heart');
         } else if (response.message === "removed") {
           document.getElementById("favoriteBtnIcon").style.color = "none";
-        document.getElementById("favoriteBtnIcon").setAttribute('name','heart-outline');
-        document.getElementById("favoriteBtnIcon").style.color="black";
-        }
-        else if(response.message === "redirect")
-        {
+          document.getElementById("favoriteBtnIcon").setAttribute('name', 'heart-outline');
+          document.getElementById("favoriteBtnIcon").style.color = "black";
+        } else if (response.message === "redirect") {
           window.location.href = '/login';
         }
       },
