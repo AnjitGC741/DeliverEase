@@ -21,7 +21,7 @@
           <h2>Order Placed!</h2>
           <p>Your order was placed successfully.</p>
           <p>For more details check Delivery status under profile tab.</p>
-        <a href="{{url('/user-profile')}}"><button class="delivery-status-btn">Delivery status</button>    </a>  
+        <a href="{{url('/user-profile')}}"><button class="delivery-status-btn">Delivery status</button></a>  
     </div>
 </body>
 </html>

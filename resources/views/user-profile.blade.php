@@ -1,7 +1,3 @@
-<?php
-
-use App\Models\Favorite;
-?>
 @extends('/frequently-used/header-and-footer')
 @section('title','Restaurant')
 @section('other-content')
@@ -31,12 +27,15 @@ $orderDetail= App\Models\Orderdetail::all()
             </div>
         </div>
         @endforeach
+        @if($orderData->status == 2)
+      <p style="color:#9F1D22;font-size:16px;margin-top:5px;"><strong>Reason for rejecting order:</strong> {{$orderData->reason}}</p>
+        @endif    
     </div>
 </div>
 @endforeach
 <section class="About-Section-header">
     <div class="img-section">
-        <img src="./img/try5.jpg" alt="" />
+        <img src="/img/try5.jpg" alt="" />
     </div>
     <div class="linear"></div>
     <div class="text-about">
@@ -53,7 +52,7 @@ $orderDetail= App\Models\Orderdetail::all()
         </ul>
     </div>
     <hr style="color:gray;">
-    <div class="user-section-div">
+    <div class="user-section-div" id="user-section-div">
         <div class="user-profile" id="userProfile">
             <h2>Your Profile</h2>
             <hr style="width:10%; margin:10px 0 20px 0;">
@@ -171,7 +170,7 @@ $orderDetail= App\Models\Orderdetail::all()
         </div>
         <div class="my-order" id="myOrder">
             <h1>My Recent Order</h1>
-            <div class="my-order-main-box">
+            <div class="my-order-main-box" id="my-order-main-box">
                 <h2>Order Details</h2>
                 @php
                 $userId = session()->get('loginCustomerId');
@@ -182,34 +181,42 @@ $orderDetail= App\Models\Orderdetail::all()
                 ->get();
                 @endphp
                 @if($userRecentOrder->isNotEmpty())
-                @foreach($userRecentOrder as $recentOrder)
-                <p>{{$recentOrder->customerName}}</p>
-                <p>{{$recentOrder->streetName}},{{$recentOrder->cityName}}</p>
-                @if($recentOrder->status == 0)
-                <p>Your order has been placed by the outlet</p>
-                @else
-                <p>Your order is being prepared by the outlet</p>
-                @endif
-                <h1>Your order Food</h1>
-                <div class="user-order-food-list">
-                @foreach ($recentOrder->orderfoods as $recentOrderFood)
-                <div class="order-food-section1">
-                    <div class="order-food-img">
-                    <img src="{{ asset('/storage/'.$recentOrderFood->orderFoodImg) }}">
+                <div id="recent-order-food-lists-box" class="recent-order-food-lists-box">
+                    @foreach($userRecentOrder as $recentOrder)
+                    <div class="recent-order-food-lists">
+                        @php
+                        $restaurant = DB::table('restaurants')->where('id',$recentOrder->restaurant_id)->first();
+                        @endphp
+                        <p style="font-size:16px;letter-spacing:0,8px;font-weight:400;">{{$restaurant->restaurantName}} Restaurant</p>
+                        <p style="font-size:16px;letter-spacing:0.8px;">{{$recentOrder->customerName}}</p>
+                        <p style="font-size:16px;letter-spacing:0.8px;">{{$recentOrder->streetName}},{{$recentOrder->cityName}}</p>
+                        @if($recentOrder->status == 0)
+                        <p style="font-size:18px;letter-spacing:0.8px;font-weight:500">Your order has been placed by the outlet.</p>
+                        @else
+                        <p style="font-size:18px;letter-spacing:0.8px;font-weight:500">Your order is being prepared by the outlet.</p>
+                        @endif
+                        <h1 style="margin-bottom: 20px;">Your order Food</h1>
+                        <div class="user-order-food-list">
+                            @foreach ($recentOrder->orderfoods as $recentOrderFood)
+                            <div class="order-food-section1">
+                                <div class="order-food-img">
+                                    <img src="{{ asset('/storage/'.$recentOrderFood->orderFoodImg) }}">
+                                </div>
+                                <div class="order-food-detail">
+                                    <p class="order-food-name">{{$recentOrderFood -> orderFoodName}}</p>
+                                    <p class="order-food-type">{{$recentOrderFood -> orderFoodType}}</p>
+                                    <div class="order-food-quantity-price">
+                                        <p class="order-food-price">Rs {{$recentOrderFood->orderFoodPrice}}</p>
+                                        <p class="order-food-quantity">Qty: {{$recentOrderFood->orderFoodQuantity}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                        <p class="grandTotal">Grand Total: Rs {{($recentOrder->orderfoods)->sum('orderTotal')}}</p>
                     </div>
-                    <div class="order-food-detail">
-                    <p class="order-food-name">{{$recentOrderFood -> orderFoodName}}</p>
-                    <p class="order-food-type">{{$recentOrderFood -> orderFoodType}}</p>
-                    <div class="order-food-quantity-price">
-                        <p class="order-food-price">Rs {{$recentOrderFood->orderFoodPrice}}</p>
-                        <p class="order-food-quantity">Qty: {{$recentOrderFood->orderFoodQuantity}}</p>
-                    </div>
-                    </div>
+                    @endforeach
                 </div>
-                @endforeach
-                </div>
-                <p>Rs {{($orderData->orderfoods)->sum('orderTotal')}}</p>
-                @endforeach
                 @else
                 <h1>You have no any order</h1>
                 @endif
@@ -217,17 +224,18 @@ $orderDetail= App\Models\Orderdetail::all()
         </div>
     </div>
 </section>
-<script src="/js/userProfile.js"></script>
 <script>
-    window.onload = function() {
-        if (<?= session()->get('myFavoriteValue') ?> == 1) {
-            document.getElementById("userProfile").style.display = "none";
-            document.getElementById("userFavorite").style.display = "block";
-            document.getElementById("userHistory").style.display = "none";
-            document.getElementById("show-profile-btn").classList.remove("active1");
-            document.getElementById("show-favorite-btn").classList.add("active1");
-            document.getElementById("show-history-btn").classList.remove("active1");
-        }
+    if (<?= session()->get('myFavoriteValue') ?> !== null) {
+        document.getElementById("userProfile").style.display = "none";
+        document.getElementById("userFavorite").style.display = "block";
+        document.getElementById("userHistory").style.display = "none";
+        document.getElementById("myOrder").style.display = "none";
+        document.getElementById("show-profile-btn").classList.remove("active1");
+        document.getElementById("show-favorite-btn").classList.add("active1");
+        document.getElementById("show-history-btn").classList.remove("active1");
+        document.getElementById("show-order-btn").classList.remove("active1");
+
     }
 </script>
+<script src="/js/userProfile.js"></script>
 @endsection

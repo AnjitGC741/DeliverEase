@@ -13,6 +13,11 @@ $sep = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMo
 $oct = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMonth('serviceDate', '=', 10)->count();
 $nov = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMonth('serviceDate', '=', 11)->count();
 $dec = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMonth('serviceDate', '=', 12)->count();
+$five = DB::table('ratings')->where('restaurant_id','=',$value->id)->where('rating','=',5)->count();
+$four = DB::table('ratings')->where('restaurant_id','=',$value->id)->where('rating','=',4)->count();
+$three = DB::table('ratings')->where('restaurant_id','=',$value->id)->where('rating','=',3)->count();
+$two= DB::table('ratings')->where('restaurant_id','=',$value->id)->where('rating','=',2)->count();
+$one = DB::table('ratings')->where('restaurant_id','=',$value->id)->where('rating','=',1)->count();
 @endphp
 @inject('carbon', 'Carbon\Carbon')
 <!DOCTYPE html>
@@ -45,6 +50,19 @@ $dec = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMo
 <body>
   <div class="blur-box" id="blurBox" onclick="hideAll();">
   </div>
+  @foreach($order as $orderData)
+  <div class="reasonBox" id="reasonBox_{{$orderData->id}}">
+    <form action="{{route('reject-food')}}" method="POST">
+      @csrf
+      <input type="text" name="id" value="{{$orderData->id}}" hidden>
+    <div class="mb-3">
+      <label class="form-label fs-4" style="letter-spacing: 1px;">Reason</label>
+      <textarea type="text" style="letter-spacing: 0.8px;" class="form-control fs-4"  placeholder="Why you reject the order" name="reason"></textarea>
+    </div>
+    <button type="submit" style="width: 100%; height: 50px;letter-spacing:1px" class=" fs-3 mt-3 btn btn-danger">Reject Order</button>
+    </form>
+  </div>
+  @endforeach
   @foreach($order as $orderData)
   <div class="view-order-detail" style="padding:20px" id="viewOrderDetail_{{$orderData->id}}">
     <div class="food-order-box">
@@ -81,6 +99,9 @@ $dec = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMo
         </div>
       </div>
       @endforeach
+      @if($orderData->status == 2)
+      <p style="color:#9F1D22;font-size:16px;margin-top:5px;"><strong>Reason for rejecting order:</strong> {{$orderData->reason}}</p>
+        @endif   
     </div>
   </div>
   @endforeach
@@ -369,30 +390,68 @@ $dec = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMo
     <div>
       <ul class="secondary-navbar-links">
         <li class="secondary-navbar-link"><button id="food-section-btn" class="active" onclick="displayFoodSection();">Foods</button></li>
-        <li class="secondary-navbar-link"><button id="unavailable-food-section-btn" class="" onclick="displayUnavailableFoodSection();">unavailable Foods</button></li>
+        <li class="secondary-navbar-link"><button id="unavailable-food-section-btn" class="" onclick="displayUnavailableFoodSection();">Unavailable Foods</button></li>
         <li class="secondary-navbar-link"><button id="order-section-btn" class="" onclick="displayOrderSection();">Orders</button></li>
         <li class="secondary-navbar-link"><button id="analysis-section-btn" class="" onclick="displayAnalysisSection();">Analysis</button></li>
         <li class="secondary-navbar-link"><button id="photo-gallary-section-btn" class="" onclick="displayPhotoGallarySection();">Photo Gallary</button></li>
         <li class="secondary-navbar-link"><button id="customer-review-section-btn" class="" onclick="displayCustomerReviewSection();">Customer Review</button></li>
-        @if($value->status == 1)
         <li style="list-style: none;">
-          <form action="{{route('close-restaurant')}}" method="POST">
+          <form id="openCloseRestaurant">
             @csrf
             <input type="text" hidden name="id" value="{{$value->id}}">
+            @if($value->status == 1)
             <input type="text" hidden name="status" value="0">
-            <button type="submit" class="btn btn-danger fs-4">Close Restaurant</button>
-          </form>
-        </li>
-        @else
-        <li style="list-style: none;">
-          <form action="{{route('open-restaurant')}}" method="POST">
-            @csrf
-            <input type="text" hidden name="id" value="{{$value->id}}">
+            <button id="closeRestaurantBtn" type="submit" class="btn btn-danger fs-4">Close Restaurant</button>
+            @else
             <input type="text" hidden name="status" value="1">
-            <button type="submit" class="btn btn-success fs-4">Open Restaurant</button>
+            <button id="openRestaurantBtn" type="submit" class="btn btn-success fs-4">Open Restaurant</button>
+            @endif
           </form>
         </li>
-        @endif
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script>
+          $('#openCloseRestaurant').submit(function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+              url: "{{ url('/open-close-restaurant') }}",
+              type: 'POST',
+              data: formData,
+              success: function(response) {
+                if (response.message === "opened") {
+                  var button = $('#openRestaurantBtn');
+                  if (button.hasClass('btn-success')) {
+                    button.removeClass('btn-success').addClass('btn-danger');
+                    button.text('Close Restaurant');
+                    toastr.success('Restaurant Opened');
+                  } else {
+                    button.removeClass('btn-danger').addClass('btn-success');
+                    button.text('Open Restaurant');
+                    toastr.error('Restaurant Closed');
+                  }
+
+                } else if (response.message === "closed") {
+                  var button = $('#closeRestaurantBtn');
+                  if (button.hasClass('btn-danger')) {
+                    button.removeClass('btn-danger').addClass('btn-success');
+                    button.text('Open Restaurant');
+                    toastr.error('Restaurant Closed');
+                  } else {
+                    button.removeClass('btn-success').addClass('btn-danger');
+                    button.text('Close Restaurant');
+                    toastr.success('Restaurant Opened');
+                  }
+                }
+              },
+              error: function(xhr, status, error) {
+                $('#response-message').html(xhr.responseText);
+              }
+            });
+          });
+        </script>
         <li style="list-style: none;"><a href="{{url('logout-restaurant')}}"><button class="btn btn-danger fs-4">Logout</button></a></li>
       </ul>
     </div>
@@ -528,7 +587,7 @@ $dec = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMo
             $flag = 1;
             }
             else{
-            $diffInMinutes = $currentTime->floatDiffInMinutes($formattedDeliveryDateTime);
+            $diffInMinutes = $currentTime2->floatDiffInMinutes($formattedDeliveryDateTime);
             $timeValue = (int)$diffInMinutes;
             }
             @endphp
@@ -537,22 +596,26 @@ $dec = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMo
             <script>
               countDown(<?= $timeValue ?>);
 
-              function countDown(x) {
-                var countDownDate = new Date();
-                countDownDate.setMinutes(countDownDate.getMinutes() + x);
+              function countDown(timeInMinutes) {
+                var countDownDate = new Date().getTime() + (timeInMinutes * 60 * 1000);
                 var x = setInterval(function() {
                   var now = new Date().getTime();
                   var distance = countDownDate - now;
+                  var hours = Math.floor(distance / (1000 * 60 * 60));
                   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
                   var countdownElement = document.getElementById("countdown");
-                  countdownElement.innerHTML = minutes + "m " + seconds + "s ";
-                  if (distance < 900000) { // 300000 ms = 5 minutes
+                  var countdownText = "";
+                  if (hours > 0) {
+                    countdownText += hours + "h ";
+                  }
+                  countdownText += minutes + "m " + seconds + "s";
+                  countdownElement.innerHTML = countdownText;
+                  if (distance < 300000) { // 300000 ms = 5 minutes
                     document.getElementById("timeValue").style.backgroundColor = "#F66358";
                   } else {
                     document.getElementById("timeValue").style.backgroundColor = "#2EB886";
                   }
-
                   if (distance < 0) {
                     clearInterval(x);
                     countdownElement.innerHTML = "expired";
@@ -569,6 +632,7 @@ $dec = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMo
                   <p class="order-count">Order:{{$orderCount++}}</p>
                   <p class="food-delivery-time">{{$orderData->serviceDate}},<span style="margin-left: 5px;">{{$orderData->serviceTime}}</span></p>
                   <p class="contact-name">{{$orderData->customerName}},<span style="margin-left: 5px;">{{$orderData->contactNumber}}</span></p>
+                  <p class="contact-name">{{$orderData->serviceType}}</p>
                 </div>
                 <div class="user-profile">
                   @if($orderData->status == 0)
@@ -605,10 +669,10 @@ $dec = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMo
                 </div>
                 <div class="decision">
                   @if($orderData->status == 0)
-                  <a href="{{url('reject-food/'.$orderData->id)}}"><button class="btn btn-danger" style="font-size: 14px;">Reject</button></a>
+                  <button id="{{$orderData->id}}" onclick="displayRejectReasonBox(this.id);" class="btn btn-danger" style="font-size: 14px;">Reject</button>
                   <a href="{{url('prepare-food/'.$orderData->id)}}"><button class="btn btn-primary" style="font-size: 14px;margin-left: 5px;">Prepare</button></a>
                   @elseif($orderData->status == 3)
-                  <a href="{{url('reject-food/'.$orderData->id)}}"><button class="btn btn-danger" style="font-size: 14px;">Reject</button></a>
+                  <button id="{{$orderData->id}}" onclick="displayRejectReasonBox(this.id);" class="btn btn-danger" style="font-size: 14px;">Reject</button>
                   <a href="{{url('deliver-food/'.$orderData->id)}}"><button class="btn btn-success" style="font-size: 14px;margin-left: 5px;">Deliver</button></a>
                   @endif
                 </div>
@@ -672,14 +736,19 @@ $dec = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMo
       </div>
     </div>
     <div class="analysis-section" id="analysis-section">
-      <h1>Your restaurant Info</h1>
+      <h1 class="mt-3" style="text-align: center;letter-spacing:0.7px;">My restaurant Info</h1>
+      <p class="overallInformation">Overall Information</p>
       <div class="data-summary-section">
         <div class="box restaurant-count">
           <div class="for-icon restaurant-icon">
             <ion-icon name="pizza"></ion-icon>
           </div>
           <div class="for-text">
+        @if($foods ->count() > 0)
             <p class="count">{{$food->count()}}</p>
+        @else
+        <p class="count">0</p>
+        @endif
             <p class="text-name">Total Food</p>
           </div>
         </div>
@@ -715,6 +784,69 @@ $dec = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMo
           <div class="for-text">
             <p class="count">{{$value->customermessages()->count()}}</p>
             <p class="text-name">Customer Review</p>
+          </div>
+        </div>
+      </div>
+      <p class="overallInformation">Today's Information</p>
+      @php
+      $currentTime = \Carbon\Carbon::now('Asia/Kathmandu');
+      $todayDate = $currentTime->format('Y-m-d');
+      $todayOrder = $order->filter(function($item) use ($todayDate) {
+      return $item->created_at->toDateString() === $todayDate;
+      });
+      $todayOrderDelivered = $order->filter(function($item) use ($todayDate) {
+      return $item->created_at->toDateString() === $todayDate && $item->status === 1;
+      });
+      $todayOrderRejected = $order->filter(function($item) use ($todayDate) {
+      return $item->created_at->toDateString() === $todayDate && $item->status === 2;
+      });
+      $todayEarned = 0;
+      if ($todayOrder->isNotEmpty()) {
+      $todayEarned = $todayOrderDelivered
+      ->load('orderfoods')
+      ->pluck('orderfoods')
+      ->flatten()
+      ->sum('orderTotal');
+      }
+      $todayOrderCount = $todayOrder->count();
+      $todayOrderDeliveredCount = $todayOrderDelivered->count();
+      $todayOrderRejectedCount = $todayOrderRejected->count();
+      @endphp
+      <div class="data-summary-section">
+        <div class="box today-order-count">
+          <div class="for-icon today-order-icon">
+            <ion-icon name="fast-food"></ion-icon>
+          </div>
+          <div class="for-text">
+            <p class="count">{{$todayOrderCount}}</p>
+            <p class="text-name">Today Order</p>
+          </div>
+        </div>
+        <div class="box today-deliver-count">
+          <div class="for-icon today-deliver-icon">
+            <ion-icon name="car"></ion-icon>
+          </div>
+          <div class="for-text">
+            <p class="count">{{ $todayOrderDeliveredCount}}</p>
+            <p class="text-name">Today Delivered</p>
+          </div>
+        </div>
+        <div class="box today-reject-count">
+          <div class="for-icon today-reject-icon">
+            <ion-icon name="close-circle"></ion-icon>
+          </div>
+          <div class="for-text">
+            <p class="count">{{ $todayOrderRejectedCount}}</p>
+            <p class="text-name">Today Rejected</p>
+          </div>
+        </div>
+        <div class="box today-earn-count">
+          <div class="for-icon today-earn-icon">
+            <ion-icon name="cash"></ion-icon>
+          </div>
+          <div class="for-text">
+            <p class="count">{{$todayEarned}}</p>
+            <p class="text-name">Today Earned</p>
           </div>
         </div>
       </div>
@@ -770,23 +902,23 @@ $dec = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMo
       <h1 style="text-align:center;margin-bottom:16px;">Customer Review</h1>
       <table class="table table-striped table-hover">
         <tr style="height:50px;">
-                <th style="padding-top:15px;padding-left:25px">SN</th>
-                <th style="padding-top:15px;padding-left:10px">Customer Name</th>
-                <th style="padding-top:15px;padding-left:10px">Rating</th>
-                <th style="padding-top:15px;padding-left:25px">Message</th>
-              </tr>
-            @foreach($value->customermessages as $message)
-            <tr>
-            <td class="fs-3" style="padding-top:10px;padding-left:25px;">{{$sn++}}</td>
-            <td class="fs-3" style="padding-top:10px;padding-left:10px;">{{$message->customerName}}</td>
-            @php
-            $rating =  App\Models\Rating::where('restaurant_id', '=', $value->id)->where('customer_id', '=', $message->customer_id)->first();
-            @endphp
-            <td class="fs-3" style="padding-top:10px;padding-left:10px;color:#FF7F00;">{{$rating->rating}}<span><ion-icon style="font-size: 18px;color:#FF7F00;margin-left:5px;" name="star"></ion-icon></span></td>
-            <td class="fs-3" style="padding-top:10px;padding-left:25px;">{{$message->customerMsg}}</td>
-            </tr>
-            @endforeach
-      </table>     
+          <th style="padding-top:15px;padding-left:25px">SN</th>
+          <th style="padding-top:15px;padding-left:10px">Customer Name</th>
+          <th style="padding-top:15px;padding-left:10px">Rating</th>
+          <th style="padding-top:15px;padding-left:25px">Message</th>
+        </tr>
+        @foreach($value->customermessages as $message)
+        <tr>
+          <td class="fs-3" style="padding-top:10px;padding-left:25px;">{{$sn++}}</td>
+          <td class="fs-3" style="padding-top:10px;padding-left:10px;">{{$message->customerName}}</td>
+          @php
+          $rating = App\Models\Rating::where('restaurant_id', '=', $value->id)->where('customer_id', '=', $message->customer_id)->first();
+          @endphp
+          <td class="fs-3" style="padding-top:10px;padding-left:10px;color:#FF7F00;">{{$rating->rating}}<span><ion-icon style="font-size: 18px;color:#FF7F00;margin-left:5px;" name="star"></ion-icon></span></td>
+          <td class="fs-3" style="padding-top:10px;padding-left:25px;">{{$message->customerMsg}}</td>
+        </tr>
+        @endforeach
+      </table>
     </div>
   </section>
 
@@ -825,14 +957,16 @@ $dec = DB::table('orderdetails')->where('restaurant_id','=',$value->id)->whereMo
     const myPie = new Chart(ctx1, {
       type: 'doughnut',
       data: {
-        labels: ['kathmandu', 'pokhara', 'dharan'],
+        labels: [<?= $five ?>, <?= $four ?>, <?= $three ?>, <?= $two ?>, <?= $one ?>],
         datasets: [{
-          label: 'Product Sales',
-          data: [10, 30, 40],
+          label: 'Rating count',
+          data: [<?= $five ?>, <?= $four ?>, <?= $three ?>, <?= $two ?>, <?= $one ?>],
           backgroundColor: [
-            '#EC6B56',
-            '#FFC154',
-            '#47B39C',
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)',
+            'rgb(255, 159, 64)',
+            'rgb(75, 192, 192)',
           ],
 
         }]

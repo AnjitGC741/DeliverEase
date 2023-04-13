@@ -49,36 +49,6 @@ $sn = 1;
         </div>
       </div>
       <div class="detail-section">
-        <p class="Info">Location Info</p>
-
-        <div class="d-flex mb-3" style="gap:10px;margin-left:20px;margin-right:20px;">
-          <div class="mb-3  w-50">
-            <label class="form-label fs-4" style="letter-spacing: 1px;">Street Name</label>
-            <input type="text" style="letter-spacing: 1px;" class="form-control fs-4  @error('streetName') is-invalid @enderror" name="streetName" placeholder="Your street Name" value="{{old('streetName')}}">
-            <span class="fs-4" style="color: red;"> @error('streetName'){{$message}}@enderror</span>
-          </div>
-          <div class="mb-3 w-50">
-            <label class="form-label fs-4" style="letter-spacing: 1px;">City Name</label>
-            <input type="text" style="letter-spacing: 1px;" class="form-control fs-4  @error('cityName') is-invalid @enderror" placeholder="Your City Name" name="cityName" value="{{old('cityName')}}">
-            <span class="fs-4" style="color: red;"> @error('cityName'){{$message}}@enderror</span>
-          </div>
-        </div>
-        <div style="margin-right:40px;">
-          <div class="mb-3 w-100" style="margin-left:20px;">
-            <label class="form-label fs-4" style="letter-spacing: 1px;">Near By Organization</label>
-            <input type="text" style="letter-spacing: 1px;" class="form-control fs-4 " placeholder="Enter Near By Organization(If Exists)" name="organization" value="{{old('organization')}}">
-            <span class="fs-4" style="color: red;"> @error('organization'){{$message}}@enderror</span>
-          </div>
-        </div>
-        <div style="margin-right:40px;">
-          <div class="mb-5 w-100" style="margin-left:20px;">
-            <label class="form-label fs-4" style="letter-spacing: 1px;">Detail Address Direction</label>
-            <textarea type="text" style="letter-spacing: 1px;" class="form-control fs-4  @error('detailAddress') is-invalid @enderror" id="" placeholder="Enter Detail Address Location" name="detailAddress" value="{{old('detailAddress')}}"></textarea>
-            <span class="fs-4" style="color: red;"> @error('detailAddress'){{$message}}@enderror</span>
-          </div>
-        </div>
-      </div>
-      <div class="detail-section">
         <p class="Info">DELIVERY DATE AND TIME</p>
         <div class="d-flex mb-3" style="gap:10px;margin-left:20px;margin-right:20px;">
           <div class="mb-3  w-75">
@@ -116,22 +86,54 @@ $sn = 1;
           </div>
           <div class="mb-3 w-25">
             <label class="form-label fs-4" style="letter-spacing: 1px;">Service Type</label>
-            @if($value->service == "Delivery & Pickup")
-            <select id="dates" name="serviceType" class="form-select fs-4  @error('serviceType') is-invalid @enderror" style="letter-spacing: 1px;">
+            @if($value->service === "Delivery & Pickup")
+            <select id="dates" name="serviceType" onchange="locationVisibility(this.value);" class="form-select fs-4  @error('serviceType') is-invalid @enderror" style="letter-spacing: 1px;">
             <option value="">Service</option>
               <option value="delivery">Delivery</option>
               <option value="pickup">Pickup</option>
             </select>
-            @elseif($value->service == "Pickup Only")
-            <input class="form-check-input fs-4 @error('serviceType') is-invalid @enderror" type="text" readonly name="serviceType" value="{{$value->service}}">
+            @elseif($value->service === "Pickup Only")
+            <input class="form-control  fs-4 @error('serviceType') is-invalid @enderror" type="text" readonly name="serviceType" value="Pickup">
             @else
-            <input class="form-check-input fs-4 @error('serviceType') is-invalid @enderror" type="text" readonly name="serviceType" value="{{$value->service}}">
+            <input class=" form-control  fs-4 @error('serviceType') is-invalid @enderror" type="text" readonly name="serviceType" value="Delivery">
             @endif
             <span class="fs-4" style="color: red;"> @error('serviceType'){{$message}}@enderror</span>
           </div>
         </div>
 
       </div>
+      @if($value->service === "Delivery Only" || $value->service === "Delivery & Pickup")
+      <div class="detail-section locationInfo" id="locationInfo">
+        <p class="Info">Location Info</p>
+
+        <div class="d-flex mb-3" style="gap:10px;margin-left:20px;margin-right:20px;">
+          <div class="mb-3  w-50">
+            <label class="form-label fs-4" style="letter-spacing: 1px;">Street Name</label>
+            <input type="text" style="letter-spacing: 1px;" class="form-control fs-4  @error('streetName') is-invalid @enderror" name="streetName" placeholder="Your street Name" value="{{old('streetName')}}">
+            <span class="fs-4" style="color: red;"> @error('streetName'){{$message}}@enderror</span>
+          </div>
+          <div class="mb-3 w-50">
+            <label class="form-label fs-4" style="letter-spacing: 1px;">City Name</label>
+            <input type="text" style="letter-spacing: 1px;" class="form-control fs-4  @error('cityName') is-invalid @enderror" readonly name="cityName" value="{{$value->city}}">
+            <span class="fs-4" style="color: red;"> @error('cityName'){{$message}}@enderror</span>
+          </div>
+        </div>
+        <div style="margin-right:40px;">
+          <div class="mb-3 w-100" style="margin-left:20px;">
+            <label class="form-label fs-4" style="letter-spacing: 1px;">Near By Organization</label>
+            <input type="text" style="letter-spacing: 1px;" class="form-control fs-4 " placeholder="Enter Near By Organization(If Exists)" name="organization" value="{{old('organization')}}">
+            <span class="fs-4" style="color: red;"> @error('organization'){{$message}}@enderror</span>
+          </div>
+        </div>
+        <div style="margin-right:40px;">
+          <div class="mb-5 w-100" style="margin-left:20px;">
+            <label class="form-label fs-4" style="letter-spacing: 1px;">Detail Address Direction</label>
+            <textarea type="text" style="letter-spacing: 1px;" class="form-control fs-4  @error('detailAddress') is-invalid @enderror" id="" placeholder="Enter Detail Address Location" name="detailAddress" value="{{old('detailAddress')}}"></textarea>
+            <span class="fs-4" style="color: red;"> @error('detailAddress'){{$message}}@enderror</span>
+          </div>
+        </div>
+      </div>
+      @endif
       <div class="detail-section">
         <p class="Info">PAYMENT OPTION</p>
         <div class="form-check form-check-inline mb-3" style="margin-left: 30px;">
@@ -149,7 +151,7 @@ $sn = 1;
         <div style="margin-right:40px;">
           <div class="mb-5 w-100" style="margin-left:20px;">
             <label class="form-label fs-4" style="letter-spacing: 1px;">Instruction</label>
-            <textarea type="text" style="letter-spacing: 1px;" class="form-control fs-4" id="" placeholder="If Any Warning For Delivery Person" name="instruction" value="{{old('detailAddress')}}"></textarea>
+            <textarea type="text" style="letter-spacing: 1px;" class="form-control fs-4" id="" placeholder="If Any Warning For Delivery Person or any thing to do with food" name="instruction" value="{{old('detailAddress')}}"></textarea>
           </div>
         </div>
       </div>
@@ -169,26 +171,46 @@ $sn = 1;
         <th>Food price</th>
         <th>Food quantity</th>
         <th>Total</th>
-        <th>Action</th>
       </tr>
-      @foreach ($newValue->my_carts as $cart)
+      @foreach ($newValue->my_carts->where('restaurant_id', $value->id) as $cart)
       <tr>
         <th>{{$sn++}}</th>
         <td>{{$cart->foodName}}</td>
         <td>{{$cart->foodPrice}}</td>
         <td>{{$cart->foodQuantity}}</td>
         <td>{{$cart->total}}</td>
-        <td>
-          <!-- <button  class="btn btn-success" id="{{$cart->id}}" onclick="openFoodEditBox(this.id);" style="border-radius: 50%;"><i class="fa fa-pencil" style="color:white;font-size:12px"></i></button> -->
-          <button class="btn btn-danger" style="border-radius: 50%;"><ion-icon name="trash" style="color:white;font-size:12px;"></ion-icon></button>
-        </td>
       </tr>
       @endforeach
     </table>
-    <p class="fs-4">Grand total: {{ collect($newValue->my_carts)->sum('total')}}</p>
+    <p class="fs-4">Grand total: {{ collect($newValue->my_carts->where('restaurant_id', $value->id))->sum('total')}}</p>
   </div>
 </div>
 <script>
+  function locationVisibility(x)
+  {
+    if(x === "pickup")
+    {
+      document.getElementById("locationInfo").style.display = "none";
+    }
+    else
+    {
+      document.getElementById("locationInfo").style.display = "block";
+
+    }
+  }
+   function toggleMenu(){
+  let subMenu = document.getElementById("subMenu");
+  subMenu.classList.toggle("open-menu");
+ }
+ window.addEventListener('load', function() {
+  var loader = document.querySelector('.loader');
+  setTimeout(function() {
+    loader.style.opacity = '0';
+    setTimeout(function() {
+      loader.style.display = 'none';
+    }, 1000); 
+  }, 2000); 
+});
   var today = new Date();
   var monthNames = [
     "January", "February", "March", "April",

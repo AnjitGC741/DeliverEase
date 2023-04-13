@@ -152,12 +152,13 @@
 </section>
 <section class="how-it-works">
       <div class="how-it-works-maindiv">
-      <h2>How it works</h2>
-      <p>Get your favorite food at 4 simple steps</p>
+        <div class="how-it-works-heading">
+          <h2>How it works</h2>
+        </div>
       <div class="how-it-work-boxes">
          <div class="how-it-work-box">
               <div class="how-it-work-img">
-              <img src="./img/search.png" alt="">
+              <img src="./img/restaurant-icon.png" alt="">
               </div>
               <div class="how-it-work-text">
                 <h1>Search</h1>
@@ -166,7 +167,7 @@
           </div>
           <div class="how-it-work-box">
               <div class="how-it-work-img">
-              <img src="./img/order.png" alt="">
+              <img src="./img/food-icon.png" alt="">
               </div>
               <div class="how-it-work-text">
                 <h1>Choose</h1>
@@ -175,7 +176,7 @@
           </div>
           <div class="how-it-work-box">
               <div class="how-it-work-img">
-              <img src="./img/pay.png" alt="">
+              <img src="./img/wallet-icon.png" alt="">
               </div>
               <div class="how-it-work-text">
                 <h1>Pay</h1>

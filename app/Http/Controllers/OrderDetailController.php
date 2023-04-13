@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Mail;
 
 class OrderDetailController extends Controller
 {
-    public function rejectFood($id)
+    public function rejectFood(Request $req)
     {
-        $changeStatus = Orderdetail::find($id);
+        $changeStatus = Orderdetail::find($req->id);
         $changeStatus->status = 2;
+        $changeStatus->reason = $req->reason;
         $changeStatus->save();
         $req = "gcanjit741@gmail.com";
         $body = "Your order has been rejected!!";
@@ -19,7 +20,6 @@ class OrderDetailController extends Controller
             $message->from($req,'Anjit');
             $message->to($req,'timi');
             $message->subject('Order Rejected');
-
         });
         return back();
     }

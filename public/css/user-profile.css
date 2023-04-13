@@ -60,7 +60,7 @@
 }
 .user-section-div
 {
-    min-height: 50rem !important; 
+    min-height: 60rem !important; 
    position: relative;
 }
 /* user profile ////////////////////////*/
@@ -68,7 +68,7 @@
     margin-top: 20px;
     width: 100%;
     position: absolute;
-    display: none;
+    display: block;
 }
 .user-profile h2{
   color: rgb(76, 76, 76);
@@ -304,7 +304,7 @@
     margin-top: 20px;
     width: 100%;
     position: absolute;
-    display: block;
+    display: none;
   }
   .my-order-main-box{
     width: 100%;
@@ -370,4 +370,26 @@
     font-weight: 700;
     margin-bottom: 0!important;
     letter-spacing: 1px;
+  }
+  .grandTotal{
+    font-size: 2rem;
+    margin-top: 1rem;
+  }
+  .recent-order-food-lists-box{
+    display:flex;
+    flex-wrap:wrap;
+    gap:40px;
+    background: rgba(0, 0, 0, .04);
+    margin-top: 20px;
+    padding: 20px;
+  }
+  .recent-order-food-lists{
+    padding: 10px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .08);
+    transition: .3s;
+  }
+  .recent-order-food-lists:hover{
+    box-shadow: none;
   }

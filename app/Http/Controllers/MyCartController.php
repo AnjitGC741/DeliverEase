@@ -47,6 +47,11 @@ class MyCartController extends Controller
         }
         
     }
+    public function removeFromCart(Request $req)
+    {
+        MyCart::where('food_id', $req->foodId)->where('customer_id',session()->get('loginCustomerId'))->delete();
+        return back();
+    }
     public function myCart()
     {
         return view('my-cart');
@@ -67,19 +72,36 @@ class MyCartController extends Controller
     }
     public function saveCheckoutInfo(Request $req)
     {
-        $req -> validate([
-            'firstName' => 'required',
-            'lastName' => 'required',
-            'contactNumber' => 'required',
-            'streetName' => 'required',
-            'cityName'=>'required',
-            'detailAddress' => 'required',
-            'serviceDate' => 'required',
-            'serviceTime' => 'required',
-            'serviceType' => 'required',
-            'paymentMethod' => 'required'
-            
-        ]);
+        if($req->serviceType == "Delivery")
+        {
+            $req -> validate([
+                'firstName' => 'required',
+                'lastName' => 'required',
+                'contactNumber' => 'required',
+                'streetName' => 'required',
+                'cityName'=>'required',
+                'detailAddress' => 'required',
+                'serviceDate' => 'required',
+                'serviceTime' => 'required',
+                'serviceType' => 'required',
+                'paymentMethod' => 'required'
+                
+            ]);
+        }
+        else
+        {
+            $req -> validate([
+                'firstName' => 'required',
+                'lastName' => 'required',
+                'contactNumber' => 'required',
+                'serviceDate' => 'required',
+                'serviceTime' => 'required',
+                'serviceType' => 'required',
+                'paymentMethod' => 'required'
+                
+            ]);
+        }
+
         $currentTime = \Carbon\Carbon::now('Asia/Kathmandu');
         $currentTime2= Carbon::createFromFormat('Y-m-d H:i:s', $currentTime);
         $deliveryDateTime = Carbon::createFromFormat('Y-m-d', $req->serviceDate);
@@ -90,9 +112,9 @@ class MyCartController extends Controller
             return back()->with('fail','The delivery time you have choosen is already passed.');
         }
         $diffInMinutes = $currentTime->floatDiffInMinutes($formattedDeliveryDateTime);
-        if($diffInMinutes < 30)
+        if($diffInMinutes < 60)
         {
-            return back()->with('fail','The delivery time should be minimum half and hours.');
+            return back()->with('fail','The delivery time should be minimum an hours.');
         }
          $save = Orderdetail::create([
             'customerName'=>$req->firstName.' '.$req->lastName,

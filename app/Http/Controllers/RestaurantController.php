@@ -231,19 +231,19 @@ class RestaurantController extends Controller
         $updateRestaurantInfo->update($input);
         return redirect('restaurant-admin-page/' . $req->id);
     }
-    public function openRestaurant(Request $req)
+    public function openCloseRestaurant(Request $req)
     {
-        $changeStatus = Restaurant::find($req->id);
-        $changeStatus->status = $req->status;
+        $changeStatus = Restaurant::find($req->input('id'));
+        $changeStatus->status = $req->input('status');
         $changeStatus->save();
-        return  redirect('restaurant-admin-page/' . $req->id);
-    }
-    public function closeRestaurant(Request $req)
-    {
-        $changeStatus = Restaurant::find($req->id);
-        $changeStatus->status = $req->status;
-        $changeStatus->save();
-        return  redirect('restaurant-admin-page/' . $req->id);
+        if($req->input('status') == 0)
+        {
+            return response()->json(['message' => 'closed']);
+        }
+        else
+        {
+            return response()->json(['message' => 'opened']);
+        }
     }
     public function logoutRestaurant()
     {

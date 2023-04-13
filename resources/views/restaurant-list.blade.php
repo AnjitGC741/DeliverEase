@@ -203,8 +203,8 @@
       data: formData,
       success: function(response) {
         if (response.message === "added") {
-        document.getElementById("favoriteBtn-"+index).style.color = "red";
-        document.getElementById("favoriteBtnIcon-"+index).setAttribute('name','heart');
+          document.getElementById("favoriteBtnIcon-"+index).setAttribute('name','heart');
+          document.getElementById("favoriteBtnIcon-"+index).style.color = "red";
         } else if (response.message === "removed") {
           document.getElementById("favoriteBtn-"+index).style.color = "none";
         document.getElementById("favoriteBtnIcon-"+index).setAttribute('name','heart-outline');

@@ -36,7 +36,6 @@ Route::get('/login', function () {
 Route::get('/signup', function () {
     return view('signup-page');
 });
-
 Route::get('/aboutus', function () {
     return view('aboutus');
 });
@@ -76,8 +75,8 @@ Route::post('/restaurants-sort-asc',[RestaurantController::class,'sortRestaurant
 Route::post('/restaurants-sort-desc',[RestaurantController::class,'sortRestaurantDesc'])->name('sort-restaurant-descending');
 Route::post('/restaurants-sort-location',[RestaurantController::class,'sortByLocation'])->name('sort-by-location');
 Route::post('/restaurants-sort-cuisine',[RestaurantController::class,'sortByCuisine'])->name('sort-by-cuisine');
-Route::post('/close-restaurant',[RestaurantController::class,'closeRestaurant'])->name('close-restaurant');
-Route::post('/open-restaurant',[RestaurantController::class,'openRestaurant'])->name('open-restaurant');
+// Route::post('/close-restaurant',[RestaurantController::class,'closeRestaurant'])->name('close-restaurant');
+Route::post('/open-close-restaurant',[RestaurantController::class,'openCloseRestaurant'])->name('open-close-restaurant');
 Route::get('/logout-restaurant',[RestaurantController::class,'logoutRestaurant']);
 Route::get('/restaurant-signup2/{id}',[RestaurantController::class,'findRestaurantName']);
 Route::get('/restaurant-signup3/{id}',[RestaurantController::class,'findRestaurantName1']);
@@ -119,13 +118,14 @@ Route::get('/contact',[ContactController::class,'index'])->name('contact');
 // for Add to cart
 Route::get('/successful-order',[MyCartController::class,'successfulOrder']);
 Route::post('/restaurant-page/addToCart',[MyCartController::class,'addToCart'])->name('add-to-cart');
+Route::post('/restaurant-page/removeFromCart',[MyCartController::class,'removeFromCart'])->name('remove-from-cart');
 Route::post('/my-cart/update-food-quantity',[MyCartController::class,'updateFoodQuantity'])->name('update-food-quantity');
 Route::get('/my-cart',[MyCartController::class,'myCart']);
 Route::get('/checkout/go-to-checkout',[MyCartController::class,'checkout'])->name('go-checkout-page');
 Route::POST('/checkout/save-checkout-info',[MyCartController::class,'saveCheckoutInfo'])->name('save-checkout');
 Route::post('/stripecontroller',[Stripe::class,"stripePayment"])->name("stripe.post");
 // for Order
-Route::get('reject-food/{id}',[OrderDetailController::class,'rejectFood']);
+Route::post('reject-food',[OrderDetailController::class,'rejectFood'])->name('reject-food');
 Route::get('prepare-food/{id}',[OrderDetailController::class,'prepareFood']);
 Route::get('deliver-food/{id}',[OrderDetailController::class,'deliverFood']);
 // for favorite
@@ -134,8 +134,8 @@ Route::post('/add-to-favorite',[FavoriteController::class,'addToFavorite'])->nam
 // customer rating and message
 Route::post('/save-rating-message',[CustomermessageController::class,'saveRatingMessage'])->name('save-rating-message');
 Route::post('/save-rating',[CustomermessageController::class,'saveRating'])->name('save-rating');
-Route::get ( '/cardform', function () {
-   return view ( 'cardForm' );
- });
+Route::get ( '/', function () {
+    return view ( 'cardForm' );
+} );
 Route::post ( '/', [UserController::class,'call'] );
 
