@@ -196,11 +196,11 @@
 
       </div>
     </section>
-<section class="customer-review">
+<!-- <section class="customer-review">
   <div class="customer-review-maindiv">
     <h2>What our customer has to say</h2>
   </div>
-</section>
+</section> -->
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

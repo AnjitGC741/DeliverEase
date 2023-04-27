@@ -71,6 +71,8 @@ Route::get('/',[HomeController::class,'home']);
 Route::get('/dashboard',[SuperAdmin::class,'dashboard']);
 Route::get('/dashboard/restaurant-list',[SuperAdmin::class,'dashboardRestaurantList']);
 Route::get('/dashboard/customer-list',[SuperAdmin::class,'dashboardCustomerList']);
+Route::get('/dashboard/customer-message',[SuperAdmin::class,'dashboardCustomerMessage']);
+Route::post('/dashboard/customer-message-delete',[SuperAdmin::class,'deleteCustomerMessage'])->name('customer-message-delete');
 Route::post('/dashboard/add-location',[SuperAdmin::class,'addLocation'])->name('add-location');
 Route::post('/dashboard/add-Cuisine',[SuperAdmin::class,'addCuisine'])->name('add-cuisine');
 Route::post('/dashboard/delete-location',[SuperAdmin::class,'deleteLocation'])->name('delete-location');
@@ -84,6 +86,7 @@ Route::post('/dashboard/search-block-restaurant',[SuperAdmin::class,'searchBlock
 Route::post('/dashboard/search-unverified-restaurant',[SuperAdmin::class,'searchUnverifiedRestaurant'])->name('search-unverified-restaurant');
 Route::get('/dashboard/restaurant-page/{id}',[SuperAdmin::class,'dashboardRestaurantDetial']);
 //for restaurant
+Route::post('/login-restaurant',[RestaurantController::class,'loginRestaurant'])->name('login-restaurant');
 Route::get('/browse-by-cuisine/{cuisine}',[RestaurantController::class,'browseByCuisine']);
 Route::post('/search-food',[RestaurantController::class,'searchFood'])->name('search-food');
 Route::post('/admin-search-food',[RestaurantController::class,'adminSearchFood'])->name('admin-search-food');

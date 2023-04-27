@@ -14,6 +14,7 @@ class HomeController extends Controller
     public function home()
     {
     session()->put(['loginCustomer']);
+    session()->put(['restaurantId']);
     session()->put(['loginCustomerId']);
     session()->put(['loginCustomer']);
     session()->put(['searchRestaurant']);
