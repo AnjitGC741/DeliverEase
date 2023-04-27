@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 use Stripe;
 use Session;
 
-class StripeController extends Controller
+class ProductController extends Controller
 {
     public function index(){
 
-      \Stripe\Stripe::setApiKey('PASTE_YOU_SECRET_KEY_HERE');
+      \Stripe\Stripe::setApiKey('pk_test_51MsTQgJrXfzFqOPpAAN1iEXcHDqcpsui8ZgHZd4cOkB0b01HoFKGQnOtCV7MMPlOTZaOK2ONBHgkoqFs5fUiMjQW00xUxiV4iE');
 
       $YOUR_DOMAIN = 'http://127.0.0.1:8000/';
 

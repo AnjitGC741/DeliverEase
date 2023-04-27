@@ -16,9 +16,26 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\stripecontroller;
 use Carbon\Carbon;
 
+
+
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\StripePaymentController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('pay',[PaymentController::class,'index']);
+Route::any('success',[PaymentController::class,'success'])->name('success');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -123,7 +140,7 @@ Route::post('/my-cart/update-food-quantity',[MyCartController::class,'updateFood
 Route::get('/my-cart',[MyCartController::class,'myCart']);
 Route::get('/checkout/go-to-checkout',[MyCartController::class,'checkout'])->name('go-checkout-page');
 Route::POST('/checkout/save-checkout-info',[MyCartController::class,'saveCheckoutInfo'])->name('save-checkout');
-Route::post('/stripecontroller',[Stripe::class,"stripePayment"])->name("stripe.post");
+// Route::post('/stripecontroller',[Stripe::class,"stripePayment"])->name("stripe.post");
 // for Order
 Route::post('reject-food',[OrderDetailController::class,'rejectFood'])->name('reject-food');
 Route::get('prepare-food/{id}',[OrderDetailController::class,'prepareFood']);
@@ -134,8 +151,7 @@ Route::post('/add-to-favorite',[FavoriteController::class,'addToFavorite'])->nam
 // customer rating and message
 Route::post('/save-rating-message',[CustomermessageController::class,'saveRatingMessage'])->name('save-rating-message');
 Route::post('/save-rating',[CustomermessageController::class,'saveRating'])->name('save-rating');
-Route::get ( '/', function () {
-    return view ( 'cardForm' );
-} );
-Route::post ( '/', [UserController::class,'call'] );
+
+Route::get('/stripe', [StripePaymentController::class, 'stripe']);
+Route::post('/stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
 
