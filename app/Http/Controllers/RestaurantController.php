@@ -10,10 +10,35 @@ use App\Models\OrderDetail;
 use App\Models\Restaurant;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Session\Store;
+use Illuminate\Support\Facades\Hash;
 
 class RestaurantController extends Controller
 {
+    // restaurant login
+    public function loginRestaurant(Request $req)
+    { 
+        $req->validate([
+            'email'=>'required',
+            'password'=>'required'
+         ]);
+         $restaurant = Restaurant::where('contactEmail','=',$req->email)->first();
+         if($restaurant)
+         {
+            if($req->password === $restaurant->password)
+            {
+                session()->put('restaurantId',$restaurant->id);
+                return redirect('restaurant-admin-page/' . $restaurant->id);
+            }
+            else
+            {
+                return back()->with('fail','Incorrect Password');
+            }
+         }
+         else
+         {
+            return back()->with('fail','Email not found');
+         }
+    }
     // searching and sorting restaurant
     public function sortRestaurantAsc()
     {

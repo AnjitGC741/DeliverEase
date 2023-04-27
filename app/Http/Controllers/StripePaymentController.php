@@ -22,9 +22,6 @@ class StripePaymentController extends Controller
                 "source" => $request->stripeToken,
                 "description" => "This is test payment",
         ]);
-   
-        Session::flash('success', 'Payment Successful !');
-           
-        return back();
+        return redirect('/successful-order');
     }
 }

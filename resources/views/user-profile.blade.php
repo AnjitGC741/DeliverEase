@@ -29,7 +29,10 @@ $orderDetail= App\Models\Orderdetail::all()
         @endforeach
         @if($orderData->status == 2)
       <p style="color:#9F1D22;font-size:16px;margin-top:5px;"><strong>Reason for rejecting order:</strong> {{$orderData->reason}}</p>
-        @endif    
+        @elseif($orderData->status == 1)
+        <p style="color:white;background-color:#3CD755;border-radius:5px;padding:5px 10px;margin-top:5px;width:30%;text-align:center;">Deliverd</p>
+        @endif
+         
     </div>
 </div>
 @endforeach

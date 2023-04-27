@@ -101,6 +101,7 @@ class MyCartController extends Controller
                 
             ]);
         }
+       
 
         $currentTime = \Carbon\Carbon::now('Asia/Kathmandu');
         $currentTime2= Carbon::createFromFormat('Y-m-d H:i:s', $currentTime);
@@ -146,6 +147,10 @@ class MyCartController extends Controller
             $newOrder->save();
         }
          MyCart::where('customer_id','=',session()->get('loginCustomerId'))->where('restaurant_id','=',$req->restaurantId)->delete();
+         if($req->paymentMethod == "payOnline")
+         {
+            return redirect('/stripe');
+         }
          return redirect('/successful-order');
     }
     public function successfulOrder()

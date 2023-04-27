@@ -71,7 +71,7 @@
                 </div>
                 @endif
                 <h2 class="mb-4 mt-4">Login</h1>
-                <form action="#" method="#">
+                <form action="{{route('login-restaurant')}}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Restaurant id</label>
@@ -89,7 +89,6 @@
                     <button type="submit" class="btn1 btn-login" id="btn-login">Log In</button>
                 </form>
                 <p class="mt-3" style="letter-spacing: 0.5px;">Have not register restauant! <a href="{{url('/restaurant-signup1')}}" style="text-decoration: none;">Register now</a></p>
-    
             </div>
     
         </div>

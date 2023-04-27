@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Cuisine;
 use App\Models\customer;
+use App\Models\Customermessage;
 use App\Models\Location;
 use App\Models\Orderdetail;
 use App\Models\Restaurant;
@@ -92,6 +94,21 @@ class SuperAdmin extends Controller
 
         ];
         return view('backend/dashboard-user-list', $data);
+    }
+    public function dashboardCustomerMessage()
+    {
+        $customerMessageTotal = Contact::count();
+        $data = [
+            'restaurantCount' => $customerMessageTotal,
+            'customers' => Contact::all(),
+            'orderDetail' => Orderdetail::all(),
+        ];
+        return view('backend/dashboard-message', $data);
+    }
+    public function deleteCustomerMessage(Request $req){
+        $deleteRestaurant = Contact::find($req->id);
+        $deleteRestaurant->delete();
+        return  back();
     }
     public function verifyRestaurant(Request $req)
     {

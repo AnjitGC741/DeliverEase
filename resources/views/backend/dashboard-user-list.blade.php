@@ -7,7 +7,7 @@ $sn = 1;
 <link rel="stylesheet" href="/css/super-admin-style.css">
 <h1 class="mb-4" style="text-align:center;">Customer list</h1>
 <div class="pl-5 pr-5 d-flex justify-content-between">
- <div class="d-flex" style="gap:20px">
+ <div class="d-flex" style="gap:20px;visibility:hidden;">
  <a class="navbar-brand">Active Customer</a>
   <a class="navbar-brand">Blocked Customer</a>
  </div>
@@ -25,7 +25,6 @@ $sn = 1;
           <th scope="col">Contact Number</th>
           <th scope="col">Email</th>
           <th scope="col">Total Order</th>
-          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -33,13 +32,13 @@ $sn = 1;
         <tr>
             <td>{{$sn++}}</td>
             <td>{{$customer->customerName}}</td>
-            <td>11111</td>
+            <td>{{$customer->customerNumber?$customer->customerNumber:"Not given"}}</td>
             <td>{{$customer->email}}</td>
-            <td>0</td>
-            <td>
-                <button  class="btn btn-primary">View Detail</button>
-                <button class="btn btn-danger">Block</button>
-            </td>
+            @php
+            $userId = $customer->id;
+            $earned = App\Models\Orderdetail::where('customer_id', '=',$userId)->count();
+            @endphp
+            <td>{{$earned?$earned:"0"}}</td>
         </tr>
         @endforeach
       </tbody>
