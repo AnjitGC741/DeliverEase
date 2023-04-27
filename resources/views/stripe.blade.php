@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>How To Integrate Stripe Payment Gateway In Laravel 8 - Techsolutionstuff</title>
+      <title>Payment Gateway</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>      
    </head>
    <body>
       <div class="container">         
          <div class="row">
-          <h3 style="text-align: center;margin-top: 40px;margin-bottom: 40px;">How To Integrate Stripe Payment Gateway In Laravel 8 - Techsolutionstuff</h3>
             <div class="col-md-6 col-md-offset-3">
                <div class="panel panel-default credit-card-box">
                   <div class="panel-heading" >
